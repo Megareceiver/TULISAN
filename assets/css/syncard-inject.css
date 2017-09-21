@@ -1,0 +1,113 @@
+/*syncard-inject custom css*/
+.form-control,.btn{
+  border-radius: 0px;
+}
+header{
+  margin-top: 20px;
+}
+header img{
+  width : 239.841px;
+  height: 45.327px;
+
+}
+.container{max-width: 960px;}
+.syn-center{ text-align: center; }
+.syn-centerExt{
+  display: inline-block;
+  float: none;
+   }
+.syn-right{ text-align: right; }
+.syn-plus{margin-top: 40px;}
+.smallImg{
+  width : 95.94px;
+  height: 18.132px;
+}
+.plain{
+  background-color: #FFF;
+  border-color: #FFF;
+}
+.navbar-default .navbar-collapse, .navbar-default .navbar-form{border-color:#fff;}
+.btn-default, .btn-default.active:active, .btn-default.visited, .btn-default:focus{
+  background-color: #605B5D;
+  color: #FFF;
+}
+.btn-default:hover,
+.btn-default:active,
+.btn-default.active.focus,
+.btn-default.active:focus, 
+.btn-default.active:hover, 
+.btn-default:active.focus, 
+.btn-default:active:focus, 
+.btn-default:active:hover, 
+.open>.dropdown-toggle.btn-default.focus, 
+.open>.dropdown-toggle.btn-default:focus, 
+.open>.dropdown-toggle.btn-default:hover{
+  background-color: #333232;
+  color: #FFF;
+  border-color:unset; 
+}
+.navbar-default .navbar-nav>li>a{padding-bottom: 5px;}
+li a{border-bottom: 2px solid #fff;}
+li a:hover{
+  border-color: #ED1C24;
+}
+.no-padding{
+  padding-left: 0;
+  padding-right: 0;
+}
+.big-image{
+  width: 100%;
+  height: initial;
+}
+.margin-top{
+  margin-top: 25px;
+}
+.article{
+  min-height: 50px;
+}
+.picture-box{
+  width: 100%;
+  height: 200px;
+  background-size: cover;
+}
+.page-article{border-bottom: 1px solid #E9E2DB}
+.footer{
+  background-color: #E9E2DB;
+  height: 300px;
+  padding-top: 60px;
+  padding-left: 120px;
+  padding-right: 120px;
+  padding-bottom: 5px;
+}
+
+
+
+
+/*page size*/
+@media (max-width: 767px) {
+  
+}
+
+/* extra small to small */
+@media (max-width: 991px) {
+  .syn-center{ text-align: inherit; }
+  .syn-centerExt{
+    display: inherit;
+    float: left;
+  }
+  .picture-box{height: 200px;}
+}
+
+/* small */
+@media (min-width: 768px) and (max-width: 991px) {
+  
+  
+}
+/* medium */
+@media (min-width: 992px) and (max-width: 1199px) {
+  
+}
+/* large */
+@media (min-width: 1200px) {
+  
+}

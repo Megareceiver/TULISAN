@@ -70,7 +70,11 @@ li a:hover{
   height: 200px;
   background-size: cover;
 }
-.page-article{border-bottom: 1px solid #E9E2DB}
+.page-article{border-bottom: 1px solid #E9E2DB;}
+.sosmed{
+  border-bottom: 1px solid #473728;
+  padding-top: 10px;
+}
 .footer{
   background-color: #E9E2DB;
   height: 300px;

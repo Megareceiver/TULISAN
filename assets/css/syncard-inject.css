@@ -10,14 +10,17 @@ header img{
   height: 45.327px;
 
 }
+
+a { color: #333; }
 .container{max-width: 960px;}
 .syn-center{ text-align: center; }
 .syn-centerExt{
   display: inline-block;
   float: none;
    }
+   
 .syn-right{ text-align: right; }
-.syn-plus{margin-top: 40px;}
+.syn-plus{margin-top: 25px;}
 .smallImg{
   width : 95.94px;
   height: 18.132px;
@@ -76,11 +79,15 @@ li a:hover{
   padding-top: 10px;
 }
 .footer{
+  display: inline-block;
+  width: 100%;
   background-color: #E9E2DB;
-  height: 300px;
   padding-top: 40px;
   padding-bottom: 5px;
 }
+
+.sosmed a { margin-right: 15px; }
+.sosmed a .fa { font-size: 24px; }
 
 
 
@@ -98,6 +105,9 @@ li a:hover{
     float: left;
   }
   .picture-box{height: 200px;}
+  
+  .jumbo-tron { margin-top: 0 }
+  .short-cut { margin-bottom: 15px; }
 }
 
 /* small */

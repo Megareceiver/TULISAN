@@ -99,6 +99,11 @@ li a:hover{
   background-repeat: no-repeat;
   background-position: center center;
 }
+.pict-box{
+  width: 100%;
+  height: 200px;
+  background-size: cover;
+}
 .page-article{border-bottom: 1px solid #E9E2DB;}
 .sosmed{
   border-bottom: 1px solid #473728;
@@ -114,7 +119,9 @@ li a:hover{
   padding-top: 40px;
   padding-bottom: 5px;
 }
-
+.text-default-color{
+  color: #605B5D;
+}
 .fontserif{
   font-family: serif;
 }
@@ -138,9 +145,6 @@ li a:hover{
 .breadcrumb > li + li:before {
     content: "> ";
     color: #000;
-}
-.comment{
-	color:#999;
 }
 
 /*page size*/

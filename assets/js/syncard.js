@@ -9,25 +9,25 @@ function loadStory(){
 		image	: "pepe.png",
 		title	: "PEPE AND THE FLYING BALLOON",
 		page	: "Once upon a time, there were two mice that lived an adventurous life in the heart of Jakarta. Hiro and his wife, Sur, were a hard-working and courageous duo. Even though they were tiny creatures, their hearts were set on rescuing abandoned children who lived on the streets.",
-		url		: "#"
+		url		: "./storydetail.html"
 		},
 		{
 		image	: "pepe.png",
 		title	: "PEPE AND THE FLYING BALLOON",
 		page	: "Once upon a time, there were two mice that lived an adventurous life in the heart of Jakarta. Hiro and his wife, Sur, were a hard-working and courageous duo. Even though they were tiny creatures, their hearts were set on rescuing abandoned children who lived on the streets.",
-		url		: "#"
+		url		: "./storydetail.html"
 		},
 		{
 		image	: "pepe.png",
 		title	: "PEPE AND THE FLYING BALLOON",
 		page	: "Once upon a time, there were two mice that lived an adventurous life in the heart of Jakarta. Hiro and his wife, Sur, were a hard-working and courageous duo. Even though they were tiny creatures, their hearts were set on rescuing abandoned children who lived on the streets.",
-		url		: "#"
+		url		: "./storydetail.html"
 		},
 		{
 		image	: "pepe.png",
 		title	: "PEPE AND THE FLYING BALLOON",
 		page	: "Once upon a time, there were two mice that lived an adventurous life in the heart of Jakarta. Hiro and his wife, Sur, were a hard-working and courageous duo. Even though they were tiny creatures, their hearts were set on rescuing abandoned children who lived on the streets.",
-		url		: "#"
+		url		: "./storydetail.html"
 		}];
 	
 	for(var a = 0; a < data.length; a++){

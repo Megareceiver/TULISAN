@@ -113,8 +113,9 @@ li a:hover{
     content: "> ";
     color: #000;
 }
-
-
+.comment{
+	color:#999;
+}
 
 /*page size*/
 @media (max-width: 767px) {

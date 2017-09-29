@@ -46,15 +46,15 @@ function header(){
 				'</div>' +
 				'<div class="col-md-8 col-md-offset-2">' +
 					'<div id="navbar-custom" class="row">' +
-						'<ul class="nav navbar-nav">' +
-					        '<li><a href="' + base_url + '">HOME</a></li>' +
-					        '<li><a href="#">SHOP</a></li>' +
-					        '<li><a href="' + base_url + '/page/story.html">STORIES</a></li>' +
-					        '<li><a href="#">BLOG</a></li>' +
-					        '<li><a href="#">VIDEOS</a></li>' +
-					        '<li><a href="' + base_url + '/page/chatter.html">CHATTER</a></li>' +
-					        '<li><a href="#">ABOUT</a></li>' +
-					        '<li><a href="#">CONTACT</a></li>' +
+						'<ul class="nav navbar-nav main-menu">' +
+					        '<li><a href="' + base_url + '"><span>HOME</span></a></li>' +
+					        '<li><a href="#"><span>SHOP</span></a></li>' +
+					        '<li><a href="' + base_url + '/page/story.html"><span>STORIES</span></a></li>' +
+					        '<li><a href="' + base_url + '/page/blog.html"><span>BLOG</span></a></li>' +
+					        '<li><a href="#"><span>VIDEOS</span></a></li>' +
+					        '<li><a href="' + base_url + '/page/chatter.html"><span>CHATTER</span></a></li>' +
+					        '<li><a href="#"><span>ABOUT</span></a></li>' +
+					        '<li><a href="#"><span>CONTACT</span></a></li>' +
 					    '</ul>' +
 					'</div>' +
 				'</div>' +
@@ -73,7 +73,7 @@ function footer(){
 		{ "head": "ABOUT", "head_link": "#", "body": [
 			{ "caption": "Shop", 	"link": "#" },
 			{ "caption": "Stories", "link": base_url + "/page/story.html" },
-			{ "caption": "Blog"	, 	"link": "#" },
+			{ "caption": "Blog"	, 	"link": base_url + "/page/blog.html" },
 			{ "caption": "About", 	"link": "#" },
 			{ "caption": "Store", 	"link": "#" },
 			{ "caption": "Media", 	"link": "#" },

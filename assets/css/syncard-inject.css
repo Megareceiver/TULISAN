@@ -39,10 +39,7 @@ a { color: #333; }
   color: #FFF;
   border-color:unset; 
 }
-li a{border-bottom: 2px solid #fff;}
-li a:hover{
-  border-color: #ED1C24;
-}
+
 .no-padding{
   padding-left: 0;
   padding-right: 0;
@@ -131,10 +128,18 @@ li a:hover{
 
 /*=============================================================================================*/
 /* HEADER */
-header img{ width : 239.841px; }
-header img.smallImg{
+header.parent img{ width : 239.841px; }
+header.parent img.smallImg{
   width: auto;
   height: 100%;
+}
+
+header.parent .main-menu a span {
+  border-bottom: 2px solid #fff;
+}
+
+header.parent .main-menu a:hover span{
+  border-color: #ED1C24;
 }
 
 /*=============================================================================================*/
@@ -210,6 +215,7 @@ header img.smallImg{
 /*=============================================================================================*/
 /* MAIN */
 main.parent { margin-top: 40px; }
+main.parent.clear { margin-top: 20px; }
 main.parent .jumbo-tron { margin-top: -30px }
 
 /*=============================================================================================*/
@@ -237,6 +243,55 @@ footer.parent .socmed .socmed-box .fa { font-size: 28px; }
 footer.parent .license {
   padding: 15px 0 0 0;
 }
+
+
+/*=============================================================================================*/
+/* CUSTOM PAGE */
+
+/*=============================================================================================*/
+/* PAGING */
+.data-paging { font-weight: bold; }
+.data-paging.center { text-align: center; }
+.data-paging a { display: inline-block; padding: 5px; }
+
+/*=============================================================================================*/
+/* BLOG */
+
+.blog-container {
+  display: inline-block;
+  width: 100%;
+  padding-bottom: 30px;
+  border-bottom: 1px solid #ddd;
+  margin-bottom: 30px;
+}
+
+.blog-container:last-child { border: none; margin-bottom: 0; }
+
+.blog-box,
+.blog-box .blog-pic {
+  display: inline-block;
+  width: 100%;
+  text-align: center;
+  font-weight: bold;
+}
+
+.blog-box .blog-pic img {
+  width: 100%;
+}
+
+.blog-box .blog-title,
+.blog-box .blog-subtitle {
+  margin-bottom: 30px;
+}
+
+.blog-box .blog-title p {
+  font-weight: 500;
+}
+
+.blog-box .blog-pic {
+  margin-bottom: 40px;
+}
+
 
 /*=============================================================================================*/
 /*=============================================================================================*/
@@ -273,6 +328,11 @@ footer.parent .license {
   }
 
   .navbar-default .navbar-brand { width: auto; margin-bottom: 0; }
+  .navbar-shortcut {
+    position: initial;
+    width: 100%;
+    margin-top: 20px;
+  }
 
   /*=============================================================================================*/
   /* ARTICLE */

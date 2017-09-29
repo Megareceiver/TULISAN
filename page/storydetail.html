@@ -19,37 +19,21 @@
 			<main class="parent">
 				<div class="row">
 					<div class="page-article">
-						<div class="col-md-8 col-md-offset-2 jumbo-tron center-div">
-							<img class="small-image" src="../assets/PICS/pepe.png">
+						<div class="col-md-8 col-md-offset-2 center-div">
+							<img id="picture" class="small-image" src="../assets/PICS/">
 						</div>
-						<div class="clearfix"></div>
-						<div class="article">
-							<h2 class="title-story fontserif"><b>PEPE AND THE FLYING BALLOON</b></h2>
-							<h3 class="title-story fontserif"><i>The little girl gave Pepe a big hug and said, "I have been<br> endlessly chasing the horizon, running away from monsters<br> that keep haunting me</i></h3>
+						<div class="col-md-6 col-md-offset-3 center-div">
+							<div class="">
+								<h2 id="title" class="title-story fontserif"><b>&nbsp;</b></h2>
+								<h3 id="subtitle" class="title-story fontserif"><i></i></h3>
+							</div>
+							<div class="clearfix"></div>
 						</div>
-						<div class="clearfix"></div>
-						<!-- <div class="col-md-8 col-md-offset-2 jumbo-tron center-div">
-							<img class="small-image" src="../assets/PICS/pepe.png">
-						</div> -->
-						<div class="col-md-8 col-md-offset-2 jumbo-tron center-div">
-							<div class="article content-story">
-								<h4><i>by Melisa Sanjaya</i></h4>
-								<div class="clearfix"></div>
-								<p>Once upon a time, there were two mice that lived an adventurous life in the heart of Jakarta. Hiro and his wife, Sur, were a hard-working and courageous duo. Even though they were tiny creatures, their hearts were set on rescuing abandoned children who lived on the streets. Sometimes they slept under the rooftops of big houses, where they could steal some food for these children. Other times they spent the night in a clothing factory, where Sur would sew little scarves from leftover materials. But they spent most of their time under a bridge at the vintage train station in Kota - the old town - where about twenty to thirty neglected kids sought shelter each night. The old bridge had a nasty and damp atmosphere, but it was here that Hiro and Sur felt they were needed most. As the children slept, Hiro would carefully wrap their necks with the scarves that Sur made and gently place food next to them. None of the kids ever found out who their secret guardians truly were.
-								<br><br>
-								Many nameless children with mysterious stories came to this dark corner. After a while, some would leave to seek shelter elsewhere, while others suffered tragic ends. One day, a child with a shaved head limped into this place. The child’s dark, thin, and flat chest suggested that it was a boy. Yet, starring deeply into the young visitor’s large almond eyes, Sur knew this poor soul was a little girl. Her expression conveyed a mix of rage, fear, longing, and sorrow; but her eyes held the burning flame of Srikandi's (the ancient Javanese warrior goddess) spirit. Acting like an angry boy was her means of surviving the abuse and violence of the streets. Now it seemed as if she had been running for hours from something. Her lips were pale and cold. Her body was shaking from exhaustion. She knelt to the ground and fell into a deep sleep inside a torn packing box that Hiro had procured from the factory. Even as the little girl slept, there was intensity on her face, and Sur fell in love with the girl's fighting spirit.
-								<br><br>
-								Sur sat down next to her and started to sew a tiny doll while humming an enchanting lullaby. This loving mouse had a miraculous power when she sewed. Every stitch she made was performed with a solemn wish for the child. As she completed the doll, a star shot across the deep blue sky above them. It broke into tiny fireflies which enveloped the wishful doll in a warm glow and blessed it with a smile. Sur named this doll “Pepe” after the label printed on the box where the little girl slept. When she gingerly placed the doll in the child's embrace, an air of joy filled the girl's face, as if she had just entered a magnificent dream. The cluster of fireflies twinkled above this girl and lit an image of what seemed to be her dream.
-								<br><br>
-								In her dream, this little girl found herself running through a mystical forest. She was wearing a long cotton dress with huge Bougainvillea flowers painted on it. There, she met Pepe - a sparkling and witty doll with a warm human heart. Pepe loved jazz and played his trumpet like any other crazy musician. The music he played cast a spell that could turn some dreams into reality. He listened to her stories and made her laugh; something that she had not done for a long time.
-								<br><br>
-								The little girl gave Pepe a big hug and said, “I have been endlessly chasing the horizon, running away from monsters that keep haunting me. Destiny has brought me to you, so that for a few minutes of my life I could experience warmth and tenderness. Please take me away from this dark place so I can stop running. I wish to fly and be in a world where I can stop pretending to be something I’m not and can be my true self."
-								<br><br>
-								Pepe held her hand and looked into her teary eyes. As he whistled a melancholic melody, a striped balloon magically appeared. She climbed up and sat on top of it as it slowly rose to the sky. With a small kite to navigate the balloon, they followed the wind which carried them from the dark forest, over the mountains, above the cities’ skyscrapers, and through the clouds. From up above, she saw people living different lives. Some enjoyed more fortunate moments, while others had to face a more challenging fate than hers. She found that she could paint her life with any colors she wished and draw her own horizons without having to reach out for them. Sorrow and monsters existed only in her mind, not in her reality. It all depended on how she looked at them. And now with this new perspective, she felt better.
-								<br><br>
-								She was on the top of her universe when Pepe gave her a sudden kiss on the cheek, flew away, and disappeared behind the moon. Her funny valentine was nowhere to be seen. The balloon drifted down at a speed she could not control, her breath became thin, and the world was again a fearful place. She summoned the remaining courage that she had, took a deep breath, and slid away from the top of the balloon. Her white cotton dress served as a parachute such that she could land gracefully. As she touched the ground, the little girl woke up and found herself with the little Pepe doll nestled in her embrace.
-								</p>
-								<div class="clearfix"></div>
+						
+						<div class="col-md-8 col-md-offset-2 center-div">
+							<div class=" content-story">
+								<h4 id="author"><i>&nbsp;</i></h4>
+								<p id="description">&nbsp;</p>
 								<div class="sosmedpage">
 									<p> SHARE IT &nbsp;
 										<a href="#"><span class="fa fa-3x fa-instagram"> </span></a>
@@ -83,5 +67,52 @@
 		<script type="text/javascript" src="../assets/js/jquery-ui-1.10.0.custom.min.js"></script>
 		<script type="text/javascript" src="../assets/js/bootstrap.min.js"></script>	
 		<script type="text/javascript" src="../assets/js/partial.js"></script>	
+
+		<script type="text/javascript">
+			storyDetail();
+
+			function storyDetail(){
+				var tempDescription =
+				"Once upon a time, there were two mice that lived an adventurous life in the heart of Jakarta. Hiro and his wife, Sur, were a hard-working and courageous duo. Even though they were tiny creatures, their hearts were set on rescuing abandoned children who lived on the streets. Sometimes they slept under the rooftops of big houses, where they could steal some food for these children. Other times they spent the night in a clothing factory, where Sur would sew little scarves from leftover materials. But they spent most of their time under a bridge at the vintage train station in Kota - the old town - where about twenty to thirty neglected kids sought shelter each night. The old bridge had a nasty and damp atmosphere, but it was here that Hiro and Sur felt they were needed most. As the children slept, Hiro would carefully wrap their necks with the scarves that Sur made and gently place food next to them. None of the kids ever found out who their secret guardians truly were. \n\n" +
+				"Many nameless children with mysterious stories came to this dark corner. After a while, some would leave to seek shelter elsewhere, while others suffered tragic ends. One day, a child with a shaved head limped into this place. The child’s dark, thin, and flat chest suggested that it was a boy. Yet, starring deeply into the young visitor’s large almond eyes, Sur knew this poor soul was a little girl. Her expression conveyed a mix of rage, fear, longing, and sorrow; but her eyes held the burning flame of Srikandi's (the ancient Javanese warrior goddess) spirit. Acting like an angry boy was her means of surviving the abuse and violence of the streets. Now it seemed as if she had been running for hours from something. Her lips were pale and cold. Her body was shaking from exhaustion. She knelt to the ground and fell into a deep sleep inside a torn packing box that Hiro had procured from the factory. Even as the little girl slept, there was intensity on her face, and Sur fell in love with the girl's fighting spirit.  \n\n" +
+				"Sur sat down next to her and started to sew a tiny doll while humming an enchanting lullaby. This loving mouse had a miraculous power when she sewed. Every stitch she made was performed with a solemn wish for the child. As she completed the doll, a star shot across the deep blue sky above them. It broke into tiny fireflies which enveloped the wishful doll in a warm glow and blessed it with a smile. Sur named this doll “Pepe” after the label printed on the box where the little girl slept. When she gingerly placed the doll in the child's embrace, an air of joy filled the girl's face, as if she had just entered a magnificent dream. The cluster of fireflies twinkled above this girl and lit an image of what seemed to be her dream.  \n" +
+				"In her dream, this little girl found herself running through a mystical forest. She was wearing a long cotton dress with huge Bougainvillea flowers painted on it. There, she met Pepe - a sparkling and witty doll with a warm human heart. Pepe loved jazz and played his trumpet like any other crazy musician. The music he played cast a spell that could turn some dreams into reality. He listened to her stories and made her laugh; something that she had not done for a long time.  \n\n" +
+				"The little girl gave Pepe a big hug and said, “I have been endlessly chasing the horizon, running away from monsters that keep haunting me. Destiny has brought me to you, so that for a few minutes of my life I could experience warmth and tenderness. Please take me away from this dark place so I can stop running. I wish to fly and be in a world where I can stop pretending to be something I’m not and can be my true self. \n\n" +
+				"Pepe held her hand and looked into her teary eyes. As he whistled a melancholic melody, a striped balloon magically appeared. She climbed up and sat on top of it as it slowly rose to the sky. With a small kite to navigate the balloon, they followed the wind which carried them from the dark forest, over the mountains, above the cities’ skyscrapers, and through the clouds. From up above, she saw people living different lives. Some enjoyed more fortunate moments, while others had to face a more challenging fate than hers. She found that she could paint her life with any colors she wished and draw her own horizons without having to reach out for them. Sorrow and monsters existed only in her mind, not in her reality. It all depended on how she looked at them. And now with this new perspective, she felt better.  \n\n" +
+				"She was on the top of her universe when Pepe gave her a sudden kiss on the cheek, flew away, and disappeared behind the moon. Her funny valentine was nowhere to be seen. The balloon drifted down at a speed she could not control, her breath became thin, and the world was again a fearful place. She summoned the remaining courage that she had, took a deep breath, and slid away from the top of the balloon. Her white cotton dress served as a parachute such that she could land gracefully. As she touched the ground, the little girl woke up and found herself with the little Pepe doll nestled in her embrace.";
+				
+				var story = {
+					"storyId"		: "1",
+					"author"		: "Melisa Sanjaya",
+					"title" 		: "PEPE AND THE FLYING BALLOON",
+					"subtitle"		: "The little girl gave Pepe a big hug and said, \"I have been endlessly chasing the horizon, running away from monsters that keep haunting me \"",
+					"description"	: tempDescription,
+					"picture"		: "pepe.png",
+					"shopCollection": "yes",
+					"shopLink"		: "#",
+					"nextStoryLink" : "#"	
+				};
+
+				var socmedApi = {
+					"instagram"		: "#",
+					"twitter"		: "#",
+					"pinterest" 	: "#",
+					"facebook" 		: "#",
+					"tumblr" 		: "#",
+					"dribbble" 		: "#"
+				};
+
+				//GENERATOR
+				if(story != null){
+					story.description = story.description.replace(/(?:\r\n|\r|\n)/g, '<br />');
+
+					$("#author i").html('by ' + story.author);
+					$("#title b").html(story.title);
+					$("#subtitle i").html(story.subtitle);
+					$("#description").html(story.description);
+					$("#picture").attr('src', $("#picture").attr('src') + story.picture);
+				}
+			}
+		</script>		
 	</body>
 </html>

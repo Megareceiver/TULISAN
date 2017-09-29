@@ -183,13 +183,7 @@
 							</div>	
 							<div class="clearfix"></div>			
 						</div>
-						<div class="col-md-12 syn-center syn-plus">
-							<a href="#"><b>1</b></a>
-							<a href="#"><b>2</b></a>
-							<a href="#"><b>3</b></a>
-							<a href="#"><b>...</b></a>
-							<a href="#"><b>124</b></a>
-						</div>
+						<div id="pagging"></div>
 						<div class="clearfix"></div>
 					</div>
 				</div>
@@ -203,5 +197,39 @@
 		<script type="text/javascript" src="../assets/js/jquery-ui-1.10.0.custom.min.js"></script>
 		<script type="text/javascript" src="../assets/js/bootstrap.min.js"></script>	
 		<script type="text/javascript" src="../assets/js/partial.js"></script>	
+	
+		<!-- page script -->
+		<script type="text/javascript">
+			loadBlog();
+
+			function loadBlog(){
+				var html = '';
+				var counter = 0;
+				var paging = "";
+				var pagingLink = "";
+				var pagingLinkBefore = "";
+				var pagingState = 1;
+				var data = {"paging": "124"};
+
+				paging = parseInt(data.paging);
+
+				for(var loop=pagingState; loop<=paging; loop++){
+					if((paging - pagingState) > 5){
+						if(counter == 4){
+							pagingLink = pagingLink + "..." + "<a href='#?" + paging + "' class='data-paging'>" + paging + "</a>";
+							break;
+						}
+					}
+					pagingLink = pagingLink + "<a href='#?" + loop + "' class='data-paging'>" + loop + "</a>";
+					counter++;
+				}
+
+				html = html + '<div class="row">';
+				html = html + "<div class='data-paging center'>" + pagingLink + "</div>";
+				html = html + "</div>";
+
+				$("#pagging").replaceWith(html);
+			}
+		</script>
 	</body>
 </html>

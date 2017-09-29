@@ -340,7 +340,8 @@ footer.parent .license {
 
   /*=============================================================================================*/
   /**/
-  main.parent { margin-top: 57px }
+  main.parent,
+  main.parent.clear { margin-top: 57px }
 
 }
 

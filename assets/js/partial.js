@@ -6,6 +6,7 @@ var base_url = window.location.origin + '/TULISAN';
 // });
 
 function header(){
+	var active_page = "home-route";
 	var html = 
 	'<div class="row">' +
 		'<nav class="navbar navbar-default plain">' +
@@ -40,21 +41,21 @@ function header(){
 				   		'</form>' +
 					'</div>' +
 				'</div>' +
-		    	'<div class="col-md-8 col-md-offset-2 hidden-xs">' +
+		    	'<div class="col-md-8 col-md-offset-2 hidden-xs navbar-brand-custom">' +
 			    	'<div class="navbar-brand"><img src="' + base_url + '/assets/PICS/tulisan.png" /></div>' +
 			    	'<div class="clearfix"></div>' +
 				'</div>' +
 				'<div class="col-md-8 col-md-offset-2">' +
 					'<div id="navbar-custom" class="row">' +
-						'<ul class="nav navbar-nav main-menu">' +
-					        '<li><a href="' + base_url + '"><span>HOME</span></a></li>' +
-					        '<li><a href="#"><span>SHOP</span></a></li>' +
-					        '<li><a href="' + base_url + '/page/story.html"><span>STORIES</span></a></li>' +
-					        '<li><a href="' + base_url + '/page/blog.html"><span>BLOG</span></a></li>' +
-					        '<li><a href="#"><span>VIDEOS</span></a></li>' +
-					        '<li><a href="' + base_url + '/page/chatter.html"><span>CHATTER</span></a></li>' +
-					        '<li><a href="#"><span>ABOUT</span></a></li>' +
-					        '<li><a href="#"><span>CONTACT</span></a></li>' +
+						'<ul class="nav navbar-nav main-menu fontserif">' +
+					        '<li><a id="home-route" href="' + base_url + '"><span>HOME</span></a></li>' +
+					        '<li><a id="shop-route" href="#"><span>SHOP</span></a></li>' +
+					        '<li><a id="story-route" href="' + base_url + '/page/story.html"><span>STORIES</span></a></li>' +
+					        '<li><a id="blog-route" href="' + base_url + '/page/blog.html"><span>BLOG</span></a></li>' +
+					        '<li><a id="video-route" href="#"><span>VIDEOS</span></a></li>' +
+					        '<li><a id="chatter-route" href="' + base_url + '/page/chatter.html"><span>CHATTER</span></a></li>' +
+					        '<li><a id="about-route" href="' + base_url + '/page/about.html"><span>ABOUT</span></a></li>' +
+					        '<li><a id="contact-route" href="#"><span>CONTACT</span></a></li>' +
 					    '</ul>' +
 					'</div>' +
 				'</div>' +
@@ -62,7 +63,57 @@ function header(){
 		'</nav>' +
 	'</div><!-- /.navbar-collapse -->';
 
+	//breadcrum
+	var breadcrumbHtml = "";
+	var breadcrumb = "";
+	var page = window.location.href; 
+		page = page.replace('#', '');
+		page = page.split('/');
+
+	if(page != null && page.length > 0){
+		switch(page[page.length - 1]){
+			case "story.html": 		 	
+				breadcrumb = "<a href='" + base_url + "'>Home</a> / story"; 
+				active_page = "story-route"; 
+			break;
+			case "storydetail.html": 	
+				breadcrumb = "<a href='" + base_url + "'>Home</a> / <a href='" + base_url + "/page/story.html'>story</a> / detail";
+				active_page = "story-route"; 
+			break;
+			case "blog.html": 			
+				breadcrumb = "<a href='" + base_url + "'>Home</a> / blog";	
+				active_page = "blog-route"; 
+			break;
+			case "blogDetail.html":  	
+				breadcrumb = "<a href='" + base_url + "'>Home</a> / <a href='" + base_url + "/page/blog.html'>blog</a> / detail";
+				active_page = "blog-route"; 
+			break;
+			case "chatter.html":  	 	
+				breadcrumb = "<a href='" + base_url + "'>Home</a> / chatter";
+				active_page = "chatter-route"; 
+			break;
+			case "chatterDetail.html":  
+				breadcrumb = "<a href='" + base_url + "'>Home</a> / <a href='" + base_url + "/page/chatter.html'>chatter</a> / detail";
+				active_page = "chatter-route"; 
+			break;
+			case "about.html":  	 	
+				breadcrumb = "<a href='" + base_url + "'>Home</a> / about";
+				active_page = "about-route"; 
+			break;
+		}
+
+		breadcrumbHtml =
+		'<div class="row">' +
+			'<div class="col-md-8 col-md-offset-2">' +
+				'<div class="breadcrumb"><p class="fontserifs">' + breadcrumb + '</p></div>' +
+			'</div>' +
+		'</div>';
+	}
+
 	$("header.parent").html(html);
+	$("header.parent").after(breadcrumbHtml);
+	$("header.parent .main-menu a").removeClass('active');
+	$("header.parent .main-menu a#" + active_page).addClass('active');
 }
 
 function footer(){
@@ -109,7 +160,7 @@ function footer(){
 	/*===========================================================================================*/
 	/* GENERATOR */
 
-	html = '<div class="col-md-8 col-md-offset-2">';
+	html = '<div class="col-md-8 col-md-offset-2 div-normalize">';
 
 	/* shortcut generator */
 	if(shortcut != null && shortcut.length > 0){

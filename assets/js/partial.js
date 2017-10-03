@@ -28,7 +28,7 @@ function header(){
 		    	'<div class="navbar-shortcut">' +
 					'<div class="link">' +
 						'<a href="#">FIND A STORE</a> |' +
-						'<a href="#">MEDIA</a> |' +
+						'<a href="' + base_url + '/page/privacyPolicy.html">MEDIA</a> |' +
 						'<a href="#"><span class="fa fa-shopping-cart"></span></a> |' +
 						'<a href="#">LOGIN</a>' +
 					'</div>' +

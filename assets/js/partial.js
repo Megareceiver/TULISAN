@@ -28,7 +28,7 @@ function header(){
 		    	'<div class="navbar-shortcut">' +
 					'<div class="link">' +
 						'<a href="#">FIND A STORE</a> |' +
-						'<a href="' + base_url + '/page/privacyPolicy.html">MEDIA</a> |' +
+						'<a href="' + base_url + '/page/media.html">MEDIA</a> |' +
 						'<a href="#"><span class="fa fa-shopping-cart"></span></a> |' +
 						'<a href="#">LOGIN</a>' +
 					'</div>' +
@@ -96,6 +96,14 @@ function header(){
 				breadcrumb = "<a href='" + base_url + "'>Home</a> / <a href='" + base_url + "/page/chatter.html'>chatter</a> / detail";
 				active_page = "chatter-route"; 
 			break;
+			case "media.html":  	 	
+				breadcrumb = "<a href='" + base_url + "'>Home</a> / Media";
+				active_page = "Media"; 
+			break;
+			case "privacyPolicy.html":  	 	
+				breadcrumb = "<a href='" + base_url + "'>Home</a> / Privacy Policy";
+				active_page = "Privacy Policy"; 
+			break;
 			case "about.html":  	 	
 				breadcrumb = "<a href='" + base_url + "'>Home</a> / about";
 				active_page = "about-route"; 
@@ -140,7 +148,7 @@ function footer(){
 			{ "caption": "By Story"	, 	"link": "#" },
 		]},
 		{ "head": "LEGAL", "head_link": "#", "body": [
-			{ "caption": "Store / Privacy Policy", 	"link": "#" },
+			{ "caption": "Store / Privacy Policy", 	"link": base_url + "/page/privacyPolicy.html" },
 		]},
 	];
 

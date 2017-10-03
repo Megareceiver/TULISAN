@@ -325,8 +325,8 @@ footer.parent .license {
 }
 
 /*=============================================================================================*/
-/*RESPONSIVE*/
-.privacy span{
+/*media*/
+.media span{
   display: inline-block;
   width: 200px;
 }

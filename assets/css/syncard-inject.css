@@ -138,6 +138,7 @@ header.parent .main-menu a.active span{
   display: block;
   padding-left: 20px;
   background-color: unset;
+  margin-bottom: 0;
 }
 
 .breadcrumb p { font-weight: bold; }
@@ -199,6 +200,8 @@ header.parent .main-menu a.active span{
   padding-bottom: 0;
 }
 
+.navbar-brand-custom { margin-bottom: 20px }
+
 /*=============================================================================================*/
 /* ARTICLE */
 #articles-section {
@@ -218,7 +221,7 @@ header.parent .main-menu a.active span{
 
 /*=============================================================================================*/
 /* MAIN */
-main.parent { margin-top: 40px; }
+main.parent { display: inline-block; width: 100%; margin-top: 40px; }
 main.parent.clear { margin-top: 0px; }
 main.parent .jumbo-tron { margin-top: -30px }
 
@@ -328,8 +331,19 @@ footer.parent .license {
 /*media*/
 .media span{
   display: inline-block;
-  width: 200px;
 }
+
+.media span:first-child {
+	min-width: 200px;
+}
+
+.media span:nth-child(2) {
+	min-width: 40px;
+}
+
+/*=============================================================================================*/
+/*privacy*/
+.privacy p { text-align: justify }
 
 
 /*=============================================================================================*/
@@ -353,7 +367,7 @@ footer.parent .license {
 
   /*=============================================================================================*/
   /* NAVBAR */
-  #navbar-custom ul { display: block; margin: 0; }
+  #navbar-custom ul { display: block; margin: 0; padding-bottom: 25px; }
   #navbar-custom li {
     display: block;
     width: 100%;
@@ -372,7 +386,7 @@ footer.parent .license {
     width: 100%;
     margin-top: 5px;
   }
-
+  
   /*=============================================================================================*/
   /* BREADCRUMB */
   .breadcrumb { margin-top: 50px; padding-left: 0 }
@@ -384,7 +398,7 @@ footer.parent .license {
   /*=============================================================================================*/
   /**/
   main.parent,
-  main.parent.clear { margin-top: 57px }
+  main.parent.clear { margin-top: 0 }
 }
 
 /* extra small to small */

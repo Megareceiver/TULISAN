@@ -18,7 +18,7 @@
 		<div class="container">
 			<header class="parent"></header>
 
-			<main class="parent"></main>
+			<main class="parent clear"></main>
 	
 			<footer class="parent"></footer>
 		</div>
@@ -36,7 +36,7 @@
 			function loadPrivacy(){
 				var html = '';
 				
-				html = '<div class="row"><div class="col-md-8 col-md-offset-2 div-normalize">';
+				html = '<div class="col-md-8 col-md-offset-2 div-normalize">';
 				html = html +
 					'<div class="media">'+
 						'<h2>Download</h2>'+
@@ -65,7 +65,7 @@
 						'<div class="plus"><p><a href="#">Catalog archived download</a></p></div>'+
 					'</div>';
 
-				html = html + "</div></div>";
+				html = html + "</div><div class='clearfix'></div>";
 
 				$("main").html(html);
 

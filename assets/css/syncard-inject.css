@@ -386,6 +386,7 @@ footer.parent .license {
   background-size: cover;
 
 }
+.content .detail-content p{ text-align: justify; }
 
 
 .media span:first-child {

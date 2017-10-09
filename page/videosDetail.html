@@ -36,52 +36,33 @@
 			function loadVideo(){
 				var html = '';
 
-				var data = [
+				var data = 
 					{
 						video	: "testVids.mp4",
 						title	: "Finding Unconditional Love",
 						desc	: "The Sound of Dawn’, an art project by multi-dimensional artist Melissa Sunjaya, examines the concept of self-love. This sensual prose is about a spiritual awakening to discover bliss and happiness within ourselves. Only through a commitment of loving ourselves wholeheartedly, we can begin to love others unconditionally.</br>We recently sat down with designer Zhijun Wang to discuss his project that turns hyped sneakers into wearable face masks. The Beijing-based creative started his face mask project to comment on the pollution in his city, where citizens are battling extreme air pollution. Understandably, Wang’s mask projects have been met with mixed responses and have created quite a buzz on the internet. In our talk with Wang he notes that he only wishes to make interesting items that no one has made before and that he has no interest in selling his masks. Additionally, we gave a pair of our HYPEBEAST 20th anniversary New Balance 580 “Earth” sneakers to Wang to be made into one of his signature face masks.",
 						publish: "May 3, 2016"
 					}
-					];
+					;
 
 				
-				html = '<div class=""><div class="detail-video">';
+				html = '<div class=""><div class="detail-video col-md-offset-1 col-md-10">';
 				html = html + 	'<div class="video-player" >'+
 									'<video id="vid1" width="100%">'+
-									  '<source src="'+ base_url +'/assets/VIDS/'+data[0].video+'" type="video/mp4">'+
+									  '<source src="'+ base_url +'/assets/VIDS/'+data.video+'" type="video/mp4">'+
 									'Your browser does not support the video tag.'+
 								'</video></div>';
 				html = html + 	'<div class="detail-video-cover">'+
 								'</div></div>';
 				// /*little video*/
-				html = html + 	'<div class="content">'+
+				html = html + 	'<div class="col-md-offset-2 col-md-8 content">'+
 									'<div>'+
-										'<h1>'+data[0].title+'</h1>'+
+										'<h1>'+data.title+'</h1>'+
 									'</div>'+
-									'<div><p>Published on '+data[0].publish+'</p></div>'+
-									'<div>'+
-										'<p>'+data[0].desc+'</p>'+
+									'<div><p>Published on '+data.publish+'</p></div>'+
+									'<div class="detail-content">'+
+										'<p>'+data.desc+'</p>'+
 									'</div>';
-				// for(var loop=0; loop<data.length; loop++){
-				// 	html = html + 
-				// 			'<div class="col-md-4">'+
-				// 				'<div  class="video-player-little">'+
-				// 					'<video id="vid1" width="100%" >'+
-				// 					  '<source src="'+ base_url +'/assets/VIDS/'+data[loop].video+'" type="video/mp4">'+
-				// 					'Your browser does not support the video tag.'+
-				// 					'</video>'+
-				// 					'<div class="video-cover-little">'+
-				// 					'</div>'+
-				// 				'</div>'+
-				// 				'<div>'+
-				// 					'<p><b>'+data[loop].title+'</b></p>'+
-				// 				'</div>'+
-				// 				'<div>'+
-				// 					'<p>'+data[loop].comment+' Comments</p>'+
-				// 				'</div>'+
-				// 			'</div>';
-				// }
 				html = html + "</div>";
 
 				$("main").html(html);

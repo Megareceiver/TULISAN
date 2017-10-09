@@ -368,6 +368,25 @@ footer.parent .license {
   margin: auto;
   background-size: cover;
 }
+/*detail video*/
+.detail-video{
+  position: relative;
+}
+.detail-video-cover{
+  position: absolute;
+  background-color: rgba(255, 255, 255,0.3);
+  background:  url("../PICS/playbutton.png")no-repeat;
+  height: 100px;
+  width: 100px;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  background-size: cover;
+
+}
+
 
 .media span:first-child {
 	min-width: 200px;

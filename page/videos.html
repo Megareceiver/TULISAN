@@ -36,56 +36,84 @@
 			function loadVideo(){
 				var html = '';
 
-				var data = [{
-					picture	: "pepe.png",
-					title	: "PEPE AND THE FLYING BALLOON",
-					page	: "Once upon a time, there were two mice that lived an adventurous life in the heart of Jakarta. Hiro and his wife, Sur, were a hard-working and courageous duo. Even though they were tiny creatures, their hearts were set on rescuing abandoned children who lived on the streets.",
-					url		: base_url + "/page/storydetail.html"
+				var data = [
+					{
+						video	: "testVids.mp4",
+						title	: "Netflix's 'Abstract: The Art of Design' Will Spotlight the World's Most Creative Minds",
+						comment	: 3
 					},
 					{
-					picture	: "pepe.png",
-					title	: "PEPE AND THE FLYING BALLOON",
-					page	: "Once upon a time, there were two mice that lived an adventurous life in the heart of Jakarta. Hiro and his wife, Sur, were a hard-working and courageous duo. Even though they were tiny creatures, their hearts were set on rescuing abandoned children who lived on the streets.",
-					url		: base_url + "/page/storydetail.html"
+						video	: "testVids.mp4",
+						title	: "Netflix's 'Abstract: The Art of Design' Will Spotlight the World's Most Creative Minds",
+						comment	: 1
 					},
 					{
-					picture	: "pepe.png",
-					title	: "PEPE AND THE FLYING BALLOON",
-					page	: "Once upon a time, there were two mice that lived an adventurous life in the heart of Jakarta. Hiro and his wife, Sur, were a hard-working and courageous duo. Even though they were tiny creatures, their hearts were set on rescuing abandoned children who lived on the streets.",
-					url		: base_url + "/page/storydetail.html"
+						video	: "testVids.mp4",
+						title	: "Netflix's 'Abstract: The Art of Design' Will Spotlight the World's Most Creative Minds",
+						comment	: 2
 					},
 					{
-					picture	: "pepe.png",
-					title	: "PEPE AND THE FLYING BALLOON",
-					page	: "Once upon a time, there were two mice that lived an adventurous life in the heart of Jakarta. Hiro and his wife, Sur, were a hard-working and courageous duo. Even though they were tiny creatures, their hearts were set on rescuing abandoned children who lived on the streets.",
-					url		: base_url + "/page/storydetail.html"
-					}];
+						video	: "testVids.mp4",
+						title	: "Netflix's 'Abstract: The Art of Design' Will Spotlight the World's Most Creative Minds",
+						comment	: 7
+					},
+					{
+						video	: "testVids.mp4",
+						title	: "Netflix's 'Abstract: The Art of Design' Will Spotlight the World's Most Creative Minds",
+						comment	: 5
+					},
+					{
+						video	: "testVids.mp4",
+						title	: "Netflix's 'Abstract: The Art of Design' Will Spotlight the World's Most Creative Minds",
+						comment	: 5
+					},
+					{
+						video	: "testVids.mp4",
+						title	: "Netflix's 'Abstract: The Art of Design' Will Spotlight the World's Most Creative Minds",
+						comment	: 2
+					},
+					{
+						video	: "testVids.mp4",
+						title	: "Netflix's 'Abstract: The Art of Design' Will Spotlight the World's Most Creative Minds",
+						comment	: 3
+					}
+					];
 
 				
-				html = '<div class="row"><div class="col-md-8 col-md-offset-2 div-normalize">';
-				
-				// for(var loop=0; loop<data.length; loop++){
-				// 	html = html + 
-				// 		"<div class='col-md-6 story-box'>"+
-				// 			"<div class='picture-box story' style='background-image: url(../assets/PICS/"+data[loop].picture+");'></div>"+
-				// 			"<div class='title-story'>"+
-				// 				"<h3>"+data[loop].title+"</h3>"+
-				// 			"</div>"+
-				// 			"<div class='content-story'>"+
-				// 				"<p>"+data[loop].page+" <a href="+data[loop].url+"><b>MORE</b></a></p>"+
-				// 			"</div>"+
-				// 		"</div>";
-				// }
-				html = html + 	'<div class="video">'+
+				html = '<div class=""><div class="video">';
+				html = html + 	'<div class="video-player">'+
 									'<video id="vid1" class="video-player" width="100%" >'+
 									  '<source src="'+ base_url +'/assets/VIDS/testVids.mp4" type="video/mp4">'+
-									  // '<source src="'+ base_url +'/assets/VIDS/testVids.mp4" type="video/ogg">'+
 									'Your browser does not support the video tag.'+
 								'</video></div>';
-				// html = html + 	'<div class="video-cover">'+
-									
-				// 				'</div>';
-				html = html + "</div></div>";
+				html = html + 	'<div class="video-cover">'+
+									'<div class="title-video">'+
+										'<h1>Finding Unconditional Love</h1>'+
+										'<button type="">WATCH</button>'+
+									'</div>'+
+								'</div></div>';
+				/*little video*/
+				html = html + '<div class="video-little row">';
+				for(var loop=0; loop<data.length; loop++){
+					html = html + 
+							'<div class="col-md-4">'+
+								'<div  class="video-player-little">'+
+									'<video id="vid1" width="100%" >'+
+									  '<source src="'+ base_url +'/assets/VIDS/'+data[loop].video+'" type="video/mp4">'+
+									'Your browser does not support the video tag.'+
+									'</video>'+
+									'<div class="video-cover-little">'+
+									'</div>'+
+								'</div>'+
+								'<div>'+
+									'<p><b>'+data[loop].title+'</b></p>'+
+								'</div>'+
+								'<div>'+
+									'<p>'+data[loop].comment+' Comments</p>'+
+								'</div>'+
+							'</div>';
+				}
+				html = html + "</div></div></div>";
 
 				$("main").html(html);
 				document.getElementById('vid1').addEventListener('loadedmetadata', function() {

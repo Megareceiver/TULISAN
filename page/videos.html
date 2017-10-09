@@ -40,42 +40,50 @@
 					{
 						video	: "testVids.mp4",
 						title	: "Netflix's 'Abstract: The Art of Design' Will Spotlight the World's Most Creative Minds",
-						comment	: 3
+						comment	: 3,
+						id 		: 0
 					},
 					{
 						video	: "testVids.mp4",
 						title	: "Netflix's 'Abstract: The Art of Design' Will Spotlight the World's Most Creative Minds",
-						comment	: 1
+						comment	: 1,
+						id 		: 0
 					},
 					{
 						video	: "testVids.mp4",
 						title	: "Netflix's 'Abstract: The Art of Design' Will Spotlight the World's Most Creative Minds",
-						comment	: 2
+						comment	: 2,
+						id 		: 0
 					},
 					{
 						video	: "testVids.mp4",
 						title	: "Netflix's 'Abstract: The Art of Design' Will Spotlight the World's Most Creative Minds",
-						comment	: 7
+						comment	: 7,
+						id 		: 0
 					},
 					{
 						video	: "testVids.mp4",
 						title	: "Netflix's 'Abstract: The Art of Design' Will Spotlight the World's Most Creative Minds",
-						comment	: 5
+						comment	: 5,
+						id 		: 0
 					},
 					{
 						video	: "testVids.mp4",
 						title	: "Netflix's 'Abstract: The Art of Design' Will Spotlight the World's Most Creative Minds",
-						comment	: 5
+						comment	: 5,
+						id 		: 0
 					},
 					{
 						video	: "testVids.mp4",
 						title	: "Netflix's 'Abstract: The Art of Design' Will Spotlight the World's Most Creative Minds",
-						comment	: 2
+						comment	: 2,
+						id 		: 0
 					},
 					{
 						video	: "testVids.mp4",
 						title	: "Netflix's 'Abstract: The Art of Design' Will Spotlight the World's Most Creative Minds",
-						comment	: 3
+						comment	: 3,
+						id 		: 0
 					}
 					];
 
@@ -102,7 +110,7 @@
 									  '<source src="'+ base_url +'/assets/VIDS/'+data[loop].video+'" type="video/mp4">'+
 									'Your browser does not support the video tag.'+
 									'</video>'+
-									'<div class="video-cover-little">'+
+									'<div class="video-cover-little" video-id='+data[loop].id+'>'+
 									'</div>'+
 								'</div>'+
 								'<div>'+
@@ -132,6 +140,9 @@
 				       $(this).get(0).pause();
 				        // $(this).children(".playpause").fadeIn();
 				    }
+				});
+				$('main').on('click','.video-cover-little', function(){
+					window.location.href = base_url+"/page/videosDetail.html";
 				});
 			}
 		</script>

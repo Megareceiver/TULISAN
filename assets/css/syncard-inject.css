@@ -337,6 +337,11 @@ footer.parent .license {
 .left-menu{
   background-color : #F1F1F2;
 }
+.shop-img{
+	height	: 300px;
+	background-size : cover;
+	background-repeat	: no-repeat;
+}
 /*=============================================================================================*/
 /*video*/
 /*home video*/

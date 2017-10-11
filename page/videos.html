@@ -78,57 +78,67 @@
 						title	: "Netflix's 'Abstract: The Art of Design' Will Spotlight the World's Most Creative Minds",
 						comment	: 2,
 						id 		: 0
-					},
-					{
-						video	: "testVids.mp4",
-						title	: "Netflix's 'Abstract: The Art of Design' Will Spotlight the World's Most Creative Minds",
-						comment	: 3,
-						id 		: 0
 					}
-					];
+				];
 
 				
-				html = '<div class=""><div class="video">';
-				html = html + 	'<div class="video-player">'+
-									'<video id="vid1" class="video-player" width="100%" >'+
-									  '<source src="'+ base_url +'/assets/VIDS/testVids.mp4" type="video/mp4">'+
-									'Your browser does not support the video tag.'+
-								'</video></div>';
-				html = html + 	'<div class="video-cover">'+
-									'<div class="title-video">'+
-										'<h1>Finding Unconditional Love</h1>'+
-										'<button type="">WATCH</button>'+
-									'</div>'+
-								'</div></div>';
+				
+
+				// html = html + 	
+				// '<!--div class="video-cover">'+
+				// 	'<div class="title-video">'+
+				// 		
+				// 		
+				// 	'</div>'+
+				// '</div-->';
+
 				/*little video*/
-				html = html + '<div class="video-little row">';
+				
 				for(var loop=0; loop<data.length; loop++){
-					html = html + 
-							'<div class="col-md-4">'+
-								'<div  class="video-player-little">'+
-									'<video id="vid1" width="100%" >'+
-									  '<source src="'+ base_url +'/assets/VIDS/'+data[loop].video+'" type="video/mp4">'+
+					if(loop == 0){
+						html =
+						'<div class="col-md-12">' +
+							'<div class="video-box">' +
+								'<video id="vid-' + loop + '" class="video-player">'+
+								  	'<source src="'+ base_url +'/assets/VIDS/testVids.mp4" type="video/mp4">'+
 									'Your browser does not support the video tag.'+
-									'</video>'+
-									'<div class="video-cover-little" video-id='+data[loop].id+'>'+
-									'</div>'+
-								'</div>'+
-								'<div>'+
-									'<p><b>'+data[loop].title+'</b></p>'+
-								'</div>'+
-								'<div>'+
-									'<p>'+data[loop].comment+' Comments</p>'+
-								'</div>'+
-							'</div>';
+								'</video>' +
+								'<div class="layer"></div>' +
+								'<div class="caption">' +
+									'<h1 class="fontserif">Finding Unconditional Love</h1>'+
+									'<button type="button">WATCH</button>'+
+								'</div>' +
+							'</div>' +
+						'</div>' +
+						'<div class="rows">' +
+							'<div class="col-md-8 col-md-offset-2">';
+					}else{
+						html = html + 
+						'<div class="col-md-4">'+
+							'<div class="video-box">' +
+								'<video id="vid-' + loop + '">'+
+								  	'<source src="'+ base_url +'/assets/VIDS/'+data[loop].video+'" type="video/mp4">'+
+									'Your browser does not support the video tag.'+
+								'</video>'+
+								'<div class="play-button" video-id='+data[loop].id+'></div>'+
+							'</div>' +
+							'<div class="video-description">' +
+								'<p><b>'+data[loop].title+'</b></p>'+
+								'<p>'+data[loop].comment+' Comments</p>'+
+							'</div>' +
+						'</div>';
+					}
 				}
-				html = html + "</div></div></div>";
+
+				html = html + "</div></div>";
+				html = html + "</div>";
 
 				$("main").html(html);
-				document.getElementById('vid1').addEventListener('loadedmetadata', function() {
-				  this.currentTime = 29;
-				}, false);
+				for(var loop=0; loop<data.length; loop++){	
+					document.getElementById('vid-' + loop).addEventListener('loadedmetadata', function() { this.currentTime = 29; }, false);
+				}
 
-				    var a = 0;
+				var a = 0;
 				$('.video-player').click(function () {
 					$(this).attr('controls','true');
 				    if(a==0)this.currentTime = a;
@@ -141,9 +151,8 @@
 				        // $(this).children(".playpause").fadeIn();
 				    }
 				});
-				$('main').on('click','.video-cover-little', function(){
-					window.location.href = base_url+"/page/videosDetail.html";
-				});
+
+				$('main').on('click','.video-cover-little', function(){ window.location.href = base_url+"/page/videoDetail.html"; });
 			}
 		</script>
 	</body>

@@ -335,9 +335,45 @@ footer.parent .license {
 /*=============================================================================================*/
 /*video*/
 /*home video*/
-.video{
+.video-box {
   position: relative;
+  margin-bottom: 20px;
 }
+
+.video-box video { width: 100% }
+.video-box .play-button {
+  position: absolute;
+  background:  url("../PICS/playbutton.png")no-repeat;
+  height: 60px;
+  width: 60px;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  background-size: cover;
+}
+
+.video-box .caption {
+  position: absolute;
+  bottom: 10%;
+  left: 10%;
+}
+
+.video-box .caption h1 {
+  color:  #fff;
+}
+
+.video-box .caption button {
+  background-color: transparent;
+  padding: 10px 15px;
+  border: 2px solid #fff;
+  color:  #fff;
+}
+
+.video-description { margin-bottom: 20px }
+
+
 .video-cover{
   position: absolute;
   background-color: rgba(255, 255, 255,0.3);

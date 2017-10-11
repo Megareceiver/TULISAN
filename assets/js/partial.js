@@ -1,4 +1,4 @@
-var base_url = window.location.origin + '';
+var base_url = window.location.origin + '/TULISAN';
 				
 // $(function(){
 	header();
@@ -96,12 +96,20 @@ function header(){
 				breadcrumb = "<a href='" + base_url + "'>Home</a> / <a href='" + base_url + "/page/chatter.html'>chatter</a> / detail";
 				active_page = "chatter-route"; 
 			break;
+			case "videos.html":  	 	
+				breadcrumb = "<a href='" + base_url + "'>Home</a> / videos";
+				active_page = "video-route"; 
+			break;
+			case "videoDetail.html":  	 	
+				breadcrumb = "<a href='" + base_url + "'>Home</a> / <a href='" + base_url + "/page/videos.html'>videos</a> / detail";
+				active_page = "video-route"; 
+			break;
 			case "media.html":  	 	
-				breadcrumb = "<a href='" + base_url + "'>Home</a> / Media";
+				breadcrumb = "<a href='" + base_url + "'>Home</a> / media";
 				active_page = "Media"; 
 			break;
 			case "privacyPolicy.html":  	 	
-				breadcrumb = "<a href='" + base_url + "'>Home</a> / Privacy Policy";
+				breadcrumb = "<a href='" + base_url + "'>Home</a> / privacy policy";
 				active_page = "Privacy Policy"; 
 			break;
 			case "about.html":  	 	

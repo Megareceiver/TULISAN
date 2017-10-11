@@ -37,101 +37,101 @@
 				var html = '';
 				var data = [{
 						title	: 'Bags & Totes',
-						url		: '#'
+						id		: '#'
 					},
 					{
 						title	: 'Atelier Box',
-						url		: '#'
+						id		: 'ShopDetail'
 					},
 					{
 						title	: 'Beach Bag',
-						url		: '#'
+						id		: '#'
 					},
 					{
 						title	: 'City Tote',
-						url		: '#'
+						id		: '#'
 					},
 					{
 						title	: 'Club Tote',
-						url		: '#'
+						id		: '#'
 					},
 					{
 						title	: 'Coterie Bag',
-						url		: '#'
+						id		: '#'
 					},
 					{
 						title	: 'Cruise Bag',
-						url		: '#'
+						id		: '#'
 					},
 					{
 						title	: 'Gallery Tote',
-						url		: '#'
+						id		: '#'
 					},
 					{
 						title	: 'Hobo Tote',
-						url		: '#'
+						id		: '#'
 					},
 					{
 						title	: 'Journalist Tote',
-						url		: '#'
+						id		: '#'
 					},
 					{
 						title	: 'Librarian Tote',
-						url		: '#'
+						id		: '#'
 					},
 					{
 						title	: 'Lilliput Tote',
-						url		: '#'
+						id		: '#'
 					},
 					{
 						title	: 'Portico Tote',
-						url		: '#'
+						id		: '#'
 					},
 					{
 						title	: 'Siesta Tote',
-						url		: '#'
+						id		: '#'
 					},
 					{
 						title	: 'Toy Box',
-						url		: '#'
+						id		: '#'
 					},
 					{
 						title	: 'Bowler Tote',
-						url		: '#'
+						id		: '#'
 					},
 					{
 						title	: 'Studio Bag',
-						url		: '#'
+						id		: '#'
 					},
 					{
 						title	: 'Concerto Purse',
-						url		: '#'
+						id		: '#'
 					},
 					{
 						title	: 'Panama Bag',
-						url		: '#'
+						id		: '#'
 					},
 					{
 						title	: 'Luna Tote',
-						url		: '#'
+						id		: '#'
 					},
 					{
 						title	: 'Accessories',
-						url		: '#'
+						id		: '#'
 					},
 					{
 						title	: 'For the Home',
-						url		: '#'
+						id		: '#'
 					},
 					{
 						title	: 'Stationery',
-						url		: '#'
+						id		: '#'
 					},
 					{
 						title	: 'Gift Set',
-						url		: '#'
+						id		: '#'
 					}];
-				
+
 				var product = [
 					{
 						name	: 'Altier Box',
@@ -163,7 +163,7 @@
 						price	: '$87.00',
 						img		: 'db_file_img_133_350x350.jpg'
 					}
-				]
+				];
 				
 				html = '<div class="col-md-11 col-md-offset-1 div-normalize">';
 				
@@ -171,24 +171,34 @@
 					'<div class="shop row">'+
 						'<div class="col-md-4 left-menu">'+
 							'<h4>SHOP BY PRODUCT</h4>';
-							for(var a = 0; a < data.length; a++)
-							{
+							if(data.length > 0){
+								for(var a = 0; a < data.length; a++)
+								{
+									html = html +
+									'<p><a href="shopDetail.html">'+data[a].title+'</a></p>';	
+								}
+							}else{
 								html = html +
-								'<p><a href="'+data[a].url+'">'+data[a].title+'</a></p>';	
+									'<p>Sorry there is no product</p>';
 							}
 				html = html + 
 						'</div>';
 				
 				html = html +
 						'<div class="col-md-8">';
-							for(var a = 0; a < product.length; a++)
-							{
-							html = html +
-							'<div class="col-md-6">'+
-								'<div class="shop-img" style="background-image : url(../assets/PICS/'+product[a].img+')">'+
-								'</div>'+
-								'<p>'+product[a].name+' '+product[a].price+'</p>'+
-							'</div>';
+							if(product.length > 0){
+								for(var a = 0; a < product.length; a++)
+								{
+								html = html +
+								'<div class="col-md-6 shop-thumb">'+
+									'<div class="shop-img" style="background-image : url(../assets/PICS/'+product[a].img+')">'+
+									'</div>'+
+									'<p><b>'+product[a].name+' '+product[a].price+'</b></p>'+
+								'</div>';
+								}
+							}else{
+								html = html +
+									'<p>Sorry there is no product</p>';
 							}
 				html = html +
 						'</div>'+

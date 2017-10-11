@@ -41,10 +41,21 @@
 				
 				var product = [];
 				
-				html = '<div class="col-md-11 col-md-offset-1 div-normalize">';
+				html = '<div class="col-md-12 div-normalize">';
 				
 				html = html +
-							'<div class="">'+
+							'<div class="col-md-6">'+
+								'<div class="product-img-thumb">'+
+								'</div>'+
+								'<div class="color-choice">'+
+									'<ul>';
+								for(var a=0; a<8; a++){
+									html = html +
+										'<li>a</li>';
+								}
+				html = html +
+									'</ul>'+
+								'</div>';
 
 				html = html + 
 						"</div><div class='clearfix'></div>";

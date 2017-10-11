@@ -342,6 +342,10 @@ footer.parent .license {
 	background-size : cover;
 	background-repeat	: no-repeat;
 }
+/*shop detail*/
+.color-choice li{
+  display: inline-block;
+}
 /*=============================================================================================*/
 /*video*/
 /*home video*/

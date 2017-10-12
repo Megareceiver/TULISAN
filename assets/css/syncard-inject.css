@@ -342,6 +342,7 @@ footer.parent .license {
 	background-size : cover;
 	background-repeat	: no-repeat;
 }
+.shop-thumb p{text-align: center;}
 /*shop detail*/
 .color-choice li{
   display: inline-block;

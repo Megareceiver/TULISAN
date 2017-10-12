@@ -49,7 +49,7 @@ function header(){
 					'<div id="navbar-custom" class="row">' +
 						'<ul class="nav navbar-nav main-menu fontserif">' +
 					        '<li><a id="home-route" href="' + base_url + '"><span>HOME</span></a></li>' +
-					        '<li><a id="shop-route" href="#"><span>SHOP</span></a></li>' +
+					        '<li><a id="shop-route" href="' + base_url + '/page/shop.html"><span>SHOP</span></a></li>' +
 					        '<li><a id="story-route" href="' + base_url + '/page/story.html"><span>STORIES</span></a></li>' +
 					        '<li><a id="blog-route" href="' + base_url + '/page/blog.html"><span>BLOG</span></a></li>' +
 					        '<li><a id="video-route" href="' + base_url + '/page/videos.html"><span>VIDEOS</span></a></li>' +

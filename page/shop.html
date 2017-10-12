@@ -35,6 +35,12 @@
 
 			function loadShop(){
 				var html = '';
+				var counter = 0;
+				var paging = "";
+				var pagingLink = "";
+				var pagingLinkBefore = "";
+				var pagingState = 1;
+
 				var data = [{
 						title	: 'Bags & Totes',
 						id		: '#'
@@ -184,6 +190,7 @@
 				html = html + 
 						'</div>';
 				
+				paging = product.length;
 				html = html +
 						'<div class="col-md-8">';
 							if(product.length > 0){
@@ -196,14 +203,28 @@
 									'<p><b>'+product[a].name+' '+product[a].price+'</b></p>'+
 								'</div>';
 								}
+								/*paging*/
+								for(var loop=pagingState; loop<=paging; loop++){
+									if((paging - pagingState) > 5){
+										if(counter == 4){
+											pagingLink = pagingLink + "..." + "<a href='#?" + paging + "' class='data-paging'>" + paging + "</a>";
+											break;
+										}
+									}
+									pagingLink = pagingLink + "<a href='#?" + loop + "' class='data-paging'>" + loop + "</a>";
+									counter++;
+								}
+								html = html + '<div class="row">';
+								html = html + "<div class='data-paging center'>" + pagingLink + "</div>";
+								html = html + "</div>";
 							}else{
 								html = html +
 									'<p>Sorry there is no product</p>';
-							}
+							}			
 				html = html +
 						'</div>'+
 					'</div>';
-				
+
 				html = html + "</div><div class='clearfix'></div>";
 
 				$("main").html(html);

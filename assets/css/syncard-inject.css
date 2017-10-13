@@ -342,11 +342,22 @@ footer.parent .license {
 	background-size : cover;
 	background-repeat	: no-repeat;
 }
+.product-img-thumb{
+  height  : 500px;
+  background-size : cover;
+  background-repeat : no-repeat;
+}
 .shop-thumb p{text-align: center;}
 /*shop detail*/
 .color-choice li{
   display: inline-block;
+  background-size: cover;
+  background-repeat: no-repeat;
+  width: 50px;
+  height: 50px;
+  margin: 5px;
 }
+.product-story p{text-align: center;}
 /*=============================================================================================*/
 /*video*/
 /*home video*/
@@ -447,7 +458,14 @@ footer.parent .license {
 .media span:nth-child(2) {
 	min-width: 40px;
 }
-
+/*=============================================================================================*/
+/*location*/
+.img-place{
+ height : 200px;
+ background-size : cover;
+ background-repeat : no-repeat;
+}
+/*=============================================================================================*/
 /*=============================================================================================*/
 /*privacy*/
 .privacy p { text-align: justify }

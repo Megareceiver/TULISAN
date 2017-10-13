@@ -45,13 +45,13 @@
 				
 				html = html +
 							'<div class="col-md-6">'+
-								'<div class="product-img-thumb">'+
+								'<div class="product-img-thumb" style="background-image : url(../assets/PICS/db_file_img_133_350x350.jpg)">'+
 								'</div>'+
 								'<div class="color-choice">'+
 									'<ul>';
 								for(var a=0; a<8; a++){
 									html = html +
-										'<li>a</li>';
+										'<li style="background-image : url(../assets/PICS/pattern1.jpg)"></li>';
 								}
 				html = html +
 									'</ul>'+
@@ -75,7 +75,14 @@
 										'13 x 7.5 x 12 in'+
 									'</p>'+
 								'</div>'+
-							'</div>';
+							'</div>'+
+							"</div><div class='clearfix'></div>";
+				html = html +
+							'<div class="col-md-12 plus product-story">'+
+								'<p>'+
+								'LUCA </br> Marigold is a derivation of the children’s book “Les Papillons de Victor” in which Melissa, the founder and creative director of Tulisan collaborated with a French writer, Virginie Kasse to do the illustrations for the book. Marigold, also known as Calendula, was chosen to symbolize sacred love and affection, a theme that largely shapes the storyline of “Les Papillons de Victor.”</br> Handcrafted in small batches, Tulisan products are made using eco-friendly water based dyes while still maintaining rich, intense color. The Marigold collection is silk-screened onto pure, unbleached cotton canvas using a technique that can create slight variations from product to product, making every product a little different. The products are coated with a non-toxic water-resistant coating that is formaldehyde, phthalate and lead free. From start to finish, each Tulisan product is made with love in Indonesia.'+
+								'</p>'+
+							'</div>';	
 							
 				html = html + 
 						"</div><div class='clearfix'></div>";

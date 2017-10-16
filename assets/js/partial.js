@@ -118,7 +118,7 @@ function header(){
 			break;
 			case "location.html":  	 	
 				breadcrumb = "<a href='" + base_url + "'>Home</a> / Store locator";
-				active_page = ""; 
+				active_page = "location"; 
 			break;
 		}
 

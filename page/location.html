@@ -38,8 +38,15 @@
 			function maps(){
 				var html = '';
 				var mapMarker = [
-					{'x': 0 , 'y' : 0, 'lat': '', 'long': ''},
-					{'x': 100 , 'y' : 100, 'lat': '', 'long': ''},
+					{'location': 'location 1', 'x': 200 , 'y' : 175, 'lat': '', 'long': ''},
+					{'location': 'location 2', 'x': 240 , 'y' : 225, 'lat': '', 'long': ''},
+					{'location': 'location 3', 'x': 170 , 'y' : 280, 'lat': '', 'long': ''},
+				];
+
+				var mapMarkerMin = [
+					{'location': 'location 4', 'x': 290 , 'y' : 235, 'lat': '', 'long': ''},
+					{'location': 'location 5', 'x': 320 , 'y' : 205, 'lat': '', 'long': ''},
+					{'location': 'location 6', 'x': 215 , 'y' : 240, 'lat': '', 'long': ''},
 				];
 
 				html = '<div class="col-md-12 div-normalize">';
@@ -48,18 +55,34 @@
 				//   // <img src="/path-to/your-fallback-image.png" />
 				// '</object>';
 				'<div class=" col-md-12 maps">'+
-					'<embed src="../assets/PICS/maps.svg"'+
-					'type="image/svg+xml" /> '+
+					'<!--embed src="../assets/PICS/maps.svg"'+
+					'type="image/svg+xml" /--> '+
+					'<img src="../assets/PICS/maps.png" />' +
 				'</div>';
 
-				//map marker
-				html = html +
-					'<div class="map-marker">' +
+				for(var loop=0; loop<mapMarker.length; loop++){
+					//map marker
+					html = html +
+					'<div class="map-marker" style="top: ' + mapMarker[loop].x + 'px; left: ' + mapMarker[loop].y + 'px">' +
 						'<div class="marker">' +
+							'<div class="caption">' + mapMarker[loop].location + '</div>' +
 							'<div class="pin"></div>' +
 							'<div class="pulse"></div>' +
 						'</div>' +
 					'</div>';
+				}
+
+				for(var loop=0; loop<mapMarkerMin.length; loop++){
+					//map marker
+					html = html +
+					'<div class="map-marker" style="top: ' + mapMarkerMin[loop].x + 'px; right: ' + mapMarkerMin[loop].y + 'px">' +
+						'<div class="marker">' +
+							'<div class="caption">' + mapMarkerMin[loop].location + '</div>' +
+							'<div class="pin"></div>' +
+							'<div class="pulse"></div>' +
+						'</div>' +
+					'</div>';
+				}
 
 				html = html +
 							'<div class="col-md-6">'+
@@ -100,7 +123,7 @@
 						"</div><div class='clearfix'></div>";
 
 				$("main").html(html);
-				$('svg').attr('style','fill:antiquewhite');
+				// $('svg').attr('style','fill:antiquewhite');
 
 			}
 		</script>

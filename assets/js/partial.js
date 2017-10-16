@@ -162,11 +162,10 @@ function footer(){
 
 	var socmed = [
 		{ "icon": "instagram", 	 		"link": "#" },
+		{ "icon": "facebook-official", 	"link": "#" },
 		{ "icon": "twitter", 	 		"link": "#" },
 		{ "icon": "pinterest-p", 		"link": "#" },
-		{ "icon": "facebook-official", 	"link": "#" },
-		{ "icon": "tumblr", 			"link": "#" },
-		{ "icon": "dribbble", 			"link": "#" },
+		{ "icon": "youtube", 			"link": "#" },
 	];
 
 	var license = 'Copyright © 2014 Tulisan LLC. All Rights Reserved';

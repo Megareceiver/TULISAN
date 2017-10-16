@@ -33,6 +33,7 @@
 		<!-- page script -->
 		<script type="text/javascript">
 			maps();
+			// nah();
 
 			function maps(){
 				var html = '';
@@ -43,9 +44,11 @@
 							// '<object data="../assets/PICS/maps.svg" type="image/svg+xml">'+
 							//   // <img src="/path-to/your-fallback-image.png" />
 							// '</object>';
-							'<embed src="../assets/PICS/maps.svg"'+
-							'type="image/svg+xml"'+
-							'pluginspage="http://www.adobe.com/svg/viewer/install/" /> ';
+							'<div class=" col-md-12 maps">'+
+								'<embed src="../assets/PICS/maps.svg"'+
+								'type="image/svg+xml"'+
+								'pluginspage="http://www.adobe.com/svg/viewer/install/" /> '+
+								'</div>';
 
 				html = html +
 							'<div class="col-md-6">'+
@@ -86,6 +89,8 @@
 						"</div><div class='clearfix'></div>";
 
 				$("main").html(html);
+				$('svg').attr('style','fill:antiquewhite');
+
 			}
 		</script>
 	</body>

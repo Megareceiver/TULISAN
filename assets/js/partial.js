@@ -55,7 +55,7 @@ function header(){
 					        '<li><a id="video-route" href="' + base_url + '/page/videos.html"><span>VIDEOS</span></a></li>' +
 					        '<li><a id="chatter-route" href="' + base_url + '/page/chatter.html"><span>CHATTER</span></a></li>' +
 					        '<li><a id="about-route" href="' + base_url + '/page/about.html"><span>ABOUT</span></a></li>' +
-					        '<li><a id="contact-route" href="#"><span>CONTACT</span></a></li>' +
+					        '<li><a id="contact-route" href="' + base_url + '/page/location.html"><span>CONTACT</span></a></li>' +
 					    '</ul>' +
 					'</div>' +
 				'</div>' +
@@ -118,7 +118,7 @@ function header(){
 			break;
 			case "location.html":  	 	
 				breadcrumb = "<a href='" + base_url + "'>Home</a> / Store locator";
-				active_page = "location"; 
+				active_page = "contact-route"; 
 			break;
 		}
 

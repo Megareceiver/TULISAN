@@ -27,7 +27,7 @@ function header(){
 		    '<div class="collapse navbar-collapse" id="syncard-nav">' +
 		    	'<div class="navbar-shortcut">' +
 					'<div class="link">' +
-						'<a href="#">FIND A STORE</a> |' +
+						'<a href="' + base_url + '/page/location.html">FIND A STORE</a> |' +
 						'<a href="' + base_url + '/page/media.html">MEDIA</a> |' +
 						'<a href="#"><span class="fa fa-shopping-cart"></span></a> |' +
 						'<a href="#">LOGIN</a>' +
@@ -115,6 +115,10 @@ function header(){
 			case "about.html":  	 	
 				breadcrumb = "<a href='" + base_url + "'>Home</a> / about";
 				active_page = "about-route"; 
+			break;
+			case "location.html":  	 	
+				breadcrumb = "<a href='" + base_url + "'>Home</a> / Store locator";
+				active_page = ""; 
 			break;
 		}
 

@@ -19,9 +19,9 @@
 		<div class="container">
 			<header class="parent"></header>
 
-			<main class="parent clear"></main>
+			<main class="parent clear dark-flex"></main>
 	
-			<footer class="parent"></footer>
+			<footer class="parent clear"></footer>
 		</div>
 
 		<!-- Script collection -->
@@ -37,18 +37,29 @@
 
 			function maps(){
 				var html = '';
+				var mapMarker = [
+					{'x': 0 , 'y' : 0, 'lat': '', 'long': ''},
+					{'x': 100 , 'y' : 100, 'lat': '', 'long': ''},
+				];
 
 				html = '<div class="col-md-12 div-normalize">';
-
 				html = html +
-							// '<object data="../assets/PICS/maps.svg" type="image/svg+xml">'+
-							//   // <img src="/path-to/your-fallback-image.png" />
-							// '</object>';
-							'<div class=" col-md-12 maps">'+
-								'<embed src="../assets/PICS/maps.svg"'+
-								'type="image/svg+xml"'+
-								'pluginspage="http://www.adobe.com/svg/viewer/install/" /> '+
-								'</div>';
+				// '<object data="../assets/PICS/maps.svg" type="image/svg+xml">'+
+				//   // <img src="/path-to/your-fallback-image.png" />
+				// '</object>';
+				'<div class=" col-md-12 maps">'+
+					'<embed src="../assets/PICS/maps.svg"'+
+					'type="image/svg+xml" /> '+
+				'</div>';
+
+				//map marker
+				html = html +
+					'<div class="map-marker">' +
+						'<div class="marker">' +
+							'<div class="pin"></div>' +
+							'<div class="pulse"></div>' +
+						'</div>' +
+					'</div>';
 
 				html = html +
 							'<div class="col-md-6">'+

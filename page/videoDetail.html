@@ -18,9 +18,9 @@
 		<div class="container">
 			<header class="parent"></header>
 
-			<main class="parent clear"></main>
+			<main class="parent clear yellow-flex"></main>
 	
-			<footer class="parent"></footer>
+			<footer class="parent clear"></footer>
 		</div>
 
 		<!-- Script collection -->
@@ -46,25 +46,33 @@
 
 				
 				html = 
-				'<div class="detail-video col-md-12">' +
-					'<div class="video-player" >'+
-						'<video id="vid1" width="100%">'+
-						  	'<source src="'+ base_url +'/assets/VIDS/' + data.video + '" type="video/mp4">'+
-							'Your browser does not support the video tag.'+
-						'</video>' +
+				'<div class="row" >'+
+					'<div class="detail-video col-md-12">' +
+						'<div class="video-player" >'+
+							'<video id="vid1" width="100%">'+
+							  	'<source src="'+ base_url +'/assets/VIDS/' + data.video + '" type="video/mp4">'+
+								'Your browser does not support the video tag.'+
+							'</video>' +
+						'</div>' +
+						'<div class="detail-video-cover"></div>' +
 					'</div>' +
-					'<div class="detail-video-cover"></div>' +
 				'</div>';
 
-				// /*little video*/
 				html = html + 	
-				'<div class="col-md-offset-2 col-md-8 content div-normalize">'+
-					'<div>'+
-						'<h1>'+data.title+'</h1>' +
-						'<p>Published on ' + data.publish + '</p>' +
-					'</div>'+
+				'<div class="col-md-12 content description-box">'+
+					'<h1 class="fontserif">'+data.title+'</h1>' +
+					'<p>Published on ' + data.publish + '</p>' +
 					'<div class="detail-content">'+
 						'<p>'+data.desc+'</p>'+
+					'</div>' +
+					'<div class="sosmedpage">' +
+						'<p> SHARE IT &nbsp;' +
+							'<a href="#"><span class="fa fa-3x fa-instagram"> </span></a>' +
+							'<a href="#"><span class="fa fa-3x fa-facebook-official"> </span></a>' +
+							'<a href="#"><span class="fa fa-3x fa-twitter"> </span></a>' +
+							'<a href="#"><span class="fa fa-3x fa-pinterest"> </span></a>' +
+							'<a href="#"><span class="fa fa-3x fa-youtube"> </span></a>' +
+						'</p>' +
 					'</div>' +
 				'</div>';
 

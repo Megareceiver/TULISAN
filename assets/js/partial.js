@@ -8,7 +8,7 @@ var base_url = window.location.origin + '/TULISAN';
 function header(){
 	var active_page = "home-route";
 	var html = 
-	'<div class="row">' +
+	'<!--div class="row"-->' +
 		'<nav class="navbar navbar-default plain">' +
 		    '<!-- Brand and toggle get grouped for better mobile display -->' +
 		    '<div class="navbar-header">' +
@@ -61,7 +61,7 @@ function header(){
 				'</div>' +
 		  	'</div>' +
 		'</nav>' +
-	'</div><!-- /.navbar-collapse -->';
+	'<!--/div--><!-- /.navbar-collapse -->';
 
 	//breadcrum
 	var breadcrumbHtml = "";
@@ -77,7 +77,7 @@ function header(){
 				active_page = "story-route"; 
 			break;
 			case "storydetail.html": 	
-				breadcrumb = "<a href='" + base_url + "'>Home</a> / <a href='" + base_url + "/page/story.html'>story</a> / detail";
+				breadcrumb = "<a href='" + base_url + "'>Home</a> / <a href='" + base_url + "/page/story.html'>story</a> / <span id='custom-bread-detail'>detail</span>";
 				active_page = "story-route"; 
 			break;
 			case "blog.html": 			
@@ -119,6 +119,14 @@ function header(){
 			case "location.html":  	 	
 				breadcrumb = "<a href='" + base_url + "'>Home</a> / Store locator";
 				active_page = "contact-route"; 
+			break;
+			case "shop.html":  	 	
+				breadcrumb = "<a href='" + base_url + "'>Home</a> / Shop";
+				active_page = "shop-route"; 
+			break;
+			case "shopDetail.html":  	 	
+				breadcrumb = "<a href='" + base_url + "'>Home</a> / <a href='" + base_url + "/page/shop.html'>Shop</a> / <span id='custom-bread-detail'>detail</span>";
+				active_page = "shop-route"; 
 			break;
 		}
 
@@ -236,4 +244,9 @@ function footer(){
 
 	$("footer.parent").html(html);
 
+}
+
+function toTitleCase(str)
+{
+    return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
 }

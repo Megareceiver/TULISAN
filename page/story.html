@@ -18,9 +18,9 @@
 		<div class="container">
 			<header class="parent"></header>
 
-			<main class="parent"></main>
+			<main class="parent clear yellow-flex"></main>
 	
-			<footer class="parent"></footer>
+			<footer class="parent clear"></footer>
 		</div>
 
 		<!-- Script collection -->
@@ -35,34 +35,44 @@
 
 			function loadStory(){
 				var html = '';
+				var counter = 0;
+				var paging = "";
+				var pagingLink = "";
+				var pagingLinkBefore = "";
+				var pagingState = 1;
+				var data = {
+					"data": [{
+					picture	: "pepe.png",
+					title	: "PEPE AND THE FLYING BALLOON",
+					page	: "Once upon a time, there were two mice that lived an adventurous life in the heart of Jakarta. Hiro and his wife, Sur, were a hard-working and courageous duo. Even though they were tiny creatures, their hearts were set on rescuing abandoned children who lived on the streets.",
+					url		: base_url + "/page/storydetail.html"
+					},
+					{
+					picture	: "pepe.png",
+					title	: "PEPE AND THE FLYING BALLOON",
+					page	: "Once upon a time, there were two mice that lived an adventurous life in the heart of Jakarta. Hiro and his wife, Sur, were a hard-working and courageous duo. Even though they were tiny creatures, their hearts were set on rescuing abandoned children who lived on the streets.",
+					url		: base_url + "/page/storydetail.html"
+					},
+					{
+					picture	: "pepe.png",
+					title	: "PEPE AND THE FLYING BALLOON",
+					page	: "Once upon a time, there were two mice that lived an adventurous life in the heart of Jakarta. Hiro and his wife, Sur, were a hard-working and courageous duo. Even though they were tiny creatures, their hearts were set on rescuing abandoned children who lived on the streets.",
+					url		: base_url + "/page/storydetail.html"
+					},
+					{
+					picture	: "pepe.png",
+					title	: "PEPE AND THE FLYING BALLOON",
+					page	: "Once upon a time, there were two mice that lived an adventurous life in the heart of Jakarta. Hiro and his wife, Sur, were a hard-working and courageous duo. Even though they were tiny creatures, their hearts were set on rescuing abandoned children who lived on the streets.",
+					url		: base_url + "/page/storydetail.html"
+					}],
 
-				var data = [{
-					picture	: "pepe.png",
-					title	: "PEPE AND THE FLYING BALLOON",
-					page	: "Once upon a time, there were two mice that lived an adventurous life in the heart of Jakarta. Hiro and his wife, Sur, were a hard-working and courageous duo. Even though they were tiny creatures, their hearts were set on rescuing abandoned children who lived on the streets.",
-					url		: base_url + "/page/storydetail.html"
-					},
-					{
-					picture	: "pepe.png",
-					title	: "PEPE AND THE FLYING BALLOON",
-					page	: "Once upon a time, there were two mice that lived an adventurous life in the heart of Jakarta. Hiro and his wife, Sur, were a hard-working and courageous duo. Even though they were tiny creatures, their hearts were set on rescuing abandoned children who lived on the streets.",
-					url		: base_url + "/page/storydetail.html"
-					},
-					{
-					picture	: "pepe.png",
-					title	: "PEPE AND THE FLYING BALLOON",
-					page	: "Once upon a time, there were two mice that lived an adventurous life in the heart of Jakarta. Hiro and his wife, Sur, were a hard-working and courageous duo. Even though they were tiny creatures, their hearts were set on rescuing abandoned children who lived on the streets.",
-					url		: base_url + "/page/storydetail.html"
-					},
-					{
-					picture	: "pepe.png",
-					title	: "PEPE AND THE FLYING BALLOON",
-					page	: "Once upon a time, there were two mice that lived an adventurous life in the heart of Jakarta. Hiro and his wife, Sur, were a hard-working and courageous duo. Even though they were tiny creatures, their hearts were set on rescuing abandoned children who lived on the streets.",
-					url		: base_url + "/page/storydetail.html"
-					}];
+					"paging": "8"
+				};
 
-				
-				html = '<div class="row"><div class="col-md-8 col-md-offset-2 div-normalize">';
+				paging = parseInt(data.paging);
+				data   = data.data;
+
+				html = '<div class="row"><div class="col-md-8 col-md-offset-2 div-normalize"><div class="row">';
 				
 				for(var loop=0; loop<data.length; loop++){
 					html = html + 
@@ -77,7 +87,22 @@
 						"</div>";
 				}
 
-				html = html + "</div></div>";
+				for(var loop=pagingState; loop<=paging; loop++){
+					if((paging - pagingState) > 5){
+						if(counter == 4){
+							pagingLink = pagingLink + "..." + "<a href='#?" + paging + "' class='data-paging'>" + paging + "</a>";
+							break;
+						}
+					}
+					pagingLink = pagingLink + "<a href='#?" + loop + "' class='data-paging'>" + loop + "</a>";
+					counter++;
+				}
+
+				html = html + "</div></div></div>";
+				html = html + '<div class="row">';
+				html = html + '<div class="row"><div class="col-md-8 col-md-offset-2 div-normalize"><div class="row">';
+				html = html + "<div class='col-md-6 col-md-offset-6'><div class='data-paging right'>" + pagingLink + "</div></div>";
+				html = html + "</div></div></div>";
 
 				$("main").html(html);
 

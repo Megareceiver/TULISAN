@@ -35,24 +35,38 @@
 
 			function loadShop(){
 				var html = '';
-				var data = [{
+				var data = {	
+					"name"	 	 :  "Altier Box",
+					"product"	 :  "db_file_img_133_350x350.jpg",
+					"date"		 :  "25TH FEBRUARY 2014",
+					"price"	 	 :  "$77.00",
+					"description":  "Much like the Gallery Tote, the Atelier Box has a structure that lends to organization. This attaché is perfect for an afternoon stroll about town or to keep at home to tidy files and accessories. The Atelier features a short handle to clutch or sling over one elbow as a sophisticated shopper. An interior split stitched pocket helps secure smaller items like a cellphone or business cards.",
+					"color"	 	 :  "Blue Note is crisp and preppy. Featuring a solid indigo background, the leaves and blooms of the Marigold pattern take on the natural raffia color of the raw canvas.",
+					"material"	 :  "Water-resistant, non-toxic coated cotton canvas and coated polyester lining. Comes with dust bag.",
+					"dimension"	 :  "13 x 7.5 x 12 in",
+					"picture"	 :  ["LB_FW13_23.jpg","LB_FW13_15.jpg"],
+					"title"	 	 :  "LUCA",
+					"story"	 	 :  "Marigold is a derivation of the children’s book “Les Papillons de Victor” in which Melissa, the founder and creative director of Tulisan collaborated with a French writer, Virginie Kasse to do the illustrations for the book. Marigold, also known as Calendula, was chosen to symbolize sacred love and affection, a theme that largely shapes the storyline of “Les Papillons de Victor.” \r\n \r\n Handcrafted in small batches, Tulisan products are made using eco-friendly water based dyes while still maintaining rich, intense color. The Marigold collection is silk-screened onto pure, unbleached cotton canvas using a technique that can create slight variations from product to product, making every product a little different. The products are coated with a non-toxic water-resistant coating that is formaldehyde, phthalate and lead free. From start to finish, each Tulisan product is made with love in Indonesia.",
+					"pattern"	 :  ["pattern1.jpg","pattern2.jpg","pattern3.jpg","pattern4.jpg"]
+				};
+
+				data.description = data.description.replace(/(?:\r\n|\r|\n)/g, '<br />');
+				data.story = data.story.replace(/(?:\r\n|\r|\n)/g, '<br />');
 				
-					}];
-				
-				var product = [];
-				
-				html = '<div class="col-md-12 div-normalize">';
+				html = '<div class="col-md-10 col-md-offset-1 div-normalize">';
 				
 				html = html +
-							'<div class="col-md-6">'+
-								'<div class="product-img-thumb" style="background-image : url(../assets/PICS/db_file_img_133_350x350.jpg)">'+
-								'</div>'+
-								'<div class="color-choice">'+
-									'<ul>';
-								for(var a=0; a<8; a++){
-									html = html +
-										'<li style="background-image : url(../assets/PICS/pattern1.jpg)"></li>';
-								}
+				'<div class="col-md-6">'+
+					'<div class="col-md-10 col-md-offset-1"><img class="big-image" src="../assets/PICS/' + data.product + '"/></div>'+
+					'<div class="clearfix"></div>' +
+					'<div class="color-choice">'+
+						'<ul>';
+
+				//color
+				for(var loop=0; loop<data.pattern.length; loop++){
+					html = html + '<li style="background-image : url(../assets/PICS/' + data.pattern[loop] + ')"></li>';
+				}
+
 				html = html +
 									'</ul>'+
 								'</div>'+
@@ -60,34 +74,65 @@
 				html = html +
 							'<div class="col-md-6">'+
 								'<div class="product-desc">'+
-									'<p><b>Altier Box $77.00</b></p>'+
-									'<p>Much like the Gallery Tote, the Atelier Box has a structure that lends to organization. This attaché is perfect for an afternoon stroll about town or to keep at home to tidy files and accessories. The Atelier features a short handle to clutch or sling over one elbow as a sophisticated shopper. An interior split stitched pocket helps secure smaller items like a cellphone or business cards.</p>'+
+									'<h1 class="fontserif"><b>' + data.name + '</b> <small>' + data.price + '</small></h1>'+
+									'<p>' + data.description + '</p>'+
 									'<p>'+
 										'COLOR<br>'+
-										'Blue Note is crisp and preppy. Featuring a solid indigo background, the leaves and blooms of the Marigold pattern take on the natural raffia color of the raw canvas.'+
+										data.color +
 									'</p>'+
 									'<p>'+
 										'MATERIAL<br>'+
-										'Water-resistant, non-toxic coated cotton canvas and coated polyester lining. Comes with dust bag.'+
+										data.material +
 									'</p>'+
 									'<p>'+
 										'DIMENSION<br>'+
-										'13 x 7.5 x 12 in'+
+										data.dimension +
 									'</p>'+
 								'</div>'+
 							'</div>'+
 							"</div><div class='clearfix'></div>";
 				html = html +
-							'<div class="col-md-12 plus product-story">'+
-								'<p>'+
-								'LUCA </br> Marigold is a derivation of the children’s book “Les Papillons de Victor” in which Melissa, the founder and creative director of Tulisan collaborated with a French writer, Virginie Kasse to do the illustrations for the book. Marigold, also known as Calendula, was chosen to symbolize sacred love and affection, a theme that largely shapes the storyline of “Les Papillons de Victor.”</br> Handcrafted in small batches, Tulisan products are made using eco-friendly water based dyes while still maintaining rich, intense color. The Marigold collection is silk-screened onto pure, unbleached cotton canvas using a technique that can create slight variations from product to product, making every product a little different. The products are coated with a non-toxic water-resistant coating that is formaldehyde, phthalate and lead free. From start to finish, each Tulisan product is made with love in Indonesia.'+
-								'</p>'+
-							'</div>';	
+				'<div class="col-md-10 col-md-offset-1 product-story center-div margin-top div-normalize">'+
+					'<h4>' + data.title + '</h4>' +
+					'<p class="margin-top">' + data.story + '</p>' +
+				'</div>';	
 							
 				html = html + 
 						"</div><div class='clearfix'></div>";
 
+				html = html + 
+				'<div class="row margin-top">' +
+					'<div class="col-md-12">' +
+						"<div class='blog-box'>"+
+							"<div class='blog-pic'>";
+
+				for(var loop=0; loop<data.picture.length; loop++){
+					html = html +  "<img src='../assets/PICS/" + data.picture[loop] + "' />";
+				}
+
+				data.description = data.description.replace(/(?:\r\n|\r|\n)/g, '<br />');
+
+				html = html +  
+							"</div>"+
+						"</div>" +
+					"</div>" +
+				"</div>";
+
+				html = html + 
+				'<div class="center-div">' +
+					'<div class="sosmedpage">' +
+						'<p> SHARE IT &nbsp;' +
+							'<a href="#"><span class="fa fa-3x fa-instagram"> </span></a>' +
+							'<a href="#"><span class="fa fa-3x fa-facebook-official"> </span></a>' +
+							'<a href="#"><span class="fa fa-3x fa-twitter"> </span></a>' +
+							'<a href="#"><span class="fa fa-3x fa-pinterest"> </span></a>' +
+							'<a href="#"><span class="fa fa-3x fa-youtube"> </span></a>' +
+						'</p>' +
+					'</div>' +
+				'</div>';
+
 				$("main").html(html);
+				$("#custom-bread-detail").html(toTitleCase(data.name));
 
 			}
 		</script>

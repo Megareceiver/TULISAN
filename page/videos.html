@@ -18,9 +18,9 @@
 		<div class="container">
 			<header class="parent"></header>
 
-			<main class="parent clear"></main>
+			<main class="parent clear yellow-flex"></main>
 	
-			<footer class="parent"></footer>
+			<footer class="parent clear"></footer>
 		</div>
 
 		<!-- Script collection -->
@@ -35,8 +35,13 @@
 
 			function loadVideo(){
 				var html = '';
-
-				var data = [
+				var counter = 0;
+				var paging = "";
+				var pagingLink = "";
+				var pagingLinkBefore = "";
+				var pagingState = 1;
+				var data = {
+					"data" : [
 					{
 						video	: "testVids.mp4",
 						title	: "Netflix's 'Abstract: The Art of Design' Will Spotlight the World's Most Creative Minds",
@@ -61,42 +66,18 @@
 						comment	: 7,
 						id 		: 0
 					},
-					{
-						video	: "testVids.mp4",
-						title	: "Netflix's 'Abstract: The Art of Design' Will Spotlight the World's Most Creative Minds",
-						comment	: 5,
-						id 		: 0
-					},
-					{
-						video	: "testVids.mp4",
-						title	: "Netflix's 'Abstract: The Art of Design' Will Spotlight the World's Most Creative Minds",
-						comment	: 5,
-						id 		: 0
-					},
-					{
-						video	: "testVids.mp4",
-						title	: "Netflix's 'Abstract: The Art of Design' Will Spotlight the World's Most Creative Minds",
-						comment	: 2,
-						id 		: 0
-					}
-				];
+				],
 
-				
-				
+				"paging": "8"
+			};
 
-				// html = html + 	
-				// '<!--div class="video-cover">'+
-				// 	'<div class="title-video">'+
-				// 		
-				// 		
-				// 	'</div>'+
-				// '</div-->';
+			paging = parseInt(data.paging);
+			data   = data.data;	
 
-				/*little video*/
-				
-				for(var loop=0; loop<data.length; loop++){
-					if(loop == 0){
-						html =
+			for(var loop=0; loop<data.length; loop++){
+				if(loop == 0){
+					html =
+					'<div class="row">' +
 						'<div class="col-md-12">' +
 							'<div class="video-box">' +
 								'<video id="vid-' + loop + '" class="video-player">'+
@@ -110,27 +91,39 @@
 								'</div>' +
 							'</div>' +
 						'</div>' +
-						'<div class="rows">' +
-							'<div class="col-md-12 div-normalize">';
-					}else{
-						html = html + 
-						'<div class="col-md-4">'+
-							'<div class="video-box">' +
-								'<video id="vid-' + loop + '">'+
-								  	'<source src="'+ base_url +'/assets/VIDS/'+data[loop].video+'" type="video/mp4">'+
-									'Your browser does not support the video tag.'+
-								'</video>'+
-								'<div class="play-button" video-id='+data[loop].id+'></div>'+
-							'</div>' +
-							'<div class="video-description">' +
-								'<p><b>'+data[loop].title+'</b></p>'+
-								'<p>'+data[loop].comment+' Comments</p>'+
-							'</div>' +
-						'</div>';
+					'</div>' +
+					'<div class="row">';
+				}else{
+					html = html + 
+					'<div class="col-md-4">'+
+						'<div class="video-box">' +
+							'<video id="vid-' + loop + '">'+
+							  	'<source src="'+ base_url +'/assets/VIDS/'+data[loop].video+'" type="video/mp4">'+
+								'Your browser does not support the video tag.'+
+							'</video>'+
+							'<div class="play-button" video-id='+data[loop].id+'></div>'+
+						'</div>' +
+						'<div class="video-description">' +
+							'<p><b>'+data[loop].title+'</b></p>'+
+							'<p>'+data[loop].comment+' Comments</p>'+
+						'</div>' +
+					'</div>';
 					}
 				}
 
-				html = html + "</div></div>";
+				for(var loop=pagingState; loop<=paging; loop++){
+					if((paging - pagingState) > 5){
+						if(counter == 4){
+							pagingLink = pagingLink + "..." + "<a href='#?" + paging + "' class='data-paging'>" + paging + "</a>";
+							break;
+						}
+					}
+					pagingLink = pagingLink + "<a href='#?" + loop + "' class='data-paging'>" + loop + "</a>";
+					counter++;
+				}
+
+				html = html + "</div>";
+				html = html + "<div class='data-paging right'><span class='fontserif'>MORE VIDEOS > </span> " + pagingLink + "</div>";
 				html = html + "</div>";
 
 				$("main").html(html);
@@ -152,7 +145,7 @@
 				    }
 				});
 
-				$('main').on('click','.video-box button', function(){ window.location.href = base_url+"/page/videoDetail.html"; });
+				$('main').on('click','.video-box .play-button', function(){ window.location.href = base_url+"/page/videoDetail.html"; });
 			}
 		</script>
 	</body>

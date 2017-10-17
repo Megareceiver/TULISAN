@@ -48,6 +48,10 @@ a { color: #333; }
   width: 100%;
   height: initial;
 }
+.medium-image{
+  width: 50%;
+  height: initial;
+}
 .small-image{
   width: 35%;
   height: initial;
@@ -55,6 +59,9 @@ a { color: #333; }
 .tiny-image{
   width: 18%;
   height: initial;
+}
+.line-divider {
+  margin: 30px 0;
 }
 .center-div{
   text-align: center;
@@ -97,13 +104,19 @@ a { color: #333; }
 
 .sosmed a { margin-right: 15px; }
 .sosmed a .fa { font-size: 24px; }
-.sosmedpage a { margin-right: 15px; }
+.sosmedpage { margin-top: 30px; }
+.sosmedpage a { margin-right: 10px; }
 .sosmedpage a .fa { font-size: 24px; }
 .content-story p{text-align: justify;}
 .title-story {text-align: center;}
 
 /*=============================================================================================*/
 /* */
+body { background-color: #CCC }
+body .container:first-child {
+  background: #FFF;
+  padding: 0;
+}
 
 .fixed-container { 
   display: inline-block; 
@@ -113,6 +126,8 @@ a { color: #333; }
 }
 
 .div-normalize { padding-left: 25px; padding-right: 25px; }
+
+
 
 /*=============================================================================================*/
 /* HEADER */
@@ -136,7 +151,7 @@ header.parent .main-menu a.active span{
 /* BREADCRUMB */
 .breadcrumb {
   display: block;
-  padding-left: 20px;
+  padding-left: 30px;
   background-color: unset;
   margin-bottom: 0;
 }
@@ -188,9 +203,16 @@ header.parent .main-menu a.active span{
   display: inline-block;
   position: absolute;
   top: 15px;
-  right: 15px;
+  right: 25px;
   text-align: right;
   z-index: 2;
+  font-size: 12px;
+}
+
+.navbar-shortcut .form-control { height: 30px; background: #ddd; }
+.navbar-shortcut .btn {
+    height: 30px;
+    border: 1px solid #605B5D;
 }
 
 .navbar-shortcut .link { margin-bottom: 7px; }
@@ -223,6 +245,7 @@ header.parent .main-menu a.active span{
 /* MAIN */
 main.parent { display: inline-block; width: 100%; margin-top: 40px; }
 main.parent.dark-flex { background: #ECEBEA; margin-bottom: -6px; padding: 30px }
+main.parent.yellow-flex { background: #FAF6ED; margin-bottom: -6px; padding: 30px }
 main.parent.clear { margin-top: 0px; }
 main.parent .jumbo-tron { margin-top: -30px }
 
@@ -272,8 +295,10 @@ footer.parent .license {
 /*=============================================================================================*/
 /* MAP MARKER */
 .maps { 
-  position: relative; 
-  margin-bottom: 20px;
+  position: relative;
+  margin-bottom: 35px;
+  padding-bottom: 35px;
+  border-bottom: 1px solid #111;
 }
 
 .maps img { 
@@ -655,6 +680,7 @@ footer.parent .license {
 /* PAGING */
 .data-paging { font-weight: bold; }
 .data-paging.center { text-align: center; }
+.data-paging.right { text-align: right; }
 .data-paging a { display: inline-block; padding: 5px; }
 
  /*=============================================================================================*/
@@ -736,8 +762,8 @@ footer.parent .license {
   display: inline-block;
   background-size: cover;
   background-repeat: no-repeat;
-  width: 50px;
-  height: 50px;
+  width: 45px;
+  height: 45px;
   margin: 5px;
 }
 .product-story p{text-align: center;}
@@ -772,7 +798,7 @@ footer.parent .license {
 .video-box .layer {
   position: absolute;
   width: 100%;
-  height: 100%;
+  height: 99%;
   left: 0;
   top: 0;
   right: 0;
@@ -844,7 +870,9 @@ footer.parent .license {
 
 }
 .content .detail-content p{ text-align: justify; }
+.content h1 { font-size: 40px; font-weight: bold; margin-bottom: 30px }
 
+.story-box { margin-bottom: 45px }
 
 .media span:first-child {
 	min-width: 200px;
@@ -967,7 +995,7 @@ footer.parent .license {
 
   .short-cut { margin-bottom: 15px; }
   .story-box:nth-child(odd){
-  padding-right: 1em;
+    padding-right: 1em;
   }
   .story-box:nth-child(even){
     padding-left: 1em;

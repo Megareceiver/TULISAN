@@ -35,9 +35,18 @@
 
 			function loadShop(){
 				var html = '';
-				var data = [{
-				
-					}];
+				var data = {	
+					"title"		 :  "DOTTY OUTFIT",
+					"date"		 :  "25TH FEBRUARY 2014",
+					"subtitle"	 :  "LOCATION: NEW YORK",
+					"description":  "Always opting for a beautiful two piece, or even better, three piece ensemble is such an easy and polished way of dressing. In this" +
+									"case, I decided to layer dots on dots on dots on my new favourite dotty bag. I still remember how I felt the day we shot these photos." +
+									"The tiniest slither of silver light escaped from between the grey sheet of clouds above and spilled onto the concrete pavement below." +
+									"For someone who hadn’t seen sun in two weeks it made everything illuminate with a soft silver glow ten times more than usual. It" +
+									"was nice to finally witness New York in the shimmering light I had been visualising it in ever since I left back in September, perched" +
+									"high on its smitten pedestal accompanied by bigger and better expectations. Luckily, New York always delivers… \n\n Photos by Carin Olsson",
+					"picture"	 :  ["NF8C0757.jpg","NF8C0645.jpg", "NF8C07401.jpg"]
+				};
 				
 				var product = [];
 				
@@ -86,6 +95,37 @@
 							
 				html = html + 
 						"</div><div class='clearfix'></div>";
+
+				html = html + 
+				'<div class="row">' +
+					'<div class="col-md-12">' +
+						"<div class='blog-box'>"+
+							"<div class='blog-pic'>";
+
+				for(var loop=0; loop<data.picture.length; loop++){
+					html = html +  "<img src='../assets/PICS/" + data.picture[loop] + "' />";
+				}
+
+				data.description = data.description.replace(/(?:\r\n|\r|\n)/g, '<br />');
+
+				html = html +  
+							"</div>"+
+						"</div>" +
+					"</div>" +
+				"</div>";
+
+				html = html + 
+				'<div class="center-div">' +
+					'<div class="sosmedpage">' +
+						'<p> SHARE IT &nbsp;' +
+							'<a href="#"><span class="fa fa-3x fa-instagram"> </span></a>' +
+							'<a href="#"><span class="fa fa-3x fa-facebook-official"> </span></a>' +
+							'<a href="#"><span class="fa fa-3x fa-twitter"> </span></a>' +
+							'<a href="#"><span class="fa fa-3x fa-pinterest"> </span></a>' +
+							'<a href="#"><span class="fa fa-3x fa-youtube"> </span></a>' +
+						'</p>' +
+					'</div>' +
+				'</div>';
 
 				$("main").html(html);
 

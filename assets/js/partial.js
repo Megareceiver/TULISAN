@@ -120,6 +120,14 @@ function header(){
 				breadcrumb = "<a href='" + base_url + "'>Home</a> / Store locator";
 				active_page = "contact-route"; 
 			break;
+			case "shop.html":  	 	
+				breadcrumb = "<a href='" + base_url + "'>Home</a> / Shop";
+				active_page = "shop-route"; 
+			break;
+			case "shopDetail.html":  	 	
+				breadcrumb = "<a href='" + base_url + "'>Home</a> / <a href='" + base_url + "/page/shop.html'>Shop</a> / <span id='custom-bread-detail'>detail</span>";
+				active_page = "shop-route"; 
+			break;
 		}
 
 		breadcrumbHtml =

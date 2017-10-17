@@ -244,6 +244,7 @@ header.parent .main-menu a.active span{
 /*=============================================================================================*/
 /* MAIN */
 main.parent { display: inline-block; width: 100%; margin-top: 40px; }
+main.parent.default-flex { margin-bottom: -6px; padding: 0 }
 main.parent.dark-flex { background: #ECEBEA; margin-bottom: -6px; padding: 30px }
 main.parent.yellow-flex { background: #FAF6ED; margin-bottom: -6px; padding: 30px }
 main.parent.clear { margin-top: 0px; }
@@ -288,9 +289,6 @@ footer.parent .socmed .socmed-box .fa { font-size: 28px; }
 footer.parent .license {
   padding: 15px 0 0 0;
 }
-
-
-
 
 /*=============================================================================================*/
 /* MAP MARKER */
@@ -745,6 +743,19 @@ footer.parent .license {
 /*shop*/
 .left-menu{
   background-color : #F1F1F2;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  padding: 40px 30px 40px 80px;
+  z-index: 3;
+}
+.left-menu .title {
+  margin-bottom: 30px;
+  font-weight: bold;
+}
+.product-list {
+  padding: 20px 40px  40px 40px;
 }
 .shop-img{
 	height	: 300px;
@@ -756,14 +767,16 @@ footer.parent .license {
   background-size : cover;
   background-repeat : no-repeat;
 }
+.shop-thumb { padding: 40px; }
 .shop-thumb p{text-align: center;}
 /*shop detail*/
+.color-choice ul { padding: 0; display: block; text-align: center; }
 .color-choice li{
   display: inline-block;
   background-size: cover;
   background-repeat: no-repeat;
-  width: 45px;
-  height: 45px;
+  width: 35px;
+  height: 35px;
   margin: 5px;
 }
 .product-story p{text-align: center;}

@@ -31,7 +31,7 @@
 								</div>
 								<a href="#">Forgot password?</a>
 								<div class="form-group">
-								  <button class="btn" value="">Sign In</button>
+								  <button id='signIn' class="btn" value="">Sign In</button>
 								</div>
 								<p><b>Or sign in using Facebook</b></p>
 								<div class="form-group">
@@ -72,8 +72,11 @@
 
 		<!-- page script -->
 		<script type="text/javascript">
-		
-	
+			
+			$('.parent').on('click','.login #signIn', function(){
+				window.location=base_url + '/admin/dashboard.html';
+				
+			});
 
 			
 		</script>

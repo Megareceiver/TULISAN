@@ -27,6 +27,7 @@
 		<script type="text/javascript" src="../assets/js/jquery-3.2.1.min.js"></script>
 		<script type="text/javascript" src="../assets/js/jquery-ui-1.10.0.custom.min.js"></script>
 		<script type="text/javascript" src="../assets/js/bootstrap.min.js"></script>	
+		<script type="text/javascript" src="../assets/js/imagesloaded.pkgd.min.js"></script>
 		<script type="text/javascript" src="../assets/js/partial.js"></script>	
 
 		<!-- page script -->
@@ -181,54 +182,54 @@
 				html = '<div class="col-md-12">';
 				
 				html = html +
-					'<div class="shop row">'+
-						'<div class="col-md-4 left-menu">'+
-							'<h3 class="fontserif title">SHOP BY PRODUCT</h3>';
-							if(data.length > 0){
-								for(var a = 0; a < data.length; a++)
-								{
-									html = html +
-									'<p><a href="shopDetail.html">'+data[a].title+'</a></p>';	
-								}
-							}else{
-								html = html +
-									'<p>Sorry there is no product</p>';
-							}
-				html = html + 
-						'</div>';
-				
-				html = html +
-						'<div class="col-md-8 col-md-offset-4 product-list">';
-							if(product.length > 0){
-								for(var a = 0; a < product.length; a++)
-								{
-								html = html +
-								'<div class="col-md-6 shop-thumb">'+
-									'<img class="big-image" src="../assets/PICS/'+product[a].img+'">'+
-									'<h4 class="center-div"><b class="fontserif">'+product[a].name+' '+product[a].price+'</b></h4>'+
-								'</div>';
-								}
-								
-								/*paging*/
-								for(var loop=pagingState; loop<=paging; loop++){
-									if((paging - pagingState) > 5){
-										if(counter == 4){
-											pagingLink = pagingLink + "..." + "<a href='#?" + paging + "' class='data-paging'>" + paging + "</a>";
-											break;
-										}
-									}
-									pagingLink = pagingLink + "<a href='#?" + loop + "' class='data-paging'>" + loop + "</a>";
-									counter++;
-								}
+				'<div class="shop row">'+
+					'<div class="col-md-4 left-menu">'+
+						'<h3 class="fontserif title">SHOP BY PRODUCT <span id="left-menu-toggle" class="fa fa-chevron-down syn-fixed-right "></span></h3>' +
+						'<ul>';
 
-								html = html + '<div class="clearfix"></div>';
-								html = html + '<div class="row">';
-								html = html + "<div class='data-paging center'>" + pagingLink + "</div>";
-								html = html + "</div>";
-							}else{
-								html = html +
-									'<p>Sorry there is no product</p>';
-							}			
+				if(data.length > 0){
+					for(var loop = 0; loop < data.length; loop++)
+					{
+						html = html + '<li><a href="shopDetail.html">'+data[loop].title+'</a></li>';	
+					}
+				}else{
+					html = html + '<p>Sorry there is no product</p>';
+				}
+
+				html = html + '</ul></div>';
+
+				html = html + '<div class="col-md-8 col-md-offset-4 product-list">';
+				if(product.length > 0){
+					for(var loop = 0; loop < product.length; loop++)
+					{
+					html = html +
+					'<div class="col-md-6 shop-thumb">'+
+						'<img class="big-image" src="../assets/PICS/'+product[loop].img+'">'+
+						'<h4 class="center-div"><b class="fontserif">'+product[loop].name+' '+product[loop].price+'</b></h4>'+
+					'</div>';
+					}
+					
+					/*paging*/
+					for(var loop=pagingState; loop<=paging; loop++){
+						if((paging - pagingState) > 5){
+							if(counter == 4){
+								pagingLink = pagingLink + "..." + "<a href='#?" + paging + "' class='data-paging'>" + paging + "</a>";
+								break;
+							}
+						}
+						pagingLink = pagingLink + "<a href='#?" + loop + "' class='data-paging'>" + loop + "</a>";
+						counter++;
+					}
+
+					html = html + '<div class="clearfix"></div>';
+					html = html + '<div class="row">';
+					html = html + "<div class='data-paging center'>" + pagingLink + "</div>";
+					html = html + "</div>";
+				}else{
+					html = html +
+						'<p>Sorry there is no product</p>';
+				}	
+
 				html = html +
 					'</div>'+
 				'</div>';
@@ -236,6 +237,16 @@
 				html = html + "</div><div class='clearfix'></div>";
 
 				$("main").html(html);
+				$("#left-menu-toggle").on('click', function(){
+					if($('.left-menu ul').is(":hidden")){
+						$(this).switchClass('fa-chevron-down', 'fa-chevron-up');
+					}else{
+						$(this).switchClass('fa-chevron-up', 'fa-chevron-down');
+					}
+
+					$('.left-menu ul').slideToggle();
+
+				});
 			}
 		</script>
 	</body>

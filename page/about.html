@@ -18,15 +18,16 @@
 		<div class="container">
 			<header class="parent"></header>
 
-			<main class="parent clear"></main>
+			<main class="parent clear yellow-flex"></main>
 	
-			<footer class="parent"></footer>
+			<footer class="parent clear"></footer>
 		</div>
 
 		<!-- Script collection -->
 		<script type="text/javascript" src="../assets/js/jquery-3.2.1.min.js"></script>
 		<script type="text/javascript" src="../assets/js/jquery-ui-1.10.0.custom.min.js"></script>
 		<script type="text/javascript" src="../assets/js/bootstrap.min.js"></script>	
+		<script type="text/javascript" src="../assets/js/imagesloaded.pkgd.min.js"></script>	
 		<script type="text/javascript" src="../assets/js/partial.js"></script>	
 
 		<!-- page script -->
@@ -44,7 +45,19 @@
 					{"groupId": "store", "group": "Store" , "groupStyle": "italic"},
 				];
 
-				html = '<div id="about-page" class="col-md-8 col-md-offset-2 div-normalize">';
+				var tabContent = [
+					{ "groupId": "about", "content" : {
+						"title" : "About Tulisan",
+						"picture" : "work.jpg",
+						"description" : 'Tulisan means ‘handwriting’ in Bahasa Indonesia. This simple word is symbolic of making your mark while' +
+										'staying true to yourself and sharing your experience with others. To those who wear our collections, it is about' +
+										'colorful storytelling through handcrafted products made with love in small batches. Tulisan began as a' +
+										'home-based art studio in Jakarta filled with dedicated people who simply believed in each other and were determined' +
+										'to follow their dreams.',
+					}},
+				];
+
+				html = '<div class="row"><div id="about-page" class="col-md-8 col-md-offset-2 div-normalize">';
 				html = html + 
 				'<div class="tab-header">' +
 					'<ul>';
@@ -57,18 +70,19 @@
 					'</ul>' +
 				'</div>';
 
-				// for(var loop=0; loop<data.length; loop++){
-				// 	html = html + 
-				// 	'<div class="tab-container">' +
-				// 		"<div class='blog-container'>" +
-				// 			"<div class='blog-box'>"+
-				// 				"<div class='blog-pic'>" +
-				// 					"<img src='../assets/PICS/" + data[loop].picture + "' />" +
-				// 				"</div>" +
-				// 			"</div>" +
-				// 		"</div>" +
-				// 	'</div>';
-				// }
+				for(var loop=0; loop<tabContent.length; loop++){
+					html = html + 
+					'<div class="tab-container">' +
+						"<div class='blog-container'>" +
+							"<div class='blog-box justify'>"+
+								"<h1 class='fontserif'><b>" + tabContent[loop].content.title + "</b></h1>" +
+								"<div class='blog-pic margin-top'>" +
+									"<img src='../assets/PICS/" + tabContent[loop].content.picture + "' />" +
+								"</div>" +
+							"</div>" +
+						"</div>" +
+					'</div>';
+				}
 				
 				// for(var loop=0; loop<data.length; loop++){
 				// 	html = html + 
@@ -84,7 +98,7 @@
 				// }
 
 				html = html + "</div>";
-				html = html + "<div class='clearfix'></div>";
+				html = html + "<div class='clearfix'></div></div>";
 
 				$("main").html(html);
 

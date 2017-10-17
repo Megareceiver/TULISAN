@@ -1,9 +1,11 @@
 var base_url = window.location.origin + '/TULISAN';
 				
-// $(function(){
-	header();
-	footer();
-// });
+header();
+footer();
+
+$(function(){
+	backToTop();
+});
 
 function header(){
 	var active_page = "home-route";
@@ -34,10 +36,12 @@ function header(){
 					'</div>' +
 					'<div class="form">' +
 				    	'<form class="form-inline">' +
-				        	'<div class="form-group">' +
+				        	'<div class="input-group">' +
 				        		'<input type="text" class="form-control" placeholder="Search">' +
+					        	'<span class="input-group-btn">' +
+					        		'<button type="submit" class="btn btn-default">SEARCH</button>' +
+					        	'</span>' +
 				        	'</div>' +
-				        	'<button type="submit" class="btn btn-default">SEARCH</button>' +
 				   		'</form>' +
 					'</div>' +
 				'</div>' +
@@ -241,6 +245,8 @@ function footer(){
 		'<div class="clearfix"></div>' +
 	'</div>';
 
+	html = html + '<a href="#" id="back-to-top" title="Back to top"><span class="fa fa-arrow-up fa-2x"></span></a>';
+
 
 	$("footer.parent").html(html);
 
@@ -249,4 +255,88 @@ function footer(){
 function toTitleCase(str)
 {
     return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
+}
+
+function backToTop(){
+	if ($('#back-to-top').length) {
+	    var scrollTrigger = 100, // px
+	        backToTop = function () {
+	            var scrollTop = $(window).scrollTop();
+	            if (scrollTop > scrollTrigger) {
+	                $('#back-to-top').addClass('show');
+	            } else {
+	                $('#back-to-top').removeClass('show');
+	            }
+	        };
+	    backToTop();
+	    $(window).on('scroll', function () {
+	        backToTop();
+	    });
+	    $('#back-to-top').on('click', function (e) {
+	        e.preventDefault();
+	        $('html,body').animate({
+	            scrollTop: 0
+	        }, 700);
+	    });
+	}
+}
+
+
+//==============================================================================
+// loader
+var $container = $('.container');
+var $status = $('#status');
+var $progress = $('progress');
+
+var supportsProgress = $progress[0] &&
+  // IE does not support progress
+  $progress[0].toString().indexOf('Unknown') === -1;
+
+var loadedImageCount, imageCount;
+
+$(function(){
+	  $container.imagesLoaded()
+	    .progress( onProgress )
+	    .always( onAlways );
+	  // reset progress counter
+	  imageCount = $container.find('img').length;
+	  resetProgress();
+	  updateProgress( 0 );
+});
+
+// -----  ----- //
+
+function resetProgress() {
+  $status.css({ opacity: 1 });
+  loadedImageCount = 0;
+  if ( supportsProgress ) {
+    $progress.attr( 'max', imageCount );
+  }
+}
+
+function updateProgress( value ) {
+  if ( supportsProgress ) {
+    $progress.attr( 'value', value );
+  } else {
+    // if you don't support progress elem
+    $status.text( value + ' / ' + imageCount );
+  }
+}
+
+// triggered after each item is loaded
+function onProgress( imgLoad, image ) {
+  // change class if the image is loaded or broken
+  var $item = $( image.img ).parent();
+  $item.removeClass('is-loading');
+  if ( !image.isLoaded ) {
+    $item.addClass('is-broken');
+  }
+  // update progress element
+  loadedImageCount++;
+  updateProgress( loadedImageCount );
+}
+
+// hide status when done
+function onAlways() {
+  $status.css({ opacity: 0 });
 }

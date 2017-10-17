@@ -138,38 +138,45 @@
 						id		: '#'
 					}];
 
-				var product = [
-					{
-						name	: 'Altier Box',
-						price	: '$77.00',
-						img		: 'db_file_img_133_350x350.jpg'
-					},
-					{
-						name	: 'Beach Bag',
-						price	: '$87.00',
-						img		: 'db_file_img_539_350x350.jpg'
-					},
-					{
-						name	: 'Cruise Bag',
-						price	: '$137.00',
-						img		: 'db_file_img_785_350x350.jpg'
-					},
-					{
-						name	: 'Gallery Tote',
-						price	: '$87.00',
-						img		: 'db_file_img_944_350x350.jpg'
-					},
-					{
-						name	: 'Coterie Bag',
-						price	: '$127.00',
-						img		: 'db_file_img_995_350x350.jpg'
-					},
-					{
-						name	: 'City Tote',
-						price	: '$87.00',
-						img		: 'db_file_img_567_350x350.jpg'
-					},
-				];
+				var product = {
+					"data" : [
+						{
+							name	: 'Altier Box',
+							price	: '$77.00',
+							img		: 'db_file_img_133_350x350.jpg'
+						},
+						{
+							name	: 'Beach Bag',
+							price	: '$87.00',
+							img		: 'db_file_img_539_350x350.jpg'
+						},
+						{
+							name	: 'Cruise Bag',
+							price	: '$137.00',
+							img		: 'db_file_img_785_350x350.jpg'
+						},
+						{
+							name	: 'Gallery Tote',
+							price	: '$87.00',
+							img		: 'db_file_img_944_350x350.jpg'
+						},
+						{
+							name	: 'Coterie Bag',
+							price	: '$127.00',
+							img		: 'db_file_img_995_350x350.jpg'
+						},
+						{
+							name	: 'City Tote',
+							price	: '$87.00',
+							img		: 'db_file_img_567_350x350.jpg'
+						},
+					],
+
+					"paging": "124"
+				};
+
+				paging = parseInt(product.paging);
+				product   = product.data;
 				
 				html = '<div class="col-md-12">';
 				
@@ -190,7 +197,6 @@
 				html = html + 
 						'</div>';
 				
-				paging = product.length;
 				html = html +
 						'<div class="col-md-8 col-md-offset-4 product-list">';
 							if(product.length > 0){
@@ -202,6 +208,7 @@
 									'<h4 class="center-div"><b class="fontserif">'+product[a].name+' '+product[a].price+'</b></h4>'+
 								'</div>';
 								}
+								
 								/*paging*/
 								for(var loop=pagingState; loop<=paging; loop++){
 									if((paging - pagingState) > 5){

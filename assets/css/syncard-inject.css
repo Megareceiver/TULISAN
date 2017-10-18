@@ -22,9 +22,14 @@ a { color: #333; }
   text-align: right; 
   padding-right: 38px;
 }
+
 .syn-fixed-right { float: right; }
 .syn-plus{margin-top: 25px;}
 .syn-divider{margin: 25px 0;}
+
+.text-right {
+  text-align: right;
+}
 
 .btn-default:hover,
 .btn-default:active,
@@ -147,6 +152,12 @@ header.parent .main-menu a span {
 header.parent .main-menu a:hover span,
 header.parent .main-menu a.active span{
   border-color: #ED1C24;
+}
+
+header.parent.fly {
+  -webkit-box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+     -moz-box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+          box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
 }
 
 /*=============================================================================================*/
@@ -769,13 +780,13 @@ footer.parent .license {
   top: 0;
   left: 0;
   height: 100%;
-  padding: 40px 30px 40px 60px;
+  padding: 40px 30px 40px 45px;
   overflow-y: auto;
   z-index: 3;
 }
 .left-menu .title {
-  margin-bottom: 30px;
   font-weight: bold;
+  font-size: 20px;
 }
 
 .left-menu ul {
@@ -1010,6 +1021,21 @@ footer.parent .license {
   opacity: 1;
 }
 
+/*=============================================================================================*/
+/*TABLE*/
+.table-box {
+  display: block;
+  font-size: 16px;
+}
+
+.table-box ul { display: inline-block; width: 100%; padding: 0; border-bottom: 1px solid #CCC; }
+.table-box ul.clear { border-bottom: none; }
+.table-box ul li { 
+  list-style: none;
+  padding: 20px 10px;
+}
+
+.table-box h4 { margin: 0; margin-bottom: 20px; font-weight: bold; }
 
 /*=============================================================================================*/
 /*LOADER*/
@@ -1129,7 +1155,7 @@ img,
   /*=============================================================================================*/
   /* NAVBAR */
   .navbar-default .navbar-brand { text-align: left; }
-  .navbar-shortcut { top: 10px; }
+  .navbar-shortcut { top: 10px; font-size: 20px; }
   .navbar-shortcut .form-control,
   .navbar-shortcut .btn {
       height: 45px;

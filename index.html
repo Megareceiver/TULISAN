@@ -20,15 +20,56 @@
 			<main class="parent">
 				<div class="row">
 					<div class="col-md-12 jumbo-tron">
-						<img class="big-image" src="assets/PICS/SAM_0731.jpg">
+						<div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="6000">
+							  <!-- Indicators -->
+							  <ol class="carousel-indicators">
+							    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+							    <li data-target="#myCarousel" data-slide-to="1"></li>
+							    <li data-target="#myCarousel" data-slide-to="2"></li>
+							  </ol>
+
+							  <!-- Wrapper for slides -->
+							  <div class="carousel-inner">
+							    <div class="item active">
+							      <img src="assets/PICS/SAM_0731.jpg" alt="Tulisan">
+							      <div class="carousel-caption">
+							        <h3>EMPROWERING OTHERS</h3>
+							        <p>We are dedicated to enriching our community by investing our time in training and employing local artisansand talents, with an aim to provide them a fair living with benefits that exceed market standards. </p>
+							      </div>
+							    </div>
+
+							     <div class="item">
+							      <img src="assets/PICS/820abdfb_18f8.jpg" alt="Tulisan">
+							      <div class="carousel-caption">
+							        <h3>CELEBRATING INDIVIDUALITY</h3>
+							        <p>We design our products to be simple and pure, then layer them with artist-illustrated editions to celebrate individuality. Each creation is constructed by hand in small batches, with artisanal craftsmanship. </p>
+							      </div>
+							    </div>
+
+							    <div class="item">
+							      <img src="assets/PICS/61446540_81af.jpg" alt="Tulisan">
+							      <div class="carousel-caption">
+							        <h3>CARING FOR OUR WORLD</h3>
+							        <p>We strive to improve the quality of our work by being responsive of our surroundings and by using sustainable design principles to foster a healthier environment. </p>
+							      </div>
+							    </div>
+							</div>
+
+							<!-- Left and right controls -->
+						  <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+						    <span class="glyphicon glyphicon-chevron-left"></span>
+						    <span class="sr-only">Previous</span>
+						  </a>
+						  <a class="right carousel-control" href="#myCarousel" data-slide="next">
+						    <span class="glyphicon glyphicon-chevron-right"></span>
+						    <span class="sr-only">Next</span>
+						  </a>
 					</div>
 				</div>
-				<div class="row">
-					<div class="col-md-12 div-normalize">
-						<div id="articles-section">&nbsp;</div>	
-						<div class="clearfix"></div>			
-					</div>				
-				</div>
+				<div class="col-md-12 div-normalize">
+					<div id="articles-section">&nbsp;</div>	
+					<div class="clearfix"></div>			
+				</div>				
 			</main>
 					
 			<footer class="parent"></footer>
@@ -76,8 +117,9 @@
 				}
 
 				$("#articles-section").html(html);
-			}
 
+				$(".jumbo-tron img").css({'height':($(window).innerHeight()-52), 'object-fit':'cover', 'width': '100%'});
+			}
 			
 		</script>
 	</body>

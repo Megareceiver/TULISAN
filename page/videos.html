@@ -129,7 +129,7 @@
 
 				$("main").html(html);
 				for(var loop=0; loop<data.length; loop++){	
-					document.getElementById('vid-' + loop).addEventListener('loadedmetadata', function() { this.currentTime = 29; }, false);
+					document.getElementById('vid-' + loop).addEventListener('loadeddata', function() { this.currentTime = 29; }, false);
 				}
 
 				var a = 0;
@@ -148,6 +148,10 @@
 
 				$('main').on('click','.video-box .play-button', function(){ window.location.href = base_url+"/page/videoDetail.html"; });
 			}
+
+			$(function(){
+
+			});
 		</script>
 	</body>
 </html>

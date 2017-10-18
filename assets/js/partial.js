@@ -31,7 +31,7 @@ function header(){
 					'<div class="link">' +
 						'<a href="' + base_url + '/page/location.html">FIND A STORE</a> |' +
 						'<a href="' + base_url + '/page/media.html">MEDIA</a> |' +
-						'<a href="#"><span class="fa fa-shopping-cart"></span></a> |' +
+						'<a href="' + base_url + '/page/cart.html"><span class="fa fa-shopping-cart"></span></a> |' +
 						'<a href="#">LOGIN</a>' +
 					'</div>' +
 					'<div class="form">' +
@@ -130,6 +130,10 @@ function header(){
 			break;
 			case "shopDetail.html":  	 	
 				breadcrumb = "<a href='" + base_url + "'>Home</a> / <a href='" + base_url + "/page/shop.html'>Shop</a> / <span id='custom-bread-detail'>detail</span>";
+				active_page = "shop-route"; 
+			break;
+			case "chart.html":  	 	
+				breadcrumb = "<a href='" + base_url + "'>Home</a> / cart";
 				active_page = "shop-route"; 
 			break;
 		}

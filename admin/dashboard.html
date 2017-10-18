@@ -12,6 +12,7 @@
 		<link href="../assets/css/bootstrap.min.css" rel="stylesheet">
 		<link href="../assets/css/font-awesome.min.css" rel="stylesheet">
 		<link href="../assets/css/syncard-inject.css" rel="stylesheet">
+		<link href="../assets/css/admin.css" rel="stylesheet">
 	</head>
 	<body>
 		<div class="container">
@@ -28,10 +29,123 @@
 		<script type="text/javascript" src="../assets/js/jquery-ui-1.10.0.custom.min.js"></script>
 		<script type="text/javascript" src="../assets/js/bootstrap.min.js"></script>	
 		<script type="text/javascript" src="../assets/js/partial.js"></script>	
+		<script type="text/javascript" src="../assets/js/syncard.js"></script>	
 
 		<!-- page script -->
 		<script type="text/javascript">
-		
+			$(function(){
+				customer();
+			});
+			function customer(){
+				var html = '';
+
+				var data = [
+					{
+						name	: 'Achdiyati Sumi',
+						email 	: 'sumiong.ong@gmail.com',
+						company	: 'PT. Sky Aviation',
+						phone 	: '',
+						loca	: '' 
+					},
+					{
+						name	: 'Achdiyati Sumi',
+						email 	: 'sumiong.ong@gmail.com',
+						company	: 'PT. Sky Aviation',
+						phone 	: '',
+						loca	: ''
+					},
+					{
+						name	: 'Achdiyati Sumi',
+						email 	: 'sumiong.ong@gmail.com',
+						company	: 'PT. Sky Aviation',
+						phone 	: '',
+						loca	: ''
+					},
+					{
+						name	: 'Achdiyati Sumi',
+						email 	: 'sumiong.ong@gmail.com',
+						company	: 'PT. Sky Aviation',
+						phone 	: '',
+						loca	: ''
+					},
+					{
+						name	: 'Achdiyati Sumi',
+						email 	: 'sumiong.ong@gmail.com',
+						company	: 'PT. Sky Aviation',
+						phone 	: '',
+						loca	: ''
+					}
+				]
+
+				// html = 	'<div class="col-md-offset-3 col-md-9">';
+
+				html = html +
+				'<div class="operation-group">'+
+					'<a href="#"><i class="fa fa-plus-circle">Create Customer</i></a>'+
+					'<a href="#"><i class="fa fa-minus-circle">Delete Customer </i></a>'+
+					'<a href="#"><i class="fa fa-bars">Manage Customer Group</i></a>'+
+					// '<div class="form-group">'+
+					  '<input type="text" placeholder="E mail">'+
+					   '<button class="" value="">Search</button>'+
+					// '</div>'+
+				'</div>';
+
+				html = html +
+				'<div class="col-md-3 col-xs-6">'+
+					'<p>Total number of customers</p>'+
+					'<p class="number">1385</p>'+
+				'</div>'+
+				'<div class="col-md-2 col-xs-3">'+
+					'<p>Registered</p>'+
+					'<p class="number">1350</p>'+
+				'</div>'+
+				'<div class="col-md-1 col-xs-3">'+
+					'<p>Guest</p>'+
+					'<p class="number">35</p>'+
+				'</div>'+
+				'<div class="col-md-6 alpha">'+
+					'<p>A B C D E F G H I J K L M N O P Q R S T U V W X Y Z </p>'+
+				'</div>'+
+				'<div class="clearfix"></div>';
+
+				html = html +
+				'<div class="table">'+
+					'<p><a href="#">< Previous page</a> | <a href="#">Next page ></a></p>'+
+					'<table class="table table-striped">'+
+					    '<thead>'+
+					    	'<tr>'+
+						    	'<th></th>'+
+						    	'<th>Name</th>'+
+						        '<th>E mail</th>'+
+						        '<th>Company</th>'+
+						        '<th>Phone</th>'+
+						        '<th>Location</th>'+
+					    	'</tr>'+
+					    '</thead>'+
+					    '<tbody>';
+					    	for(var a =0; a < data.length; a++){
+					    		html = html +
+					    		'<tr>'+
+					    			'<td>'+
+										'<input type="checkbox" value="'+a+'">'+
+					    			'</td>'+
+					    			'<td>'+ data[a].name +'</td>'+
+					    			'<td>'+ data[a].email +'</td>'+
+					    			'<td>'+ data[a].company +'</td>'+
+					    			'<td>'+ data[a].phone +'</td>'+
+					    			'<td>'+ data[a].loca +'</td>'+
+					    		'<tr>';
+					    	}
+				html = html +
+					    '</tbody>'+
+					'</table>'+
+					'<p><a href="#">< Previous page</a> | <a href="#">Next page ></a></p>'+
+				'</div>';
+
+				// html = html + '</div>';
+				$('.container .main-menu').append(html);
+			}
+			
 		
 		</script>
 	</body>

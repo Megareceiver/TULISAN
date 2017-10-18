@@ -1037,6 +1037,25 @@ footer.parent .license {
 
 .table-box h4 { margin: 0; margin-bottom: 20px; font-weight: bold; }
 
+.basic-table { margin-bottom: 30px; }
+.basic-table.clear { margin-bottom: 0; }
+.basic-table h2 {
+  background-color: #605B5D;
+  color: #FFF;
+}
+
+.basic-table h2, h3, h4 {
+  padding: 5px 25px;
+}
+
+.basic-table a { color: rgb(17, 85, 204) }
+.basic-table ul { display: inline-block; width: 100%; padding-left: 25px  }
+.basic-table ul:nth-child(odd) { background-color: #DDD; }
+.basic-table ul li { 
+  list-style: none;
+  padding: 10px 0;
+}
+
 /*=============================================================================================*/
 /*LOADER*/
 
@@ -1074,6 +1093,12 @@ img,
   border-radius: 10px;
   z-index: 2; /* over other stuff */
 }
+
+/*=============================================================================================*/
+/*=============================================================================================*/
+/*BOOTSTRAP*/
+.modal-content { border-radius: 0 }
+.modal-header { background-color: #E9E2DB }
 
 /*=============================================================================================*/
 /*=============================================================================================*/

@@ -19,22 +19,28 @@
 			<header class="parent"></header>
 
 			<main class="parent clear">
-				<div id="cart-list" class="col-md-8 col-md-offset-2 div-normalize">
+				<div class="col-md-8 col-md-offset-2 div-normalize">
 					<h1>Your Account</h1>
 				</div>
-				<div id="cart-summary" class="col-md-8 col-md-offset-2 div-normalize">
-					<div class="table-box">
-						<ul class="cart-cell clear">
-							<li class="col-md-3"><b>Grand total <span id="itemsTotal"></span></b></li>
-							<li class="col-md-9 text-right"><span id="total"></span></li>
-						</ul>
-						<ul class="cart-cell clear">
-							<li class="col-md-7 hidden-sm hidden-xs"></li>
-							<li class="col-md-5">
-								<button type="button" class="btn btn-warning form-control">Check out</button>
-							</li>
-						</ul>
-					</div>
+				<div class="col-md-8 col-md-offset-2 div-normalize basic-table">
+					<h2>Account settings</h2>
+					<h3><b>Jen's personal information</b></h3>
+					<h4>Your Information <small><a href="#">Edit</a></small></h4>
+					<h4>Your email jen1810@yahoo.com Edit Saved addresses: 6 <small><a href="#">View</a></small></h4>
+					<h4>Email preferences <small><a href="#">Update</a></small></h4>
+				</div>
+				<div class="col-md-8 col-md-offset-2 div-normalize basic-table">
+					<h3><b>Jen's payment information</b></h3>
+					<h4>Checkout settings: On Edit Credit cards saved: 3 <small><a href="#">Edit</a></small></h4>
+				</div>
+				<div id="recentOrders" class="col-md-8 col-md-offset-2 div-normalize basic-table clear">
+					<h2>Recent orders</h2>
+				</div>
+				<div class="col-md-8 col-md-offset-2 div-normalize basic-table">
+					<div class="div-normalize"><a href="#">View order history and returns</a></div>
+				</div>
+				<div id="UnpaidOrders" class="col-md-8 col-md-offset-2 div-normalize basic-table">
+					<h2>Unpaid orders</h2>
 				</div>
 			</main>	
 	
@@ -56,82 +62,39 @@
 
 			function loadData(){
 				var html = '';
-				var data = [
-					{ 'productId': 'LDA02014', 'productName': 'Beach Bag', 'productPicture': 'db_file_img_539_350x350.jpg', 'price': '86000', 'quantity': '1' },
-					{ 'productId': 'LDA02012', 'productName': 'Daisy Loops', 'productPicture': 'db_file_img_740_350x350.jpg', 'price': '20000', 'quantity': '1' },
-				];
+				var data = {
+					"recentOrders": [
+						{ "date": "August 1, 2014", "number": "#11234", "status": "Shipped", "link": "no", "linkTarget": "" },
+						{ "date": "August 1, 2014", "number": "#11234", "status": "Shipped", "link": "no", "linkTarget": "" },
+					],
+					"UnpaidOrders": [
+						{ "date": "August 1, 2014", "number": "#11234", "status": "Confirm", "link": "yes", "linkTarget": "#" },
+						{ "date": "August 1, 2014", "number": "#11234", "status": "Confirm", "link": "yes", "linkTarget": "#" },
+					]
+				};
 
-				var total = 0;
-
-				html = html + '<div class="table-box">';
-				for(var loop=0; loop<data.length; loop++){
-					html = html + 
-					'<ul class="cart-cell" id="' + data[loop].productId + '">' +
-						'<li class="col-md-2"><img class="big-image" src="../assets/PICS/' + data[loop].productPicture + '"/></li>' +
-						'<li class="col-md-5">' + 
-							'<h4>' + data[loop].productName + '</h4>' + 
-							'<button type="button" class="btn btn-danger" delete-list="' + data[loop].productId + '">Delete</button>' +
-						'</li>' +
-						'<li class="col-md-3">' + currencyFormat(data[loop].price) + '</li>' +
-						'<li class="col-md-2 col-sm-4 col-xs-4"><input type="number" class="form-control price" d-price="' + data[loop].price + '" value="' + data[loop].quantity + '" /></li>' +
+				for(var loop=0; loop<data.recentOrders.length; loop++){
+					html = html +
+					'<ul>' +
+						'<li class="col-md-4">' + data.recentOrders[loop].date + '</li>' +
+						'<li class="col-md-4 col-sm-6 col-xs-6">Order ' + data.recentOrders[loop].number + '</li>' +
+						'<li class="col-md-4 col-sm-6 col-xs-6">' + data.recentOrders[loop].status + '</li>' +
 					'</ul>';
-					html = html + '<div class="clearfix"></div>';
-
-					total = total + parseInt(data[loop].price);
 				}
 
-				html = html + '</div>';
+				$("main #recentOrders").append(html);
+				html = "";
 
-				if(data.length == 0) html = "<div class='col-md-12 text-danger'>No items added yet</div>" + html;
+				for(var loop=0; loop<data.UnpaidOrders.length; loop++){
+					html = html +
+					'<ul>' +
+						'<li class="col-md-4">' + data.UnpaidOrders[loop].date + '</li>' +
+						'<li class="col-md-4 col-sm-6 col-xs-6">Order ' + data.UnpaidOrders[loop].number + '</li>' +
+						'<li class="col-md-4 col-sm-6 col-xs-6"><a href="#">' + data.UnpaidOrders[loop].status + '</a></li>' +
+					'</ul>';
+				}
 
-				$("main #cart-list").append(html);
-
-				//===================================================================================
-				var itemsTotal = '(' + data.length + ((data.length > 1) ? " items" : ' item' ) + ')';
-				$("#itemsTotal").html(itemsTotal);
-				$("#total").html(currencyFormat(String(total)));
-				temp = total;
-				itemCounter = data.length;
-
-
-				/* price calculator */
-				$('.price').on('click', function(){
-					$("#total").html('Please wait..');
-				});
-
-				$('.price').on('change', function(){
-					priceSummary();
-				});
-
-				$('.price').on('blur', function(){
-					$("#total").html(currencyFormat(String(temp)));
-					$("#totalTemp").val(temp);
-				});
-
-				/* delete function*/
-				$('[delete-list]').on('click', function(){
-					target = $(this).attr('delete-list');
-					$("#" + target).remove();
-					priceSummary();
-					itemCounter = itemCounter -1;
-					itemsTotal = '(' + itemCounter + ((itemCounter > 1) ? " items" : ' item' ) + ')';
-					$("#itemsTotal").html(itemsTotal);
-
-					if(itemCounter == 0) $("main #cart-list").append("<div class='col-md-12 text-danger'>No items added yet</div>");
-				});
-
-			}
-
-			function priceSummary(){
-				tempRest = 0;
-				$('.price').each(function(){
-					tempRest = tempRest + parseInt($(this).val()) * $(this).attr('d-price');
-				});
-				setTimeout(function(){
-					$("#total").html(currencyFormat(String(tempRest)));
-					$("#totalTemp").val(tempRest);
-					temp = tempRest;
-				}, 500);
+				$("main #UnpaidOrders").append(html);
 			}
 		</script>
 	</body>

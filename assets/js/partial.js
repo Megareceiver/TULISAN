@@ -275,7 +275,7 @@ function footer(){
 	        '<h4 class="modal-title">Care Instructions</h4>' +
 	      '</div>' +
 	      '<div class="modal-body">' +
-	        '<p>' +
+	        '<p class="justify">' +
 	        	'Handle with Care<br/>' +
 				'To protect the artwork, handle our totes and organizers with extra care. When needed, wipe clean with a damp cloth. We do not recommend machine washing, using soap or dry cleaning these items as these actions will damage the products.' +
 				'<br/><br/>' +

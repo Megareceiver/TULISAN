@@ -154,22 +154,22 @@ function footer(){
 	/* CONFIG */
 	var shortcut = [
 		{ "head": "ABOUT", "head_link": "#", "body": [
-			{ "caption": "Shop", 	"link": "#" },
+			{ "caption": "Shop", 	"link": base_url + "/page/shop.html" },
 			{ "caption": "Stories", "link": base_url + "/page/story.html" },
 			{ "caption": "Blog"	, 	"link": base_url + "/page/blog.html" },
-			{ "caption": "About", 	"link": "#" },
-			{ "caption": "Store", 	"link": "#" },
-			{ "caption": "Media", 	"link": "#" },
+			{ "caption": "About", 	"link": base_url + "/page/about.html" },
+			{ "caption": "Store", 	"link": base_url + "/page/location.html" },
+			{ "caption": "Media", 	"link": base_url + "/page/media.html" },
 		]},
 		{ "head": "SUPPORT", "head_link": "#", "body": [
 			{ "caption": "Product Care", "link": "#" },
-			{ "caption": "Contact Us", 	 "link": "#" },
+			{ "caption": "Contact Us", 	 "link": base_url + "/page/location.html" },
 			{ "caption": "Login"	, 	 "link": "#" },
 		]},
 		{ "head": "SHOP", "head_link": "#", "body": [
-			{ "caption": "By Product", 	"link": "#" },
-			{ "caption": "By Color", 	"link": "#" },
-			{ "caption": "By Story"	, 	"link": "#" },
+			{ "caption": "By Product", 	"link": base_url + "/page/shop.html" },
+			{ "caption": "By Color", 	"link": base_url + "/page/shop.html" },
+			{ "caption": "By Story"	, 	"link": base_url + "/page/shop.html" },
 		]},
 		{ "head": "LEGAL", "head_link": "#", "body": [
 			{ "caption": "Store / Privacy Policy", 	"link": base_url + "/page/privacyPolicy.html" },
@@ -339,4 +339,18 @@ function onProgress( imgLoad, image ) {
 // hide status when done
 function onAlways() {
   $status.css({ opacity: 0 });
+}
+
+/* maps */
+function openMaps(plc,lng,lat){
+	var url = "https://www.google.com/maps/place/" + plc + "/@" + lat + "," + lng;
+	window.open(url);
+}
+
+/* tab */
+function tabChange(elem){
+	target = $(elem).attr('t-target');
+	$(".tab-button, .tab-container").removeClass('active');
+	$(elem).addClass('active');
+	$(target).addClass('active');
 }

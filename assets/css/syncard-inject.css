@@ -126,7 +126,7 @@ body .container:first-child {
   margin: auto;  
 }
 
-.div-normalize { padding-left: 25px; padding-right: 25px; }
+.div-normalize { padding-left: 30px; padding-right: 30px; }
 
 
 
@@ -292,6 +292,21 @@ footer.parent .license {
 }
 
 /*=============================================================================================*/
+/* TAB PAGE */
+.tab-header .tab-button { 
+  display: inline-block;
+  padding: 5px 0;
+  color: #111; 
+  border-bottom: 2px solid transparent
+}
+
+.tab-header .tab-button:hover,
+.tab-header .tab-button.active { cursor: pointer; border-color: #BBB }
+
+.tab-container { display: none; }
+.tab-container.active { display: block; }
+
+/*=============================================================================================*/
 /* MAP MARKER */
 .maps { 
   position: relative;
@@ -312,9 +327,9 @@ footer.parent .license {
 .map-marker .caption {
   display: none;
   position: absolute;
-  top: 20px;
+  top: -20px;
   padding: 5px 10px;
-  left: 2px;
+  left: 100%;
   white-space: nowrap;
   z-index: 3;
   background: #000;
@@ -327,11 +342,11 @@ footer.parent .license {
   width: 0;
   height: 0;
   position: absolute;
-  top: -5px;
-  left: 10px;
-  border-left: 5px solid transparent;
-  border-right: 5px solid transparent;
-  border-bottom: 5px solid black;
+  top: 10px;
+  left: -5px;
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+  border-right: 5px solid black;
 }
 
 .marker { position: relative; display: inline-block; width: 45px; }
@@ -714,6 +729,7 @@ footer.parent .license {
   font-weight: bold;
 }
 
+.blog-box.norm { font-weight: normal; }
 .blog-box.justify {
   text-align: justify;
 }
@@ -752,7 +768,7 @@ footer.parent .license {
   top: 0;
   left: 0;
   height: 100%;
-  padding: 40px 30px 40px 80px;
+  padding: 40px 30px 40px 60px;
   overflow-y: auto;
   z-index: 3;
 }
@@ -833,9 +849,9 @@ footer.parent .license {
 .video-box .layer {
   position: absolute;
   width: 100%;
-  height: 99%;
+  height: 100%;
   left: 0;
-  top: 0;
+  top: -5px;
   right: 0;
   bottom: 0;
   margin: auto;

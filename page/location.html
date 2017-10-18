@@ -39,15 +39,15 @@
 			function maps(){
 				var html = '';
 				var mapMarker = [
-					{'location': 'location 1', 'x': 200 , 'y' : 175, 'lat': '', 'long': ''},
-					{'location': 'location 2', 'x': 240 , 'y' : 225, 'lat': '', 'long': ''},
-					{'location': 'location 3', 'x': 170 , 'y' : 280, 'lat': '', 'long': ''},
+					{'location': 'location 1', 'x': 200 , 'y' : 175, 'lat': '', 'long': '', 'place': ''},
+					{'location': 'location 2', 'x': 240 , 'y' : 225, 'lat': '', 'long': '', 'place': ''},
+					{'location': 'location 3', 'x': 170 , 'y' : 280, 'lat': '', 'long': '', 'place': ''},
 				];
 
 				var mapMarkerMin = [
-					{'location': 'location 4', 'x': 290 , 'y' : 235, 'lat': '', 'long': ''},
-					{'location': 'location 5', 'x': 320 , 'y' : 205, 'lat': '', 'long': ''},
-					{'location': 'location 6', 'x': 215 , 'y' : 240, 'lat': '', 'long': ''},
+					{'location': 'Singapore', 'x': 280 , 'y' : 265, 'lat': '1.2916439', 'long': '103.8202578,12.1z', 'place': 'Tulisan'},
+					{'location': 'Jakarta', 'x': 332 , 'y' : 205, 'lat': '-6.2554062', 'long': '106.8081536,15z', 'place': 'Tulisan'},
+					{'location': 'Hongkong', 'x': 215 , 'y' : 240, 'lat': '22.3582235', 'long': '114.1194768,17z', 'place': 'Metro+Loft,+38+Kwai+Hei+St,+Kwai+Chung,+Hong+Kong'},
 				];
 
 				html = '<div class="col-md-12 div-normalize">';
@@ -64,7 +64,7 @@
 				for(var loop=0; loop<mapMarker.length; loop++){
 					//map marker
 					html = html +
-					'<div class="map-marker" style="top: ' + mapMarker[loop].x + 'px; left: ' + mapMarker[loop].y + 'px">' +
+					'<div class="map-marker go-maps" m-place="' + mapMarker[loop].place + '" m-lng="' + mapMarker[loop].long + '" m-lat="' + mapMarker[loop].lat + '" style="top: ' + mapMarker[loop].x + 'px; left: ' + mapMarker[loop].y + 'px">' +
 						'<div class="marker">' +
 							'<div class="caption">' + mapMarker[loop].location + '</div>' +
 							'<div class="pin"></div>' +
@@ -76,7 +76,7 @@
 				for(var loop=0; loop<mapMarkerMin.length; loop++){
 					//map marker
 					html = html +
-					'<div class="map-marker" style="top: ' + mapMarkerMin[loop].x + 'px; right: ' + mapMarkerMin[loop].y + 'px">' +
+					'<div class="map-marker go-maps" m-place="' + mapMarkerMin[loop].place + '" m-lng="' + mapMarkerMin[loop].long + '" m-lat="' + mapMarkerMin[loop].lat + '" style="top: ' + mapMarkerMin[loop].x + 'px; right: ' + mapMarkerMin[loop].y + 'px">' +
 						'<div class="marker">' +
 							'<div class="caption">' + mapMarkerMin[loop].location + '</div>' +
 							'<div class="pin"></div>' +
@@ -92,7 +92,7 @@
 									'</div>'+
 								'</div>'+
 								'<div class="col-md-6">'+
-									'<div class="address">'+
+									'<div class="address syn-divider">'+
 										'<p><b>HONG KONG</b></p>'+
 										'Arketype Limited (HK Distributor)<br/>'+
 										'7F Metro Loft,<br/>'+
@@ -108,7 +108,7 @@
 									'</div>'+
 								'</div>'+
 								'<div class="col-md-6">'+
-									'<div class="address">'+
+									'<div class="address syn-divider">'+
 										'<p>Fang Fong Projects<br/>'+
 										'G/F, B3, 160 Electric Road,<br/>'+
 										'North Point<br/>'+
@@ -125,8 +125,10 @@
 						"</div><div class='clearfix'></div>";
 
 				$("main").html(html);
-				// $('svg').attr('style','fill:antiquewhite');
 
+				$(".go-maps").unbind().on("click", function(){ 
+					openMaps($(this).attr('m-place'), $(this).attr('m-lng'),$(this).attr('m-lat'));
+				});
 			}
 		</script>
 	</body>

@@ -22,8 +22,14 @@ a { color: #333; }
   text-align: right; 
   padding-right: 38px;
 }
+
 .syn-fixed-right { float: right; }
 .syn-plus{margin-top: 25px;}
+.syn-divider{margin: 25px 0;}
+
+.text-right {
+  text-align: right;
+}
 
 .btn-default:hover,
 .btn-default:active,
@@ -126,7 +132,7 @@ body .container:first-child {
   margin: auto;  
 }
 
-.div-normalize { padding-left: 25px; padding-right: 25px; }
+.div-normalize { padding-left: 30px; padding-right: 30px; }
 
 
 
@@ -146,6 +152,12 @@ header.parent .main-menu a span {
 header.parent .main-menu a:hover span,
 header.parent .main-menu a.active span{
   border-color: #ED1C24;
+}
+
+header.parent.fly {
+  -webkit-box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+     -moz-box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+          box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
 }
 
 /*=============================================================================================*/
@@ -292,6 +304,21 @@ footer.parent .license {
 }
 
 /*=============================================================================================*/
+/* TAB PAGE */
+.tab-header .tab-button { 
+  display: inline-block;
+  padding: 5px 0;
+  color: #111; 
+  border-bottom: 2px solid transparent
+}
+
+.tab-header .tab-button:hover,
+.tab-header .tab-button.active { cursor: pointer; border-color: #BBB }
+
+.tab-container { display: none; }
+.tab-container.active { display: block; }
+
+/*=============================================================================================*/
 /* MAP MARKER */
 .maps { 
   position: relative;
@@ -312,9 +339,9 @@ footer.parent .license {
 .map-marker .caption {
   display: none;
   position: absolute;
-  top: 20px;
+  top: -20px;
   padding: 5px 10px;
-  left: 2px;
+  left: 100%;
   white-space: nowrap;
   z-index: 3;
   background: #000;
@@ -327,11 +354,11 @@ footer.parent .license {
   width: 0;
   height: 0;
   position: absolute;
-  top: -5px;
-  left: 10px;
-  border-left: 5px solid transparent;
-  border-right: 5px solid transparent;
-  border-bottom: 5px solid black;
+  top: 10px;
+  left: -5px;
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+  border-right: 5px solid black;
 }
 
 .marker { position: relative; display: inline-block; width: 45px; }
@@ -714,6 +741,7 @@ footer.parent .license {
   font-weight: bold;
 }
 
+.blog-box.norm { font-weight: normal; }
 .blog-box.justify {
   text-align: justify;
 }
@@ -752,13 +780,13 @@ footer.parent .license {
   top: 0;
   left: 0;
   height: 100%;
-  padding: 40px 30px 40px 80px;
+  padding: 40px 30px 40px 45px;
   overflow-y: auto;
   z-index: 3;
 }
 .left-menu .title {
-  margin-bottom: 30px;
   font-weight: bold;
+  font-size: 20px;
 }
 
 .left-menu ul {
@@ -810,7 +838,7 @@ footer.parent .license {
   margin-bottom: 20px;
 }
 
-.video-box video { width: 100% }
+.video-box video { width: 100%; border: 1px solid #DDD; }
 .video-box .play-button {
   position: absolute;
   background:  url("../PICS/playbutton.png")no-repeat;
@@ -833,9 +861,9 @@ footer.parent .license {
 .video-box .layer {
   position: absolute;
   width: 100%;
-  height: 99%;
+  height: 100%;
   left: 0;
-  top: 0;
+  top: -5px;
   right: 0;
   bottom: 0;
   margin: auto;
@@ -970,9 +998,9 @@ footer.parent .license {
 #back-to-top {
     position: fixed;
     bottom: 40px;
-    right: 40px;
+    right: 30px;
     z-index: 9999;
-    padding: 15px;
+    padding: 10px;
     text-align: center;
     line-height: 30px;
     background: #444;
@@ -993,6 +1021,21 @@ footer.parent .license {
   opacity: 1;
 }
 
+/*=============================================================================================*/
+/*TABLE*/
+.table-box {
+  display: block;
+  font-size: 16px;
+}
+
+.table-box ul { display: inline-block; width: 100%; padding: 0; border-bottom: 1px solid #CCC; }
+.table-box ul.clear { border-bottom: none; }
+.table-box ul li { 
+  list-style: none;
+  padding: 20px 10px;
+}
+
+.table-box h4 { margin: 0; margin-bottom: 20px; font-weight: bold; }
 
 /*=============================================================================================*/
 /*LOADER*/
@@ -1112,7 +1155,7 @@ img,
   /*=============================================================================================*/
   /* NAVBAR */
   .navbar-default .navbar-brand { text-align: left; }
-  .navbar-shortcut { top: 10px; }
+  .navbar-shortcut { top: 10px; font-size: 20px; }
   .navbar-shortcut .form-control,
   .navbar-shortcut .btn {
       height: 45px;
@@ -1142,6 +1185,10 @@ img,
 
   .left-menu ul { display: none }
   .left-menu ul li a { padding: 20px 0; }
+
+  /*=============================================================================================*/
+  /* VIDEO */
+  .video-box .caption h1 { font-size: 24px }
 }
 
 /* small */

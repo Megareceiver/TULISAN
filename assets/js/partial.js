@@ -5,6 +5,17 @@ footer();
 
 $(function(){
 	backToTop();
+
+	/* navbar fly shadow */
+	$(window).on('scroll', function () {
+		var elem = 'header.parent';
+		var act = 'fly';
+		if ($(this).scrollTop() > 30) {
+			if (!$(elem).hasClass(act)) { $(elem).addClass(act); }
+		} else {
+			if ($(elem).hasClass(act)) { $(elem).removeClass(act); }
+		}
+	});
 });
 
 function header(){
@@ -31,8 +42,9 @@ function header(){
 					'<div class="link">' +
 						'<a href="' + base_url + '/page/location.html">FIND A STORE</a> |' +
 						'<a href="' + base_url + '/page/media.html">MEDIA</a> |' +
-						'<a href="#"><span class="fa fa-shopping-cart"></span></a> |' +
-						'<a href="#">LOGIN</a>' +
+						'<a href="' + base_url + '/page/cart.html"><span class="fa fa-shopping-cart"></span></a> |' +
+						'<a href="' + base_url + '/page/profile.html"><span class="fa fa-user-circle-o"></span></a>' +
+						// '<a href="' + base_url + '/page/userLog.html">LOGIN</a>' +
 					'</div>' +
 					'<div class="form">' +
 				    	'<form class="form-inline">' +
@@ -132,6 +144,10 @@ function header(){
 				breadcrumb = "<a href='" + base_url + "'>Home</a> / <a href='" + base_url + "/page/shop.html'>Shop</a> / <span id='custom-bread-detail'>detail</span>";
 				active_page = "shop-route"; 
 			break;
+			case "chart.html":  	 	
+				breadcrumb = "<a href='" + base_url + "'>Home</a> / cart";
+				active_page = "shop-route"; 
+			break;
 		}
 
 		breadcrumbHtml =
@@ -154,22 +170,22 @@ function footer(){
 	/* CONFIG */
 	var shortcut = [
 		{ "head": "ABOUT", "head_link": "#", "body": [
-			{ "caption": "Shop", 	"link": "#" },
+			{ "caption": "Shop", 	"link": base_url + "/page/shop.html" },
 			{ "caption": "Stories", "link": base_url + "/page/story.html" },
 			{ "caption": "Blog"	, 	"link": base_url + "/page/blog.html" },
-			{ "caption": "About", 	"link": "#" },
-			{ "caption": "Store", 	"link": "#" },
-			{ "caption": "Media", 	"link": "#" },
+			{ "caption": "About", 	"link": base_url + "/page/about.html" },
+			{ "caption": "Store", 	"link": base_url + "/page/location.html" },
+			{ "caption": "Media", 	"link": base_url + "/page/media.html" },
 		]},
 		{ "head": "SUPPORT", "head_link": "#", "body": [
-			{ "caption": "Product Care", "link": "#" },
-			{ "caption": "Contact Us", 	 "link": "#" },
+			{ "caption": "Product Care", "link": "#", "custom": "care" },
+			{ "caption": "Contact Us", 	 "link": base_url + "/page/location.html" },
 			{ "caption": "Login"	, 	 "link": "#" },
 		]},
 		{ "head": "SHOP", "head_link": "#", "body": [
-			{ "caption": "By Product", 	"link": "#" },
-			{ "caption": "By Color", 	"link": "#" },
-			{ "caption": "By Story"	, 	"link": "#" },
+			{ "caption": "By Product", 	"link": base_url + "/page/shop.html" },
+			{ "caption": "By Color", 	"link": base_url + "/page/shop.html" },
+			{ "caption": "By Story"	, 	"link": base_url + "/page/shop.html" },
 		]},
 		{ "head": "LEGAL", "head_link": "#", "body": [
 			{ "caption": "Store / Privacy Policy", 	"link": base_url + "/page/privacyPolicy.html" },
@@ -204,7 +220,8 @@ function footer(){
 
 			var body = shortcut[loop].body;
 			for(var look=0; look<body.length; look++){
-				html = html +'<div class="body"><a href="' + body[look].link + '">' + body[look].caption + '</a></div>';
+				if(body[look].custom == undefined) html = html +'<div class="body"><a href="' + body[look].link + '">' + body[look].caption + '</a></div>';
+				else html = html +'<div class="body"><a href="#" data-toggle="modal" data-target="#produtCare">' + body[look].caption + '</a></div>';
 			}
 
 			html = html + '</div>';
@@ -214,7 +231,6 @@ function footer(){
 			'<div class="clearfix"></div>' +
 		'</div>';
 	}
-
 
 	/* socmed generator */
 	if(socmed != null && socmed.length > 0){
@@ -247,6 +263,33 @@ function footer(){
 
 	html = html + '<a href="#" id="back-to-top" title="Back to top"><span class="fa fa-arrow-up fa-2x"></span></a>';
 
+	html = html +
+	'<!-- Modal -->' +
+	'<div id="produtCare" class="modal fade" role="dialog">' +
+	  '<div class="modal-dialog">' +
+
+	    '<!-- Modal content-->' +
+	    '<div class="modal-content">' +
+	      '<div class="modal-header">' +
+	        '<button type="button" class="close" data-dismiss="modal">&times;</button>' +
+	        '<h4 class="modal-title">Care Instructions</h4>' +
+	      '</div>' +
+	      '<div class="modal-body">' +
+	        '<p>' +
+	        	'Handle with Care<br/>' +
+				'To protect the artwork, handle our totes and organizers with extra care. When needed, wipe clean with a damp cloth. We do not recommend machine washing, using soap or dry cleaning these items as these actions will damage the products.' +
+				'<br/><br/>' +
+				'Care for Home and Apparel<br/>' +
+				'All of our home products and apparel collections are delicate. For best results, we recommend washing home goods and apparel inside out in cold water. Lay flat to dry and avoid exposure to direct sunlight. Use a warm iron as needed (inside out).' +
+			'</p>' +
+	      '</div>' +
+	      '<div class="modal-footer">' +
+	        '<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>' +
+	      '</div>' +
+	    '</div>' +
+
+	  '</div>' +
+	'</div>';
 
 	$("footer.parent").html(html);
 
@@ -339,4 +382,26 @@ function onProgress( imgLoad, image ) {
 // hide status when done
 function onAlways() {
   $status.css({ opacity: 0 });
+}
+
+/* maps */
+function openMaps(plc,lng,lat){
+	var url = "https://www.google.com/maps/place/" + plc + "/@" + lat + "," + lng;
+	window.open(url);
+}
+
+/* tab */
+function tabChange(elem){
+	target = $(elem).attr('t-target');
+	$(".tab-button, .tab-container").removeClass('active');
+	$(elem).addClass('active');
+	$(target).addClass('active');
+}
+
+// currency
+function currencyFormat(num, curr = 'Rp. ') {
+    var p = num;
+    return curr + p.split("").reverse().reduce(function(acc, num, i, orig) {
+        return  num=="-" ? acc : num + (i && !(i % 3) ? "," : "") + acc;
+    }, "");
 }

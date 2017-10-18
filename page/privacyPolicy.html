@@ -18,9 +18,9 @@
 		<div class="container">
 			<header class="parent"></header>
 
-			<main class="parent clear"></main>
+			<main class="parent clear yellow-flex"></main>
 	
-			<footer class="parent"></footer>
+			<footer class="parent clear"></footer>
 		</div>
 
 		<!-- Script collection -->
@@ -37,7 +37,7 @@
 			function loadPrivacy(){
 				var html = '';
 				
-				html = '<div class="col-md-8 col-md-offset-2 div-normalize">';
+				html = '<div class="row"><div class="col-md-8 col-md-offset-2">';
 				html = html +
 					'<div class="privacy">'+
 						'<h2>Privacy Policy</h2>'+
@@ -78,7 +78,7 @@
 
 					'</div>';
 
-				html = html + "</div>";
+				html = html + "</div></div>";
 
 				$("main").html(html);
 

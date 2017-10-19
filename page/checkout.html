@@ -327,7 +327,7 @@
 							</div>
 						</div>
 					</div>
-					<div class="tab-container active" id="2">
+					<div class="tab-container" id="2">
 						<div class='blog-container'>
 							<div class='blog-box text-left norm'>
 								<h1 class='fontserif'><b>Select payment method</b></h1>
@@ -344,7 +344,7 @@
 							</div>
 						</div>
 					</div>
-					<div class="tab-container active" id="3">
+					<div class="tab-container" id="3">
 						<div class='blog-container'>
 							<div class='blog-box text-left norm'>
 								<h1 class='fontserif'><b>Thank you for your order!</b></h1>
@@ -365,29 +365,29 @@
 										<h5><i class="sessionCity">&nbsp;</i></h5>
 										<h5><i class="sessionPhone">&nbsp;</i></h5>
 									</div>
-									<div id="orderItems" class="col-md-12 basic-table italic syn-clear syn-plus">
+								</div>
+								<div class='blog-description table-frame'>
+									<div id="orderItems" class="col-md-12 basic-table italic syn-clear syn-plus clear">
 										<ul class="header">
 											<li class="col-md-3">Product</li>
 											<li class="col-md-3">SKU</li>
-											<li class="col-md-2">Price</li>
-											<li class="col-md-2">Quantity</li>
-											<li class="col-md-2">Total</li>
-										</ul>
-										<ul>
-											<li class="col-md-3">Medium</li>
-											<li class="col-md-3">Cube CUB1401-SN-M</li>
-											<li class="col-md-2">Rp268,000</li>
-											<li class="col-md-2">1</li>
-											<li class="col-md-2">Rp268,000</li>
-										</ul>
-										<ul>
-											<li class="col-md-3">Medium</li>
-											<li class="col-md-3">Cube CUB1401-SN-M</li>
-											<li class="col-md-2">Rp268,000</li>
-											<li class="col-md-2">1</li>
-											<li class="col-md-2">Rp268,000</li>
+											<li class="col-md-2 text-center">Price</li>
+											<li class="col-md-2 text-center">Quantity</li>
+											<li class="col-md-2 text-center">Total</li>
 										</ul>
 									</div>
+								</div>
+								<div class='blog-description syn-plus'>
+									<div class="table-box thin">
+										<ul class="clear">
+											<li class="col-md-12 text-right"><b>Cart Total</b> &nbsp; <span id="cartTotal"></span></li>
+										</ul>
+										<ul class="clear">
+											<li class="col-md-12 text-right"><b>Grand Total</b> &nbsp; <span id="grandTotal"></span></li>
+										</ul>
+									</div>
+									<h5><i>After making your transfer, click this button to confirm.</i></h5>
+									<button type="button" class="btn btn-warning syn-plus">Confirm Payment</button>
 								</div>
 							</div>
 						</div>
@@ -412,6 +412,7 @@
 			loadFunction();
 
 			function loadFunction(){
+				var html = "";
 				var data = { 
 					"tulisan_customerName" : "Jen Ratnasari" ,
 					"tulisan_customerAddress" : "Jalan kirai no 1. Andara ujung. Pondok labu 16513 \r\n\r\nJakarta, Indonesia",
@@ -433,6 +434,32 @@
 				$(".tab-header .tab-button").unbind().on("click", function(){ 
 					tabWizardChange($(this));
 				});
+
+				//===========================================================================================
+				var items = [
+					{ 'productId': 'LDA02014', 'productName': 'Beach Bag', 'price': '86000', 'quantity': '1' },
+					{ 'productId': 'LDA02012', 'productName': 'Daisy Loops','price': '20000', 'quantity': '1' },
+				];
+
+				var grandTotal = 0;
+
+				for(var loop=0; loop<items.length; loop++){
+					total = parseInt(items[loop].price) * parseInt(items[loop].quantity);
+					grandTotal = grandTotal + total;
+
+					html = html +
+					'<ul>' +
+						'<li class="col-xs-3">' + items[loop].productName + '</li>' +
+						'<li class="col-xs-3">' + items[loop].productId + '</li>' +
+						'<li class="col-xs-2 text-right">' + currencyFormat(items[loop].price) + '</li>' +
+						'<li class="col-xs-2 text-center">' + items[loop].quantity + '</li>' +
+						'<li class="col-xs-2 text-right">' + currencyFormat(String(total)) + '</li>' +
+					'</ul>';
+				}
+
+				$("#orderItems").append(html);
+				$("#cartTotal").html(currencyFormat(String(grandTotal)));
+				$("#grandTotal").html(currencyFormat(String(grandTotal)));
 			}
 		</script>
 	</body>

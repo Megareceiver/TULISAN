@@ -8,12 +8,16 @@ $(function(){
 
 	/* navbar fly shadow */
 	$(window).on('scroll', function () {
-		var elem = 'header.parent';
-		var act = 'fly';
-		if ($(this).scrollTop() > 30) {
-			if (!$(elem).hasClass(act)) { $(elem).addClass(act); }
-		} else {
-			if ($(elem).hasClass(act)) { $(elem).removeClass(act); }
+		if($(window).width() <= 991){
+			var elem = 'header.parent';
+			var act = 'fly';
+			if ($(this).scrollTop() > 30) {
+				if (!$(elem).hasClass(act)) { $(elem).addClass(act); }
+			} else {
+				if ($(elem).hasClass(act)) { $(elem).removeClass(act); }
+			}
+		}else{
+			$(elem).removeClass(act);
 		}
 	});
 });

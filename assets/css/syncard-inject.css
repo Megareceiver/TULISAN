@@ -9,7 +9,7 @@ html, body { overflow-x: hidden; }
 
 a { color: #333; }
 /*.container{max-width: 687px;}*/
-.syn-center{ 
+.syn-center { 
   text-align: center;
   padding: 0;
  }
@@ -28,13 +28,9 @@ a { color: #333; }
 .syn-divider{margin: 25px 0;}
 .syn-clear { padding: 0; }
 
-.text-right {
-  text-align: right;
-}
-
-.text-left {
-  text-align: left !important;
-}
+.text-right { text-align: right !important; }
+.text-left {text-align: left !important; }
+.text-center {text-align: center !important; }
 
 .btn-default:hover,
 .btn-default:active,
@@ -1054,6 +1050,10 @@ footer.parent .license {
   padding: 20px 10px;
 }
 
+.table-box.thin ul li { 
+  padding: 0 10px;
+}
+
 .table-box h4 { margin: 0; margin-bottom: 20px; font-weight: bold; }
 
 .basic-table { margin-bottom: 30px; }
@@ -1069,11 +1069,12 @@ footer.parent .license {
 }
 
 .basic-table a { color: rgb(17, 85, 204) }
-.basic-table ul { display: inline-block; width: 100%; padding-left: 25px  }
+.basic-table ul { display: inline-block; width: 100%; padding-left: 25px; padding-right: 25px;  }
 .basic-table ul:nth-child(odd) { background-color: #DDD; }
 .basic-table ul li { 
   list-style: none;
-  padding: 10px 0;
+  padding: 10px 5px;
+  text-align: left;
 }
 
 .basic-table ul.header {
@@ -1244,6 +1245,13 @@ img,
   /*=============================================================================================*/
   /* TAB */
   .tab-header.in-style ul li { width: 100%; }
+
+  /*=============================================================================================*/
+  /* TABEL */
+  .table-frame { overflow: auto; display: block; }
+  .basic-table { display: table; width: 100%; }
+  .basic-table ul { display: table-row; }
+  .basic-table ul li { display: table-cell; white-space: nowrap; width: auto; float: none; }
 }
 
 /* small */

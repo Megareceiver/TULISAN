@@ -31,7 +31,7 @@
 						<ul class="cart-cell clear">
 							<li class="col-md-7 hidden-sm hidden-xs"></li>
 							<li class="col-md-5">
-								<button type="button" class="btn btn-warning form-control">Check out</button>
+								<button id="checkOut" type="button" class="btn btn-warning form-control">Check out</button>
 							</li>
 						</ul>
 					</div>
@@ -120,6 +120,10 @@
 					if(itemCounter == 0) $("main #cart-list").append("<div class='col-md-12 text-danger'>No items added yet</div>");
 				});
 
+				/*checkout redirect*/
+				$("#checkOut").on("click", function(){
+					window.location.replace(base_url + "/page/checkout.html");
+				});
 			}
 
 			function priceSummary(){

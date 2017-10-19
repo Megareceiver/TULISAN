@@ -148,6 +148,10 @@ function header(){
 				breadcrumb = "<a href='" + base_url + "'>Home</a> / cart";
 				active_page = "shop-route"; 
 			break;
+			case "checkout.html":  	 	
+				breadcrumb = "<a href='" + base_url + "'>Home</a> / <a href='" + base_url + "/page/shop.html'>Shop</a> / <span id='custom-bread-detail'>checkout</span>";
+				active_page = "shop-route"; 
+			break;
 		}
 
 		breadcrumbHtml =
@@ -396,6 +400,18 @@ function tabChange(elem){
 	$(".tab-button, .tab-container").removeClass('active');
 	$(elem).addClass('active');
 	$(target).addClass('active');
+}
+
+function tabWizardChange(elem){
+	target = $(elem).attr('t-target');
+	$(".tab-button, .tab-container").removeClass('active');
+	$(elem).addClass('active');
+	$(target).addClass('active');
+
+	switch(target){
+		case "#2" : $("[t-target='#1']").addClass('active'); break;
+		case "#3" : $("[t-target='#1'], [t-target='#2']").addClass('active'); break;
+	}
 }
 
 // currency

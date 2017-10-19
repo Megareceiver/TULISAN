@@ -36,7 +36,7 @@ function header(){
 			        '<span class="icon-bar"></span>' +
 		    	'</button>' +
 		    	'<div class="navbar-brand hidden-lg hidden-md hidden-sm col-xs-10">' +
-		    		'<img class="smallImg" src="' + base_url + '/assets/PICS/tulisan.png" />' +
+		    		'<a href="' + base_url + '"><img class="smallImg" src="' + base_url + '/assets/PICS/tulisan.png" /></a>' +
 				'</div>' +
 		    '</div>' +
 

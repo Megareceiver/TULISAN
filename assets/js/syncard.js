@@ -9,13 +9,18 @@ function headerAdmin(){
 	var html =
 	'<div class="row">'+
 		'<div class="col-md-3">'+
-			'<img src="../assets/PICS/tulisan.png" />'+
+			'<div class="logo"><img class="big-image" src="../assets/PICS/tulisan.png" /></div>'+
 		'</div>'+
-		'<div class="col-md-3 title">'+
-			'<p><b>Product - Departement</b></p>'+
-		'</div>'+
-		'<div class="col-md-6 right">'+
-			'<p><a href=#>View Store</a> | <img src="../assets/PICS/3.jpg"> Khrisni Swandayani <a href="#"><i class="fa fa-cog fa-2x"></i></a></p>'+
+		'<div class="col-md-9">'+
+			'<div class="header-title"><h2>Product - Departement</h2></div>'+
+			'<div class="header-menu fontserif">' + 
+				'<ul>' + 
+					'<li><a href=#>View Store</a> &nbsp; &nbsp;|</li>' + 
+					'<li><img src="../assets/PICS/pattern3.jpg"></li>' +
+					'<li>Khrisni Swandayani</li>' + 
+					'<li><a href="#"><i class="fa fa-cog fa-o"></i></a></li>' + 
+				'</ul>'+
+			'</div>'+
 		'</div>'+
 	'</div><div class="clearfix"></div>';
 
@@ -24,30 +29,41 @@ function headerAdmin(){
 
 function menuAdmin(){
 	var html =
-	'<div class="row div-normalize">'+
-		'<div class="col-md-3 right-menu">'+
-			'<p><a href="#">DASHBOARD</a></p>'+
-			'<p><a href="#">PRODUCT</a></p>'+
-			'<p><a href="#">CMS</a></p>'+
-			'<p><a href="#">SYSTEM SETTING</a></p>'+
-			'<p><a href="#">USERS BLOG</a></p>'+
-			'<p><a href="#">CUSTOMERS</a></p>'+
-			'<p><a href="#">VENDORS</a></p>'+
-			'<p><a href="#">ORDER</a></p>'+
+	'<div class="row">'+
+		'<div class="col-md-3 left-nav">'+
+			'<div class="list-nav">'+
+				'<ul>' +
+					'<li><a href="#">DASHBOARD</a></li>'+
+					'<li><a href="#">PRODUCT</a></li>'+
+					'<li><a href="#">CMS</a></li>'+
+					// '<li><a href="#">SYSTEM SETTING</a></li>'+
+					// '<li><a href="#">USERS BLOG</a></li>'+
+					'<li><a href="#">CUSTOMERS</a></li>'+
+					'<li><a href="#">VENDORS</a></li>'+
+					'<li><a href="#">ORDER</a></li>'+
+				'</ul>' +
+			'</div>'+
 		'</div>'+
-		'<div class="col-md-9 top-menu">'+
-			'<a href="#">Departement</a>'+
-			'<a href="#">Item</a>'+
-			'<a href="#">Customer</a>'+
-			'<a href="#">Shipping Option</a>'+
-			'<a href="#">Payment Method</a>'+
-			'<a href="#">Discounts</a>'+
-			'<a href="#">Catalog Price Rule</a>'+
+		'<div class="col-md-9 top-nav">'+
+			'<ul>' +
+				'<li><a href="#">Departement</a></li>'+
+				'<li><a href="#">Item</a></li>'+
+				'<li><a href="#">Customer</a></li>'+
+				'<li><a href="#">Shipping Option</a></li>'+
+				'<li><a href="#">Payment Method</a></li>'+
+				'<li><a href="#">Discounts</a></li>'+
+				'<li><a href="#">Catalog Price Rule</a></li>'+
+			'</ul>' +
 		'</div>'+
-		// '</div><div class="clearfix"></div>'+
-		'<div class="col-md-9 main-menu row">'+
+		'<div class="col-md-9 main-content row">'+
 		'</div>'+
 	'</div><div class="clearfix"></div>';
 
 	$("main.parent-admin").html(html);
+}
+
+function footerAdmin(){
+	var html = "Copyright © 2014 Tulisan LLC. All Rights Reserved.";
+
+	$("footer.parent-admin").html(html);
 }

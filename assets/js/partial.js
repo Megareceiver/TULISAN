@@ -346,16 +346,14 @@ var supportsProgress = $progress[0] &&
 var loadedImageCount, imageCount;
 
 $(function(){
-	  $container.imagesLoaded()
-	    .progress( onProgress )
-	    .always( onAlways );
-	  // reset progress counter
-	  imageCount = $container.find('img').length;
-	  resetProgress();
-	  updateProgress( 0 );
+	  // $container.imagesLoaded()
+	  //   .progress( onProgress )
+	  //   .always( onAlways );
+	  // // reset progress counter
+	  // imageCount = $container.find('img').length;
+	  // resetProgress();
+	  // updateProgress( 0 );
 });
-
-// -----  ----- //
 
 function resetProgress() {
   $status.css({ opacity: 1 });

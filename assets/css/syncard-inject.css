@@ -977,39 +977,6 @@ footer.parent .license {
 /*privacy*/
 .privacy p { text-align: justify }
 
-
-/*=============================================================================================*/
-/*login*/
-.login-form{
-  padding: unset;
-  position: absolute;
-  height: 300px;
-  /*box-shadow: 3px 3px 2px grey;*/
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  margin: auto;
-}
-.login-form .left{
-  /*background-color: beige;*/
-  height: 100%;
-  padding-top: 20px;
-}
-.login-form .right{
-  background-color: #E6E7E8;
-  height: 100%;
-  padding-top: 20px;
-}
-.login-form .right p{
-  font-size: 12px;
-}
-.login-form .btn{
-  width: 100%;
-  background-color: #366797;
-  color: #fff;
-}
-
 /*=============================================================================================*/
 /*BACK TO TOP*/
 #back-to-top {

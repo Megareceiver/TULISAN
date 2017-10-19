@@ -14,57 +14,54 @@
 		<link href="../assets/css/syncard-inject.css" rel="stylesheet">
 		<link href="../assets/css/admin.css" rel="stylesheet">
 	</head>
-	<body>
-		<div class="container">
-			<!-- <header class="parent"></header> -->
-
-			<main class="parent">
-				<div class="login ">
-					<div class="col-md-offset-2 col-md-8 login-form ">
-						<div class="col-md-6 left">
-							<div class="col-md-offset-1 col-md-10">
-								<p><b>Sign In</b></p>
-								<div class="form-group">
-								  <input type="text" class="form-control" placeholder="E mail">
-								</div>
-								<div class="form-group">
-								  <input type="text" class="form-control" placeholder="Password">
-								</div>
-								<a href="#">Forgot password?</a>
-								<div class="form-group">
-								  <button id='signIn' class="btn" value="">Sign In</button>
-								</div>
-								<p><b>Or sign in using Facebook</b></p>
-								<div class="form-group">
-								  <button class="btn facebook" value="">Facebook</button>
-								</div>
-							</div>
-						</div>
-						<div class="col-md-6 right">
-							<div class="col-md-offset-1 col-md-10">
-								<p><b>Register</b></p>
-								<div class="form-group">
-								  <input type="text" class="form-control" placeholder="First Name">
-								</div>
-								<div class="form-group">
-								  <input type="text" class="form-control" placeholder="Last Name">
-								</div>
-								<div class="form-group">
-								  <input type="text" class="form-control" placeholder="E mail">
-								</div>
-								<p>Enter your name and email address and click Submit.
-									We will send you a confirmation email with your password.</p>
-								<div class="form-group">
-								  <button class="btn" value="">Sign Up</button>
-								</div>
-							</div>
-						</div>
-					</div>
+	<body class="login-bg">
+		<main class="parent">
+			<div class="col-md-offset-2 col-md-8 login-form ">
+				<div class="col-md-12 login-brand">
+					<img class="small-image" src="../assets/PICS/tulisan.png" />
 				</div>
-			</main>
+				<div class="col-md-6 left">
+					<form>
+						<p><b>Sign In</b></p>
+						<div class="form-group">
+						  <input type="text" class="form-control" placeholder="E mail">
+						</div>
+						<div class="form-group">
+						  <input type="text" class="form-control" placeholder="Password">
+						</div>
+						<a href="#" class="text-warning">Forgot password?</a>
+						<div class="form-group syn-plus">
+						  <button id='signIn' class="btn form-control" value="">Sign In</button>
+						</div>
+						<p><b>Or sign in using Facebook</b></p>
+						<div class="form-group">
+						  <button class="btn facebook" value="">Facebook</button>
+						</div>
+					</form>
+				</div>
+				<div class="col-md-6 right">
+					<form>
+						<p><b>Register</b></p>
+						<div class="form-group">
+						  <input type="text" class="form-control" placeholder="First Name">
+						</div>
+						<div class="form-group">
+						  <input type="text" class="form-control" placeholder="Last Name">
+						</div>
+						<div class="form-group">
+						  <input type="text" class="form-control" placeholder="E mail">
+						</div>
+						<p>Enter your name and email address and click Submit.
+							We will send you a confirmation email with your password.</p>
+						<div class="form-group syn-plus">
+						  <button class="btn form-control" value="">Sign Up</button>
+						</div>
+					</form>
+				</div>
+				<div class="clearfix"></div>
+			</div>
+		</main>
 					
-			<!-- <footer class="parent"></footer> -->
-		</div>
 		<!-- Script collection -->
 		<script type="text/javascript" src="../assets/js/jquery-3.2.1.min.js"></script>
 		<script type="text/javascript" src="../assets/js/jquery-ui-1.10.0.custom.min.js"></script>
@@ -78,7 +75,6 @@
 				window.location=base_url + '/admin/dashboard.html';
 				
 			});
-
 			
 		</script>
 	</body>

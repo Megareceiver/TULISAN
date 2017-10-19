@@ -42,135 +42,64 @@
 				var pagingLinkBefore = "";
 				var pagingState = 1;
 
-				var data = [{
-						title	: 'Bags & Totes',
-						id		: '#'
-					},
-					{
-						title	: 'Atelier Box',
-						id		: 'ShopDetail'
-					},
-					{
-						title	: 'Beach Bag',
-						id		: '#'
-					},
-					{
-						title	: 'City Tote',
-						id		: '#'
-					},
-					{
-						title	: 'Club Tote',
-						id		: '#'
-					},
-					{
-						title	: 'Coterie Bag',
-						id		: '#'
-					},
-					{
-						title	: 'Cruise Bag',
-						id		: '#'
-					},
-					{
-						title	: 'Gallery Tote',
-						id		: '#'
-					},
-					{
-						title	: 'Hobo Tote',
-						id		: '#'
-					},
-					{
-						title	: 'Journalist Tote',
-						id		: '#'
-					},
-					{
-						title	: 'Librarian Tote',
-						id		: '#'
-					},
-					{
-						title	: 'Lilliput Tote',
-						id		: '#'
-					},
-					{
-						title	: 'Portico Tote',
-						id		: '#'
-					},
-					{
-						title	: 'Siesta Tote',
-						id		: '#'
-					},
-					{
-						title	: 'Toy Box',
-						id		: '#'
-					},
-					{
-						title	: 'Bowler Tote',
-						id		: '#'
-					},
-					{
-						title	: 'Studio Bag',
-						id		: '#'
-					},
-					{
-						title	: 'Concerto Purse',
-						id		: '#'
-					},
-					{
-						title	: 'Panama Bag',
-						id		: '#'
-					},
-					{
-						title	: 'Luna Tote',
-						id		: '#'
-					},
-					{
-						title	: 'Accessories',
-						id		: '#'
-					},
-					{
-						title	: 'For the Home',
-						id		: '#'
-					},
-					{
-						title	: 'Stationery',
-						id		: '#'
-					},
-					{
-						title	: 'Gift Set',
-						id		: '#'
-					}];
+				var data = {
+					"productList": [
+						{ title	: 'Bags & Totes', id: '#'},
+						{ title	: 'Atelier Box', id: '#' },
+						{ title	: 'Beach Bag', id: '#' },
+						{ title	: 'City Tote', id: '#' },
+						{ title	: 'Club Tote', id: '#' },
+						{ title	: 'Coterie Bag', id: '#' },
+						{ title	: 'Cruise Bag', id: '#' },
+						{ title	: 'Gallery Tote', id: '#' },
+						{ title	: 'Hobo Tote', id: '#' },
+						{ title	: 'Journalist Tote', id: '#' },
+						{ title	: 'Librarian Tote', id: '#' },
+						{ title	: 'Lilliput Tote', id: '#' },
+						{ title	: 'Portico Tote', id: '#' },
+						{ title	: 'Siesta Tote', id: '#' },
+						{ title	: 'Toy Box', id: '#' },
+						{ title	: 'Bowler Tote', id: '#' },
+						{ title	: 'Studio Bag', id: '#' },
+						{ title	: 'Concerto Purse', id: '#' },
+						{ title	: 'Panama Bag', id: '#' },
+						{ title	: 'Luna Tote', id: '#' },
+						{ title	: 'Accessories', id: '#' },
+						{ title	: 'For the Home', id: '#' },
+						{ title	: 'Stationery', id: '#' },
+						{ title	: 'Gift Set', id: '#' }
+					],
+					"colorList": [
+						{ title	: 'Bags & Totes', id: '#'},
+						{ title	: 'Atelier Box', id: '#' },
+						{ title	: 'Beach Bag', id: '#' },
+						{ title	: 'City Tote', id: '#' },
+						{ title	: 'Club Tote', id: '#' },
+						{ title	: 'Coterie Bag', id: '#' },
+						{ title	: 'Cruise Bag', id: '#' },
+						{ title	: 'Gallery Tote', id: '#' },
+						{ title	: 'Hobo Tote', id: '#' },
+						{ title	: 'Journalist Tote', id: '#' },
+						{ title	: 'Librarian Tote', id: '#' },
+					],
+					"storyList": [
+						{ title	: 'Bags & Totes', id: '#'},
+						{ title	: 'Atelier Box', id: '#' },
+						{ title	: 'Beach Bag', id: '#' },
+						{ title	: 'City Tote', id: '#' },
+						{ title	: 'Journalist Tote', id: '#' },
+						{ title	: 'Librarian Tote', id: '#' },
+					]
+				};
 
 				var product = {
 					"data" : [
-						{
-							name	: 'Altier Box',
-							price	: '$77.00',
-							img		: 'db_file_img_133_350x350.jpg'
-						},
-						{
-							name	: 'Beach Bag',
-							price	: '$87.00',
-							img		: 'db_file_img_539_350x350.jpg'
-						},
-						{
-							name	: 'Cruise Bag',
-							price	: '$137.00',
-							img		: 'db_file_img_785_350x350.jpg'
-						},
-						{
-							name	: 'Gallery Tote',
-							price	: '$87.00',
-							img		: 'db_file_img_944_350x350.jpg'
-						},
-						{
-							name	: 'Coterie Bag',
-							price	: '$127.00',
-							img		: 'db_file_img_995_350x350.jpg'
-						},
-						{
-							name	: 'City Tote',
-							price	: '$87.00',
-							img		: 'db_file_img_567_350x350.jpg'
-						},
+						{ name	: 'Altier Box', price: '$77.00', img: 'db_file_img_133_350x350.jpg' },
+						{ name	: 'Beach Bag', price: '$87.00', img: 'db_file_img_539_350x350.jpg' },
+						{ name	: 'Cruise Bag', price: '$137.00', img: 'db_file_img_785_350x350.jpg' },
+						{ name	: 'Gallery Tote', price: '$87.00', img: 'db_file_img_944_350x350.jpg' },
+						{ name	: 'Coterie Bag', price: '$127.00', img: 'db_file_img_995_350x350.jpg' },
+						{ name	: 'City Tote', price: '$87.00', img: 'db_file_img_567_350x350.jpg' },
 					],
 
 					"paging": "124"
@@ -184,16 +113,28 @@
 				html = html +
 				'<div class="shop row">'+
 					'<div class="col-md-4 left-menu">'+
-						'<h3 class="fontserif title">SHOP BY PRODUCT <span id="left-menu-toggle" class="fa fa-chevron-up syn-fixed-right "></span></h3>' +
-						'<ul>';
+						'<h3 class="fontserif title">SHOP BY PRODUCT <span toggle-target="#productList" class="left-menu-toggle fa fa-chevron-down syn-fixed-right "></span></h3>' +
+						'<ul id="productList" style="display: none">';
 
-				if(data.length > 0){
-					for(var loop = 0; loop < data.length; loop++)
-					{
-						html = html + '<li><a href="shopDetail.html">'+data[loop].title+'</a></li>';	
-					}
-				}else{
-					html = html + '<p>Sorry there is no product</p>';
+				for(var loop = 0; loop < data.productList.length; loop++){
+					html = html + '<li><a href="shopDetail.html">' + data.productList[loop].title + '</a></li>';	
+				}
+
+				html = html + '</ul>';
+				html = html + 
+				'<h3 class="fontserif title">SHOP BY COLOR <span toggle-target="#colorList" class="left-menu-toggle fa fa-chevron-down syn-fixed-right "></span></h3>' +
+				'<ul id="colorList" style="display: none">';
+
+				for(var loop = 0; loop < data.colorList.length; loop++){
+					html = html + '<li><a href="shopDetail.html">' + data.colorList[loop].title + '</a></li>';	
+				}
+
+				html = html + '</ul>';
+				html = html + 
+				'<h3 class="fontserif title">SHOP BY STORY <span toggle-target="#storyList" class="left-menu-toggle fa fa-chevron-up syn-fixed-right "></span></h3>' +
+				'<ul id="storyList" class="active">';
+				for(var loop = 0; loop < data.storyList.length; loop++){
+					html = html + '<li><a href="shopDetail.html">' + data.storyList[loop].title + '</a></li>';	
 				}
 
 				html = html + '</ul></div>';
@@ -237,14 +178,14 @@
 				html = html + "</div><div class='clearfix'></div>";
 
 				$("main").html(html);
-				$("#left-menu-toggle").on('click', function(){
-					if($('.left-menu ul').is(":hidden")){
+				$(".left-menu-toggle").on('click', function(){
+					if($($(this).attr('toggle-target')).is(":hidden")){
 						$(this).switchClass('fa-chevron-down', 'fa-chevron-up');
 					}else{
 						$(this).switchClass('fa-chevron-up', 'fa-chevron-down');
 					}
 
-					$('.left-menu ul').slideToggle();
+					$($(this).attr('toggle-target')).slideToggle();
 
 				});
 			}

@@ -8,9 +8,9 @@ $(function(){
 
 	/* navbar fly shadow */
 	$(window).on('scroll', function () {
+		var elem = 'header.parent';
+		var act = 'fly';
 		if($(window).width() <= 991){
-			var elem = 'header.parent';
-			var act = 'fly';
 			if ($(this).scrollTop() > 30) {
 				if (!$(elem).hasClass(act)) { $(elem).addClass(act); }
 			} else {
@@ -47,8 +47,8 @@ function header(){
 						'<a href="' + base_url + '/page/location.html">FIND A STORE</a> |' +
 						'<a href="' + base_url + '/page/media.html">MEDIA</a> |' +
 						'<a href="' + base_url + '/page/cart.html"><span class="fa fa-shopping-cart"></span></a> |' +
-						'<a href="' + base_url + '/page/profile.html"><span class="fa fa-user-circle-o"></span></a>' +
-						// '<a href="' + base_url + '/page/userLog.html">LOGIN</a>' +
+						// '<a href="' + base_url + '/page/profile.html"><span class="fa fa-user-circle-o"></span></a>' +
+						'<a href="' + base_url + '/page/login.html">LOGIN</a>' +
 					'</div>' +
 					'<div class="form">' +
 				    	'<form class="form-inline">' +
@@ -414,7 +414,7 @@ function tabWizardChange(elem){
 
 	switch(target){
 		case "#2" : $("[t-target='#1']").addClass('active'); break;
-		case "#3" : $("[t-target='#1'], [t-target='#2']").addClass('active'); break;
+		case "#3" : $("[t-target='#1'], [t-target='#2'], [t-target-disabled='#0']").addClass('active'); break;
 	}
 }
 

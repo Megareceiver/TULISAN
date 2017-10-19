@@ -24,7 +24,7 @@
 						<ul>
 							<li class="fontserif"><span class="tab-button active" t-target="#1">Shipping</span></li>
 							<li class="fontserif"><span class="tab-button" t-target="#2">Payment</span></li>
-							<li class="fontserif"><span class="tab-button" t-target="#3">Place order</span></li>
+							<li class="fontserif"><span class="tab-button" t-target-disabled="#0">Place order</span></li>
 						</ul>
 					</div>
 					<div class="tab-container active" id="1">
@@ -37,7 +37,7 @@
 									<h5><b class="sessionAddress">&nbsp;</b></h4>
 									<h5><b class="sessionCity">&nbsp;</b></h5>
 									<h5><b class="sessionPhone">&nbsp;</b></h5>
-									<button type="button" class="btn btn-warning syn-plus">Ship to this address</button>
+									<button type="button" class="btn btn-warning syn-plus" t-target="#2">Ship to this address</button>
 								</div>
 								<hr/>
 								<div class="col-md-8 syn-clear">
@@ -321,7 +321,7 @@
 										    <label for="mobilePhone">Mobile Phone</label>
 										    <input type="text" class="form-control" id="mobilePhone">
 										</div>
-										<button type="submit" class="btn btn-warning">Ship to this address</button>
+										<button type="button" class="btn btn-warning" t-target="#2">Ship to this address</button>
 									</form>
 								</div>
 							</div>
@@ -334,10 +334,41 @@
 								<div class='blog-description'>
 									<div class="col-md-8 syn-clear">
 										<form class="syn-plus">
-											<select class="form-control" id="payment">
+											<select class="form-control" id="paymentMethod">
 												<option value="BANK TRANSFER">BANK TRANSFER</option>
 												<option value="DOKU WALLET">DOKU WALLET</option>
 											</select>
+											<div id="bankTransfer" class="col-md-12 syn-clear">
+												<h5 class="syn-plus">Please transfer your order payment to:</h5>
+												<h5>PT. Tulisan Susunan Tinta</h5>
+												<h5>Bank Mandiri</h5>
+												<h5><b>Acc. No. 126-00-0618835-2</b></h5>
+												<h5>(Rupiah account)</h5>
+												<div class="radio syn-plus">
+												  <label><input type="radio" name="optradio" checked="checked">Payment from Bank Mandiri</label>
+												</div>
+												<div class="form-group">
+													<div class="col-sm-6 syn-clear">
+													    <div class="radio">
+														  <label><input type="radio" name="optradio">Payment from other bank</label>
+														</div>
+													</div>
+												    <div class="col-sm-6 syn-clear">
+												    	<select class="form-control" id="payment">
+															<option value="">BANK NAME</option>
+														</select>
+													</div>
+													<div class="clearfix"></div>
+												</div>
+												<div class="checkbox">
+													<label><input type="checkbox" value="">Make the above payment information my default for future orders.</label>
+												</div>
+												<h5 class="text-warning">Please include your Order ID as a reference when making your transfer.</h5>
+												<h5 class="syn-plus"><b><i>Your order will automatically be cancelled if the payment is not confirmed within 24 hours after the order is made.</i></b></h5>
+												<div class="col-md-6 syn-clear"><button type="button" class="btn btn-warning syn-plus form-control" t-target="#3">Next</button></div>
+											</div>
+											<div id="dokeWallet" class="col-md-12 syn-clear">
+											</div>
 										</form>
 									</div>
 								</div>
@@ -431,8 +462,10 @@
 					$("#recentShipping").show();
 				}
 
-				$(".tab-header .tab-button").unbind().on("click", function(){ 
-					tabWizardChange($(this));
+				$("[t-target]").unbind().on("click", function(){ 
+					if($(this).attr('t-target')){
+						tabWizardChange($(this));
+					}
 				});
 
 				//===========================================================================================
@@ -460,6 +493,12 @@
 				$("#orderItems").append(html);
 				$("#cartTotal").html(currencyFormat(String(grandTotal)));
 				$("#grandTotal").html(currencyFormat(String(grandTotal)));
+
+				$("#paymentMethod").on('change', function(){
+					$("#bankTransfer, #dokeWallet").hide();
+					if($(this).val() == "DOKU WALLET") $("#dokeWallet").show();
+					else $("#bankTransfer").show();
+				});
 			}
 		</script>
 	</body>

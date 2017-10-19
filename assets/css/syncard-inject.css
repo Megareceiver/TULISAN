@@ -819,6 +819,8 @@ footer.parent .license {
   padding: 10px 0;
 }
 
+.left-menu-toggle { cursor: pointer; }
+
 .product-list {
   padding: 20px 40px  40px 40px;
 }
@@ -1059,12 +1061,13 @@ footer.parent .license {
 .basic-table { margin-bottom: 30px; }
 .basic-table.clear { margin-bottom: 0; }
 .basic-table.italic { font-style: italic; }
-.basic-table h2 {
+.header-custom {
   background-color: #605B5D;
   color: #FFF;
+  padding: 5px 25px;
 }
 
-.basic-table h2, .basic-table h3, .basic-table h4 {
+.basic-table h2, .basic-table h3, .basic-table h4, .basic-table h5 {
   padding: 5px 25px;
 }
 
@@ -1207,7 +1210,7 @@ img,
   /*=============================================================================================*/
   /* NAVBAR */
   .navbar-default .navbar-brand { text-align: left; }
-  .navbar-shortcut { top: 10px; font-size: 20px; }
+  .navbar-shortcut { top: 10px; font-size: 16px; }
   .navbar-shortcut .form-control,
   .navbar-shortcut .btn {
       height: 45px;
@@ -1237,6 +1240,7 @@ img,
 
   .left-menu ul { display: none }
   .left-menu ul li a { padding: 20px 0; }
+  .left-menu ul.active { display: block; }
 
   /*=============================================================================================*/
   /* VIDEO */

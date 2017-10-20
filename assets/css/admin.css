@@ -1,6 +1,7 @@
 /*admin custom css*/
 /*=============================================================================================*/
 /*public*/
+html, body { height: 100%; }
 body {
   background-color: #FFF;
 }
@@ -13,14 +14,20 @@ ul li { list-style: none; }
   color: #EEE;
 }
 
+.content-frame { max-width: 1280px; margin: auto; height: 100%; }
+
 /*=============================================================================================*/
 /*header*/
 header.parent-admin { 
+  position: absolute;
+  left: 0;
+  right: 0;
+  z-index: 9;
   background-color: #EEE; 
-  position: relative; 
   height: 125px; 
   padding: 10px 20px;
   color: #777;
+  margin: auto;
 }
 
 header.parent-admin a { color: #777; }
@@ -59,14 +66,26 @@ header.parent-admin .header-menu ul li img {
 
 main.parent-admin {
   padding: 30px 20px;
+  position: relative;
+  height: 100%;
+  margin: auto;
+  overflow: auto;
+  background-color: #FFF;
+  border-top: 125px solid #FFF;
 }
 
 main.parent-admin .left-nav {
   padding: 0 20px 0 30px;
+  position: absolute;
+  left: 0;
+  top: 30px;
+  height: 100%;
+  min-height: 310px;
 }
 
 main.parent-admin .left-nav .list-nav {
   display: block;
+  height: 100%;
   background-color: #EEE;
   padding: 40px;
   box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.2);
@@ -87,7 +106,39 @@ main.parent-admin .top-nav ul li {
   display: inline-block;
   padding: 5px 20px;
 }
+
 main.parent-admin .top-nav a { color: #FFF; }
+.main-footer { text-align: center; }
+
+/*operation-group*/
+.operation-group .input-group {
+  padding: 10px 20px 10px 0;
+  line-height: 35px;
+}
+
+/*alpha*/
+.alpha { display: inline-block; }
+.alpha ul {
+  display: block;
+  text-align: right;
+  font-size: 16px;
+}
+
+.alpha ul li {
+  display: inline-block;
+  padding: 0 4px;
+}
+
+.alpha ul li a { color: #888; }
+
+/*summary group*/
+.summary-group p { margin-bottom: 0 }
+.summary-group .number { font-size: 34px; }
+.summary-group .summary-text { display: inline-block; margin-right: 30px; }
+
+/*pagging-text*/
+.pagging-text { font-size: 11px; display: inline-block; margin-right: 35px; }
+.pagging-text .pagging-left { color: #CCC; }
 
 /*=============================================================================================*/
 /*login*/
@@ -111,7 +162,8 @@ main.parent-admin .top-nav a { color: #FFF; }
   display: inline-block;
   position: absolute;
   max-width: 600px;
-  height: 402px;
+  height: 342px;
+  /*height: 402px;*/
   top: 0;
   left: 0;
   right: 0;
@@ -137,6 +189,37 @@ main.parent-admin .top-nav a { color: #FFF; }
   color: #fff;
 }
 
+
+/* table */
+.table thead { 
+  background-color: #CCC; 
+  font-weight: normal; 
+  border-top: 1.2px solid #111;
+}
+
+.table thead th,  
+.table tbody td { 
+  font-weight: normal;
+  border-left: 1px solid #111;
+  padding: 2px 15px !important;
+}
+
+.table thead th:first-child,
+.table tbody td:first-child {
+  border-left: none;
+}
+
+.table tbody tr:last-child {
+  border-bottom: 1px solid #111;
+}
+
+/* bootstrap */
+.container-fluid {
+  padding: 0;
+  height: 100%;
+}
+
+
 /*=============================================================================================*/
 /*RESPONSIVE*/
 
@@ -151,6 +234,7 @@ main.parent-admin .top-nav a { color: #FFF; }
     /*height: auto;*/
   }
 
+  .login-form{ height: 402px; }
   .login-form .left, .login-form .right { height: auto; padding: 50px; }
 }
 

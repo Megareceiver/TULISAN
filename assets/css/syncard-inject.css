@@ -973,6 +973,40 @@ footer.parent .license {
   fill: cyan;
 }
 /*=============================================================================================*/
+/*customer*/
+
+.input-frame{
+  padding: 20px;
+  /*background: #EEE;*/
+  margin-top: 10px;
+  margin-bottom: 60px;
+}
+.input-frame .btn-group{
+  margin-top: 20px;
+}
+.input-frame .btn{
+  margin-right: 15px;
+  background-color: #FBAF3F;
+}
+.detail-customer{
+  margin-bottom: 30px;
+}
+.detail-customer p{
+  margin-bottom: unset;
+}
+.detail-customer a{
+  color: #1B75BB;
+}
+.table-frame p.title-table{
+  color: #FFF;
+  background-color: #5D5D5D;
+  display: block;
+}
+.table-frame img.img-product{
+  width: 100px;
+  height: auto;
+  margin: 5px;
+}
 /*=============================================================================================*/
 /*privacy*/
 .privacy p { text-align: justify }

@@ -15,71 +15,185 @@
 		<link href="../assets/css/admin.css" rel="stylesheet">
 	</head>
 	<body>
-		<div class="container">
-			<!-- <header class="parent"></header> -->
+		<div class="container-fluid">
+			<header class="parent-admin"></header>
 
-			<main class="parent">
-				<div class="login ">
-					<div class="col-md-offset-2 col-md-8 login-form ">
-						<div class="col-md-6 left">
-							<div class="col-md-offset-1 col-md-10">
-								<p><b>Sign In</b></p>
-								<div class="form-group">
-								  <input type="text" class="form-control" placeholder="E mail">
-								</div>
-								<div class="form-group">
-								  <input type="text" class="form-control" placeholder="Password">
-								</div>
-								<a href="#">Forgot password?</a>
-								<div class="form-group">
-								  <button id='signIn' class="btn" value="">Sign In</button>
-								</div>
-								<p><b>Or sign in using Facebook</b></p>
-								<div class="form-group">
-								  <button class="btn facebook" value="">Facebook</button>
-								</div>
-							</div>
-						</div>
-						<div class="col-md-6 right">
-							<div class="col-md-offset-1 col-md-10">
-								<p><b>Register</b></p>
-								<div class="form-group">
-								  <input type="text" class="form-control" placeholder="First Name">
-								</div>
-								<div class="form-group">
-								  <input type="text" class="form-control" placeholder="Last Name">
-								</div>
-								<div class="form-group">
-								  <input type="text" class="form-control" placeholder="E mail">
-								</div>
-								<p>Enter your name and email address and click Submit.
-									We will send you a confirmation email with your password.</p>
-								<div class="form-group">
-								  <button class="btn" value="">Sign Up</button>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</main>
+			<main class="parent-admin"></main>
 					
-			<!-- <footer class="parent"></footer> -->
+			<footer class="parent-admin"></footer>
 		</div>
+
 		<!-- Script collection -->
 		<script type="text/javascript" src="../assets/js/jquery-3.2.1.min.js"></script>
 		<script type="text/javascript" src="../assets/js/jquery-ui-1.10.0.custom.min.js"></script>
 		<script type="text/javascript" src="../assets/js/bootstrap.min.js"></script>	
-		<script type="text/javascript" src="../assets/js/partial.js"></script>	
+		<script type="text/javascript" src="../assets/js/syncard.js"></script>	
 
 		<!-- page script -->
 		<script type="text/javascript">
-			
-			$('.parent').on('click','.login #signIn', function(){
-				window.location=base_url + '/admin/dashboard.html';
-				
+			$(function(){
+				customer();
 			});
+			function customer(){
+				var html = '';
 
+				var data = [
+					{ customerId: "1", name: 'Achdiyati Sumi', email: 'sumiong.ong@gmail.com', company: 'PT. Sky Aviation', phone: '', address: '' },
+					{ customerId: "2", name: 'Achdiyati Sumi', email: 'sumiong.ong@gmail.com', company: 'PT. Sky Aviation', phone: '', address: '' },
+					{ customerId: "3", name: 'Achdiyati Sumi', email: 'sumiong.ong@gmail.com', company: 'PT. Sky Aviation', phone: '', address: '' },
+					{ customerId: "4", name: 'Achdiyati Sumi', email: 'sumiong.ong@gmail.com', company: 'PT. Sky Aviation', phone: '', address: '' },
+					{ customerId: "5", name: 'Achdiyati Sumi', email: 'sumiong.ong@gmail.com', company: 'PT. Sky Aviation', phone: '', address: '' },
+					{ customerId: "6", name: 'Achdiyati Sumi', email: 'sumiong.ong@gmail.com', company: 'PT. Sky Aviation', phone: '', address: '' },
+					{ customerId: "7", name: 'Achdiyati Sumi', email: 'sumiong.ong@gmail.com', company: 'PT. Sky Aviation', phone: '', address: '' },
+					{ customerId: "8", name: 'Achdiyati Sumi', email: 'sumiong.ong@gmail.com', company: 'PT. Sky Aviation', phone: '', address: '' },
+					{ customerId: "9", name: 'Achdiyati Sumi', email: 'sumiong.ong@gmail.com', company: 'PT. Sky Aviation', phone: '', address: '' },
+					{ customerId: "10", name: 'Achdiyati Sumi', email: 'sumiong.ong@gmail.com', company: 'PT. Sky Aviation', phone: '', address: '' },
+					{ customerId: "11", name: 'Achdiyati Sumi', email: 'sumiong.ong@gmail.com', company: 'PT. Sky Aviation', phone: '', address: '' },
+					{ customerId: "11", name: 'Achdiyati Sumi', email: 'sumiong.ong@gmail.com', company: 'PT. Sky Aviation', phone: '', address: '' },
+					{ customerId: "11", name: 'Achdiyati Sumi', email: 'sumiong.ong@gmail.com', company: 'PT. Sky Aviation', phone: '', address: '' },
+					{ customerId: "11", name: 'Achdiyati Sumi', email: 'sumiong.ong@gmail.com', company: 'PT. Sky Aviation', phone: '', address: '' },
+					{ customerId: "11", name: 'Achdiyati Sumi', email: 'sumiong.ong@gmail.com', company: 'PT. Sky Aviation', phone: '', address: '' },
+					{ customerId: "11", name: 'Achdiyati Sumi', email: 'sumiong.ong@gmail.com', company: 'PT. Sky Aviation', phone: '', address: '' },
+					{ customerId: "11", name: 'Achdiyati Sumi', email: 'sumiong.ong@gmail.com', company: 'PT. Sky Aviation', phone: '', address: '' },
+				]
+
+				html = html +
+				'<div class="header-option">' +
+					'<div class="operation-group">'+
+						'<form class="form-inline">' +
+							'<div class="input-group operation-button">' +
+								'<a href="#"><i class="fa fa-plus-circle text-warning">&nbsp;</i> Create Customer</a>'+
+							'</div>' +
+							'<div class="input-group operation-button">' +
+								'<a href="#"><i class="fa fa-minus-circle text-warning">&nbsp;</i> Delete Customer</a>'+
+							'</div>' +
+							'<div class="input-group operation-button">' +
+								'<a href="#"><i class="fa fa-bars text-warning">&nbsp;</i> Manage Customer</a>'+
+							'</div>' +
+				        	'<div class="input-group pull-right search-box">' +
+				        		'<input type="text" class="form-control" placeholder="Search">' +
+					        	'<span class="input-group-btn">' +
+					        		'<button type="submit" class="btn btn-default">SEARCH</button>' +
+					        	'</span>' +
+				        	'</div>' +
+				   		'</form>' +
+				   		'<div class="clearfix"></div>' +
+					'</div>' +
+					'<div class="summary-group">'+
+						'<div class="summary-text">'+
+							'<p>Total number of customers</p>'+
+							'<p class="number">1385</p>'+
+						'</div>'+
+						'<div class="summary-text">'+
+							'<p>Registered</p>'+
+							'<p class="number">1350</p>'+
+						'</div>'+
+						'<div class="summary-text">'+
+							'<p>Guest</p>'+
+							'<p class="number">35</p>'+
+						'</div>'+
+						'<div class="alpha">'+
+							'<ul>' +
+								'<li><a href="#">A</a></li>'+
+								'<li><a href="#">B</a></li>'+
+								'<li><a href="#">C</a></li>'+
+								'<li><a href="#">D</a></li>'+
+								'<li><a href="#">E</a></li>'+
+								'<li><a href="#">F</a></li>'+
+								'<li><a href="#">G</a></li>'+
+								'<li><a href="#">H</a></li>'+
+								'<li><a href="#">I</a></li>'+
+								'<li><a href="#">J</a></li>'+
+								'<li><a href="#">K</a></li>'+
+								'<li><a href="#">L</a></li>'+
+								'<li><a href="#">M</a></li>'+
+								'<li><a href="#">N</a></li>'+
+								'<li><a href="#">O</a></li>'+
+								'<li><a href="#">P</a></li>'+
+								'<li><a href="#">Q</a></li>'+
+								'<li><a href="#">R</a></li>'+
+								'<li><a href="#">S</a></li>'+
+								'<li><a href="#">T</a></li>'+
+								'<li><a href="#">U</a></li>'+
+								'<li><a href="#">V</a></li>'+
+								'<li><a href="#">W</a></li>'+
+								'<li><a href="#">X</a></li>'+
+								'<li><a href="#">Z</a></li>'+
+							'</ul>'+
+						'</div>'+
+					'</div>'+
+					'<p class="pagging-text"><a href="#" class="pagging-left">< Previous page</a> | <a href="#" class="pagging-right">Next page ></a></p>' +
+				'</div>';
+
+				html = html +
+				'<div class="table-frame">'+
+					'<table class="table table-striped table-responsive">'+
+					    '<thead>'+
+					    	'<tr>'+
+						    	'<th width="5%"><input type="checkbox" value="'+loop+'" id="selectRecord' + loop + '" onclick="checkboxToggle(this, \'customerSelect\')" /><label for="selectRecord' + loop + '"></label></th>'+
+						    	'<th>Name</th>'+
+						        '<th>E mail</th>'+
+						        '<th>Company</th>'+
+						        '<th>Phone</th>'+
+						        '<th>Location</th>'+
+					    	'</tr>'+
+					    '</thead>'+
+					    '<tbody>';
+					    	for(var loop =0; loop<data.length; loop++){
+					    		html = html +
+					    		'<tr>'+
+					    			'<td><input type="checkbox" name="customerSelect" value="'+data[loop].customerId+'" id="selectRecord' + loop + '"><label for="selectRecord' + loop + '"></label></td>'+
+					    			'<td class="syn-nowrap">'+ data[loop].name +'</td>'+
+					    			'<td>'+ data[loop].email +'</td>'+
+					    			'<td class="syn-nowrap">'+ data[loop].company +'</td>'+
+					    			'<td>'+ data[loop].phone +'</td>'+
+					    			'<td>'+ data[loop].address +'</td>'+
+					    		'</tr>';
+					    	}
+				html = html +
+					    '</tbody>'+
+					'</table>'+
+				'</div>';
+
+				html = html +
+				'<p class="pagging-text"><a href="#" class="pagging-left">< Previous page</a> | <a href="#" class="pagging-right">Next page ></a></p>'+
+				'<div class="ext-group">'+
+					'<div class="alpha">'+
+						'<ul>' +
+							'<li><a href="#">A</a></li>'+
+							'<li><a href="#">B</a></li>'+
+							'<li><a href="#">C</a></li>'+
+							'<li><a href="#">D</a></li>'+
+							'<li><a href="#">E</a></li>'+
+							'<li><a href="#">F</a></li>'+
+							'<li><a href="#">G</a></li>'+
+							'<li><a href="#">H</a></li>'+
+							'<li><a href="#">I</a></li>'+
+							'<li><a href="#">J</a></li>'+
+							'<li><a href="#">K</a></li>'+
+							'<li><a href="#">L</a></li>'+
+							'<li><a href="#">M</a></li>'+
+							'<li><a href="#">N</a></li>'+
+							'<li><a href="#">O</a></li>'+
+							'<li><a href="#">P</a></li>'+
+							'<li><a href="#">Q</a></li>'+
+							'<li><a href="#">R</a></li>'+
+							'<li><a href="#">S</a></li>'+
+							'<li><a href="#">T</a></li>'+
+							'<li><a href="#">U</a></li>'+
+							'<li><a href="#">V</a></li>'+
+							'<li><a href="#">W</a></li>'+
+							'<li><a href="#">X</a></li>'+
+							'<li><a href="#">Z</a></li>'+
+						'</ul>'+
+					'</div>'+
+				'</div>';
+
+				// html = html + '</div>';
+				$('main.parent-admin .main-content').append(html);
+			}
 			
+		
 		</script>
 	</body>
 </html>

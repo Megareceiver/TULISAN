@@ -28,6 +28,7 @@
 		<script type="text/javascript" src="../assets/js/jquery-ui-1.10.0.custom.min.js"></script>
 		<script type="text/javascript" src="../assets/js/bootstrap.min.js"></script>	
 		<script type="text/javascript" src="../assets/js/syncard.js"></script>	
+		<!-- <script type="text/javascript" src="../assets/js/nicEdit.js"></script>	 -->
 
 		<!-- page script -->
 		<script type="text/javascript">
@@ -37,28 +38,9 @@
 			function customer(){
 				var html = '';
 
-				// var data = [
-				// 	{ name: 'Achdiyati Sumi', email: 'sumiong.ong@gmail.com', company: 'PT. Sky Aviation', phone: '', address: '' },
-				// 	{ name: 'Achdiyati Sumi', email: 'sumiong.ong@gmail.com', company: 'PT. Sky Aviation', phone: '', address: '' },
-				// 	{ name: 'Achdiyati Sumi', email: 'sumiong.ong@gmail.com', company: 'PT. Sky Aviation', phone: '', address: '' },
-				// 	{ name: 'Achdiyati Sumi', email: 'sumiong.ong@gmail.com', company: 'PT. Sky Aviation', phone: '', address: '' },
-				// 	{ name: 'Achdiyati Sumi', email: 'sumiong.ong@gmail.com', company: 'PT. Sky Aviation', phone: '', address: '' },
-				// 	{ name: 'Achdiyati Sumi', email: 'sumiong.ong@gmail.com', company: 'PT. Sky Aviation', phone: '', address: '' },
-				// 	{ name: 'Achdiyati Sumi', email: 'sumiong.ong@gmail.com', company: 'PT. Sky Aviation', phone: '', address: '' },
-				// 	{ name: 'Achdiyati Sumi', email: 'sumiong.ong@gmail.com', company: 'PT. Sky Aviation', phone: '', address: '' },
-				// 	{ name: 'Achdiyati Sumi', email: 'sumiong.ong@gmail.com', company: 'PT. Sky Aviation', phone: '', address: '' },
-				// 	{ name: 'Achdiyati Sumi', email: 'sumiong.ong@gmail.com', company: 'PT. Sky Aviation', phone: '', address: '' },
-				// 	{ name: 'Achdiyati Sumi', email: 'sumiong.ong@gmail.com', company: 'PT. Sky Aviation', phone: '', address: '' },
-				// ]
-
 				html = html +
-				'<div class="operation-group">'+
-					'<h1><b>New Customer</b></h1>'+
-				'</div>'+
-				'<div class="clearfix"></div>';
-
-				html = html +
-				'<div class="input-frame col-md-10">'+
+				'<div class="input-frame col-md-6">'+
+					'<h3><b>New Customer</b></h3>'+
 					'<form>'+
 						'<div class="form-group">'+
 							'<label>Full Name</label>'+
@@ -66,7 +48,7 @@
 						'</div>'+
 						'<div class="form-group">'+
 							'<label>Address</label>'+
-							'<textarea class="form-control" rows=7></textarea>'+
+							'<textarea class="form-control" id="editor"></textarea>'+
 						'</div>'+
 						'<div class="form-group">'+
 							'<div class="col-md-8 syn-clear">'+
@@ -91,17 +73,18 @@
 						'</div>'+
 						'<div class="clearfix"></div>'+
 						'<div class="btn-group">'+
-							'<input class="btn btn-default" type="button" value="Create">'+
-							'<input class="btn btn-default" type="button" value="Cancel">'+
+							'<button class="btn btn-warning" type="button">Create</button>'+
+							'<button class="btn btn-warning" type="button">Cancel</button>'+
 						'</div>'+
 					'</form>'+
 				'</div>';
 
 				// html = html + '</div>';
 				$('main.parent-admin .main-content').append(html);
+
+				// //textarea editor
+				// new nicEditor({maxHeight : 100, iconsPath : '../assets/PICS/nicEditorIcons.gif'}).panelInstance('editor');
 			}
-			
-		
 		</script>
 	</body>
 </html>

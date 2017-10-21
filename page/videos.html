@@ -82,7 +82,7 @@
 						'<div class="col-md-12">' +
 							'<div class="video-box">' +
 								'<video id="vid-' + loop + '" class="video-player">'+
-								  	'<source src="'+ base_url +'/assets/VIDS/testVids.mp4" type="video/mp4">'+
+								  	'<source src="'+ base_url +'/assets/VIDS/testVids.mp4#t=29" type="video/mp4">'+
 									'Your browser does not support the video tag.'+
 								'</video>' +
 								'<div class="layer"></div>' +
@@ -99,7 +99,7 @@
 					'<div class="col-md-4">'+
 						'<div class="video-box">' +
 							'<video id="vid-' + loop + '">'+
-							  	'<source src="'+ base_url +'/assets/VIDS/'+data[loop].video+'" type="video/mp4">'+
+							  	'<source src="'+ base_url +'/assets/VIDS/'+data[loop].video+'#t=29" type="video/mp4">'+
 								'Your browser does not support the video tag.'+
 							'</video>'+
 							'<div class="play-button" video-id='+data[loop].id+'></div>'+
@@ -129,7 +129,7 @@
 
 				$("main").html(html);
 				for(var loop=0; loop<data.length; loop++){	
-					document.getElementById('vid-' + loop).addEventListener('loadeddata', function() { this.currentTime = 29; }, false);
+					//document.getElementById('vid-' + loop).addEventListener('loadeddata', function() { this.currentTime = 29; }, false);
 				}
 
 				var a = 0;

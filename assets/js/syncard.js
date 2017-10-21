@@ -38,22 +38,22 @@ function pageAdmin(){
 				'<div class="list-nav">'+
 					'<h3 class="fontserif title hidden-lg hidden-md">MENU <span class="left-nav-toggle syn-fixed-right fa fa-chevron-down"></span></h3>' +
 					'<ul class="toggle-target">' +
-						'<li><a href="#">DASHBOARD</a></li>'+
+						'<li class="dashboard-route"><a href="#">DASHBOARD</a></li>'+
 						'<li class="product-route"><a href="product.html">PRODUCTS</a></li>'+
 						'<li class="cms-route"><a href="cms.html">CMS</a></li>'+
-						'<li><a href="#">SYSTEM SETTING</a></li>'+
-						'<li><a href="#">USERS BLOG</a></li>'+
+						'<li class="setting-route"><a href="setting.html">SYSTEM SETTING</a></li>'+
+						'<li class="blog-route"><a href="blog.html">USERS BLOG</a></li>'+
 						'<li class="customer-route"><a href="customer.html">CUSTOMERS</a></li>'+
-						'<li><a href="#">VENDORS</a></li>'+
-						'<li><a href="#">ORDER</a></li>'+
-						'<li class="hidden-md hidden-lg"><a href="#">VIEW STORE</a></li>'+
+						'<li class="vendor-route"><a href="vendor.html">VENDORS</a></li>'+
+						'<li class="order-route"><a href="order.html">ORDER</a></li>'+
+						'<li class="hidden-md hidden-lg"><a href="../page/shop.html">VIEW STORE</a></li>'+
 					'</ul>' +
 				'</div>'+
 			'</div>'+
 			'<div class="col-md-9 col-md-offset-3 syn-clear">'+
 				'<div class="col-md-12 top-nav">'+
 					'<ul>' +
-						'<li><a href="#">Departement</a></li>'+
+						'<li><a href="departement.html">Departement</a></li>'+
 						'<li class="product-route"><a href="product.html">Item</a></li>'+
 						'<li class="customer-route"><a href="customer.html">Customer</a></li>'+
 						'<li><a href="#">Shipping Option</a></li>'+
@@ -92,10 +92,18 @@ function pageAdmin(){
 		$(".list-nav li, .top-nav li").removeClass('active');
 		switch(page[page.length - 1]){
 			case "product.html": $(".product-route").addClass('active'); break;
-			case "customer.html": $(".customer-route").addClass('active'); break;
+			case "customer.html": 
+			case "newCustomer.html": $(".customer-route").addClass('active'); break;
 			case "cms.html":
+			case "home.html":
+			case "story.html":
 			case "videos.html":
 			case "chatter.html": $(".cms-route").addClass('active'); break;
+			case "blog.html": $(".blog-route").addClass('active'); break;
+			case "setting.html": $(".setting-route").addClass('active'); break;
+			case "vendor.html": $(".vendor-route").addClass('active'); break;
+			case "order.html": $(".order-route").addClass('active'); break;
+			default: $(".dashboard-route").addClass('active'); break;
 		}
 	}
 }
@@ -406,4 +414,12 @@ function timeSince(date) {
 		//return new Date(time).toLocaleDateString();
 		return date.getDate().toString() + " " + months[date.getMonth()] + ", " + date.getFullYear();
 	}
+}
+
+// currency
+function currencyFormat(num, curr = 'Rp. ') {
+    var p = num;
+    return curr + p.split("").reverse().reduce(function(acc, num, i, orig) {
+        return  num=="-" ? acc : num + (i && !(i % 3) ? "," : "") + acc;
+    }, "");
 }

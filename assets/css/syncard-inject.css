@@ -1043,12 +1043,11 @@ footer.parent .license {
 /*=============================================================================================*/
 /*customer*/
 
-.input-frame{
+.input-frame {
   padding: 20px;
-  /*background: #EEE;*/
-  margin-top: 10px;
-  margin-bottom: 60px;
 }
+
+.input-frame h3 { margin-top: 0; margin-bottom: 20px; }
 .input-frame .btn-group{
   margin-top: 20px;
 }

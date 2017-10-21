@@ -17,10 +17,10 @@ function headerAdmin(){
 				'<div class="header-title"><h2>Product - Departement</h2></div>'+
 				'<div class="header-menu fontserif hidden-sm hidden-xs">' + 
 					'<ul>' + 
-						'<li><a href=#>View Store</a> &nbsp; &nbsp;|</li>' + 
+						'<li><a href="../page/shop.html">View Store</a> &nbsp; &nbsp;|</li>' + 
 						'<li><img src="../assets/PICS/pattern3.jpg"></li>' +
 						'<li>Khrisni Swandayani</li>' + 
-						'<li><a href="#"><i class="fa fa-cog fa-o"></i></a></li>' + 
+						'<li><a href="setting.html"><i class="fa fa-cog fa-o"></i></a></li>' + 
 					'</ul>'+
 				'</div>'+
 			'</div>'+
@@ -38,14 +38,14 @@ function pageAdmin(){
 				'<div class="list-nav">'+
 					'<h3 class="fontserif title hidden-lg hidden-md">MENU <span class="left-nav-toggle syn-fixed-right fa fa-chevron-down"></span></h3>' +
 					'<ul class="toggle-target">' +
-						'<li class="dashboard-route"><a href="#">DASHBOARD</a></li>'+
+						'<li class="dashboard-route"><a href="index.html">DASHBOARD</a></li>'+
 						'<li class="product-route"><a href="product.html">PRODUCTS</a></li>'+
 						'<li class="cms-route"><a href="cms.html">CMS</a></li>'+
 						'<li class="setting-route"><a href="setting.html">SYSTEM SETTING</a></li>'+
 						'<li class="blog-route"><a href="blog.html">USERS BLOG</a></li>'+
 						'<li class="customer-route"><a href="customer.html">CUSTOMERS</a></li>'+
 						'<li class="vendor-route"><a href="vendor.html">VENDORS</a></li>'+
-						'<li class="order-route"><a href="order.html">ORDER</a></li>'+
+						'<li class="order-route"><a href="order.html">ORDERS</a></li>'+
 						'<li class="hidden-md hidden-lg"><a href="../page/shop.html">VIEW STORE</a></li>'+
 					'</ul>' +
 				'</div>'+
@@ -91,7 +91,8 @@ function pageAdmin(){
 	if(page != null && page.length > 0){
 		$(".list-nav li, .top-nav li").removeClass('active');
 		switch(page[page.length - 1]){
-			case "product.html": $(".product-route").addClass('active'); break;
+			case "product.html": 
+			case "newProduct.html": $(".product-route").addClass('active'); break;
 			case "customer.html": 
 			case "newCustomer.html": $(".customer-route").addClass('active'); break;
 			case "cms.html":

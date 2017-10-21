@@ -38,28 +38,22 @@
 				var html = '';
 
 				var data = 
-				{
-					list : [
-						{ orderNo: "1141", customer: 'Achdiyati Sumi', status: 'Waiting for payment', total: '10000000', orderTime: '2017/10/21 12:00:00' },
-						{ orderNo: "2444", customer: 'Achdiyati Sumi', status: 'Delivered', total: '20500000', orderTime: '2017/10/19 12:00:00' },
-						{ orderNo: "3123", customer: 'Guest', status: 'Paid', total: '3500000', orderTime: '2017/10/13 12:00:00' },
-						{ orderNo: "4123", customer: 'Guest', status: 'Complete', total: '2200000', orderTime: '2017/10/11 12:00:00' },
-						{ orderNo: "5432", customer: 'Guest', status: 'Complete', total: '4150000', orderTime: '2017/10/9 12:00:00' },
-					],
-
-					registered : '2',
-					guest : '3',
-				};
+				[
+					{ departmentId: '1', name: "Product" },
+				];
 
 				html = html +
 				'<div class="header-option">' +
 					'<div class="operation-group">'+
 						'<form class="form-inline">' +
 							'<div class="input-group operation-button">' +
-								'<a href="#"><i class="fa fa-minus-circle text-warning">&nbsp;</i> Delete Order</a>'+
+								'<a href="newCustomer.html"><i class="fa fa-plus-circle text-warning">&nbsp;</i> Add Department</a>'+
 							'</div>' +
 							'<div class="input-group operation-button">' +
-								'<a href="#"><i class="fa fa-check-circle text-warning">&nbsp;</i> Process Order</a>'+
+								'<a href="#"><i class="fa fa-minus-circle text-warning">&nbsp;</i> Delete Department</a>'+
+							'</div>' +
+							'<div class="input-group operation-button">' +
+								'<a href="#"><i class="fa fa-bars text-warning">&nbsp;</i> Manage Department</a>'+
 							'</div>' +
 				        	'<div class="input-group pull-right search-box">' +
 				        		'<input type="text" class="form-control" placeholder="Search">' +
@@ -72,16 +66,8 @@
 					'</div>' +
 					'<div class="summary-group">'+
 						'<div class="summary-text">'+
-							'<p>Total number of customers</p>'+
-							'<p class="number">' + data.list.length + '</p>'+
-						'</div>'+
-						'<div class="summary-text">'+
-							'<p>Registered</p>'+
-							'<p class="number">' + data.registered + '</p>'+
-						'</div>'+
-						'<div class="summary-text">'+
-							'<p>Guest</p>'+
-							'<p class="number">' + data.guest + '</p>'+
+							'<p>Total number of Departments</p>'+
+							'<p class="number">' + data.length + '</p>'+
 						'</div>'+
 						'<div class="alpha">'+
 							'<ul>' +
@@ -121,26 +107,17 @@
 					'<table class="table table-striped table-responsive">'+
 					    '<thead>'+
 					    	'<tr>'+
-						    	'<th width="5%"><input type="checkbox" onclick="checkboxToggle(this, \'customerSelect\')" /><label for="selectRecord' + loop + '"></label></th>'+
-						    	'<th>Order #</th>'+
-						        '<th>Customer</th>'+
-						        '<th>Status</th>'+
-						        '<th class="text-center">Total</th>'+
-						        '<th class="text-center">Order time</th>'+
+						    	'<th width="5%"><input type="checkbox" id="selectRecord" onclick="checkboxToggle(this, \'customerSelect\')" /><label for="selectRecord"></label></th>'+
+						    	'<th>Department</th>'+
 					    	'</tr>'+
 					    '</thead>'+
 					    '<tbody>';
 
-		    	data = data.list;
 		    	for(var loop =0; loop<data.length; loop++){
 		    		html = html +
 		    		'<tr>'+
-		    			'<td><input type="checkbox" name="customerSelect" value="'+data[loop].orderNo+'" id="selectRecord' + loop + '"><label for="selectRecord' + loop + '"></label></td>'+
-		    			'<td class="syn-nowrap">'+ data[loop].orderNo +'</td>'+
-		    			'<td>'+ data[loop].customer +'</td>'+
-		    			'<td>'+ data[loop].status +'</td>'+
-		    			'<td class="syn-nowrap text-right">'+ currencyFormat(data[loop].total) +'</td>'+
-		    			'<td class="text-center">'+ timeSince(new Date(Date.parse(data[loop].orderTime))) +'</td>'+
+		    			'<td><input type="checkbox" name="customerSelect" value="'+data[loop].departmentId+'" id="selectRecord' + loop + '"><label for="selectRecord' + loop + '"></label></td>'+
+		    			'<td class="syn-nowrap">'+ data[loop].name +'</td>'+
 		    		'</tr>';
 		    	}
 

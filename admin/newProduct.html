@@ -32,56 +32,21 @@
 		<!-- page script -->
 		<script type="text/javascript">
 			$(function(){
-				customer();
+				loadData();
 			});
-			function customer(){
+			function loadData(){
 				var html = '';
 
-				// var data = [
-				// 	{ name: 'Achdiyati Sumi', email: 'sumiong.ong@gmail.com', company: 'PT. Sky Aviation', phone: '', address: '' },
-				// 	{ name: 'Achdiyati Sumi', email: 'sumiong.ong@gmail.com', company: 'PT. Sky Aviation', phone: '', address: '' },
-				// 	{ name: 'Achdiyati Sumi', email: 'sumiong.ong@gmail.com', company: 'PT. Sky Aviation', phone: '', address: '' },
-				// 	{ name: 'Achdiyati Sumi', email: 'sumiong.ong@gmail.com', company: 'PT. Sky Aviation', phone: '', address: '' },
-				// 	{ name: 'Achdiyati Sumi', email: 'sumiong.ong@gmail.com', company: 'PT. Sky Aviation', phone: '', address: '' },
-				// 	{ name: 'Achdiyati Sumi', email: 'sumiong.ong@gmail.com', company: 'PT. Sky Aviation', phone: '', address: '' },
-				// 	{ name: 'Achdiyati Sumi', email: 'sumiong.ong@gmail.com', company: 'PT. Sky Aviation', phone: '', address: '' },
-				// 	{ name: 'Achdiyati Sumi', email: 'sumiong.ong@gmail.com', company: 'PT. Sky Aviation', phone: '', address: '' },
-				// 	{ name: 'Achdiyati Sumi', email: 'sumiong.ong@gmail.com', company: 'PT. Sky Aviation', phone: '', address: '' },
-				// 	{ name: 'Achdiyati Sumi', email: 'sumiong.ong@gmail.com', company: 'PT. Sky Aviation', phone: '', address: '' },
-				// 	{ name: 'Achdiyati Sumi', email: 'sumiong.ong@gmail.com', company: 'PT. Sky Aviation', phone: '', address: '' },
-				// ]
-
 				html = html +
-				'<div class="operation-group">'+
-					'<form class="form-inline">' +
-			        	'<h2><b>New Product<b></h2>'+
-			        	// '<div class="input-group pull-right">' +
-			        	// 	'<input type="text" class="form-control" placeholder="Search">' +
-				        // 	'<span class="input-group-btn">' +
-				        // 		'<button type="submit" class="btn btn-default">SEARCH</button>' +
-				        // 	'</span>' +
-			        	// '</div>' +
-			   		'</form>' +
-				'</div>'+
-				'<div class="clearfix"></div>';
-
-				// html = html +
-				// '<div class="summary-group">'+
-				// 	'<div class="summary-text">'+
-				// 		'<p><b>New Product<b></p>'+
-				// 	'</div>'+
-				// '</div>'+
-				// '<div class="clearfix"></div>';
-
-				html = html +
-				'<div class="input-frame col-md-8">'+
+				'<div class="input-frame col-md-6">'+
+					'<h3><b>Product</b></h3>'+
 					'<form>'+
 						'<div class="form-group col-md-8 syn-clear">'+
 							'<label>Product Name</label>'+
 							'<input type="text" class="form-control">'+
 						'</div>'+
 						'<div class="form-group col-md-4 syn-clear">'+
-							'<label>Price</label>'+
+							'<label>SKU</label>'+
 							'<input type="text" class="form-control">'+
 						'</div><div class="clearfix"></div>'+
 						'<div class="form-group">'+
@@ -96,34 +61,36 @@
 							'<label>Material</label>'+
 							'<textarea class="form-control" rows=5></textarea>'+
 						'</div>'+
-						'<div class="form-group col-md-6 row">'+
-							'<label>Dimension</label>'+
-							'<input type="text" class="form-control">'+
-						'</div>'+
-						'<div class="form-group col-md-6 ">'+
-							'<label>Product Image</label>'+
-							'<input id="input-id" type="file" class="file" data-preview-file-type="text">'+
-							
-						'</div><div class="clearfix"></div>';
-						
-						for(var a = 0; a < 8; a++){
-							html = html +
-						'<div class="form-group col-md-6 row">'+
-							'<label>Product Pattern #'+(a+1)+'</label>'+
-							'<input id="input-id'+a+'" type="file" class="file" data-preview-file-type="text">'+
-						'</div>';
-						}
+						'<div class="clearfix"></div>';
 						
 						html = html +
 						'<div class="clearfix"></div>'+
 						'<div class="btn-group">'+
-							'<input class="btn btn-default" type="button" value="Create">'+
-							'<input class="btn btn-default" type="button" value="Cancel">'+
+							'<button class="btn btn-warning" type="button">Create</button>'+
+							'<button class="btn btn-warning" type="button">Cancel</button>'+
 						'</div>'+
 					'</form>'+
-				'</div>';
+				'</div>'+
+				'<div class="input-frame col-md-6">'+
+					'<div class="form-group">'+
+						'<label>Dimension</label>'+
+						'<input type="text" class="form-control">'+
+					'</div>'+
+					'<div class="form-group">'+
+						'<label>Product Image</label>'+
+						'<input id="input-id" type="file" class="file form-control" data-preview-file-type="text">'+
+					'</div>';
 
-				// html = html + '</div>';
+					for(var loop=0; loop<4; loop++){
+						html = html +
+						'<div class="form-group">'+
+							'<label>Pattern #' + (loop + 1) + '</label>'+
+							'<input id="input-id' + loop + '" type="file" class="file form-control" data-preview-file-type="text">'+
+						'</div>';
+					}
+
+				html = html + '</div>';
+
 				$('main.parent-admin .main-content').append(html);
 			}
 			

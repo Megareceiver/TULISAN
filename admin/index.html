@@ -37,159 +37,73 @@
 			function customer(){
 				var html = '';
 
-				var data = [
-					{ customerId: "1", name: 'Achdiyati Sumi', email: 'sumiong.ong@gmail.com', company: 'PT. Sky Aviation', phone: '', address: '' },
-					{ customerId: "2", name: 'Achdiyati Sumi', email: 'sumiong.ong@gmail.com', company: 'PT. Sky Aviation', phone: '', address: '' },
-					{ customerId: "3", name: 'Achdiyati Sumi', email: 'sumiong.ong@gmail.com', company: 'PT. Sky Aviation', phone: '', address: '' },
-					{ customerId: "4", name: 'Achdiyati Sumi', email: 'sumiong.ong@gmail.com', company: 'PT. Sky Aviation', phone: '', address: '' },
-					{ customerId: "5", name: 'Achdiyati Sumi', email: 'sumiong.ong@gmail.com', company: 'PT. Sky Aviation', phone: '', address: '' },
-					{ customerId: "6", name: 'Achdiyati Sumi', email: 'sumiong.ong@gmail.com', company: 'PT. Sky Aviation', phone: '', address: '' },
-					{ customerId: "7", name: 'Achdiyati Sumi', email: 'sumiong.ong@gmail.com', company: 'PT. Sky Aviation', phone: '', address: '' },
-					{ customerId: "8", name: 'Achdiyati Sumi', email: 'sumiong.ong@gmail.com', company: 'PT. Sky Aviation', phone: '', address: '' },
-					{ customerId: "9", name: 'Achdiyati Sumi', email: 'sumiong.ong@gmail.com', company: 'PT. Sky Aviation', phone: '', address: '' },
-					{ customerId: "10", name: 'Achdiyati Sumi', email: 'sumiong.ong@gmail.com', company: 'PT. Sky Aviation', phone: '', address: '' },
-					{ customerId: "11", name: 'Achdiyati Sumi', email: 'sumiong.ong@gmail.com', company: 'PT. Sky Aviation', phone: '', address: '' },
-					{ customerId: "11", name: 'Achdiyati Sumi', email: 'sumiong.ong@gmail.com', company: 'PT. Sky Aviation', phone: '', address: '' },
-					{ customerId: "11", name: 'Achdiyati Sumi', email: 'sumiong.ong@gmail.com', company: 'PT. Sky Aviation', phone: '', address: '' },
-					{ customerId: "11", name: 'Achdiyati Sumi', email: 'sumiong.ong@gmail.com', company: 'PT. Sky Aviation', phone: '', address: '' },
-					{ customerId: "11", name: 'Achdiyati Sumi', email: 'sumiong.ong@gmail.com', company: 'PT. Sky Aviation', phone: '', address: '' },
-					{ customerId: "11", name: 'Achdiyati Sumi', email: 'sumiong.ong@gmail.com', company: 'PT. Sky Aviation', phone: '', address: '' },
-					{ customerId: "11", name: 'Achdiyati Sumi', email: 'sumiong.ong@gmail.com', company: 'PT. Sky Aviation', phone: '', address: '' },
-				]
+				var data = {
+					totalOrder: 0,
+					totalCustomer: 0,
+					registeredCustomer: 0,
+					guest: 0,
+					totalUser:0
+				}
+
+				// html = html +
+				// '<div class="header-option syn-plus">' +
+				// 	'<div class="summary-group">'+
+				// 		'<div class="summary-text">'+
+				// 			'<p>Registered Customer</p>'+
+				// 			'<p class="number">1350</p>'+
+				// 		'</div>'+
+				// 		'<div class="summary-text">'+
+				// 			'<p>Guest</p>'+
+				// 			'<p class="number">35</p>'+
+				// 		'</div>'+
+				// 		'<div class="summary-text">'+
+				// 			'<p>Registered</p>'+
+				// 			'<p class="number">1350</p>'+
+				// 		'</div>'+
+				// 		'<div class="summary-text">'+
+				// 			'<p>Guest</p>'+
+				// 			'<p class="number">35</p>'+
+				// 		'</div>'+
+				// 		'<div class="summary-text">'+
+				// 			'<p>Registered</p>'+
+				// 			'<p class="number">1350</p>'+
+				// 		'</div>'+
+				// 		'<div class="summary-text">'+
+				// 			'<p>Guest</p>'+
+				// 			'<p class="number">35</p>'+
+				// 		'</div>'+
+				// 	'</div>'+
+				// '</div>';
+
+				var menu = [
+					{ 'title': "PRODUCTS", 'link': 'product.html', 'icon': 'cubes' },
+					{ 'title': "CUSTOMERS", 'link': 'customer.html', 'icon': 'users' },
+					{ 'title': "VENDORS", 'link': 'vendor.html', 'icon': 'truck' },
+					{ 'title': "ORDERS", 'link': 'order.html', 'icon': 'file-text-o' },
+					{ 'title': "CMS HOME", 'link': 'home.html', 'icon': 'home' },
+					{ 'title': "CMS STORIES", 'link': 'story.html', 'icon': 'pencil' },
+					{ 'title': "CMS BLOG", 'link': 'blog.html', 'icon': 'commenting-o' },
+					{ 'title': "CMS VIDEOS", 'link': 'videos.html', 'icon': 'play' },
+					{ 'title': "CMS CHATTER", 'link': 'chatter.html', 'icon': 'camera' },
+					{ 'title': "SETTINGS", 'link': 'setting.html', 'icon': 'gear' },
+				];
 
 				html = html +
-				'<div class="header-option">' +
-					'<div class="operation-group">'+
-						'<form class="form-inline">' +
-							'<div class="input-group operation-button">' +
-								'<a href="#"><i class="fa fa-plus-circle text-warning">&nbsp;</i> Create Customer</a>'+
-							'</div>' +
-							'<div class="input-group operation-button">' +
-								'<a href="#"><i class="fa fa-minus-circle text-warning">&nbsp;</i> Delete Customer</a>'+
-							'</div>' +
-							'<div class="input-group operation-button">' +
-								'<a href="#"><i class="fa fa-bars text-warning">&nbsp;</i> Manage Customer</a>'+
-							'</div>' +
-				        	'<div class="input-group pull-right search-box">' +
-				        		'<input type="text" class="form-control" placeholder="Search">' +
-					        	'<span class="input-group-btn">' +
-					        		'<button type="submit" class="btn btn-default">SEARCH</button>' +
-					        	'</span>' +
-				        	'</div>' +
-				   		'</form>' +
-				   		'<div class="clearfix"></div>' +
-					'</div>' +
-					'<div class="summary-group">'+
-						'<div class="summary-text">'+
-							'<p>Total number of customers</p>'+
-							'<p class="number">1385</p>'+
-						'</div>'+
-						'<div class="summary-text">'+
-							'<p>Registered</p>'+
-							'<p class="number">1350</p>'+
-						'</div>'+
-						'<div class="summary-text">'+
-							'<p>Guest</p>'+
-							'<p class="number">35</p>'+
-						'</div>'+
-						'<div class="alpha">'+
-							'<ul>' +
-								'<li><a href="#">A</a></li>'+
-								'<li><a href="#">B</a></li>'+
-								'<li><a href="#">C</a></li>'+
-								'<li><a href="#">D</a></li>'+
-								'<li><a href="#">E</a></li>'+
-								'<li><a href="#">F</a></li>'+
-								'<li><a href="#">G</a></li>'+
-								'<li><a href="#">H</a></li>'+
-								'<li><a href="#">I</a></li>'+
-								'<li><a href="#">J</a></li>'+
-								'<li><a href="#">K</a></li>'+
-								'<li><a href="#">L</a></li>'+
-								'<li><a href="#">M</a></li>'+
-								'<li><a href="#">N</a></li>'+
-								'<li><a href="#">O</a></li>'+
-								'<li><a href="#">P</a></li>'+
-								'<li><a href="#">Q</a></li>'+
-								'<li><a href="#">R</a></li>'+
-								'<li><a href="#">S</a></li>'+
-								'<li><a href="#">T</a></li>'+
-								'<li><a href="#">U</a></li>'+
-								'<li><a href="#">V</a></li>'+
-								'<li><a href="#">W</a></li>'+
-								'<li><a href="#">X</a></li>'+
-								'<li><a href="#">Z</a></li>'+
-							'</ul>'+
-						'</div>'+
-					'</div>'+
-					'<p class="pagging-text"><a href="#" class="pagging-left">< Previous page</a> | <a href="#" class="pagging-right">Next page ></a></p>' +
+				'<div class="card-menu">'+
+					'<ul>';
+
+				for(var loop=0; loop<menu.length; loop++){
+					html = html +
+					'<li>' +
+						'<span class="fa fa-' + menu[loop].icon + '"></span>' +
+						'<a href="' + menu[loop].link + '">' + menu[loop].title + '</a>' + 
+					'</li>';
+				}
+
+				html = html +
+					'</ul>'+
 				'</div>';
 
-				html = html +
-				'<div class="table-frame">'+
-					'<table class="table table-striped table-responsive">'+
-					    '<thead>'+
-					    	'<tr>'+
-						    	'<th width="5%"><input type="checkbox" value="'+loop+'" id="selectRecord' + loop + '" onclick="checkboxToggle(this, \'customerSelect\')" /><label for="selectRecord' + loop + '"></label></th>'+
-						    	'<th>Name</th>'+
-						        '<th>E mail</th>'+
-						        '<th>Company</th>'+
-						        '<th>Phone</th>'+
-						        '<th>Location</th>'+
-					    	'</tr>'+
-					    '</thead>'+
-					    '<tbody>';
-					    	for(var loop =0; loop<data.length; loop++){
-					    		html = html +
-					    		'<tr>'+
-					    			'<td><input type="checkbox" name="customerSelect" value="'+data[loop].customerId+'" id="selectRecord' + loop + '"><label for="selectRecord' + loop + '"></label></td>'+
-					    			'<td class="syn-nowrap">'+ data[loop].name +'</td>'+
-					    			'<td>'+ data[loop].email +'</td>'+
-					    			'<td class="syn-nowrap">'+ data[loop].company +'</td>'+
-					    			'<td>'+ data[loop].phone +'</td>'+
-					    			'<td>'+ data[loop].address +'</td>'+
-					    		'</tr>';
-					    	}
-				html = html +
-					    '</tbody>'+
-					'</table>'+
-				'</div>';
-
-				html = html +
-				'<p class="pagging-text"><a href="#" class="pagging-left">< Previous page</a> | <a href="#" class="pagging-right">Next page ></a></p>'+
-				'<div class="ext-group">'+
-					'<div class="alpha">'+
-						'<ul>' +
-							'<li><a href="#">A</a></li>'+
-							'<li><a href="#">B</a></li>'+
-							'<li><a href="#">C</a></li>'+
-							'<li><a href="#">D</a></li>'+
-							'<li><a href="#">E</a></li>'+
-							'<li><a href="#">F</a></li>'+
-							'<li><a href="#">G</a></li>'+
-							'<li><a href="#">H</a></li>'+
-							'<li><a href="#">I</a></li>'+
-							'<li><a href="#">J</a></li>'+
-							'<li><a href="#">K</a></li>'+
-							'<li><a href="#">L</a></li>'+
-							'<li><a href="#">M</a></li>'+
-							'<li><a href="#">N</a></li>'+
-							'<li><a href="#">O</a></li>'+
-							'<li><a href="#">P</a></li>'+
-							'<li><a href="#">Q</a></li>'+
-							'<li><a href="#">R</a></li>'+
-							'<li><a href="#">S</a></li>'+
-							'<li><a href="#">T</a></li>'+
-							'<li><a href="#">U</a></li>'+
-							'<li><a href="#">V</a></li>'+
-							'<li><a href="#">W</a></li>'+
-							'<li><a href="#">X</a></li>'+
-							'<li><a href="#">Z</a></li>'+
-						'</ul>'+
-					'</div>'+
-				'</div>';
-
-				// html = html + '</div>';
 				$('main.parent-admin .main-content').append(html);
 			}
 			

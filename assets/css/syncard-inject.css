@@ -1071,10 +1071,11 @@ footer.parent .license {
   display: block;
 }
 .table-frame img.img-product{
-  width: 100px;
+  width: 30px;
   height: auto;
-  margin: 5px;
+  margin: 5px 0;
 }
+
 /*=============================================================================================*/
 /*privacy*/
 .privacy p { text-align: justify }

@@ -36,24 +36,27 @@
 			});
 			function customer(){
 				var html = '';
-
+					/*description: 'Always opting for a beautiful two piece, or even better, three piece ensemble is such an easy and polished way of dressing. In this case, I decided to layer dots on dots on dots on my new favourite dotty bag. I still remember how I felt the day we shot these photos. The tiniest slither of silver light escaped from between the grey sheet of clouds above and spilled onto the concrete pavement below. For someone who hadn’t seen sun in two weeks it made everything illuminate with a soft silver glow ten times more than usual. It was nice to finally witness New York in the shimmering light I had been visualising it in ever since I left back in September, perchedhigh on its smitten pedestal accompanied by bigger and better expectations. Luckily, New York always delivers…'*/
 				var data = [
-					{ picture: 'db_file_img_133_350x350', name: 'Atelier Box', price: '$77.00'},
-					{ picture: 'db_file_img_539_350x350', name: 'Beach Box', price: '$87.00'},
-					{ picture: 'db_file_img_567_350x350', name: 'City Tote', price: '$87.00'},
-					{ picture: 'db_file_img_785_350x350', name: 'Coterie Bag', price: '$127.00'},
-					{ picture: 'db_file_img_944_350x350', name: 'Cruise Bag', price: '$137.00'},
-					{ picture: 'db_file_img_995_350x350', name: 'Gallery Tote', price: '$87.00'},
+					{ title: 'PEPE AND THE FLYING BALLOON', author:'Melisa Sanjaya'},
+					{ title: 'PEPE AND THE FLYING BALLOON', author:'Melisa Sanjaya'},
+					{ title: 'PEPE AND THE FLYING BALLOON', author:'Melisa Sanjaya'},
+					{ title: 'PEPE AND THE FLYING BALLOON', author:'Melisa Sanjaya'},
+					{ title: 'PEPE AND THE FLYING BALLOON', author:'Melisa Sanjaya'},
+					{ title: 'PEPE AND THE FLYING BALLOON', author:'Melisa Sanjaya'},
 				]
 
 				html = html +
 				'<div class="operation-group">'+
 					'<form class="form-inline">' +
 						'<div class="input-group">' +
-							'<a href="newProduct.html"><i class="fa fa-plus-circle text-warning">&nbsp;</i> Add Product</a>'+
+							'<a href="newStory.html"><i class="fa fa-plus-circle text-warning">&nbsp;</i> Add Story</a>'+
 						'</div>' +
 						'<div class="input-group">' +
-							'<a href="#"><i class="fa fa-minus-circle text-warning">&nbsp;</i> Delete Product</a>'+
+							'<a href="#"><i class="fa fa-minus-circle text-warning">&nbsp;</i> Delete Story</a>'+
+						'</div>' +
+						'<div class="input-group">' +
+							'<a href="#"><i class="fa fa-bars text-warning">&nbsp;</i> Manage Story</a>'+
 						'</div>' +
 			        	'<div class="input-group pull-right">' +
 			        		'<input type="text" class="form-control" placeholder="Search">' +
@@ -66,8 +69,8 @@
 				html = html +
 					'<div class="summary-group">'+
 						'<div class="summary-text">'+
-							'<p>Total number of Product</p>'+
-							'<p class="number">355</p>'+
+							'<p>Total number of Story</p>'+
+							'<p class="number">100</p>'+
 						'</div>'+
 						'<div class="alpha">'+
 							'<ul>' +
@@ -106,57 +109,23 @@
 					    '<thead>'+
 					    	'<tr>'+
 						    	'<th></th>'+
-						    	'<th><i class="fa fa-picture-o"></i></th>'+
-						        '<th>Name</th>'+
-						        '<th>price</th>'+
+						    	'<th>Title</th>'+
+						        '<th>Author</th>'+
 					    	'</tr>'+
 					    '</thead>'+
 					    '<tbody>';
 					    	for(var loop =0; loop<data.length; loop++){
 					    		html = html +
 					    		'<tr>'+
-					    			'<td width="5%"><input type="checkbox" name="customerSelect" value="'+loop+'" id="selectRecord' + loop + '"><label for="selectRecord' + loop + '"></label></td>'+
-					    			'<td width="5%"><img class="img-product" src="../assets/PICS/'+ data[loop].picture +'.jpg"></td>'+
-					    			'<td>'+ data[loop].name +'</td>'+
-					    			'<td>'+ data[loop].price +'</td>'+
+					    			'<td><input type="checkbox" name="customerSelect" value="'+loop+'" id="selectRecord' + loop + '"><label for="selectRecord' + loop + '"></label></td>'+
+					    			'<td><a href = "storyDetail.html">'+ data[loop].title +'</a></td>'+
+					    			'<td>'+ data[loop].author +'</td>'+
 					    		'</tr>';
 					    	}
 				html = html +
 					    '</tbody>'+
 					'</table>'+
-				'</div>';
-				html = html +
-				'<p class="pagging-text"><a href="#" class="pagging-left">< Previous page</a> | <a href="#" class="pagging-right">Next page ></a></p>'+
-				'<div class="ext-group">'+
-					'<div class="alpha">'+
-						'<ul>' +
-							'<li><a href="#">A</a></li>'+
-							'<li><a href="#">B</a></li>'+
-							'<li><a href="#">C</a></li>'+
-							'<li><a href="#">D</a></li>'+
-							'<li><a href="#">E</a></li>'+
-							'<li><a href="#">F</a></li>'+
-							'<li><a href="#">G</a></li>'+
-							'<li><a href="#">H</a></li>'+
-							'<li><a href="#">I</a></li>'+
-							'<li><a href="#">J</a></li>'+
-							'<li><a href="#">K</a></li>'+
-							'<li><a href="#">L</a></li>'+
-							'<li><a href="#">M</a></li>'+
-							'<li><a href="#">N</a></li>'+
-							'<li><a href="#">O</a></li>'+
-							'<li><a href="#">P</a></li>'+
-							'<li><a href="#">Q</a></li>'+
-							'<li><a href="#">R</a></li>'+
-							'<li><a href="#">S</a></li>'+
-							'<li><a href="#">T</a></li>'+
-							'<li><a href="#">U</a></li>'+
-							'<li><a href="#">V</a></li>'+
-							'<li><a href="#">W</a></li>'+
-							'<li><a href="#">X</a></li>'+
-							'<li><a href="#">Z</a></li>'+
-						'</ul>'+
-					'</div>'+
+					'<p class="pagging-text"><a href="#" class="pagging-left">< Previous page</a> | <a href="#" class="pagging-right">Next page ></a></p>'+
 				'</div>';
 
 				// html = html + '</div>';

@@ -369,7 +369,14 @@ main.parent-admin .top-nav a { color: #FFF; }
   .ext-group { padding: 0 20px; }
 
   /*card-menu*/
+
   .card-menu ul li { margin-left: 20px; }
+  
+  /*summary*/
+  .summary-group .summary-text.card { 
+	display: inline-block;
+	width: 40%;
+  }
 
   /*=============================================================================================*/
   /*BACK TO TOP*/

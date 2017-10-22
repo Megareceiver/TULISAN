@@ -28,6 +28,7 @@
 		<script type="text/javascript" src="../assets/js/jquery-ui-1.10.0.custom.min.js"></script>
 		<script type="text/javascript" src="../assets/js/bootstrap.min.js"></script>	
 		<script type="text/javascript" src="../assets/js/syncard.js"></script>	
+		<script type="text/javascript" src="../assets/js/public.js"></script>	
 
 		<!-- page script -->
 		<script type="text/javascript">
@@ -37,13 +38,8 @@
 			function customer(){
 				var html = '';
 
-				var data = [
-					{ group: "Orders", total: 0, },
-					{ group: "Products", total: 0, },
-					{ group: "Customers", total: 0, },
-					{ group: "Vendors", total: 0, },
-					{ group: "Users", 	total: 0, }
-				];
+				var data = p_getData('operation', 'summary');
+					data = data.feedData;
 
 				html = html +
 				'<h3>Summary</h3>' +

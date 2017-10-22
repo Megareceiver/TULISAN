@@ -53,7 +53,7 @@ function pageAdmin(){
 			'<div class="col-md-9 col-md-offset-3 syn-clear">'+
 				'<div class="col-md-12 top-nav">'+
 					'<ul>' +
-						'<li><a href="departement.html">Departement</a></li>'+
+						'<li class="departement-route"><a href="departement.html">Departement</a></li>'+
 						'<li class="product-route"><a href="product.html">Item</a></li>'+
 						'<li class="customer-route"><a href="customer.html">Customer</a></li>'+
 						'<li><a href="#">Shipping Option</a></li>'+
@@ -93,9 +93,12 @@ function pageAdmin(){
 		switch(page[page.length - 1]){
 			case "product.html": 
 			case "color.html": 
-			case "newProduct.html": $(".product-route").addClass('active'); break;
+			case "formColor.html": 
+			case "formProduct.html": $(".product-route").addClass('active'); break;
 			case "customer.html": 
-			case "newCustomer.html": $(".customer-route").addClass('active'); break;
+			case "formCustomer.html": $(".customer-route").addClass('active'); break;
+			case "formDepartement.html":
+			case "departement.html": $(".departement-route").addClass('active'); break;
 			case "cms.html":
 			case "home.html":
 			case "formHome.html":

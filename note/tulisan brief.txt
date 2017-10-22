@@ -1,0 +1,18 @@
+=-=-=- Need to be clear
+[product, pattern, color] : dependency
+[Shipping Option, Payment method, Discounts, Catalog Price Rule, Department, Vendors] : process business
+[customer registered & guest] : clear differences
+[Doku] : myshortcart.com
+[Invoice] : Design & Process
+[Store locator] : Longitude, Latitude 
+[Media] : File meaning
+[Share function] : Need API & Privileges (issues : smartphone only)
+[System Setting] : function ?
+[Contact / Store Locator] : same design ?
+
+-=-=- FINISHING
+1. clean image
+2. image sizer
+3. form validation
+
+

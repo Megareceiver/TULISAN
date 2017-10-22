@@ -3,8 +3,8 @@ $(function(){
 	headerAdmin();
 	pageAdmin();
 	footerAdmin();
+	backToTop();
 });
-
 
 function headerAdmin(){
 	var html =
@@ -14,7 +14,7 @@ function headerAdmin(){
 				'<div class="logo"><img class="big-image" src="../assets/PICS/tulisan.png" /></div>'+
 			'</div>'+
 			'<div class="col-xs-7 col-md-9">'+
-				'<div class="header-title"><h2>Product - Departement</h2></div>'+
+				'<div class="header-title"><h2><span id="departmentName">Product</span> - Departement</h2></div>'+
 				'<div class="header-menu fontserif hidden-sm hidden-xs">' + 
 					'<ul>' + 
 						'<li><a href="../page/shop.html">View Store</a> &nbsp; &nbsp;|</li>' + 
@@ -92,11 +92,13 @@ function pageAdmin(){
 		$(".list-nav li, .top-nav li").removeClass('active');
 		switch(page[page.length - 1]){
 			case "product.html": 
+			case "color.html": 
 			case "newProduct.html": $(".product-route").addClass('active'); break;
 			case "customer.html": 
 			case "newCustomer.html": $(".customer-route").addClass('active'); break;
 			case "cms.html":
 			case "home.html":
+			case "formHome.html":
 			case "story.html":
 			case "videos.html":
 			case "chatter.html": $(".cms-route").addClass('active'); break;
@@ -111,6 +113,7 @@ function pageAdmin(){
 
 function footerAdmin(){
 	var html = "Copyright © 2014 Tulisan LLC. All Rights Reserved.";
+	html = html + '<a href="#" id="back-to-top" title="Back to top"><span class="fa fa-arrow-up fa-2x"></span></a>';
 
 	$(".main-footer").html(html);
 }
@@ -423,4 +426,29 @@ function currencyFormat(num, curr = 'Rp. ') {
     return curr + p.split("").reverse().reduce(function(acc, num, i, orig) {
         return  num=="-" ? acc : num + (i && !(i % 3) ? "," : "") + acc;
     }, "");
+}
+
+//backToTop
+function backToTop(){
+	if ($('#back-to-top').length) {
+	    var scrollTrigger = 100, // px
+	        backToTop = function () {
+	            var scrollTop = $("html,body").scrollTop();
+	            if (scrollTop > scrollTrigger) {
+	                $('#back-to-top').addClass('show');
+	            } else {
+	                $('#back-to-top').removeClass('show');
+	            }
+	        };
+	    backToTop();
+	    $(window).on('scroll', function () {
+	        backToTop();
+	    });
+	    $('#back-to-top').on('click', function (e) {
+	        e.preventDefault();
+	        $('html,body').animate({
+	            scrollTop: 0
+	        }, 700);
+	    });
+	}
 }

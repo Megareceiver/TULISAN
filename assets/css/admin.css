@@ -155,6 +155,12 @@ main.parent-admin .top-nav a { color: #FFF; }
 .summary-group p { margin-bottom: 0 }
 .summary-group .number { font-size: 34px; }
 .summary-group .summary-text { display: inline-block; margin-right: 30px; }
+.summary-group .summary-text.card { 
+  border: 1px solid #CCC;
+  padding: 10px;
+  margin-bottom: 20px;
+  margin-right: 20px;
+}
 
 /*ext group*/
 .ext-group { display: inline-block; }
@@ -281,6 +287,9 @@ main.parent-admin .top-nav a { color: #FFF; }
   height: 100%;
 }
 
+/*=============================================================================================*/
+/*BACK TO TOP*/
+#back-to-top { display: none; opacity: 1; }
 
 /*=============================================================================================*/
 /*RESPONSIVE*/
@@ -361,6 +370,10 @@ main.parent-admin .top-nav a { color: #FFF; }
 
   /*card-menu*/
   .card-menu ul li { margin-left: 20px; }
+
+  /*=============================================================================================*/
+  /*BACK TO TOP*/
+  #back-to-top { display: block; }
 }
 
 /* small */

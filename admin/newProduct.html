@@ -54,13 +54,33 @@
 							'<textarea class="form-control" rows=5></textarea>'+
 						'</div>'+
 						'<div class="form-group">'+
-							'<label>Color Description</label>'+
-							'<textarea class="form-control" rows=5></textarea>'+
+							'<label>Material</label>'+
+							'<textarea class="form-control" rows=3></textarea>'+
 						'</div>'+
 						'<div class="form-group">'+
-							'<label>Material</label>'+
-							'<textarea class="form-control" rows=5></textarea>'+
+							'<label>Dimension</label>'+
+							'<input type="text" class="form-control">'+
 						'</div>'+
+						'<div class="form-group">'+
+							'<label>Quantity</label>'+
+							'<input type="text" class="form-control">'+
+						'</div>'+
+						'<div class="form-group">'+
+							'<label>Price</label>'+
+							'<input type="text" class="form-control">'+
+						'</div>'+
+						'<div class="form-group">' +
+						    '<label>Story</label>' +
+						    '<select class="form-control">' +
+						    	'<option value="">Choose story</option>' +
+						    '</select>' +
+					    '</div>'+
+					    '<div class="form-group">' +
+						    '<label>Color group</label>' +
+						    '<select class="form-control">' +
+						    	'<option value="">Choose color</option>' +
+						    '</select>' +
+					    '</div>'+
 						'<div class="clearfix"></div>';
 						
 						html = html +
@@ -73,15 +93,17 @@
 				'</div>'+
 				'<div class="input-frame col-md-6">'+
 					'<div class="form-group">'+
-						'<label>Dimension</label>'+
-						'<input type="text" class="form-control">'+
+						'<label>Product Image</label>'+
+					'</div>'+
+					'<div class="form-group text-center">'+
+						'<img class="medium-image" src="../assets/default/product.gif">'+
 					'</div>'+
 					'<div class="form-group">'+
-						'<label>Product Image</label>'+
 						'<input id="input-id" type="file" class="file form-control" data-preview-file-type="text">'+
-					'</div>';
+					'</div>' +
+					'<hr/>';
 
-					for(var loop=0; loop<4; loop++){
+					for(var loop=0; loop<6; loop++){
 						html = html +
 						'<div class="form-group">'+
 							'<label>Pattern #' + (loop + 1) + '</label>'+

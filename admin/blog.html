@@ -38,9 +38,10 @@
 				var html = '';
 				var desc = "The Sound of Dawn’, an art project by multi-dimensional artist Melissa Sunjaya, examines the concept of self-love. This sensual prose is about a spiritual awakening to discover bliss and happiness within ourselves. Only through a commitment of loving ourselves wholeheartedly, we can begin to love others unconditionally.</br>We recently sat down with designer Zhijun Wang to discuss his project that turns hyped sneakers into wearable face masks. The Beijing-based creative started his face mask project to comment on the pollution in his city, where citizens are battling extreme air pollution. Understandably, Wang’s mask projects have been met with mixed responses and have created quite a buzz on the internet. In our talk with Wang he notes that he only wishes to make interesting items that no one has made before and that he has no interest in selling his masks. Additionally, we gave a pair of our HYPEBEAST 20th anniversary New Balance 580 “Earth” sneakers to Wang to be made into one of his signature face masks.";
 				desc = desc.substring(0, 100) + '...';
+				var sub = "LOCATION : NEWYORK";
 				var data = [
-					{ blogId: "1", title: 'Finding Unconditional Love', description: desc, fileName: 'testVids.mp4', filesize: '9.74MB', publishedTime: '2017/10/21 12:00:00', publishedBy: 'admin' },
-					{ blogId: "2", title: 'Finding Unconditional Love', description: desc, fileName: 'testVids.mp4', filesize: '9.74MB', publishedTime: '2017/10/21 15:35:00', publishedBy: 'admin' },
+					{ idData: "1", title: 'Finding Unconditional Love', subtitle: sub, description: desc, date: "25TH FEBRUARY 2014", photoBy: "Carin Olsson" },
+					{ idData: "2", title: 'Finding Unconditional Love', subtitle: sub, description: desc, date: "25TH FEBRUARY 2014", photoBy: "Carin Olsson" },
 				]
 
 				html = html +
@@ -48,7 +49,7 @@
 					'<div class="operation-group">'+
 						'<form class="form-inline">' +
 							'<div class="input-group operation-button">' +
-								'<a href="newVideo.html"><i class="fa fa-plus-circle text-warning">&nbsp;</i> Add Blog</a>'+
+								'<a href="formBlog.html"><i class="fa fa-plus-circle text-warning">&nbsp;</i> Add Blog</a>'+
 							'</div>' +
 							'<div class="input-group operation-button">' +
 								'<a href="#"><i class="fa fa-minus-circle text-warning">&nbsp;</i> Delete Blog</a>'+
@@ -110,20 +111,22 @@
 					    	'<tr>'+
 						    	'<th width="5%"><input type="checkbox" value="'+loop+'" id="selectRecord' + loop + '" onclick="checkboxToggle(this, \'customerSelect\')" /><label for="selectRecord' + loop + '"></label></th>'+
 						        '<th>Title</th>'+
+						        '<th>Subtitle</th>'+
 						        '<th width="30%">Description</th>'+
-						        '<th>By</th>'+
-						        '<th>Time</th>'+
+						        '<th>Date</th>'+
+						        '<th>Photo by</th>'+
 					    	'</tr>'+
 					    '</thead>'+
 					    '<tbody>';
 					    	for(var loop =0; loop<data.length; loop++){
 					    		html = html +
 					    		'<tr>'+
-					    			'<td><input type="checkbox" name="customerSelect" value="'+data[loop].blogId+'" id="selectRecord' + loop + '"><label for="selectRecord' + loop + '"></label></td>'+
+					    			'<td><input type="checkbox" name="customerSelect" value="'+data[loop].idData+'" id="selectRecord' + loop + '"><label for="selectRecord' + loop + '"></label></td>'+
 					    			'<td>'+ data[loop].title +'</td>'+
+					    			'<td>'+ data[loop].subtitle +'</td>'+
 					    			'<td>'+ data[loop].description +'</td>'+
-					    			'<td class="syn-nowrap">'+ data[loop].publishedBy +'</td>'+
-					    			'<td>'+ timeSince(new Date(Date.parse(data[loop].publishedTime))) +'</td>'+
+					    			'<td class="syn-nowrap">'+ data[loop].date +'</td>'+
+					    			'<td>'+ data[loop].photoBy +'</td>'+
 					    		'</tr>';
 					    	}
 				html = html +

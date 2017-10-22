@@ -37,49 +37,38 @@
 			function customer(){
 				var html = '';
 
-				var data = {
-					totalOrder: 0,
-					totalCustomer: 0,
-					registeredCustomer: 0,
-					guest: 0,
-					totalUser:0
+				var data = [
+					{ group: "Orders", total: 0, },
+					{ group: "Products", total: 0, },
+					{ group: "Customers", total: 0, },
+					{ group: "Vendors", total: 0, },
+					{ group: "Users", 	total: 0, }
+				];
+
+				html = html +
+				'<h3>Summary</h3>' +
+				'<div class="header-option syn-plus">' +
+					'<div class="summary-group">';
+
+				for(var loop=0; loop<data.length; loop++){
+					html = html +
+					'<div class="summary-text card">'+
+						'<p>Total number of ' + data[loop].group + '</p>'+
+						'<p class="number">' + data[loop].total + '</p>'+
+					'</div>';
 				}
 
-				// html = html +
-				// '<div class="header-option syn-plus">' +
-				// 	'<div class="summary-group">'+
-				// 		'<div class="summary-text">'+
-				// 			'<p>Registered Customer</p>'+
-				// 			'<p class="number">1350</p>'+
-				// 		'</div>'+
-				// 		'<div class="summary-text">'+
-				// 			'<p>Guest</p>'+
-				// 			'<p class="number">35</p>'+
-				// 		'</div>'+
-				// 		'<div class="summary-text">'+
-				// 			'<p>Registered</p>'+
-				// 			'<p class="number">1350</p>'+
-				// 		'</div>'+
-				// 		'<div class="summary-text">'+
-				// 			'<p>Guest</p>'+
-				// 			'<p class="number">35</p>'+
-				// 		'</div>'+
-				// 		'<div class="summary-text">'+
-				// 			'<p>Registered</p>'+
-				// 			'<p class="number">1350</p>'+
-				// 		'</div>'+
-				// 		'<div class="summary-text">'+
-				// 			'<p>Guest</p>'+
-				// 			'<p class="number">35</p>'+
-				// 		'</div>'+
-				// 	'</div>'+
-				// '</div>';
+				html = html +
+					'</div>'+
+				'</div>' +
+				'<hr/>';
 
 				var menu = [
-					{ 'title': "PRODUCTS", 'link': 'product.html', 'icon': 'cubes' },
+					{ 'title': "ORDERS", 'link': 'order.html', 'icon': 'file-text-o' },
 					{ 'title': "CUSTOMERS", 'link': 'customer.html', 'icon': 'users' },
 					{ 'title': "VENDORS", 'link': 'vendor.html', 'icon': 'truck' },
-					{ 'title': "ORDERS", 'link': 'order.html', 'icon': 'file-text-o' },
+					{ 'title': "PRODUCTS", 'link': 'product.html', 'icon': 'cubes' },
+					{ 'title': "COLORS", 'link': 'color.html', 'icon': 'paint-brush' },
 					{ 'title': "CMS HOME", 'link': 'home.html', 'icon': 'home' },
 					{ 'title': "CMS STORIES", 'link': 'story.html', 'icon': 'pencil' },
 					{ 'title': "CMS BLOG", 'link': 'blog.html', 'icon': 'commenting-o' },
@@ -88,7 +77,8 @@
 					{ 'title': "SETTINGS", 'link': 'setting.html', 'icon': 'gear' },
 				];
 
-				html = html +
+				html = html + 
+				'<h3>Quick menu</h3>' +
 				'<div class="card-menu">'+
 					'<ul>';
 

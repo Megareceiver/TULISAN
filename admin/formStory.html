@@ -28,7 +28,7 @@
 		<script type="text/javascript" src="../assets/js/jquery-ui-1.10.0.custom.min.js"></script>
 		<script type="text/javascript" src="../assets/js/bootstrap.min.js"></script>	
 		<script type="text/javascript" src="../assets/js/syncard.js"></script>	
-		<!-- <script type="text/javascript" src="../assets/js/nicEdit.js"></script>	 -->
+		<script type="text/javascript" src="../assets/js/nicEdit.js"></script>	
 
 		<!-- page script -->
 		<script type="text/javascript">
@@ -39,55 +39,49 @@
 				var html = '';
 
 				html = html +
-				'<div class="input-frame col-md-6">'+
-					'<h3><b>New Customer</b></h3>'+
-					'<form>'+
+				'<form>'+
+					'<div class="input-frame col-md-6">'+
+						'<h3><b>Story</b></h3>'+
 						'<div class="form-group">'+
-							'<label>Full Name</label>'+
+							'<label>Title</label>'+
 							'<input type="text" class="form-control">'+
 						'</div>'+
 						'<div class="form-group">'+
-							'<label>Address</label>'+
-							'<textarea class="form-control" id="editor"></textarea>'+
-						'</div>'+
-						'<div class="form-group">'+
-							'<div class="col-md-8 syn-clear">'+
-								'<label>City</label>'+
-								'<input type="text" class="form-control">'+
-							'</div>'+
-							'<div class="col-md-4 syn-clear">'+
-								'<label>Zip Code</label>'+
-								'<input type="text" class="form-control">'+
-							'</div>'+
-							'<div class="clearfix"></div>'+
-						'</div>'+
-						'<div class="form-group">'+
-							'<label>Country</label>'+
-							'<select class="form-control">'+
-								'<option> Indonesia </option>'+
-							'</select>'+
-						'</div>'+
-						'<div class="form-group">'+
-							'<label>Mobile Phone</label>'+
+							'<label>Subtitle</label>'+
 							'<input type="text" class="form-control">'+
 						'</div>'+
 						'<div class="form-group">'+
-							'<label>Email</label>'+
-							'<input type="email" class="form-control">'+
+							'<label>Description</label>'+
+							'<textarea class="form-control" rows="5" id="editor"></textarea>'+
+						'</div>'+
+						'<div class="form-group">'+
+							'<label>Author</label>'+
+							'<input type="text" class="form-control">'+
 						'</div>'+
 						'<div class="clearfix"></div>'+
 						'<div class="btn-group">'+
 							'<button class="btn btn-warning" type="button">Create</button>'+
 							'<button class="btn btn-warning" type="button">Cancel</button>'+
 						'</div>'+
-					'</form>'+
-				'</div>';
+					'</div>' +
+					'<div class="input-frame col-md-6">'+
+						'<div class="form-group">'+
+							'<label>Story Image</label>'+
+						'</div>'+
+						'<div class="form-group">'+
+							'<img class="medium-image border" src="../assets/default/story.gif">'+
+						'</div>'+
+						'<div class="form-group">'+
+							'<input id="input-id" type="file" class="file form-control" data-preview-file-type="text">'+
+						'</div>' +
+					'</div>' +
+				'</form>';
 
 				// html = html + '</div>';
 				$('main.parent-admin .main-content').append(html);
 
 				// //textarea editor
-				// new nicEditor({maxHeight : 100, iconsPath : '../assets/PICS/nicEditorIcons.gif'}).panelInstance('editor');
+				new nicEditor({iconsPath : '../assets/PICS/nicEditorIcons.gif'}).panelInstance('editor');
 			}
 		</script>
 	</body>

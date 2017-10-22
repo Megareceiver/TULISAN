@@ -39,8 +39,8 @@
 				var desc = 'We design our products to be simple and pure, then layer them with artist-illustrated editions to celebrate individuality. Each creation is constructed by hand in small batches, with artisanal craftsmanship.';
 				desc = desc.substring(0, 100) + '...';
 				var data = [
-					{ pictureId: "1", title: 'Finding Unconditional Love', description: desc, publishedTime: '2017/10/21 12:00:00', publishedBy: 'admin' },
-					{ pictureId: "2", title: 'Finding Unconditional Love', description: desc, publishedTime: '2017/10/21 15:35:00', publishedBy: 'admin' },
+					{ idData: "1", picture: "820abdfb_18f8.jpg", title: 'Finding Unconditional Love', description: desc, publishedTime: '2017/10/21 12:00:00', publishedBy: 'admin' },
+					{ idData: "2", picture: "61446540_81af.jpg", title: 'Finding Unconditional Love', description: desc, publishedTime: '2017/10/21 15:35:00', publishedBy: 'admin' },
 				]
 
 				html = html +
@@ -48,13 +48,13 @@
 					'<div class="operation-group">'+
 						'<form class="form-inline">' +
 							'<div class="input-group operation-button">' +
-								'<a href="#"><i class="fa fa-plus-circle text-warning">&nbsp;</i> Add Picture</a>'+
+								'<a href="formHome.html"><i class="fa fa-plus-circle text-warning">&nbsp;</i> Add Home Picture</a>'+
 							'</div>' +
 							'<div class="input-group operation-button">' +
-								'<a href="#"><i class="fa fa-minus-circle text-warning">&nbsp;</i> Delete Picture</a>'+
+								'<a href="#"><i class="fa fa-minus-circle text-warning">&nbsp;</i> Delete Home Picture</a>'+
 							'</div>' +
 							'<div class="input-group operation-button">' +
-								'<a href="#"><i class="fa fa-bars text-warning">&nbsp;</i> Manage Picture</a>'+
+								'<a href="#"><i class="fa fa-bars text-warning">&nbsp;</i> Manage Home Picture</a>'+
 							'</div>' +
 				        	'<div class="input-group pull-right search-box">' +
 				        		'<input type="text" class="form-control" placeholder="Search">' +
@@ -108,7 +108,8 @@
 					'<table class="table table-striped table-responsive">'+
 					    '<thead>'+
 					    	'<tr>'+
-						    	'<th width="5%"><input type="checkbox" value="'+loop+'" id="selectRecord' + loop + '" onclick="checkboxToggle(this, \'customerSelect\')" /><label for="selectRecord' + loop + '"></label></th>'+
+						    	'<th width="5%"><input type="checkbox" value="1" id="selectRecord" onclick="checkboxToggle(this, \'customerSelect\')" /><label for="selectRecord"></label></th>'+
+						        '<th width="10%" class="text-center"><span class="fa fa-picture-o"></span></th>'+
 						        '<th>Title</th>'+
 						        '<th width="30%">Description</th>'+
 						        '<th>By</th>'+
@@ -116,16 +117,19 @@
 					    	'</tr>'+
 					    '</thead>'+
 					    '<tbody>';
-					    	for(var loop =0; loop<data.length; loop++){
-					    		html = html +
-					    		'<tr>'+
-					    			'<td><input type="checkbox" name="customerSelect" value="'+data[loop].pictureId+'" id="selectRecord' + loop + '"><label for="selectRecord' + loop + '"></label></td>'+
-					    			'<td>'+ data[loop].title +'</td>'+
-					    			'<td>'+ data[loop].description +'</td>'+
-					    			'<td class="syn-nowrap">'+ data[loop].publishedBy +'</td>'+
-					    			'<td>'+ timeSince(new Date(Date.parse(data[loop].publishedTime))) +'</td>'+
-					    		'</tr>';
-					    	}
+
+		    	for(var loop =0; loop<data.length; loop++){
+		    		html = html +
+		    		'<tr>'+
+		    			'<td><input type="checkbox" name="customerSelect" value="'+data[loop].idData+'" id="selectRecord' + loop + '"><label for="selectRecord' + loop + '"></label></td>'+
+		    			'<td><img class="big-image" src="../assets/PICS/'+ data[loop].picture +'"></td>'+
+		    			'<td>'+ data[loop].title +'</td>'+
+		    			'<td>'+ data[loop].description +'</td>'+
+		    			'<td class="syn-nowrap">'+ data[loop].publishedBy +'</td>'+
+		    			'<td>'+ timeSince(new Date(Date.parse(data[loop].publishedTime))) +'</td>'+
+		    		'</tr>';
+		    	}
+
 				html = html +
 					    '</tbody>'+
 					'</table>'+

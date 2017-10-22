@@ -85,12 +85,12 @@ function pageAdmin(){
 
 	//breadcrum
 	var page = window.location.href; 
-		page = page.replace('#', '');
-		page = page.split('/');
+		page = page.substring(page.lastIndexOf("/")+ 1);
+		page = (page.match(/[^.]+(\.[^?#]+)?/) || [])[0];
 
 	if(page != null && page.length > 0){
 		$(".list-nav li, .top-nav li").removeClass('active');
-		switch(page[page.length - 1]){
+		switch(page){
 			case "product.html": 
 			case "color.html": 
 			case "formColor.html": 

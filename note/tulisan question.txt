@@ -1,0 +1,32 @@
+=-=-=-
+product - > pattern -> color
+shipping option
+payment method
+discount dependency
+catalog price rule
+perlakuan customer registered & guest
+
+
+--=-=
+media
+store locator
+
+-=-
+invoice design
+
+
+
+orderid
+customerId
+status
+total
+productsId
+quantityId
+
+
+-=-=- FINISHING
+1. clean image
+2. image sizer
+3. form validation
+
+

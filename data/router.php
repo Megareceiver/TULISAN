@@ -25,11 +25,11 @@
 
 				
 				case 'addData':
-					$json = addData($_POST, $_GET['target']);
+					$json = $route->addData($_POST, $_GET['target']);
 				break;
 				
 				case 'updateData':
-					$json = updateData($_POST, $_GET['target']);
+					$json = $route->updateData($_POST, $_GET['target']);
 				break;
 				
 				case 'removeData':

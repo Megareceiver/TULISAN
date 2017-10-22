@@ -48,7 +48,7 @@
 							'<a href="#" id="deleteButton"><i class="fa fa-minus-circle text-warning">&nbsp;</i> Delete Product</a>'+
 						'</div>' +
 						'<div class="input-group operation-button">' +
-							'<a href="#"><i class="fa fa-bars text-warning">&nbsp;</i> Manage Product</a>'+
+							'<a href="#" id="manageButton"><i class="fa fa-bars text-warning">&nbsp;</i> Manage Product</a>'+
 						'</div>' +
 						'<div class="input-group operation-button">' +
 							'<a href="color.html"><i class="fa fa-bars text-warning">&nbsp;</i> Manage Color</a>'+
@@ -246,6 +246,22 @@
 				$('#deleteButton').unbind().on("click", function(){ 
 					if(checkedArray.length>0){
 						p_removeData('operation', 'product', checkedArray);
+						
+						r_setCookie('adminPageFilter', '1');
+						r_setCookie('adminAlphaFilter', '');
+						var page = (r_getCookie('adminPageFilter') != "" ? r_getCookie('adminPageFilter'): "1");
+						var data = p_getData('operation', 'product', page);
+							data = data.feedData;
+
+						dataGenerator(data);
+					}
+				});
+
+				$('#manageButton').unbind().on("click", function(){ 
+					if(checkedArray.length == 1 && checkedArray[0] != "0"){
+						window.location.href = base_url + "/admin/formProduct.html?q=" + checkedArray[0];
+					}else{
+						alert("Please choose only one record!");
 					}
 				});
 			}

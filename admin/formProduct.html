@@ -28,6 +28,7 @@
 		<script type="text/javascript" src="../assets/js/jquery-ui-1.10.0.custom.min.js"></script>
 		<script type="text/javascript" src="../assets/js/bootstrap.min.js"></script>	
 		<script type="text/javascript" src="../assets/js/syncard.js"></script>	
+		<script type="text/javascript" src="../assets/js/public.js"></script>	
 
 		<!-- page script -->
 		<script type="text/javascript">
@@ -38,68 +39,68 @@
 				var html = '';
 
 				html = html +
+				'<form id="syncrom" f-group="operation" f-target="product" enctype="multipart/form-data">'+
 				'<div class="input-frame col-md-6">'+
 					'<h3><b>Product</b></h3>'+
-					'<form>'+
-						'<div class="form-group col-md-8 syn-clear">'+
-							'<label>Product Name</label>'+
-							'<input type="text" class="form-control">'+
-						'</div>'+
-						'<div class="form-group col-md-4 syn-clear">'+
-							'<label>SKU</label>'+
-							'<input type="text" class="form-control">'+
-						'</div><div class="clearfix"></div>'+
-						'<div class="form-group">'+
-							'<label>Description</label>'+
-							'<textarea class="form-control" rows=5></textarea>'+
-						'</div>'+
-						'<div class="form-group">'+
-							'<label>Material</label>'+
-							'<textarea class="form-control" rows=3></textarea>'+
-						'</div>'+
-						'<div class="form-group">'+
-							'<label>Dimension</label>'+
-							'<input type="text" class="form-control">'+
-						'</div>'+
-						'<div class="form-group">'+
-							'<label>Quantity</label>'+
-							'<input type="text" class="form-control">'+
-						'</div>'+
-						'<div class="form-group">'+
-							'<label>Price</label>'+
-							'<input type="text" class="form-control">'+
-						'</div>'+
-						'<div class="form-group">' +
-						    '<label>Story</label>' +
-						    '<select class="form-control">' +
-						    	'<option value="">Choose story</option>' +
-						    '</select>' +
-					    '</div>'+
-					    '<div class="form-group">' +
-						    '<label>Color group</label>' +
-						    '<select class="form-control">' +
-						    	'<option value="">Choose color</option>' +
-						    '</select>' +
-					    '</div>'+
-						'<div class="clearfix"></div>';
+					'<div class="form-group col-md-8 syn-clear">'+
+						'<label>Product Name</label>'+
+						'<input name="name" type="text" class="form-control">'+
+						'<input name="idData" type="hidden">'+
+					'</div>'+
+					'<div class="form-group col-md-4 syn-clear">'+
+						'<label>SKU</label>'+
+						'<input name="sku" type="text" class="form-control">'+
+					'</div><div class="clearfix"></div>'+
+					'<div class="form-group">'+
+						'<label>Description</label>'+
+						'<textarea name="description" class="form-control" rows=5></textarea>'+
+					'</div>'+
+					'<div class="form-group">'+
+						'<label>Material</label>'+
+						'<textarea name="material" class="form-control" rows=3></textarea>'+
+					'</div>'+
+					'<div class="form-group">'+
+						'<label>Dimension</label>'+
+						'<input name="dimension" type="text" class="form-control">'+
+					'</div>'+
+					'<div class="form-group">'+
+						'<label>Quantity</label>'+
+						'<input name="qty" type="text" class="form-control">'+
+					'</div>'+
+					'<div class="form-group">'+
+						'<label>Price</label>'+
+						'<input name="price" type="text" class="form-control">'+
+					'</div>'+
+					'<div class="form-group">' +
+					    '<label>Story</label>' +
+					    '<select name="storyId" class="form-control">' +
+					    	'<option value="NULL">Choose story</option>' +
+					    '</select>' +
+				    '</div>'+
+				    '<div class="form-group">' +
+					    '<label>Color group</label>' +
+					    '<select name="colorId" class="form-control">' +
+					    	'<option value="NULL">Choose color</option>' +
+					    '</select>' +
+				    '</div>'+
+					'<div class="clearfix"></div>';
 						
-						html = html +
-						'<div class="clearfix"></div>'+
-						'<div class="btn-group">'+
-							'<button class="btn btn-warning" type="button">Create</button>'+
-							'<button class="btn btn-warning" type="button">Cancel</button>'+
-						'</div>'+
-					'</form>'+
+					html = html +
+					'<div class="clearfix"></div>'+
+					'<div class="btn-group">'+
+						'<button class="btn btn-warning" type="sumbit">Create</button>'+
+						'<button class="btn btn-warning" type="reset">Cancel</button>'+
+					'</div>'+
 				'</div>'+
 				'<div class="input-frame col-md-6">'+
 					'<div class="form-group">'+
 						'<label>Product Image</label>'+
 					'</div>'+
 					'<div class="form-group text-center">'+
-						'<img class="medium-image" src="../assets/default/product.gif">'+
+						'<img id="preview" name-tag="picture" class="medium-image" src="../assets/default/product.gif">'+
 					'</div>'+
 					'<div class="form-group">'+
-						'<input id="input-id" type="file" class="file form-control" data-preview-file-type="text">'+
+						'<input name="picture" preview-id="preview" id="input-id" type="file" class="file form-control" data-preview-file-type="text">'+
 					'</div>' +
 					'<hr/>';
 
@@ -107,16 +108,36 @@
 						html = html +
 						'<div class="form-group">'+
 							'<label>Pattern #' + (loop + 1) + '</label>'+
-							'<input id="input-id' + loop + '" type="file" class="file form-control" data-preview-file-type="text">'+
+							'<input name="pattern[]" id="input-id' + loop + '" type="file" class="file form-control" data-preview-file-type="text">'+
 						'</div>';
 					}
 
 				html = html + '</div>';
+				html = html + '</form>';
 
 				$('main.parent-admin .main-content').append(html);
+
+				/* data generator */
+				if(getParam('q') != "" && getParam('q') != null) dataGenerator(getParam('q'));
+				else p_formHandler('syncrom', 'addData', 'product.html');
+
+				numberOnlyActivator('[name="qty"]');
+				currencyFormatActivator('[name="price"]');
+				imagePreviewActivator('[name="picture"]');
 			}
 			
-		
+			function dataGenerator(idData){
+				var xData = p_getData('operation', 'productFetch', '', "idData=" + idData);
+					xData = xData.feedData;
+
+				for (var key in xData) {
+					if($("[name=" + key + "]").attr('type') != "file") $("[name=" + key + "]").val(xData[key]);
+					else $("[name-tag=" + key + "]").attr('src', '../assets/products/' + xData[key]);
+				}
+
+				currencyFormatChanger('[name="price"]');
+				p_formHandler('syncrom', 'updateData', 'product.html');
+			}
 		</script>
 	</body>
 </html>

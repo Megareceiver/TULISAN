@@ -1,4 +1,4 @@
-var base_url = window.location.origin + '/TULISAN';
+var base_url = window.location.origin + '';
 var checkedArray = [];
 
 /* authentication */
@@ -84,9 +84,8 @@ function p_changeData(group, target, pId, refferenceId, dataFetch){
 	return data;
 }
 
-function p_formHandler(formId, type){
+function p_formHandler(formId, type, back){
 	$("#" + formId).unbind().on('submit', function(e) {
-		showNotification('info', 'waiting', 'sedang memproses...', false);
 		e.preventDefault();
 		$.ajax({
 			url: base_url + "/data/router.php?session=" + type + "&group=" + $(this).attr('f-group') + "&target=" + $(this).attr('f-target'), // Url to which the request is send
@@ -96,12 +95,20 @@ function p_formHandler(formId, type){
 			cache: false,             // To unable request pages to be cached
 			processData:false,        // To send DOMDocument or non processed data file it is set to false
 			success: function(result){
-			console.log(data);
-		},
-		complete: function(xhr,status) {  },
-		error: function(xhr,status,error) { console.log(xhr); }
+				console.log(result);
+				if(result.feedStatus == "success"){
+					r_callBack(back);
+				}
+			},
+			complete: function(xhr,status) {  },
+			error: function(xhr,status,error) { console.log(xhr); }
 		});
 	});		
+}
+
+//Fall Back 
+function r_callBack(back){
+	window.location.href = base_url + "/admin/" + back;
 }
 
 
@@ -142,4 +149,71 @@ function checkboxActivator(){
 	    checkedArray = chkArray;
 	    console.log(checkedArray);
     });
+}
+
+/* form auto */
+/* =============================================================================================== */
+function isNumberKey(evt){
+	$('input.number').keyup(function(){$(this).val($(this).val().replace(/[^\d]/,''));});
+    var charCode = (evt.which) ? evt.which : evt.keyCode
+    return !(charCode > 31 && (charCode < 48 || charCode > 57));
+}
+
+function numberOnlyActivator(target){
+	$(target).keypress(function (e) {
+	    if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
+	        return false;
+	    }
+	});
+}
+
+function currencyFormatActivator(target){
+	$(target).on('keyup', function(e){
+		if ((e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) || $(this).val() == "") { return false; }
+		else{
+	    	var n = parseInt($(this).val().replace(/\D/g,''),10);
+	    	$(this).val(n.toLocaleString());
+		}
+	});
+
+	$(target).keypress(function (e) {
+	    if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
+	        return false;
+	    }
+	});
+}
+
+function currencyFormatChanger(target){
+	var n = parseInt($(target).val().replace(/\D/g,''),10);
+	$(target).val(n.toLocaleString());
+}
+
+/* image Preview */
+function imagePreviewActivator(target){
+	 $(target).unbind().on("change", function(){ imagePreview(this, $(this).attr("preview-id")); });
+}
+
+function imagePreview(elem, targetId) {
+	
+	if (elem.files && elem.files[0]) {
+		var reader = new FileReader();
+
+		reader.onload = function (e) {
+			$('#' + targetId).attr('src', e.target.result);
+			// $('img[viewer-id=' + targetId + ']').removeClass("changed").addClass("changed");
+		};
+
+		reader.readAsDataURL(elem.files[0]);
+		return false;
+	}
+}
+
+/* get param from url */
+function getParam(name, url) {
+    if (!url) url = location.href;
+    name = name.replace(/[\[]/,"\\\[").replace(/[\]]/,"\\\]");
+    var regexS = "[\\?&]"+name+"=([^&#]*)";
+    var regex = new RegExp( regexS );
+    var results = regex.exec( url );
+    return results == null ? null : results[1];
 }

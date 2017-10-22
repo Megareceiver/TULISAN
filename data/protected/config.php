@@ -13,4 +13,8 @@
 	function closeGate($gate){
 		mysqli_close($gate);
 	}
+
+	function basePath(){
+		return $_SERVER['SERVER_NAME'].'/TULISAN/';
+	}
 ?>

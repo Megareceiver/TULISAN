@@ -1,4 +1,4 @@
-var base_url = window.location.origin + '/TULISAN';
+var base_url = window.location.origin + '';
 				
 header();
 footer();

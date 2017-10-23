@@ -28,7 +28,7 @@
 		<script type="text/javascript" src="../assets/js/jquery-ui-1.10.0.custom.min.js"></script>
 		<script type="text/javascript" src="../assets/js/bootstrap.min.js"></script>	
 		<script type="text/javascript" src="../assets/js/syncard.js"></script>	
-		<script type="text/javascript" src="../assets/js/nicEdit.js"></script>	
+		<script type="text/javascript" src="../assets/js/public.js"></script>	
 
 		<!-- page script -->
 		<script type="text/javascript">
@@ -39,34 +39,35 @@
 				var html = '';
 
 				html = html +
-				'<form>'+
+				'<form id="syncrom" f-group="operation" f-target="user" enctype="multipart/form-data">'+
 					'<div class="input-frame col-md-6">'+
 						'<h3><b>User</b></h3>'+
 						'<div class="form-group">'+
 							'<label>Full Name</label>'+
-							'<input type="text" class="form-control">'+
+							'<input name="name" type="text" class="form-control">'+
+							'<input name="idData" type="hidden">'+
 						'</div>'+
 						'<div class="form-group">'+
 							'<label>Username (email)</label>'+
-							'<input type="email" class="form-control">'+
+							'<input name="username" type="email" class="form-control">'+
 						'</div>'+
 						'<div class="form-group">'+
 							'<label>Password</label>'+
-							'<input type="password" class="form-control">'+
+							'<input name="password" type="password" class="form-control">'+
 						'</div>'+
 						'<div class="form-group">'+
 							'<label>Re-type Password</label>'+
-							'<input type="password" class="form-control">'+
+							'<input name="retype_password" type="password" class="form-control">'+
 						'</div>'+
 						'<div class="form-group">'+
 							'<label>Department</label>'+
-							'<select class="form-control">'+
+							'<select name="departmentId" class="form-control">'+
 								'<option value="">Choose Department</option>'+
 							'</select>'+
 						'</div>'+
 						'<div class="clearfix"></div>'+
 						'<div class="btn-group">'+
-							'<button class="btn btn-warning" type="button">Create</button>'+
+							'<button class="btn btn-warning" type="submit">Create</button>'+
 							'<button class="btn btn-warning" type="button">Cancel</button>'+
 						'</div>'+
 					'</div>' +
@@ -75,19 +76,39 @@
 							'<label>Avatar</label>'+
 						'</div>'+
 						'<div class="form-group text-center">'+
-							'<img class="medium-image" src="../assets/default/user.gif">'+
+							'<img id="preview" name-tag="picture" class="medium-image" src="../assets/default/user.gif">'+
 						'</div>'+
 						'<div class="form-group">'+
-							'<input id="input-id" type="file" class="file form-control" data-preview-file-type="text">'+
+							'<input name="picture" preview-id="preview" accept="image/x-png,image/gif,image/jpeg" id="input-id" type="file" class="file form-control" data-preview-file-type="text">'+
 						'</div>' +
 					'</div>' +
 				'</form>';
 
-				// html = html + '</div>';
 				$('main.parent-admin .main-content').append(html);
 
-				// //textarea editor
-				new nicEditor({iconsPath : '../assets/PICS/nicEditorIcons.gif'}).panelInstance('editor');
+				/* data generator */
+				if(getParam('q') != "" && getParam('q') != null) dataGenerator(getParam('q'));
+				else p_formHandler('syncrom', 'addData', 'user.html');
+
+				imagePreviewActivator('[name="picture"]');
+
+				var oData = p_getData('operation', 'departmentOption');
+				$("[name=departmentId]").append(dataToOptionHtml(oData.feedData));
+			}
+
+			function dataGenerator(idData){
+				var xData = p_getData('operation', 'userFetch', '', "idData=" + idData);
+					xData = xData.feedData;
+
+				for (var key in xData) {
+					if($("[name='" + key + "']").attr('type') != "file") $("[name=" + key + "]").val(xData[key]);
+					else{ 
+						if(xData[key]!="") $("[name-tag=" + key + "]").attr('src', '../assets/users/' + xData[key]);
+						else $("[name-tag='" + key + "']").attr('src', '../assets/default/user.gif');
+					}
+				}
+
+				p_formHandler('syncrom', 'updateData', 'user.html');
 			}
 		</script>
 	</body>

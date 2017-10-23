@@ -89,7 +89,7 @@
 					'<div class="clearfix"></div>'+
 					'<div class="btn-group">'+
 						'<button class="btn btn-warning" type="sumbit">Create</button>'+
-						'<button class="btn btn-warning" type="reset">Cancel</button>'+
+						'<a href="product.html" class="btn btn-warning" type="reset">Cancel</a>'+
 					'</div>'+
 				'</div>'+
 				'<div class="input-frame col-md-6">'+
@@ -129,13 +129,19 @@
 
 				$('main.parent-admin .main-content').append(html);
 
-				/* data generator */
-				if(getParam('q') != "" && getParam('q') != null) dataGenerator(getParam('q'));
-				else p_formHandler('syncrom', 'addData', 'product.html');
-
 				numberOnlyActivator('[name="qty"]');
 				currencyFormatActivator('[name="price"]');
 				imagePreviewActivator('[name="picture"], [name="pattern[]"]');
+
+				var oData = p_getData('operation', 'cms_storyOption');
+				$("[name=storyId]").append(dataToOptionHtml(oData.feedData));
+
+				oData = p_getData('operation', 'colorOption');
+				$("[name=colorId]").append(dataToOptionHtml(oData.feedData));
+
+				/* data generator */
+				if(getParam('q') != "" && getParam('q') != null) dataGenerator(getParam('q'));
+				else p_formHandler('syncrom', 'addData', 'product.html');
 			}
 			
 			function dataGenerator(idData){
@@ -145,8 +151,8 @@
 				for (var key in xData) {
 					if($("[name='" + key + "']").attr('type') != "file") $("[name=" + key + "]").val(xData[key]);
 					else{ 
-						var temp = xData[key].split(","); console.log(temp);
-						if(Array.isArray(temp) == false){
+						var temp = xData[key].split(",");
+						if(key == "picture"){
 							if(xData[key]!="") $("[name-tag=" + key + "]").attr('src', '../assets/products/' + xData[key]);
 							else $("[name-tag='" + key + "']").attr('src', '../assets/default/product.gif');
 						}else{

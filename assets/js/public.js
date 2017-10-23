@@ -190,6 +190,11 @@ function currencyFormatChanger(target){
 	$(target).val(n.toLocaleString());
 }
 
+function normalFormatChanger(target){
+	var n = parseInt(target.replace(/\D/g,''),10);
+	return n;
+}
+
 /* image Preview */
 function imagePreviewActivator(target){
 	 $(target).unbind().on("change", function(){ imagePreview(this, $(this).attr("preview-id")); });
@@ -235,4 +240,14 @@ function fileSizeConverter(bytes, si) {
         ++u;
     } while(Math.abs(bytes) >= thresh && u < units.length - 1);
     return bytes.toFixed(1)+' '+units[u];
+}
+
+//option transform
+function dataToOptionHtml(data){
+	var html = "";
+	for(var loop =0; loop<data.length; loop++){
+		html = html + "<option value='" + data[loop].value + "'>" + data[loop].caption + "</option>";
+	}
+
+	return html;
 }

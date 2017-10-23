@@ -12,12 +12,14 @@
 				case "summary" 			: $resultList = $this->summary(); break;
 				
 				case "product" 			: $resultList = $this->fetchAllRequest('products', array("picture", "idData", "sku", "name", "description", "qty", "price"), $post['keyword'], "ORDER BY name ASC", $post['page']); break;
-				case "productFetch" 	: $resultList = $this->fetchSingleRequest('products', array("picture", "pattern as `pattern[]`", "idData", "sku", "name", "description", "qty", "price"), $post['keyword']); break;
+				case "productFetch" 	: $resultList = $this->fetchSingleRequest('products', array("picture", "pattern as `pattern[]`", "idData", "sku", "name", "description", "qty", "price", "material", "dimension", "storyId", "colorId"), $post['keyword']); break;
 				
 				case "color" 			: $resultList = $this->fetchAllRequest('colors', array("name", "idData"), $post['keyword'], "ORDER BY name ASC", $post['page']); break;
+				case "colorOption" 		: $resultList = $this->fetchAllRecord('colors', array("name as caption", "idData as value"), $post['keyword'], "ORDER BY name ASC"); break;
 				case "colorFetch" 		: $resultList = $this->fetchSingleRequest('colors', array("name", "idData"), $post['keyword']); break;
 
 				case "department" 		: $resultList = $this->fetchAllRequest('departments', array("name", "idData"), $post['keyword'], "ORDER BY name ASC", $post['page']); break;
+				case "departmentOption" : $resultList = $this->fetchAllRecord('departments', array("name as caption", "idData as value"), $post['keyword'], "ORDER BY name ASC"); break;
 				case "departmentFetch" 	: $resultList = $this->fetchSingleRequest('departments', array("name", "idData"), $post['keyword']); break;
 
 				case "customer" 		: $resultList = $this->fetchAllRequest('customers', array("idData", "name", "company", "phone", "email", "CONCAT(address, '\n', city,  ,zipCode, '\n', country) as address", "COALESCE(userId,'guest')"), $post['keyword'], "ORDER BY name ASC", $post['page']); break;
@@ -33,10 +35,14 @@
 				case "cms_homeFetch" 	: $resultList = $this->fetchSingleRequest('cms_home', array("idData", "title", "description", "picture"), $post['keyword']); break;
 				
 				case "cms_story" 		: $resultList = $this->fetchAllRequest('cms_story', array("idData","title", "subtitle", "SUBSTRING(description, 1, 300) as description", "author"), $post['keyword'], "ORDER BY idData DESC", $post['page']); break;
+				case "cms_storyOption" 	: $resultList = $this->fetchAllRecord('cms_story', array("title as caption", "idData as value"), $post['keyword'], "ORDER BY title ASC"); break;
 				case "cms_storyFetch" 	: $resultList = $this->fetchSingleRequest('cms_story', array("idData", "title", "subtitle", "description", "author", "picture"), $post['keyword']); break;
 				
 				case "cms_video" 		: $resultList = $this->fetchAllRequest('cms_video', array("idData","title", "SUBSTRING(description, 1, 300) as description", "fileName", "fileSize", "createdBy as publishedBy", "createdDate as publishedTime"), $post['keyword'], "ORDER BY idData DESC", $post['page']); break;
 				case "cms_videoFetch" 	: $resultList = $this->fetchSingleRequest('cms_video', array("idData","title", "description", "fileName"), $post['keyword']); break;
+				
+				case "user" 		: $resultList = $this->fetchAllRequest('users u LEFT JOIN departments d ON u.departmentId = d.idData', array("u.idData","u.name", "u.username", "u.type", "IFNULL(d.name,'') as department", "u.picture"), "u.idData <> '0'", "ORDER BY u.idData DESC", $post['page']); break;
+				case "userFetch" 	: $resultList = $this->fetchSingleRequest('users', array("idData","name", "username", "type", "departmentId", "picture"), $post['keyword']); break;
 				
 				default	   : $resultList = array( "feedStatus" => "failed", "feedType" => "danger", "feedMessage" => "Something went wrong, failed to collect data!", "feedData" => array()); break;
 			}
@@ -215,6 +221,32 @@
 					}
 				break;
 
+				case "user"  : 
+					$fields = array("name", "username", "departmentId");
+					$values = array();
+					foreach ($fields as $key) {
+						$value = (isset($post[$key]) && $post[$key] != "") ? $post[$key] : "";
+						array_push($values, $value);
+					}
+
+					if(isset($post['password']) && isset($post['retype_password']) && $post['password'] == $post['retype_password']) {
+						array_push($fields, "password");
+						array_push($values, md5($post['password']));
+					}
+
+					array_push($fields, "type");
+					array_push($values, "admin");
+
+					$resultList = $this->insert('users', $fields, $values); 
+
+					if($resultList["feedStatus"] == "success") {
+						if(isset($_FILES["picture"])){
+							$upload = $this->uploadSingleImage($_FILES["picture"], "users", "users", "picture", $resultList["feedId"]);
+							array_push($resultList, array("feedUpload" => $upload['feedMessage']));
+						}
+					}
+				break;
+
 				default	   		: $resultList = array( "feedStatus" => "failed", "feedType" => "danger", "feedMessage" => "Something went wrong, failed to collect data!", "feedData" => array()); break;
 			}
 
@@ -370,6 +402,30 @@
 
 				break;
 
+				case "user"  : 
+					$fields = array("name", "departmentId");
+					$values = array();
+					foreach ($fields as $key) {
+						$value = (isset($post[$key]) && $post[$key] != "") ? $post[$key] : "";
+						$values[$key] = $key." = '".str_replace(',','',$value)."'";
+					}
+
+					if(isset($post['password']) && isset($post['retype_password']) && $post['password'] == $post['retype_password']) {
+						$values['password'] = "password = '".md5($post['password'])."'";
+					}
+
+					$resultList = $this->update('users', $values, $post['idData']); 
+
+					if($resultList["feedStatus"] == "success" && isset($post['idData']) && $post['idData']!="") {
+						if(isset($_FILES["picture"])){
+							$upload = $this->uploadSingleImage($_FILES["picture"], "users", "users", "picture", $post['idData']);
+							$resultList["feedMultiUpload"] = $upload['feedMessage'];
+						}
+					
+					}
+
+				break;
+
 				default	   		: $resultList = array( "feedStatus" => "failed", "feedType" => "danger", "feedMessage" => "Something went wrong, failed to collect data!", "feedData" => array()); break;
 			}
 
@@ -377,6 +433,63 @@
 			$json = $resultList;
 		
 	        return $json;
+		}
+
+		public function fetchAllRecord($table, $fields, $conditions = "", $orderBy = ""){
+			/* initial condition */
+			$resultList = array();
+			$feedStatus	= "failed";
+			$feedType   = "danger";
+			$feedMessage= "Something went wrong, failed to collect data!";
+			$feedData	= array();
+
+			$temp		= "";
+
+			/* open connection */ 
+			$gate = $this->db;
+			if($gate){		
+
+				if(is_array($fields)) {
+					foreach ($fields as $value) {
+						if($temp  == "") $temp = $value;
+						else $temp = $temp.",".$value;
+					}
+
+					$fields = $temp;
+					$temp   = "";
+				}
+
+				if(is_array($conditions)) {
+					foreach ($conditions as $value) {
+						$temp = $temp." ".$value;
+					}
+
+					$conditions = $temp;
+					$temp   = "";
+				}
+
+				$conditions = ($conditions != "") ? "WHERE ".$conditions : "";
+
+
+				$sql = "SELECT ".$fields." FROM ".$table." ".$conditions." ".$orderBy." ";
+							
+				$result = $this->db->query($sql);
+				if($result){
+					$feedStatus	= "success";
+					$feedType   = "success";
+					$feedMessage= "The process has been successful";
+					$feedData = $result->fetchAll(PDO::FETCH_ASSOC);
+				}	
+
+				$feedType = $sql;
+			}
+			
+			$resultList = array( "feedStatus" => $feedStatus, "feedType" => $feedType, "feedMessage" => $feedMessage, "feedData" => $feedData);
+			
+			/* result fetch */
+			$json = $resultList;
+			
+			return $json;
 		}
 
 		public function fetchAllRequest($table, $fields, $conditions = "", $orderBy = "", $paging = "1"){
@@ -683,7 +796,7 @@
 					$feedMessage= "The process has been successful";
 				}	
 
-				// $feedType = $sql;
+				$feedType = $sql;
 			}
 			
 			$resultList = array( "feedStatus" => $feedStatus, "feedType" => $feedType, "feedMessage" => $feedMessage, "feedData" => $feedData);

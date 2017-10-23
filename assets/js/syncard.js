@@ -110,6 +110,7 @@ function pageAdmin(){
 			case "formChatter.html": $(".cms-route").addClass('active'); break;
 			case "formBlog.html": 
 			case "blog.html": $(".blog-route").addClass('active'); break;
+			case "formUser.html":
 			case "setting.html": $(".setting-route").addClass('active'); break;
 			case "vendor.html": $(".vendor-route").addClass('active'); break;
 			case "order.html": $(".order-route").addClass('active'); break;

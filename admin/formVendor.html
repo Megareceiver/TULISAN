@@ -39,9 +39,9 @@
 				var html = '';
 
 				html = html +
-				'<form id="syncrom" f-group="operation" f-target="customer" enctype="multipart/form-data">'+
+				'<form id="syncrom" f-group="operation" f-target="vendor" enctype="multipart/form-data">'+
 					'<div class="input-frame col-md-6">'+
-						'<h3><b>Customer</b></h3>'+
+						'<h3><b>Vendor</b></h3>'+
 						'<div class="form-group">'+
 							'<label>Full Name</label>'+
 							'<input name="name" type="text" class="form-control">'+
@@ -73,36 +73,17 @@
 							'<input name="phone" type="text" class="form-control">'+
 						'</div>'+
 						'<div class="form-group">'+
+							'<label>Email</label>'+
+							'<input name="email" type="email" class="form-control">'+
+						'</div>'+
+						'<div class="form-group">'+
 							'<label>Company</label>'+
 							'<input name="company" type="text" class="form-control">'+
 						'</div>'+
 						'<div class="clearfix"></div>'+
 						'<div class="btn-group">'+
 							'<button class="btn btn-warning" type="submit">Create</button>'+
-							'<a href="customer.html" class="btn btn-warning">Cancel</a>'+
-						'</div>'+
-					'</div>' +
-					'<div class="input-frame col-md-6">'+
-						'<div class="form-group">'+
-							'<label>Avatar</label>'+
-						'</div>'+
-						'<div class="form-group text-center">'+
-							'<img id="preview" name-tag="picture" class="medium-image" src="../assets/default/user.gif">'+
-						'</div>'+
-						'<div class="form-group">'+
-							'<input name="picture" preview-id="preview" accept="image/x-png,image/gif,image/jpeg" id="input-id" type="file" class="file form-control" data-preview-file-type="text">'+
-						'</div>' +
-						'<div class="form-group">'+
-							'<label>Email / Username</label>'+
-							'<input name="email" type="email" class="form-control">'+
-						'</div>'+
-						'<div class="form-group">'+
-							'<label>Password</label>'+
-							'<input name="password" type="password" class="form-control">'+
-						'</div>'+
-						'<div class="form-group">'+
-							'<label>Retype Password</label>'+
-							'<input name="retype_password" type="password" class="form-control">'+
+							'<a href="vendor.html" class="btn btn-warning">Cancel</a>'+
 						'</div>'+
 					'</div>' +
 				'</form>';
@@ -111,25 +92,20 @@
 
 				/* data generator */
 				if(getParam('q') != "" && getParam('q') != null) dataGenerator(getParam('q'));
-				else p_formHandler('syncrom', 'addData', 'customer.html');
+				else p_formHandler('syncrom', 'addData', 'vendor.html');
 
 				imagePreviewActivator('[name="picture"]');
 			}
 
 			function dataGenerator(idData){
-				var xData = p_getData('operation', 'customerFetch', '', "c.idData=" + idData);
+				var xData = p_getData('operation', 'vendorFetch', '', "idData=" + idData);
 					xData = xData.feedData;
 
 				for (var key in xData) {
-					if($("[name='" + key + "']").attr('type') != "file") $("[name=" + key + "]").val(xData[key]);
-					else{ 
-						if(xData[key]!="") $("[name-tag=" + key + "]").attr('src', '../assets/users/' + xData[key]);
-						else $("[name-tag='" + key + "']").attr('src', '../assets/default/user.gif');
-					}
+					 $("[name=" + key + "]").val(xData[key]);
 				}
 
-				$('[name=email]').attr('readOnly', 'true');
-				p_formHandler('syncrom', 'updateData', 'customer.html');
+				p_formHandler('syncrom', 'updateData', 'vendor.html');
 			}
 		</script>
 	</body>

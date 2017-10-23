@@ -33,30 +33,10 @@
 		<!-- page script -->
 		<script type="text/javascript">
 			$(function(){
-				customer();
+				loadData();
 			});
-			function customer(){
+			function loadData(){
 				var html = '';
-
-				// var data = [
-				// 	{ customerId: "1", name: 'Achdiyati Sumi', email: 'sumiong.ong@gmail.com', company: 'PT. Sky Aviation', type: "Registered", phone: '', address: '' },
-				// 	{ customerId: "2", name: 'Achdiyati Sumi', email: 'sumiong.ong@gmail.com', company: 'PT. Sky Aviation', type: "Registered", phone: '', address: '' },
-				// 	{ customerId: "3", name: 'Achdiyati Sumi', email: 'sumiong.ong@gmail.com', company: 'PT. Sky Aviation', type: "Registered", phone: '', address: '' },
-				// 	{ customerId: "4", name: 'Achdiyati Sumi', email: 'sumiong.ong@gmail.com', company: 'PT. Sky Aviation', type: "Registered", phone: '', address: '' },
-				// 	{ customerId: "5", name: 'Achdiyati Sumi', email: 'sumiong.ong@gmail.com', company: 'PT. Sky Aviation', type: "Registered", phone: '', address: '' },
-				// 	{ customerId: "6", name: 'Achdiyati Sumi', email: 'sumiong.ong@gmail.com', company: 'PT. Sky Aviation', type: "Registered", phone: '', address: '' },
-				// 	{ customerId: "7", name: 'Achdiyati Sumi', email: 'sumiong.ong@gmail.com', company: 'PT. Sky Aviation', type: "Registered", phone: '', address: '' },
-				// 	{ customerId: "8", name: 'Achdiyati Sumi', email: 'sumiong.ong@gmail.com', company: 'PT. Sky Aviation', type: "Registered", phone: '', address: '' },
-				// 	{ customerId: "9", name: 'Achdiyati Sumi', email: 'sumiong.ong@gmail.com', company: 'PT. Sky Aviation', type: "Registered", phone: '', address: '' },
-				// 	{ customerId: "10", name: 'Achdiyati Sumi', email: 'sumiong.ong@gmail.com', company: 'PT. Sky Aviation', type: "Registered", phone: '', address: '' },
-				// 	{ customerId: "11", name: 'Achdiyati Sumi', email: 'sumiong.ong@gmail.com', company: 'PT. Sky Aviation', type: "Registered", phone: '', address: '' },
-				// 	{ customerId: "11", name: 'Achdiyati Sumi', email: 'sumiong.ong@gmail.com', company: 'PT. Sky Aviation', type: "Registered", phone: '', address: '' },
-				// 	{ customerId: "11", name: 'Achdiyati Sumi', email: 'sumiong.ong@gmail.com', company: 'PT. Sky Aviation', type: "Registered", phone: '', address: '' },
-				// 	{ customerId: "11", name: 'Achdiyati Sumi', email: 'sumiong.ong@gmail.com', company: 'PT. Sky Aviation', type: "Registered", phone: '', address: '' },
-				// 	{ customerId: "11", name: 'Achdiyati Sumi', email: 'sumiong.ong@gmail.com', company: 'PT. Sky Aviation', type: "Registered", phone: '', address: '' },
-				// 	{ customerId: "11", name: 'Achdiyati Sumi', email: 'sumiong.ong@gmail.com', company: 'PT. Sky Aviation', type: "Registered", phone: '', address: '' },
-				// 	{ customerId: "11", name: 'Achdiyati Sumi', email: 'sumiong.ong@gmail.com', company: 'PT. Sky Aviation', type: "Registered", phone: '', address: '' },
-				// ]
 
 				html = html +
 				'<div class="header-option">' +
@@ -253,7 +233,7 @@
 		    			'<td>'+ data[loop].phone +'</td>'+
 		    			'<td>'+ data[loop].address +'</td>'+
 		    		'</tr>';
-		    		
+
 		    		if(data[loop].customerId == "" || data[loop].customerId == "NULL") guestCounter++;
 		    		else registeredCounter++;
 		    	}

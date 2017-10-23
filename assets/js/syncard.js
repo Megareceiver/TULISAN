@@ -112,6 +112,7 @@ function pageAdmin(){
 			case "blog.html": $(".blog-route").addClass('active'); break;
 			case "formUser.html":
 			case "setting.html": $(".setting-route").addClass('active'); break;
+			case "formVendor.html": 
 			case "vendor.html": $(".vendor-route").addClass('active'); break;
 			case "order.html": $(".order-route").addClass('active'); break;
 			default: $(".dashboard-route").addClass('active'); break;

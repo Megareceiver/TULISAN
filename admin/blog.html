@@ -28,6 +28,7 @@
 		<script type="text/javascript" src="../assets/js/jquery-ui-1.10.0.custom.min.js"></script>
 		<script type="text/javascript" src="../assets/js/bootstrap.min.js"></script>	
 		<script type="text/javascript" src="../assets/js/syncard.js"></script>	
+		<script type="text/javascript" src="../assets/js/public.js"></script>	
 
 		<!-- page script -->
 		<script type="text/javascript">
@@ -36,13 +37,6 @@
 			});
 			function loadData(){
 				var html = '';
-				var desc = "The Sound of Dawn’, an art project by multi-dimensional artist Melissa Sunjaya, examines the concept of self-love. This sensual prose is about a spiritual awakening to discover bliss and happiness within ourselves. Only through a commitment of loving ourselves wholeheartedly, we can begin to love others unconditionally.</br>We recently sat down with designer Zhijun Wang to discuss his project that turns hyped sneakers into wearable face masks. The Beijing-based creative started his face mask project to comment on the pollution in his city, where citizens are battling extreme air pollution. Understandably, Wang’s mask projects have been met with mixed responses and have created quite a buzz on the internet. In our talk with Wang he notes that he only wishes to make interesting items that no one has made before and that he has no interest in selling his masks. Additionally, we gave a pair of our HYPEBEAST 20th anniversary New Balance 580 “Earth” sneakers to Wang to be made into one of his signature face masks.";
-				desc = desc.substring(0, 100) + '...';
-				var sub = "LOCATION : NEWYORK";
-				var data = [
-					{ idData: "1", title: 'Finding Unconditional Love', subtitle: sub, description: desc, date: "25TH FEBRUARY 2014", photoBy: "Carin Olsson" },
-					{ idData: "2", title: 'Finding Unconditional Love', subtitle: sub, description: desc, date: "25TH FEBRUARY 2014", photoBy: "Carin Olsson" },
-				]
 
 				html = html +
 				'<div class="header-option">' +
@@ -52,15 +46,15 @@
 								'<a href="formBlog.html"><i class="fa fa-plus-circle text-warning">&nbsp;</i> Add Blog</a>'+
 							'</div>' +
 							'<div class="input-group operation-button">' +
-								'<a href="#"><i class="fa fa-minus-circle text-warning">&nbsp;</i> Delete Blog</a>'+
+								'<a href="#" id="deleteButton"><i class="fa fa-minus-circle text-warning">&nbsp;</i> Delete Blog</a>'+
 							'</div>' +
 							'<div class="input-group operation-button">' +
-								'<a href="#"><i class="fa fa-bars text-warning">&nbsp;</i> Manage Blog</a>'+
+								'<a href="#" id="manageButton"><i class="fa fa-bars text-warning">&nbsp;</i> Manage Blog</a>'+
 							'</div>' +
-				        	'<div class="input-group pull-right search-box">' +
+				        	'<div class="input-group pull-right">' +
 				        		'<input type="text" class="form-control" placeholder="Search">' +
 					        	'<span class="input-group-btn">' +
-					        		'<button type="submit" class="btn btn-default">SEARCH</button>' +
+					        		'<button type="button" class="search btn btn-default">SEARCH</button>' +
 					        	'</span>' +
 				        	'</div>' +
 				   		'</form>' +
@@ -69,7 +63,7 @@
 					'<div class="summary-group">'+
 						'<div class="summary-text">'+
 							'<p>Total number of Blog</p>'+
-							'<p class="number">' + data.length + '</p>'+
+							'<p class="number" id="totalRecord">0</p>'+
 						'</div>'+
 						'<div class="alpha">'+
 							'<ul>' +
@@ -109,7 +103,7 @@
 					'<table class="table table-striped table-responsive">'+
 					    '<thead>'+
 					    	'<tr>'+
-						    	'<th width="5%"><input type="checkbox" value="'+loop+'" id="selectRecord' + loop + '" onclick="checkboxToggle(this, \'customerSelect\')" /><label for="selectRecord' + loop + '"></label></th>'+
+						    	'<th width="5%"><input type="checkbox" value="0" id="selectRecord" onclick="checkboxToggle(this, \'customerSelect\')" /><label for="selectRecord"></label></th>'+
 						        '<th>Title</th>'+
 						        '<th>Subtitle</th>'+
 						        '<th width="30%">Description</th>'+
@@ -117,20 +111,7 @@
 						        '<th>Photo by</th>'+
 					    	'</tr>'+
 					    '</thead>'+
-					    '<tbody>';
-					    	for(var loop =0; loop<data.length; loop++){
-					    		html = html +
-					    		'<tr>'+
-					    			'<td><input type="checkbox" name="customerSelect" value="'+data[loop].idData+'" id="selectRecord' + loop + '"><label for="selectRecord' + loop + '"></label></td>'+
-					    			'<td>'+ data[loop].title +'</td>'+
-					    			'<td>'+ data[loop].subtitle +'</td>'+
-					    			'<td>'+ data[loop].description +'</td>'+
-					    			'<td class="syn-nowrap">'+ data[loop].date +'</td>'+
-					    			'<td>'+ data[loop].photoBy +'</td>'+
-					    		'</tr>';
-					    	}
-				html = html +
-					    '</tbody>'+
+					    '<tbody></tbody>'+
 					'</table>'+
 				'</div>';
 
@@ -168,11 +149,119 @@
 					'</div>'+
 				'</div>';
 
-				// html = html + '</div>';
 				$('main.parent-admin .main-content').append(html);
+				r_setCookie('adminPageFilter', '1');
+				r_setCookie('adminAlphaFilter', '');
+				var page = (r_getCookie('adminPageFilter') != "" ? r_getCookie('adminPageFilter'): "1");
+				var data = p_getData('operation', 'cms_blog', page);
+					data = data.feedData;
+
+				dataGenerator(data);
+				
+				//filter
+				$('.alpha a').on("click", function(){
+					var page = (r_getCookie('adminPageFilter') != "" ? r_getCookie('adminPageFilter'): "1");
+					var data = p_getData('operation', 'cms_blog', page, '(title LIKE "' + $(this).html() + '%")');
+					data = data.feedData;
+					dataGenerator(data);
+
+					r_setCookie('adminPageFilter', page);
+					r_setCookie('adminAlphaFilter', $(this).html());
+				});
+
+				$('button.search').on("click", function(){
+					var keyword = $("[placeholder='Search']").val();
+					var data = p_getData('operation', 'cms_blog', '1', '(title LIKE "%' + keyword + '%")');
+					data = data.feedData;
+					dataGenerator(data);
+				});
+
+				//filter end
+
+				//paging
+				$('.pagging-text .pagging-right').on("click", function(){
+					var page = (r_getCookie('adminPageFilter') != "" ? r_getCookie('adminPageFilter'): "1");
+					page = parseInt(page) + 1;
+
+					var keyword = $("[placeholder='Search']").val();
+					var alpha = (r_getCookie('adminAlphaFilter') != "" ? '(title LIKE "' + r_getCookie('adminAlphaFilter') + '%") AND ': "");
+
+					var data = p_getData('operation', 'cms_blog', page, alpha + '(title LIKE "%' + keyword + '%")');
+					data = data.feedData;
+
+					if(data.length > 0){ dataGenerator(data); } else { page = parseInt(page) - 1; }
+
+					r_setCookie('adminPageFilter', page);
+				});
+
+				$('.pagging-text .pagging-left').on("click", function(){
+					var page = (r_getCookie('adminPageFilter') != "" ? r_getCookie('adminPageFilter'): "1");
+					if(page > 1){
+						page = parseInt(page) - 1;
+
+						var keyword = $("[placeholder='Search']").val();
+						var data = p_getData('operation', 'cms_blog', page, '(title LIKE "%' + keyword + '%")');
+						data = data.feedData;
+						dataGenerator(data);
+
+						r_setCookie('adminPageFilter', page);
+					}
+				});
+				//paging end
 			}
 			
-		
+			function dataGenerator(data){
+				var html = "";
+
+				for(var loop =0; loop<data.length; loop++){
+					var desc = (Base64.decode(data[loop].description)).substring(0, 300) + '...';
+		    		html = html +
+		    		'<tr>'+
+		    			'<td><input type="checkbox" name="customerSelect" value="'+data[loop].idData+'" id="selectRecord' + loop + '"><label for="selectRecord' + loop + '"></label></td>'+
+		    			'<td>'+ data[loop].title +'</td>'+
+		    			'<td>'+ data[loop].subtitle +'</td>'+
+		    			'<td>'+ desc +'</td>'+
+		    			'<td class="syn-nowrap">'+ data[loop].date +'</td>'+
+		    			'<td>'+ data[loop].photoBy +'</td>'+
+		    		'</tr>';
+		    	}
+
+				$('main.parent-admin table tbody').html('').append(html);
+				$('main.parent-admin #totalRecord').html(data.length);
+
+				//activator
+				checkboxActivator();
+				operationActivator();
+			}
+
+			function operationActivator(){
+				$('#deleteButton').unbind().on("click", function(){ 
+					if(checkedArray.length > 0){
+						var confirmation = confirm("Are you sure you want to delete the selected data?");
+						if (confirmation == true) {
+							p_removeData('operation', 'cms_blog', checkedArray);
+							
+							r_setCookie('adminPageFilter', '1');
+							r_setCookie('adminAlphaFilter', '');
+							var page = (r_getCookie('adminPageFilter') != "" ? r_getCookie('adminPageFilter'): "1");
+							var data = p_getData('operation', 'cms_blog', page);
+								data = data.feedData;
+
+							dataGenerator(data);
+						}
+					}else{
+						alert("Please choose record first!");
+					}
+				});
+
+				$('#manageButton').unbind().on("click", function(){ 
+					if(checkedArray.length == 1 && checkedArray[0] != "0"){
+						window.location.href = base_url + "/admin/formBlog.html?q=" + checkedArray[0];
+					}else{
+						alert("Please choose only one record!");
+					}
+				});
+			}
 		</script>
 	</body>
 </html>

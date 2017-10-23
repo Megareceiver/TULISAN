@@ -97,14 +97,18 @@ function pageAdmin(){
 			case "formProduct.html": $(".product-route").addClass('active'); break;
 			case "customer.html": 
 			case "formCustomer.html": $(".customer-route").addClass('active'); break;
-			case "formDepartement.html":
+			case "formDepartment.html":
 			case "departement.html": $(".departement-route").addClass('active'); break;
 			case "cms.html":
 			case "home.html":
 			case "formHome.html":
 			case "story.html":
+			case "formStory.html":
 			case "videos.html":
-			case "chatter.html": $(".cms-route").addClass('active'); break;
+			case "formVideo.html":
+			case "chatter.html":
+			case "formChatter.html": $(".cms-route").addClass('active'); break;
+			case "formBlog.html": 
 			case "blog.html": $(".blog-route").addClass('active'); break;
 			case "setting.html": $(".setting-route").addClass('active'); break;
 			case "vendor.html": $(".vendor-route").addClass('active'); break;

@@ -28,6 +28,7 @@
 		<script type="text/javascript" src="../assets/js/jquery-ui-1.10.0.custom.min.js"></script>
 		<script type="text/javascript" src="../assets/js/bootstrap.min.js"></script>	
 		<script type="text/javascript" src="../assets/js/syncard.js"></script>	
+		<script type="text/javascript" src="../assets/js/public.js"></script>	
 		<script type="text/javascript" src="../assets/js/nicEdit.js"></script>	
 
 		<!-- page script -->
@@ -39,65 +40,92 @@
 				var html = '';
 
 				html = html +
-				'<form>'+
+				'<form id="syncrom" f-group="operation" f-target="cms_blog" enctype="multipart/form-data">'+
 					'<div class="input-frame col-md-6">'+
 						'<h3><b>Blog</b></h3>'+
 						'<div class="form-group">'+
 							'<label>Title</label>'+
-							'<input type="text" class="form-control">'+
+							'<input name="title" type="text" class="form-control">'+
+							'<input name="idData" type="hidden">'+
 						'</div>'+
 						'<div class="form-group">'+
 							'<label>Subtitle</label>'+
-							'<input type="text" class="form-control">'+
+							'<input name="subtitle" type="text" class="form-control">'+
 						'</div>'+
 						'<div class="form-group">'+
 							'<label>Description</label>'+
-							'<textarea class="form-control" rows="5" id="editor"></textarea>'+
+							'<textarea name="description" class="form-control" rows="5" id="editor"></textarea>'+
 						'</div>'+
 						'<div class="form-group">'+
 							'<label>Date</label>'+
-							'<input type="text" class="form-control">'+
+							'<input name="date" type="text" class="form-control">'+
 						'</div>'+
 						'<div class="form-group">'+
-							'<label>Author</label>'+
-							'<input type="text" class="form-control">'+
+							'<label>Photo By</label>'+
+							'<input name="photoBy" type="text" class="form-control">'+
 						'</div>'+
 						'<div class="clearfix"></div>'+
 						'<div class="btn-group">'+
-							'<button class="btn btn-warning" type="button">Create</button>'+
+							'<button class="btn btn-warning" type="submit">Create</button>'+
 							'<button class="btn btn-warning" type="button">Cancel</button>'+
 						'</div>'+
 					'</div>' +
-					'<div class="input-frame col-md-6">'+
-						'<div class="form-group">'+
-							'<label>Blog Image</label>'+
-						'</div>'+
-						'<div class="form-group">'+
-							'<img class="medium-image border" src="../assets/default/blog.gif">'+
-						'</div>'+
-						'<div class="form-group">'+
-							'<input id="input-id" type="file" class="file form-control" data-preview-file-type="text">'+
-						'</div>' +
-						'<div class="form-group">'+
-							'<label>Blog image #2</label>'+
-						'</div>'+
-						'<div class="form-group">'+
-							'<input id="input-id" type="file" class="file form-control" data-preview-file-type="text">'+
-						'</div>' +
-						'<div class="form-group">'+
-							'<label>Blog image #3</label>'+
-						'</div>'+
-						'<div class="form-group">'+
-							'<input id="input-id" type="file" class="file form-control" data-preview-file-type="text">'+
-						'</div>' +
+					'<div class="input-frame col-md-6">';
+
+				for(var loop=0; loop<3; loop++){
+					html = html +
+					'<div class="form-group">'+
+						'<label>Blog Image #' + (loop + 1) + '</label>'+
+					'</div>'+
+					'<div class="form-group">'+
+						'<img id="preview' + loop + '" name-tag="pictures[]' + loop + '" class="medium-image border" src="../assets/default/blog.gif">'+
+					'</div>'+
+					'<div class="form-group">'+
+						'<input name="picturesName[]" type="hidden" class="form-control">'+
+						'<input name="pictures[]" preview-id="preview' + loop + '" accept="image/x-png,image/gif,image/jpeg" id="input-id" type="file" class="file form-control" data-preview-file-type="text">'+
+					'</div>';
+				}
+
+				html = html +	
 					'</div>' +
 				'</form>';
 
-				// html = html + '</div>';
 				$('main.parent-admin .main-content').append(html);
+
+				/* data generator */
+				if(getParam('q') != "" && getParam('q') != null) dataGenerator(getParam('q'));
+				else p_formHandler('syncrom', 'addData', 'blog.html');
+
+				imagePreviewActivator('[name="pictures[]"]');
 
 				// //textarea editor
 				new nicEditor({iconsPath : '../assets/PICS/nicEditorIcons.gif'}).panelInstance('editor');
+
+				$(".nicEdit-main").on("blur",function(){
+					$("[name='description']").val($(this).html());
+				});
+			}
+
+			function dataGenerator(idData){
+				var xData = p_getData('operation', 'cms_blogFetch', '', "idData=" + idData);
+					xData = xData.feedData;
+
+				for (var key in xData) {
+					if(key != "description"){
+						if($("[name='" + key + "']").attr('type') != "file") $("[name=" + key + "]").val(xData[key]);
+						else{ 
+							var temp = xData[key].split(","); console.log(temp);
+							for(var loop=0; loop<temp.length; loop++){
+								if(xData[key]!="") $("[name-tag='" + key + loop +"']").attr('src', '../assets/blogs/' + temp[loop]);
+								else $("[name-tag='" + key + loop +"']").attr('src', '../assets/default/blog.gif');
+							}
+						}
+					}else{
+						$("[name=" + key + "]").val(Base64.decode(xData[key]));
+					}
+				}
+
+				p_formHandler('syncrom', 'updateData', 'blog.html');
 			}
 		</script>
 	</body>

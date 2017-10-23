@@ -28,6 +28,7 @@
 		<script type="text/javascript" src="../assets/js/jquery-ui-1.10.0.custom.min.js"></script>
 		<script type="text/javascript" src="../assets/js/bootstrap.min.js"></script>	
 		<script type="text/javascript" src="../assets/js/syncard.js"></script>	
+		<script type="text/javascript" src="../assets/js/public.js"></script>	
 
 		<!-- page script -->
 		<script type="text/javascript">
@@ -38,22 +39,50 @@
 				var html = '';
 
 				html = html +
-				'<form>'+
+				'<form id="syncrom" f-group="operation" f-target="color">'+
 					'<div class="input-frame col-md-6">'+
 						'<h3><b>Color</b></h3>'+
 						'<div class="form-group">'+
 							'<label>Color Name</label>'+
-							'<input type="text" class="form-control">'+
+							'<input name="name" type="text" class="form-control">'+
+							'<input name="idData" type="hidden">'+
 						'</div>'+
 						'<div class="clearfix"></div>'+
 						'<div class="btn-group">'+
-							'<button class="btn btn-warning" type="button">Create</button>'+
+							'<button class="btn btn-warning" type="submit">Create</button>'+
 							'<button class="btn btn-warning" type="button">Cancel</button>'+
 						'</div>'+
 					'</div>' +
 				'</form>';
 
 				$('main.parent-admin .main-content').append(html);
+
+				/* data generator */
+				if(getParam('q') != "" && getParam('q') != null) dataGenerator(getParam('q'));
+				else p_formHandler('syncrom', 'addData', 'color.html');
+			}
+
+			function dataGenerator(idData){
+				var xData = p_getData('operation', 'colorFetch', '', "idData=" + idData);
+					xData = xData.feedData;
+
+				for (var key in xData) {
+					if($("[name='" + key + "']").attr('type') != "file") $("[name=" + key + "]").val(xData[key]);
+					else{ 
+						var temp = xData[key].split(","); console.log(temp);
+						if(Array.isArray(temp) == false){
+							if(xData[key]!="") $("[name-tag=" + key + "]").attr('src', '../assets/colors/' + xData[key]);
+							else $("[name-tag='" + key + "']").attr('src', '../assets/default/colors.gif');
+						}else{
+							for(var loop=0; loop<temp.length; loop++){
+								if(xData[key]!="") $("[name-tag='" + key + loop +"']").attr('src', '../assets/colors/' + temp[loop]);
+								else $("[name-tag='" + key + loop +"']").attr('src', '../assets/default/colors.gif');
+							}
+						}
+					}
+				}
+
+				p_formHandler('syncrom', 'updateData', 'color.html');
 			}
 		</script>
 	</body>

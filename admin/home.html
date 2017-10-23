@@ -28,6 +28,7 @@
 		<script type="text/javascript" src="../assets/js/jquery-ui-1.10.0.custom.min.js"></script>
 		<script type="text/javascript" src="../assets/js/bootstrap.min.js"></script>	
 		<script type="text/javascript" src="../assets/js/syncard.js"></script>	
+		<script type="text/javascript" src="../assets/js/public.js"></script>	
 
 		<!-- page script -->
 		<script type="text/javascript">
@@ -36,13 +37,6 @@
 			});
 			function loadData(){
 				var html = '';
-				var desc = 'We design our products to be simple and pure, then layer them with artist-illustrated editions to celebrate individuality. Each creation is constructed by hand in small batches, with artisanal craftsmanship.';
-				desc = desc.substring(0, 100) + '...';
-				var data = [
-					{ idData: "1", picture: "820abdfb_18f8.jpg", title: 'Finding Unconditional Love', description: desc, publishedTime: '2017/10/21 12:00:00', publishedBy: 'admin' },
-					{ idData: "2", picture: "61446540_81af.jpg", title: 'Finding Unconditional Love', description: desc, publishedTime: '2017/10/21 15:35:00', publishedBy: 'admin' },
-				]
-
 				html = html +
 				'<div class="header-option">' +
 					'<div class="operation-group">'+
@@ -51,15 +45,15 @@
 								'<a href="formHome.html"><i class="fa fa-plus-circle text-warning">&nbsp;</i> Add Home Picture</a>'+
 							'</div>' +
 							'<div class="input-group operation-button">' +
-								'<a href="#"><i class="fa fa-minus-circle text-warning">&nbsp;</i> Delete Home Picture</a>'+
+								'<a href="#" id="deleteButton"><i class="fa fa-minus-circle text-warning">&nbsp;</i> Delete Home Picture</a>'+
 							'</div>' +
 							'<div class="input-group operation-button">' +
-								'<a href="#"><i class="fa fa-bars text-warning">&nbsp;</i> Manage Home Picture</a>'+
+								'<a href="#" id="manageButton"><i class="fa fa-bars text-warning">&nbsp;</i> Manage Home Picture</a>'+
 							'</div>' +
-				        	'<div class="input-group pull-right search-box">' +
+				        	'<div class="input-group pull-right">' +
 				        		'<input type="text" class="form-control" placeholder="Search">' +
 					        	'<span class="input-group-btn">' +
-					        		'<button type="submit" class="btn btn-default">SEARCH</button>' +
+					        		'<button type="button" class="search btn btn-default">SEARCH</button>' +
 					        	'</span>' +
 				        	'</div>' +
 				   		'</form>' +
@@ -68,7 +62,7 @@
 					'<div class="summary-group">'+
 						'<div class="summary-text">'+
 							'<p>Total number of Pictures</p>'+
-							'<p class="number">' + data.length + '</p>'+
+							'<p class="number" id="totalRecord">0</p>'+
 						'</div>'+
 						'<div class="alpha">'+
 							'<ul>' +
@@ -116,22 +110,7 @@
 						        '<th>Time</th>'+
 					    	'</tr>'+
 					    '</thead>'+
-					    '<tbody>';
-
-		    	for(var loop =0; loop<data.length; loop++){
-		    		html = html +
-		    		'<tr>'+
-		    			'<td><input type="checkbox" name="customerSelect" value="'+data[loop].idData+'" id="selectRecord' + loop + '"><label for="selectRecord' + loop + '"></label></td>'+
-		    			'<td><img class="big-image" src="../assets/PICS/'+ data[loop].picture +'"></td>'+
-		    			'<td>'+ data[loop].title +'</td>'+
-		    			'<td>'+ data[loop].description +'</td>'+
-		    			'<td class="syn-nowrap">'+ data[loop].publishedBy +'</td>'+
-		    			'<td>'+ timeSince(new Date(Date.parse(data[loop].publishedTime))) +'</td>'+
-		    		'</tr>';
-		    	}
-
-				html = html +
-					    '</tbody>'+
+					    '<tbody></tbody>'+
 					'</table>'+
 				'</div>';
 
@@ -169,11 +148,118 @@
 					'</div>'+
 				'</div>';
 
-				// html = html + '</div>';
 				$('main.parent-admin .main-content').append(html);
+
+				r_setCookie('adminPageFilter', '1');
+				r_setCookie('adminAlphaFilter', '');
+				var page = (r_getCookie('adminPageFilter') != "" ? r_getCookie('adminPageFilter'): "1");
+				var data = p_getData('operation', 'cms_home', page);
+					data = data.feedData;
+
+				dataGenerator(data);
+				
+				//filter
+				$('.alpha a').on("click", function(){
+					var page = (r_getCookie('adminPageFilter') != "" ? r_getCookie('adminPageFilter'): "1");
+					var data = p_getData('operation', 'cms_home', page, '(title LIKE "' + $(this).html() + '%")');
+					data = data.feedData;
+					dataGenerator(data);
+
+					r_setCookie('adminPageFilter', page);
+					r_setCookie('adminAlphaFilter', $(this).html());
+				});
+
+				$('button.search').on("click", function(){
+					var keyword = $("[placeholder='Search']").val();
+					var data = p_getData('operation', 'cms_home', '1', '(title LIKE "%' + keyword + '%")');
+					data = data.feedData;
+					dataGenerator(data);
+				});
+
+				//filter end
+
+				//paging
+				$('.pagging-text .pagging-right').on("click", function(){
+					var page = (r_getCookie('adminPageFilter') != "" ? r_getCookie('adminPageFilter'): "1");
+					page = parseInt(page) + 1;
+
+					var keyword = $("[placeholder='Search']").val();
+					var alpha = (r_getCookie('adminAlphaFilter') != "" ? '(title LIKE "' + r_getCookie('adminAlphaFilter') + '%") AND ': "");
+
+					var data = p_getData('operation', 'cms_home', page, alpha + '(title LIKE "%' + keyword + '%")');
+					data = data.feedData;
+
+					if(data.length > 0){ dataGenerator(data); } else { page = parseInt(page) - 1; }
+
+					r_setCookie('adminPageFilter', page);
+				});
+
+				$('.pagging-text .pagging-left').on("click", function(){
+					var page = (r_getCookie('adminPageFilter') != "" ? r_getCookie('adminPageFilter'): "1");
+					if(page > 1){
+						page = parseInt(page) - 1;
+
+						var keyword = $("[placeholder='Search']").val();
+						var data = p_getData('operation', 'cms_home', page, '(title LIKE "%' + keyword + '%")');
+						data = data.feedData;
+						dataGenerator(data);
+
+						r_setCookie('adminPageFilter', page);
+					}
+				});
+				//paging end
 			}
 			
-		
+			function dataGenerator(data){
+				var html = "";
+				for(var loop =0; loop<data.length; loop++){
+		    		html = html +
+		    		'<tr>'+
+		    			'<td><input type="checkbox" name="customerSelect" value="'+data[loop].idData+'" id="selectRecord' + loop + '"><label for="selectRecord' + loop + '"></label></td>'+
+		    			'<td><img class="big-image" src="../assets/home/'+ data[loop].picture +'"></td>'+
+		    			'<td>'+ data[loop].title +'</td>'+
+		    			'<td>'+ data[loop].description +'</td>'+
+		    			'<td class="syn-nowrap">'+ data[loop].publishedBy +'</td>'+
+		    			'<td>'+ timeSince(new Date(Date.parse(data[loop].publishedTime))) +'</td>'+
+		    		'</tr>';
+		    	}
+
+				$('main.parent-admin table tbody').html('').append(html);
+				$('main.parent-admin #totalRecord').html(data.length);
+
+				//activator
+				checkboxActivator();
+				operationActivator();
+			}
+
+			function operationActivator(){
+				$('#deleteButton').unbind().on("click", function(){ 
+					if(checkedArray.length > 0){
+						var confirmation = confirm("Are you sure you want to delete the selected data?");
+						if (confirmation == true) {
+							p_removeData('operation', 'cms_home', checkedArray);
+							
+							r_setCookie('adminPageFilter', '1');
+							r_setCookie('adminAlphaFilter', '');
+							var page = (r_getCookie('adminPageFilter') != "" ? r_getCookie('adminPageFilter'): "1");
+							var data = p_getData('operation', 'cms_home', page);
+								data = data.feedData;
+
+							dataGenerator(data);
+						}
+					}else{
+						alert("Please choose record first!");
+					}
+				});
+
+				$('#manageButton').unbind().on("click", function(){ 
+					if(checkedArray.length == 1 && checkedArray[0] != "0"){
+						window.location.href = base_url + "/admin/formHome.html?q=" + checkedArray[0];
+					}else{
+						alert("Please choose only one record!");
+					}
+				});
+			}
 		</script>
 	</body>
 </html>

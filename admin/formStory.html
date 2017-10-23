@@ -28,6 +28,7 @@
 		<script type="text/javascript" src="../assets/js/jquery-ui-1.10.0.custom.min.js"></script>
 		<script type="text/javascript" src="../assets/js/bootstrap.min.js"></script>	
 		<script type="text/javascript" src="../assets/js/syncard.js"></script>	
+		<script type="text/javascript" src="../assets/js/public.js"></script>	
 		<script type="text/javascript" src="../assets/js/nicEdit.js"></script>	
 
 		<!-- page script -->
@@ -39,28 +40,29 @@
 				var html = '';
 
 				html = html +
-				'<form>'+
+				'<form id="syncrom" f-group="operation" f-target="cms_story" enctype="multipart/form-data">'+
 					'<div class="input-frame col-md-6">'+
 						'<h3><b>Story</b></h3>'+
 						'<div class="form-group">'+
 							'<label>Title</label>'+
-							'<input type="text" class="form-control">'+
+							'<input name="title" type="text" class="form-control">'+
+							'<input name="idData" type="hidden">'+
 						'</div>'+
 						'<div class="form-group">'+
 							'<label>Subtitle</label>'+
-							'<input type="text" class="form-control">'+
+							'<input name="subtitle" type="text" class="form-control">'+
 						'</div>'+
 						'<div class="form-group">'+
 							'<label>Description</label>'+
-							'<textarea class="form-control" rows="5" id="editor"></textarea>'+
+							'<textarea name="description" class="form-control" rows="5" id="editor"></textarea>'+
 						'</div>'+
 						'<div class="form-group">'+
 							'<label>Author</label>'+
-							'<input type="text" class="form-control">'+
+							'<input name="author" type="text" class="form-control">'+
 						'</div>'+
 						'<div class="clearfix"></div>'+
 						'<div class="btn-group">'+
-							'<button class="btn btn-warning" type="button">Create</button>'+
+							'<button class="btn btn-warning" type="submit">Create</button>'+
 							'<button class="btn btn-warning" type="button">Cancel</button>'+
 						'</div>'+
 					'</div>' +
@@ -68,20 +70,49 @@
 						'<div class="form-group">'+
 							'<label>Story Image</label>'+
 						'</div>'+
-						'<div class="form-group">'+
-							'<img class="medium-image border" src="../assets/default/story.gif">'+
+						'<div class="form-group text-center">'+
+							'<img id="preview" name-tag="picture" class="medium-image border" src="../assets/default/story.gif">'+
 						'</div>'+
 						'<div class="form-group">'+
-							'<input id="input-id" type="file" class="file form-control" data-preview-file-type="text">'+
+							'<input name="picture" preview-id="preview" accept="image/x-png,image/gif,image/jpeg" id="input-id" type="file" class="file form-control" data-preview-file-type="text">'+
 						'</div>' +
 					'</div>' +
 				'</form>';
 
-				// html = html + '</div>';
 				$('main.parent-admin .main-content').append(html);
+
+
+				/* data generator */
+				if(getParam('q') != "" && getParam('q') != null) dataGenerator(getParam('q'));
+				else p_formHandler('syncrom', 'addData', 'story.html');
+
+				imagePreviewActivator('[name="picture"]');
 
 				// //textarea editor
 				new nicEditor({iconsPath : '../assets/PICS/nicEditorIcons.gif'}).panelInstance('editor');
+
+				$(".nicEdit-main").on("blur",function(){
+					$("[name='description']").val($(this).html());
+				});
+			}
+
+			function dataGenerator(idData){
+				var xData = p_getData('operation', 'cms_storyFetch', '', "idData=" + idData);
+					xData = xData.feedData;
+
+				for (var key in xData) {
+					if(key != "description"){
+						if($("[name='" + key + "']").attr('type') != "file") $("[name=" + key + "]").val(xData[key]);
+						else{ 
+							if(xData[key]!="") $("[name-tag=" + key + "]").attr('src', '../assets/stories/' + xData[key]);
+							else $("[name-tag='" + key + "']").attr('src', '../assets/default/story.gif');
+						}
+					}else{
+						$("[name=" + key + "]").val(Base64.decode(xData[key]));
+					}
+				}
+
+				p_formHandler('syncrom', 'updateData', 'story.html');
 			}
 		</script>
 	</body>

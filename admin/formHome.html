@@ -28,7 +28,7 @@
 		<script type="text/javascript" src="../assets/js/jquery-ui-1.10.0.custom.min.js"></script>
 		<script type="text/javascript" src="../assets/js/bootstrap.min.js"></script>	
 		<script type="text/javascript" src="../assets/js/syncard.js"></script>	
-		<!-- <script type="text/javascript" src="../assets/js/nicEdit.js"></script>	 -->
+		<script type="text/javascript" src="../assets/js/public.js"></script>	
 
 		<!-- page script -->
 		<script type="text/javascript">
@@ -41,27 +41,28 @@
 				html = html +
 				'<div class="input-frame col-md-6">'+
 					'<h3><b>Home Picture</b></h3>'+
-					'<form>'+
+					'<form id="syncrom" f-group="operation" f-target="cms_home" enctype="multipart/form-data">'+
 						'<div class="form-group">'+
 							'<label>Home Image</label>'+
 						'</div>'+
 						'<div class="form-group text-center">'+
-							'<img class="big-image" src="../assets/default/home.gif">'+
+							'<img id="preview" name-tag="picture" class="big-image" src="../assets/default/home.gif">'+
 						'</div>'+
 						'<div class="form-group">'+
-							'<input id="input-id" type="file" class="file form-control" data-preview-file-type="text">'+
+							'<input name="picture" preview-id="preview" accept="image/x-png,image/gif,image/jpeg" id="input-id" type="file" class="file form-control" data-preview-file-type="text">'+
 						'</div>' +
 						'<div class="form-group">'+
 							'<label>Title</label>'+
-							'<input type="text" class="form-control">'+
+							'<input name="title" type="text" class="form-control">'+
+							'<input name="idData" type="hidden">'+
 						'</div>'+
 						'<div class="form-group">'+
 							'<label>Description</label>'+
-							'<textarea class="form-control" rows="5"></textarea>'+
+							'<textarea name="description" class="form-control" rows="5"></textarea>'+
 						'</div>'+
 						'<div class="clearfix"></div>'+
 						'<div class="btn-group">'+
-							'<button class="btn btn-warning" type="button">Create</button>'+
+							'<button class="btn btn-warning" type="submit">Create</button>'+
 							'<button class="btn btn-warning" type="button">Cancel</button>'+
 						'</div>'+
 					'</form>'+
@@ -70,8 +71,26 @@
 				// html = html + '</div>';
 				$('main.parent-admin .main-content').append(html);
 
-				// //textarea editor
-				// new nicEditor({maxHeight : 100, iconsPath : '../assets/PICS/nicEditorIcons.gif'}).panelInstance('editor');
+				/* data generator */
+				if(getParam('q') != "" && getParam('q') != null) dataGenerator(getParam('q'));
+				else p_formHandler('syncrom', 'addData', 'home.html');
+
+				imagePreviewActivator('[name="picture"]');
+			}
+
+			function dataGenerator(idData){
+				var xData = p_getData('operation', 'cms_homeFetch', '', "idData=" + idData);
+					xData = xData.feedData;
+
+				for (var key in xData) {
+					if($("[name='" + key + "']").attr('type') != "file") $("[name=" + key + "]").val(xData[key]);
+					else{ 
+						if(xData[key]!="") $("[name-tag=" + key + "]").attr('src', '../assets/home/' + xData[key]);
+						else $("[name-tag='" + key + "']").attr('src', '../assets/default/home.gif');
+					}
+				}
+
+				p_formHandler('syncrom', 'updateData', 'home.html');
 			}
 		</script>
 	</body>

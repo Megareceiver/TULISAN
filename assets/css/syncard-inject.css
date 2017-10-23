@@ -160,7 +160,7 @@ body .container:first-child {
 [type="checkbox"]:checked + label:before {
   content: '';
   position: absolute;
-  left: 0; top: 0;
+  left: 0; top: 2px;
   width: 15px; height: 15px;
   border: 2px solid #ccc;
   background: #fff;
@@ -911,6 +911,7 @@ footer.parent .license {
 .shop-thumb p{text-align: center;}
 /*shop detail*/
 .color-choice ul { padding: 0; display: block; text-align: center; }
+.color-choice.border li { border: 1px solid #CCC; }
 .color-choice li{
   display: inline-block;
   background-size: cover;

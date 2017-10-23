@@ -56,7 +56,7 @@
 			        	'<div class="input-group pull-right">' +
 			        		'<input type="text" class="form-control" placeholder="Search">' +
 				        	'<span class="input-group-btn">' +
-				        		'<button type="submit" class="search btn btn-default">SEARCH</button>' +
+				        		'<button type="button" class="search btn btn-default">SEARCH</button>' +
 				        	'</span>' +
 			        	'</div>' +
 			   		'</form>' +
@@ -213,8 +213,6 @@
 					}
 				});
 				//paging end
-
-				
 			}
 			
 			function dataGenerator(data){
@@ -224,7 +222,7 @@
 					data[loop].picture = (data[loop].picture != "") ? "../assets/products/" + data[loop].picture : "";
 		    		html = html +
 		    		'<tr>'+
-		    			'<td width="5%"><input type="checkbox" name="customerSelect" value="'+data[loop].idData+'" id="selectRecord' + loop + '"><label for="selectRecord' + loop + '"></label></td>'+
+		    			'<td width="5%"><input type="checkbox" value="'+data[loop].idData+'" id="selectRecord' + loop + '"><label for="selectRecord' + loop + '"></label></td>'+
 		    			'<td width="5%"><img class="img-product" src="'+ data[loop].picture +'"></td>'+
 		    			'<td class="text-center">'+ data[loop].sku +'</td>'+
 		    			'<td>'+ data[loop].name +'</td>'+
@@ -244,16 +242,21 @@
 
 			function operationActivator(){
 				$('#deleteButton').unbind().on("click", function(){ 
-					if(checkedArray.length>0){
-						p_removeData('operation', 'product', checkedArray);
-						
-						r_setCookie('adminPageFilter', '1');
-						r_setCookie('adminAlphaFilter', '');
-						var page = (r_getCookie('adminPageFilter') != "" ? r_getCookie('adminPageFilter'): "1");
-						var data = p_getData('operation', 'product', page);
-							data = data.feedData;
+					if(checkedArray.length > 0){
+						var confirmation = confirm("Are you sure you want to delete the selected data?");
+						if (confirmation == true) {
+							p_removeData('operation', 'product', checkedArray);
+							
+							r_setCookie('adminPageFilter', '1');
+							r_setCookie('adminAlphaFilter', '');
+							var page = (r_getCookie('adminPageFilter') != "" ? r_getCookie('adminPageFilter'): "1");
+							var data = p_getData('operation', 'product', page);
+								data = data.feedData;
 
-						dataGenerator(data);
+							dataGenerator(data);
+						}
+					}else{
+						alert("Please choose record first!");
 					}
 				});
 

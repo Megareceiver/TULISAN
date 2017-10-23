@@ -28,6 +28,7 @@
 		<script type="text/javascript" src="../assets/js/jquery-ui-1.10.0.custom.min.js"></script>
 		<script type="text/javascript" src="../assets/js/bootstrap.min.js"></script>	
 		<script type="text/javascript" src="../assets/js/syncard.js"></script>	
+		<script type="text/javascript" src="../assets/js/public.js"></script>	
 		<script type="text/javascript" src="../assets/js/nicEdit.js"></script>	
 
 		<!-- page script -->
@@ -39,36 +40,60 @@
 				var html = '';
 
 				html = html +
-				'<form>'+
+				'<form id="syncrom" f-group="operation" f-target="cms_video" enctype="multipart/form-data">'+
 					'<div class="input-frame col-md-6">'+
 						'<h3><b>Video</b></h3>'+
 						'<div class="form-group">'+
 							'<label>Title</label>'+
-							'<input type="text" class="form-control">'+
+							'<input name="title" type="text" class="form-control">'+
+							'<input name="idData" type="hidden">'+
 						'</div>'+
 						'<div class="form-group">'+
 							'<label>Description</label>'+
-							'<textarea class="form-control" rows="5" id="editor"></textarea>'+
+							'<textarea name="description" class="form-control" rows="5" id="editor"></textarea>'+
 						'</div>'+
 						'<div class="form-group">'+
 							'<label>File</label>'+
 						'</div>'+
 						'<div class="form-group">'+
-							'<input id="input-id" type="file" class="file form-control" data-preview-file-type="text">'+
+							'<input name="video" id="input-id" type="file" class="file form-control" data-preview-file-type="text">'+
 						'</div>' +
 						'<div class="clearfix"></div>'+
 						'<div class="btn-group">'+
-							'<button class="btn btn-warning" type="button">Create</button>'+
+							'<button class="btn btn-warning" type="submit">Create</button>'+
 							'<button class="btn btn-warning" type="button">Cancel</button>'+
 						'</div>'+
 					'</div>' +
 				'</form>';
 
-				// html = html + '</div>';
 				$('main.parent-admin .main-content').append(html);
+
+
+				/* data generator */
+				if(getParam('q') != "" && getParam('q') != null) dataGenerator(getParam('q'));
+				else p_formHandler('syncrom', 'addData', 'videos.html');
 
 				// //textarea editor
 				new nicEditor({iconsPath : '../assets/PICS/nicEditorIcons.gif'}).panelInstance('editor');
+
+				$(".nicEdit-main").on("blur",function(){
+					$("[name='description']").val($(this).html());
+				});
+			}
+
+			function dataGenerator(idData){
+				var xData = p_getData('operation', 'cms_videoFetch', '', "idData=" + idData);
+					xData = xData.feedData;
+
+				for (var key in xData) {
+					if(key != "description"){
+						if($("[name='" + key + "']").attr('type') != "file") $("[name=" + key + "]").val(xData[key]);
+					}else{
+						$("[name=" + key + "]").val(Base64.decode(xData[key]));
+					}
+				}
+
+				p_formHandler('syncrom', 'updateData', 'videos.html');
 			}
 		</script>
 	</body>

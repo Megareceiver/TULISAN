@@ -26,6 +26,7 @@
 		<script type="text/javascript" src="../assets/js/bootstrap.min.js"></script>
 		<script type="text/javascript" src="../assets/js/imagesloaded.pkgd.min.js"></script>	
 		<script type="text/javascript" src="../assets/js/partial.js"></script>	
+		<script type="text/javascript" src="../assets/js/public.js"></script>	
 
 		<script type="text/javascript">
 			blogDetail();
@@ -51,6 +52,12 @@
 					"picture"	 :  ["NF8C0757.jpg","NF8C0645.jpg", "NF8C07401.jpg"]
 				};
 
+
+				if(getParam('q') != "" && getParam('q') != null){
+					data = p_getData('operation', 'cms_blogDetail', 'idData = "' + getParam('q') + "'");
+					data = data.feedData;
+				}
+
 				// html = '<div class="row">';
 				html = html + 
 				"<div class='blog-container'>" +
@@ -66,11 +73,14 @@
 						"<div class='blog-box'>"+
 							"<div class='blog-pic'>";
 
-				for(var loop=0; loop<data.picture.length; loop++){
-					html = html +  "<img src='../assets/PICS/" + data.picture[loop] + "' />";
+				var img = data.pictures;
+					img = img.split(',');
+
+				for(var loop=0; loop<img.length; loop++){
+					html = html +  "<img src='../assets/blogs/" + img[loop] + "' />";
 				}
 
-				data.description = data.description.replace(/(?:\r\n|\r|\n)/g, '<br />');
+				// data.description = data.description.replace(/(?:\r\n|\r|\n)/g, '<br />');
 
 				html = html +  
 							"</div>"+
@@ -86,7 +96,8 @@
 					'<div class="col-md-8 col-md-offset-2 div-normalize">' +
 						"<div class='blog-box'>"+
 							"<div class='blog-description'>"+
-								"<p>"+data.description+" </p>"+
+								"<p>"+Base64.decode(data.description)+" </p>"+
+								"<p class='syn-plus'>Photo by "+data.photoBy+" </p>"+
 							"</div>"+
 						"</div>" +
 					"</div>" +
@@ -96,6 +107,8 @@
 				// html = html + "</div>";
 
 				$("main").html(html);
+
+				$("#custom-bread-detail").html(toTitleCase(data.title));
 
 			}
 		</script>		

@@ -29,6 +29,7 @@
 		<script type="text/javascript" src="../assets/js/bootstrap.min.js"></script>	
 		<script type="text/javascript" src="../assets/js/imagesloaded.pkgd.min.js"></script>
 		<script type="text/javascript" src="../assets/js/partial.js"></script>	
+		<script type="text/javascript" src="../assets/js/public.js"></script>	
 
 		<!-- page script -->
 		<script type="text/javascript">
@@ -41,6 +42,7 @@
 				var pagingLink = "";
 				var pagingLinkBefore = "";
 				var pagingState = 1;
+
 
 				var data = {
 					"productList": [
@@ -105,8 +107,20 @@
 					"paging": "124"
 				};
 
-				paging = parseInt(product.paging);
-				product   = product.data;
+				paging = 0;
+
+				keyword = "";
+				if(getParam('story') != "" && getParam('story') != null){ keyword = "storyId =" + getParam('story'); }
+				if(getParam('color') != "" && getParam('color') != null){ keyword = "colorId =" + getParam('color'); }
+
+				data = p_getData('operation', 'product', "1", keyword);
+				product = data.feedData;
+
+				data = p_getData('operation', 'color');
+				color = data.feedData;
+
+				data = p_getData('operation', 'cms_story');
+				story = data.feedData;
 				
 				html = '<div class="col-md-12">';
 				
@@ -116,8 +130,8 @@
 						'<h3 class="fontserif title">SHOP BY PRODUCT <span toggle-target="#productList" class="left-menu-toggle fa fa-chevron-down syn-fixed-right "></span></h3>' +
 						'<ul id="productList" style="display: none">';
 
-				for(var loop = 0; loop < data.productList.length; loop++){
-					html = html + '<li><a href="shopDetail.html">' + data.productList[loop].title + '</a></li>';	
+				for(var loop = 0; loop < product.length; loop++){
+					html = html + '<li><a href="shopDetail.html?q=' + product[loop].idData + '">' + product[loop].name + '</a></li>';	
 				}
 
 				html = html + '</ul>';
@@ -125,16 +139,16 @@
 				'<h3 class="fontserif title">SHOP BY COLOR <span toggle-target="#colorList" class="left-menu-toggle fa fa-chevron-down syn-fixed-right "></span></h3>' +
 				'<ul id="colorList" style="display: none">';
 
-				for(var loop = 0; loop < data.colorList.length; loop++){
-					html = html + '<li><a href="shopDetail.html">' + data.colorList[loop].title + '</a></li>';	
+				for(var loop = 0; loop < color.length; loop++){
+					html = html + '<li><a href="shop.html?color=' + color[loop].idData + '">' + color[loop].name + '</a></li>';	
 				}
 
 				html = html + '</ul>';
 				html = html + 
 				'<h3 class="fontserif title">SHOP BY STORY <span toggle-target="#storyList" class="left-menu-toggle fa fa-chevron-up syn-fixed-right "></span></h3>' +
 				'<ul id="storyList" class="active">';
-				for(var loop = 0; loop < data.storyList.length; loop++){
-					html = html + '<li><a href="shopDetail.html">' + data.storyList[loop].title + '</a></li>';	
+				for(var loop = 0; loop < story.length; loop++){
+					html = html + '<li><a href="shop.html?story=' + story[loop].idData + '">' + story[loop].title + '</a></li>';	
 				}
 
 				html = html + '</ul></div>';
@@ -143,11 +157,13 @@
 				if(product.length > 0){
 					for(var loop = 0; loop < product.length; loop++)
 					{
-					html = html +
-					'<div class="col-md-6 shop-thumb">'+
-						'<img class="big-image" src="../assets/PICS/'+product[loop].img+'">'+
-						'<h4 class="center-div"><b class="fontserif">'+product[loop].name+' '+product[loop].price+'</b></h4>'+
-					'</div>';
+						html = html +
+						'<div class="col-md-6 shop-thumb">'+
+							'<a href="shopDetail.html?q=' + product[loop].idData + '">' +
+								'<img class="big-image" src="../assets/products/'+product[loop].picture+'">'+
+								'<h4 class="center-div"><b class="fontserif">'+product[loop].name+' Rp.'+product[loop].price+'</b></h4>'+
+							'</a>' +
+						'</div>';
 					}
 					
 					/*paging*/

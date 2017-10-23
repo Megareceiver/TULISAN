@@ -896,6 +896,7 @@ footer.parent .license {
 
 .product-list {
   padding: 20px 40px  40px 40px;
+  min-height: 600px;
 }
 .shop-img{
 	height	: 300px;

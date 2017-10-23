@@ -29,6 +29,7 @@
 		<script type="text/javascript" src="../assets/js/bootstrap.min.js"></script>
 		<script type="text/javascript" src="../assets/js/imagesloaded.pkgd.min.js"></script>	
 		<script type="text/javascript" src="../assets/js/partial.js"></script>	
+		<script type="text/javascript" src="../assets/js/public.js"></script>	
 
 		<!-- page script -->
 		<script type="text/javascript">
@@ -70,20 +71,22 @@
 					"paging": "8"
 				};
 
-				paging = parseInt(data.paging);
-				data   = data.data;
+				var data = p_getData('operation', 'cms_story');
+					data = data.feedData;
+
+				paging = '0';
 
 				html = '<div class="row"><div class="col-md-8 col-md-offset-2 div-normalize"><div class="row">';
 				
 				for(var loop=0; loop<data.length; loop++){
 					html = html + 
 						"<div class='col-md-6 story-box'>"+
-							"<div class='picture-box story' style='background-image: url(../assets/PICS/"+data[loop].picture+");'></div>"+
+							"<div class='picture-box story' style='background-image: url(../assets/stories/"+data[loop].picture+");'></div>"+
 							"<div class='title-story'>"+
 								"<h3>"+data[loop].title+"</h3>"+
 							"</div>"+
 							"<div class='content-story'>"+
-								"<p>"+data[loop].page+" <a href="+data[loop].url+"><b>MORE</b></a></p>"+
+								"<p>"+Base64.decode(data[loop].description)+" <br/><br/><a href='storydetail.html?q="+data[loop].idData+"''><b>MORE</b></a></p>"+
 							"</div>"+
 						"</div>";
 				}

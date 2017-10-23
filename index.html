@@ -30,15 +30,15 @@
 
 							  <!-- Wrapper for slides -->
 							  <div class="carousel-inner">
-							    <div class="item active">
+							    <!-- <div class="item active">
 							      <img src="assets/PICS/SAM_0731.jpg" alt="Tulisan">
 							      <div class="carousel-caption">
 							        <h3>EMPROWERING OTHERS</h3>
 							        <p>We are dedicated to enriching our community by investing our time in training and employing local artisansand talents, with an aim to provide them a fair living with benefits that exceed market standards. </p>
 							      </div>
-							    </div>
+							    </div> -->
 
-							     <div class="item">
+							     <!-- <div class="item">
 							      <img src="assets/PICS/820abdfb_18f8.jpg" alt="Tulisan">
 							      <div class="carousel-caption">
 							        <h3>CELEBRATING INDIVIDUALITY</h3>
@@ -52,7 +52,7 @@
 							        <h3>CARING FOR OUR WORLD</h3>
 							        <p>We strive to improve the quality of our work by being responsive of our surroundings and by using sustainable design principles to foster a healthier environment. </p>
 							      </div>
-							    </div>
+							    </div> -->
 							</div>
 
 							<!-- Left and right controls -->
@@ -80,6 +80,7 @@
 		<script type="text/javascript" src="assets/js/bootstrap.min.js"></script>	
 		<script type="text/javascript" src="assets/js/imagesloaded.pkgd.min.js"></script>
 		<script type="text/javascript" src="assets/js/partial.js"></script>	
+		<script type="text/javascript" src="assets/js/public.js"></script>	
 
 		<!-- page script -->
 		<script type="text/javascript">
@@ -118,6 +119,22 @@
 
 				$("#articles-section").html(html);
 
+				var home = "";
+				var homeData = p_getData('operation', 'cms_home');
+					homeData = homeData.feedData;
+
+				for(var loop=0; loop<homeData.length; loop++){
+					home = home +
+					'<div class="item ' + ((loop == 0) ? 'active' : '') + '">' +
+				      '<img src="assets/home/' + homeData[loop].picture + '" alt="Tulisan">' +
+				      '<div class="carousel-caption">' +
+				        '<h3>' + homeData[loop].title + '</h3>' +
+				        '<p>' + homeData[loop].description + '</p>' +
+				      '</div>' +
+				    '</div>';
+			    }
+
+			    $("#myCarousel .carousel-inner").html(home);
 				$(".jumbo-tron img").css({'height':($(window).innerHeight()-52), 'object-fit':'cover', 'width': '100%'});
 			}
 			

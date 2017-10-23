@@ -87,11 +87,11 @@ function header(){
 	var breadcrumbHtml = "";
 	var breadcrumb = "";
 	var page = window.location.href; 
-		page = page.replace('#', '');
-		page = page.split('/');
+		page = page.substring(page.lastIndexOf("/")+ 1);
+		page = (page.match(/[^.]+(\.[^?#]+)?/) || [])[0];
 
 	if(page != null && page.length > 0){
-		switch(page[page.length - 1]){
+		switch(page){
 			case "story.html": 		 	
 				breadcrumb = "<a href='" + base_url + "'>Home</a> / story"; 
 				active_page = "story-route"; 
@@ -105,7 +105,7 @@ function header(){
 				active_page = "blog-route"; 
 			break;
 			case "blogDetail.html":  	
-				breadcrumb = "<a href='" + base_url + "'>Home</a> / <a href='" + base_url + "/page/blog.html'>blog</a> / detail";
+				breadcrumb = "<a href='" + base_url + "'>Home</a> / <a href='" + base_url + "/page/blog.html'>blog</a> / <span id='custom-bread-detail'>detail</span>";
 				active_page = "blog-route"; 
 			break;
 			case "chatter.html":  	 	
@@ -113,7 +113,7 @@ function header(){
 				active_page = "chatter-route"; 
 			break;
 			case "chatterDetail.html":  
-				breadcrumb = "<a href='" + base_url + "'>Home</a> / <a href='" + base_url + "/page/chatter.html'>chatter</a> / detail";
+				breadcrumb = "<a href='" + base_url + "'>Home</a> / <a href='" + base_url + "/page/chatter.html'>chatter</a> / <span id='custom-bread-detail'>detail</span>";
 				active_page = "chatter-route"; 
 			break;
 			case "videos.html":  	 	
@@ -121,7 +121,7 @@ function header(){
 				active_page = "video-route"; 
 			break;
 			case "videoDetail.html":  	 	
-				breadcrumb = "<a href='" + base_url + "'>Home</a> / <a href='" + base_url + "/page/videos.html'>videos</a> / detail";
+				breadcrumb = "<a href='" + base_url + "'>Home</a> / <a href='" + base_url + "/page/videos.html'>videos</a> / <span id='custom-bread-detail'>detail</span>";
 				active_page = "video-route"; 
 			break;
 			case "media.html":  	 	

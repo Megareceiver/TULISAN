@@ -20,7 +20,7 @@
 				<div class="row">
 					<div class="page-article">
 						<div class="col-md-8 col-md-offset-2 center-div">
-							<img id="picture" class="small-image" src="../assets/PICS/">
+							<img id="picture" class="small-image" src="../assets/stories/">
 						</div>
 						<div class="col-md-8 col-md-offset-2 center-div margin-top">
 							<h1 id="title" class="title-story fontserif"><b>&nbsp;</b></h1>
@@ -66,6 +66,7 @@
 		<script type="text/javascript" src="../assets/js/bootstrap.min.js"></script>	
 		<script type="text/javascript" src="../assets/js/imagesloaded.pkgd.min.js"></script>
 		<script type="text/javascript" src="../assets/js/partial.js"></script>	
+		<script type="text/javascript" src="../assets/js/public.js"></script>	
 
 		<script type="text/javascript">
 			storyDetail();
@@ -92,6 +93,11 @@
 					"nextStoryLink" : "#"	
 				};
 
+				if(getParam('q') != "" && getParam('q') != null){
+					story = p_getData('operation', 'cms_storyFetch', 'idData = "' + getParam('q') + "'");
+					story = story.feedData;
+				}
+
 				var socmedApi = {
 					"instagram"		: "#",
 					"twitter"		: "#",
@@ -103,13 +109,13 @@
 
 				//GENERATOR
 				if(story != null){
-					story.description = story.description.replace(/(?:\r\n|\r|\n)/g, '<br />');
+					// story.description = story.description.replace(/(?:\r\n|\r|\n)/g, '<br />');
 
 					$("#author i").html('by ' + story.author);
 					$("#custom-bread-detail").html(toTitleCase(story.title));
 					$("#title b").html(story.title);
 					$("#subtitle i").html(story.subtitle);
-					$("#description").html(story.description);
+					$("#description").html(Base64.decode(story.description));
 					$("#picture").attr('src', $("#picture").attr('src') + story.picture);
 				}
 			}

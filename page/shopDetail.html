@@ -29,6 +29,7 @@
 		<script type="text/javascript" src="../assets/js/bootstrap.min.js"></script>	
 		<script type="text/javascript" src="../assets/js/imagesloaded.pkgd.min.js"></script>
 		<script type="text/javascript" src="../assets/js/partial.js"></script>	
+		<script type="text/javascript" src="../assets/js/public.js"></script>	
 
 		<!-- page script -->
 		<script type="text/javascript">
@@ -51,21 +52,39 @@
 					"pattern"	 :  ["pattern1.jpg","pattern2.jpg","pattern3.jpg","pattern4.jpg"]
 				};
 
+				var story = [];
+				var color = [];
+
 				data.description = data.description.replace(/(?:\r\n|\r|\n)/g, '<br />');
 				data.story = data.story.replace(/(?:\r\n|\r|\n)/g, '<br />');
+
+				if(getParam('q') != "" && getParam('q') != null){
+					data = p_getData('operation', 'productDetail', 'idData = "' + getParam('q') + "'");
+					data = data.feedData;
+
+					story = p_getData('operation', 'cms_storyFetch', 'idData = "' + data.storyId + "'");
+					story = story.feedData;
+
+					color = p_getData('operation', 'colorFetch', 'idData = "' + data.colorId + "'");
+					color = color.feedData;
+				}
 				
 				html = '<div class="col-md-10 col-md-offset-1 div-normalize">';
 				
 				html = html +
 				'<div class="col-md-6">'+
-					'<div class="col-md-10 col-md-offset-1"><img class="big-image" src="../assets/PICS/' + data.product + '"/></div>'+
+					'<div class="col-md-10 col-md-offset-1"><img class="big-image" src="../assets/products/' + data.picture + '"/></div>'+
 					'<div class="clearfix"></div>' +
 					'<div class="color-choice">'+
 						'<ul>';
 
 				//color
-				for(var loop=0; loop<data.pattern.length; loop++){
-					html = html + '<li style="background-image : url(../assets/PICS/' + data.pattern[loop] + ')"></li>';
+				var pattern = data.pattern;
+					pattern = pattern.split(',');
+					console.log('as');
+					console.log(pattern);
+				for(var loop=0; loop<pattern.length; loop++){
+					html = html + '<li style="background-image : url(\'../assets/patterns/' + pattern[loop] + '\')"></li>';
 				}
 
 				html = html +
@@ -75,11 +94,11 @@
 				html = html +
 							'<div class="col-md-6">'+
 								'<div class="product-desc">'+
-									'<h1 class="fontserif"><b>' + data.name + '</b> <small>' + data.price + '</small></h1>'+
+									'<h1 class="fontserif"><b>' + data.name + '</b> <small> Rp. ' + data.price + '</small></h1>'+
 									'<p>' + data.description + '</p>'+
 									'<p>'+
 										'COLOR<br>'+
-										data.color +
+										color.name +
 									'</p>'+
 									'<p>'+
 										'MATERIAL<br>'+
@@ -94,8 +113,8 @@
 							"</div><div class='clearfix'></div>";
 				html = html +
 				'<div class="col-md-10 col-md-offset-1 product-story center-div margin-top div-normalize">'+
-					'<h4>' + data.title + '</h4>' +
-					'<p class="margin-top">' + data.story + '</p>' +
+					'<h4>' + story.title + '</h4>' +
+					'<p class="margin-top">' + Base64.decode(story.description) + '</p>' +
 				'</div>';	
 							
 				html = html + 
@@ -107,9 +126,9 @@
 						"<div class='blog-box'>"+
 							"<div class='blog-pic'>";
 
-				for(var loop=0; loop<data.picture.length; loop++){
-					html = html +  "<img src='../assets/PICS/" + data.picture[loop] + "' />";
-				}
+				// for(var loop=0; loop<story.length; loop++){
+					html = html +  "<img src='../assets/stories/" + story.picture + "' />";
+				// }
 
 				data.description = data.description.replace(/(?:\r\n|\r|\n)/g, '<br />');
 

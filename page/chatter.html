@@ -28,7 +28,7 @@
 							</div>
 						</div>
 					</div>
-					<div class="col-md-8 col-md-offset-2">
+					<div class="col-md-8 col-md-offset-2" id="items">
 						<div class="page-article">
 							<div class="col-md-3 margin-top">
 								<img class="pict-box" src="../assets/PICS/print-chatter-oct2011-1.jpg"></img>
@@ -200,6 +200,7 @@
 		<script type="text/javascript" src="../assets/js/bootstrap.min.js"></script>
 		<script type="text/javascript" src="../assets/js/imagesloaded.pkgd.min.js"></script>
 		<script type="text/javascript" src="../assets/js/partial.js"></script>	
+		<script type="text/javascript" src="../assets/js/public.js"></script>	
 	
 		<!-- page script -->
 		<script type="text/javascript">
@@ -214,7 +215,26 @@
 				var pagingState = 1;
 				var data = {"paging": "124"};
 
-				paging = parseInt(data.paging);
+				var items = "";
+
+				data = p_getData('operation', 'cms_chatter');
+				data = data.feedData;
+				for(var loop=0; loop<data.length; loop++){
+					items = items +
+					'<div class="col-md-3 margin-top">' +
+						'<img class="pict-box" src="../assets/chatters/' + data[loop].picture + '"></img>' +
+						'<div class="margin-top">' +
+							'<div class="article">' +
+								'<h4 class="title-story fontserif"><b class="text-default-color">' + data[loop].title + '</b></h4>' +
+								'<p class="title-story">' + data[loop].date + '</p>' +
+							'</div>' +
+						'</div>' +
+					'</div>';
+				}
+
+				$("#items").html(items);
+
+				paging = 0;
 
 				for(var loop=pagingState; loop<=paging; loop++){
 					if((paging - pagingState) > 5){

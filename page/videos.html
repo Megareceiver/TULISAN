@@ -29,6 +29,7 @@
 		<script type="text/javascript" src="../assets/js/bootstrap.min.js"></script>	
 		<script type="text/javascript" src="../assets/js/imagesloaded.pkgd.min.js"></script>
 		<script type="text/javascript" src="../assets/js/partial.js"></script>	
+		<script type="text/javascript" src="../assets/js/public.js"></script>	
 
 		<!-- page script -->
 		<script type="text/javascript">
@@ -72,8 +73,10 @@
 				"paging": "8"
 			};
 
-			paging = parseInt(data.paging);
-			data   = data.data;	
+			data = p_getData('operation', 'cms_video');
+			data = data.feedData;
+
+			paging = 0;
 
 			for(var loop=0; loop<data.length; loop++){
 				if(loop == 0){
@@ -82,13 +85,13 @@
 						'<div class="col-md-12">' +
 							'<div class="video-box">' +
 								'<video id="vid-' + loop + '" class="video-player">'+
-								  	'<source src="'+ base_url +'/assets/VIDS/testVids.mp4#t=29" type="video/mp4">'+
+								  	'<source src="'+ base_url +'/assets/videos/'+data[loop].fileName+'#t=29" type="video/mp4">'+
 									'Your browser does not support the video tag.'+
 								'</video>' +
 								'<div class="layer"></div>' +
 								'<div class="caption">' +
-									'<h1 class="fontserif">Finding Unconditional Love</h1>'+
-									'<button type="button">WATCH</button>'+
+									'<h1 class="fontserif">'+data[loop].title+'</h1>'+
+									'<button type="button" class="video-detail" video-id='+data[loop].idData+'>WATCH</button>'+
 								'</div>' +
 							'</div>' +
 						'</div>' +
@@ -99,14 +102,14 @@
 					'<div class="col-md-4">'+
 						'<div class="video-box">' +
 							'<video id="vid-' + loop + '">'+
-							  	'<source src="'+ base_url +'/assets/VIDS/'+data[loop].video+'#t=29" type="video/mp4">'+
+							  	'<source src="'+ base_url +'/assets/videos/'+data[loop].fileName+'#t=29" type="video/mp4">'+
 								'Your browser does not support the video tag.'+
 							'</video>'+
-							'<div class="play-button" video-id='+data[loop].id+'></div>'+
+							'<div class="play-button video-detail" video-id='+data[loop].idData+'></div>'+
 						'</div>' +
 						'<div class="video-description">' +
 							'<p><b>'+data[loop].title+'</b></p>'+
-							'<p>'+data[loop].comment+' Comments</p>'+
+							'<p>0 Comments</p>'+
 						'</div>' +
 					'</div>';
 					}
@@ -124,13 +127,13 @@
 				}
 
 				html = html + "</div>";
-				html = html + "<div class='data-paging right'><span class='fontserif'>MORE VIDEOS > </span> " + pagingLink + "</div>";
+				// html = html + "<div class='data-paging right'><span class='fontserif'>MORE VIDEOS > </span> " + pagingLink + "</div>";
 				html = html + "</div>";
 
 				$("main").html(html);
-				for(var loop=0; loop<data.length; loop++){	
+				// for(var loop=0; loop<data.length; loop++){	
 					//document.getElementById('vid-' + loop).addEventListener('loadeddata', function() { this.currentTime = 29; }, false);
-				}
+				// }
 
 				var a = 0;
 				$('.video-player').click(function () {
@@ -146,7 +149,7 @@
 				    }
 				});
 
-				$('main').on('click','.video-box .play-button', function(){ window.location.href = base_url+"/page/videoDetail.html"; });
+				$('main').on('click','.video-detail', function(){ window.location.href = base_url+"/page/videoDetail.html?q="+$(this).attr('video-id'); });
 			}
 
 			$(function(){

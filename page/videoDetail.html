@@ -29,6 +29,7 @@
 		<script type="text/javascript" src="../assets/js/bootstrap.min.js"></script>
 		<script type="text/javascript" src="../assets/js/imagesloaded.pkgd.min.js"></script>	
 		<script type="text/javascript" src="../assets/js/partial.js"></script>	
+		<script type="text/javascript" src="../assets/js/public.js"></script>	
 
 		<!-- page script -->
 		<script type="text/javascript">
@@ -45,13 +46,17 @@
 					publish : "May 3, 2016"
 				};
 
-				
+				if(getParam('q') != "" && getParam('q') != null){
+					data = p_getData('operation', 'cms_videoFetch', 'idData = "' + getParam('q') + "'");
+					data = data.feedData;
+				}
+
 				html = 
 				'<div class="row" >'+
 					'<div class="detail-video col-md-12">' +
 						'<div class="video-player" >'+
 							'<video id="vid1" width="100%">'+
-							  	'<source src="'+ base_url +'/assets/VIDS/' + data.video + '#t=29" type="video/mp4">'+
+							  	'<source src="'+ base_url +'/assets/videos/' + data.fileName + '#t=29" type="video/mp4">'+
 								'Your browser does not support the video tag.'+
 							'</video>' +
 						'</div>' +
@@ -60,11 +65,11 @@
 				'</div>';
 
 				html = html + 	
-				'<div class="col-md-12 content description-box">'+
+				'<div class="col-md-10 col-md-offset-1 content description-box">'+
 					'<h1 class="fontserif">'+data.title+'</h1>' +
-					'<p>Published on ' + data.publish + '</p>' +
+					'<p>Published on ' + timeSince(new Date(Date.parse(data.publish))) + '</p>' +
 					'<div class="detail-content">'+
-						'<p>'+data.desc+'</p>'+
+						'<p>'+Base64.decode(data.description)+'</p>'+
 					'</div>' +
 					'<div class="sosmedpage">' +
 						'<p> SHARE IT &nbsp;' +
@@ -78,9 +83,7 @@
 				'</div>';
 
 				$("main").html(html);
-				// document.getElementById('vid1').addEventListener('loadeddata', function() {
-				//   this.currentTime = 29;
-				// }, false);
+				$("#custom-bread-detail").html(toTitleCase(data.title));
 
 				    var a = 0;
 				$('.detail-video-cover').click(function () {

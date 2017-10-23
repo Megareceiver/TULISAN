@@ -29,6 +29,7 @@
 		<script type="text/javascript" src="../assets/js/bootstrap.min.js"></script>	
 		<script type="text/javascript" src="../assets/js/imagesloaded.pkgd.min.js"></script>
 		<script type="text/javascript" src="../assets/js/partial.js"></script>	
+		<script type="text/javascript" src="../assets/js/public.js"></script>	
 
 		<!-- page script -->
 		<script type="text/javascript">
@@ -68,11 +69,16 @@
 							"paging": "124"
 						};
 
-				paging = parseInt(data.paging);
-				data   = data.data;
+				data = p_getData('operation', 'cms_blog');
+				data = data.feedData;
+				paging = '0';
 
 				html = '<div class="row">';
 				for(var loop=0; loop<data.length; loop++){
+
+					var img = data[loop].pictures;
+						img = img.split(',');
+
 					html = html + 
 					"<div class='blog-container'>" +
 						'<div class="col-md-6 col-md-offset-3">' +
@@ -86,21 +92,21 @@
 						'<div class="col-md-10 col-md-offset-1">' +
 							"<div class='blog-box'>"+
 								"<div class='blog-pic'>"+
-									"<img src='../assets/PICS/" + data[loop].picture + "' />"+
+									"<img src='../assets/blogs/" + img[0] + "' />"+
 								"</div>"+
 							"</div>" +
 						"</div>" +
 						'<div class="col-md-6 col-md-offset-3">' +
 							"<div class='blog-box'>"+
 								"<div class='blog-subtitle'>"+
-									"<p>"+data[loop].subtitle+" </p>"+
+									"<p>"+Base64.decode(data[loop].description)+"... </p>"+
 								"</div>"+
 								
 							"</div>" +
 						"</div>" +
 						'<div class="col-md-10 col-md-offset-1">' +
 							"<div class='blog-box'>"+
-								"<div class='blog-detailLink'><a href="+data[loop].blogId+">CONTINUE READING</a></div>" +
+								"<div class='blog-detailLink'><a href='blogDetail.html?q="+data[loop].idData+"'>CONTINUE READING</a></div>" +
 							"</div>" +
 						"</div>" +
 					"</div>";

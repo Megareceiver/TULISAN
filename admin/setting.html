@@ -111,7 +111,7 @@
 					'<table class="table table-striped table-responsive">'+
 					    '<thead>'+
 					    	'<tr>'+
-						    	'<th width="5%"><input type="checkbox" onclick="checkboxToggle(this, \'customerSelect\')" /><label for="selectRecord"></label></th>'+
+						    	'<th width="5%"><input type="checkbox" name="customerSelect" id="selectRecord" value="0" onclick="checkboxToggle(this, \'customerSelect\')" /><label for="selectRecord"></label></th>'+
 						    	'<th width="5%" class="text-center"><span class="fa fa-picture-o"></span></th>'+
 						    	'<th>Name</th>'+
 						        '<th>Username</th>'+
@@ -180,7 +180,7 @@
 
 				$('button.search').on("click", function(){
 					var keyword = $("[placeholder='Search']").val();
-					var data = p_getData('operation', 'user', '1', '(title LIKE "%' + keyword + '%")');
+					var data = p_getData('operation', 'user', '1', '(name LIKE "%' + keyword + '%")');
 					data = data.feedData;
 					dataGenerator(data);
 				});
@@ -193,9 +193,9 @@
 					page = parseInt(page) + 1;
 
 					var keyword = $("[placeholder='Search']").val();
-					var alpha = (r_getCookie('adminAlphaFilter') != "" ? '(title LIKE "' + r_getCookie('adminAlphaFilter') + '%") AND ': "");
+					var alpha = (r_getCookie('adminAlphaFilter') != "" ? '(name LIKE "' + r_getCookie('adminAlphaFilter') + '%") AND ': "");
 
-					var data = p_getData('operation', 'user', page, alpha + '(title LIKE "%' + keyword + '%")');
+					var data = p_getData('operation', 'user', page, alpha + '(name LIKE "%' + keyword + '%")');
 					data = data.feedData;
 
 					if(data.length > 0){ dataGenerator(data); } else { page = parseInt(page) - 1; }
@@ -209,7 +209,7 @@
 						page = parseInt(page) - 1;
 
 						var keyword = $("[placeholder='Search']").val();
-						var data = p_getData('operation', 'user', page, '(title LIKE "%' + keyword + '%")');
+						var data = p_getData('operation', 'user', page, '(name LIKE "%' + keyword + '%")');
 						data = data.feedData;
 						dataGenerator(data);
 

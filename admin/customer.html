@@ -28,6 +28,7 @@
 		<script type="text/javascript" src="../assets/js/jquery-ui-1.10.0.custom.min.js"></script>
 		<script type="text/javascript" src="../assets/js/bootstrap.min.js"></script>	
 		<script type="text/javascript" src="../assets/js/syncard.js"></script>	
+		<script type="text/javascript" src="../assets/js/public.js"></script>	
 
 		<!-- page script -->
 		<script type="text/javascript">
@@ -37,25 +38,25 @@
 			function customer(){
 				var html = '';
 
-				var data = [
-					{ customerId: "1", name: 'Achdiyati Sumi', email: 'sumiong.ong@gmail.com', company: 'PT. Sky Aviation', type: "Registered", phone: '', address: '' },
-					{ customerId: "2", name: 'Achdiyati Sumi', email: 'sumiong.ong@gmail.com', company: 'PT. Sky Aviation', type: "Registered", phone: '', address: '' },
-					{ customerId: "3", name: 'Achdiyati Sumi', email: 'sumiong.ong@gmail.com', company: 'PT. Sky Aviation', type: "Registered", phone: '', address: '' },
-					{ customerId: "4", name: 'Achdiyati Sumi', email: 'sumiong.ong@gmail.com', company: 'PT. Sky Aviation', type: "Registered", phone: '', address: '' },
-					{ customerId: "5", name: 'Achdiyati Sumi', email: 'sumiong.ong@gmail.com', company: 'PT. Sky Aviation', type: "Registered", phone: '', address: '' },
-					{ customerId: "6", name: 'Achdiyati Sumi', email: 'sumiong.ong@gmail.com', company: 'PT. Sky Aviation', type: "Registered", phone: '', address: '' },
-					{ customerId: "7", name: 'Achdiyati Sumi', email: 'sumiong.ong@gmail.com', company: 'PT. Sky Aviation', type: "Registered", phone: '', address: '' },
-					{ customerId: "8", name: 'Achdiyati Sumi', email: 'sumiong.ong@gmail.com', company: 'PT. Sky Aviation', type: "Registered", phone: '', address: '' },
-					{ customerId: "9", name: 'Achdiyati Sumi', email: 'sumiong.ong@gmail.com', company: 'PT. Sky Aviation', type: "Registered", phone: '', address: '' },
-					{ customerId: "10", name: 'Achdiyati Sumi', email: 'sumiong.ong@gmail.com', company: 'PT. Sky Aviation', type: "Registered", phone: '', address: '' },
-					{ customerId: "11", name: 'Achdiyati Sumi', email: 'sumiong.ong@gmail.com', company: 'PT. Sky Aviation', type: "Registered", phone: '', address: '' },
-					{ customerId: "11", name: 'Achdiyati Sumi', email: 'sumiong.ong@gmail.com', company: 'PT. Sky Aviation', type: "Registered", phone: '', address: '' },
-					{ customerId: "11", name: 'Achdiyati Sumi', email: 'sumiong.ong@gmail.com', company: 'PT. Sky Aviation', type: "Registered", phone: '', address: '' },
-					{ customerId: "11", name: 'Achdiyati Sumi', email: 'sumiong.ong@gmail.com', company: 'PT. Sky Aviation', type: "Registered", phone: '', address: '' },
-					{ customerId: "11", name: 'Achdiyati Sumi', email: 'sumiong.ong@gmail.com', company: 'PT. Sky Aviation', type: "Registered", phone: '', address: '' },
-					{ customerId: "11", name: 'Achdiyati Sumi', email: 'sumiong.ong@gmail.com', company: 'PT. Sky Aviation', type: "Registered", phone: '', address: '' },
-					{ customerId: "11", name: 'Achdiyati Sumi', email: 'sumiong.ong@gmail.com', company: 'PT. Sky Aviation', type: "Registered", phone: '', address: '' },
-				]
+				// var data = [
+				// 	{ customerId: "1", name: 'Achdiyati Sumi', email: 'sumiong.ong@gmail.com', company: 'PT. Sky Aviation', type: "Registered", phone: '', address: '' },
+				// 	{ customerId: "2", name: 'Achdiyati Sumi', email: 'sumiong.ong@gmail.com', company: 'PT. Sky Aviation', type: "Registered", phone: '', address: '' },
+				// 	{ customerId: "3", name: 'Achdiyati Sumi', email: 'sumiong.ong@gmail.com', company: 'PT. Sky Aviation', type: "Registered", phone: '', address: '' },
+				// 	{ customerId: "4", name: 'Achdiyati Sumi', email: 'sumiong.ong@gmail.com', company: 'PT. Sky Aviation', type: "Registered", phone: '', address: '' },
+				// 	{ customerId: "5", name: 'Achdiyati Sumi', email: 'sumiong.ong@gmail.com', company: 'PT. Sky Aviation', type: "Registered", phone: '', address: '' },
+				// 	{ customerId: "6", name: 'Achdiyati Sumi', email: 'sumiong.ong@gmail.com', company: 'PT. Sky Aviation', type: "Registered", phone: '', address: '' },
+				// 	{ customerId: "7", name: 'Achdiyati Sumi', email: 'sumiong.ong@gmail.com', company: 'PT. Sky Aviation', type: "Registered", phone: '', address: '' },
+				// 	{ customerId: "8", name: 'Achdiyati Sumi', email: 'sumiong.ong@gmail.com', company: 'PT. Sky Aviation', type: "Registered", phone: '', address: '' },
+				// 	{ customerId: "9", name: 'Achdiyati Sumi', email: 'sumiong.ong@gmail.com', company: 'PT. Sky Aviation', type: "Registered", phone: '', address: '' },
+				// 	{ customerId: "10", name: 'Achdiyati Sumi', email: 'sumiong.ong@gmail.com', company: 'PT. Sky Aviation', type: "Registered", phone: '', address: '' },
+				// 	{ customerId: "11", name: 'Achdiyati Sumi', email: 'sumiong.ong@gmail.com', company: 'PT. Sky Aviation', type: "Registered", phone: '', address: '' },
+				// 	{ customerId: "11", name: 'Achdiyati Sumi', email: 'sumiong.ong@gmail.com', company: 'PT. Sky Aviation', type: "Registered", phone: '', address: '' },
+				// 	{ customerId: "11", name: 'Achdiyati Sumi', email: 'sumiong.ong@gmail.com', company: 'PT. Sky Aviation', type: "Registered", phone: '', address: '' },
+				// 	{ customerId: "11", name: 'Achdiyati Sumi', email: 'sumiong.ong@gmail.com', company: 'PT. Sky Aviation', type: "Registered", phone: '', address: '' },
+				// 	{ customerId: "11", name: 'Achdiyati Sumi', email: 'sumiong.ong@gmail.com', company: 'PT. Sky Aviation', type: "Registered", phone: '', address: '' },
+				// 	{ customerId: "11", name: 'Achdiyati Sumi', email: 'sumiong.ong@gmail.com', company: 'PT. Sky Aviation', type: "Registered", phone: '', address: '' },
+				// 	{ customerId: "11", name: 'Achdiyati Sumi', email: 'sumiong.ong@gmail.com', company: 'PT. Sky Aviation', type: "Registered", phone: '', address: '' },
+				// ]
 
 				html = html +
 				'<div class="header-option">' +
@@ -65,15 +66,15 @@
 								'<a href="formCustomer.html"><i class="fa fa-plus-circle text-warning">&nbsp;</i> Create Customer</a>'+
 							'</div>' +
 							'<div class="input-group operation-button">' +
-								'<a href="#"><i class="fa fa-minus-circle text-warning">&nbsp;</i> Delete Customer</a>'+
+								'<a href="#" id="deleteButton"><i class="fa fa-minus-circle text-warning">&nbsp;</i> Delete Customer</a>'+
 							'</div>' +
 							'<div class="input-group operation-button">' +
-								'<a href="#"><i class="fa fa-bars text-warning">&nbsp;</i> Manage Customer</a>'+
+								'<a href="#" id="manageButton"><i class="fa fa-bars text-warning">&nbsp;</i> Manage Customer</a>'+
 							'</div>' +
-				        	'<div class="input-group pull-right search-box">' +
+				        	'<div class="input-group pull-right">' +
 				        		'<input type="text" class="form-control" placeholder="Search">' +
 					        	'<span class="input-group-btn">' +
-					        		'<button type="submit" class="btn btn-default">SEARCH</button>' +
+					        		'<button type="button" class="search btn btn-default">SEARCH</button>' +
 					        	'</span>' +
 				        	'</div>' +
 				   		'</form>' +
@@ -82,15 +83,15 @@
 					'<div class="summary-group">'+
 						'<div class="summary-text">'+
 							'<p>Total number of customers</p>'+
-							'<p class="number">' + data.length + '</p>'+
+							'<p class="number" id="totalRecord">0</p>'+
 						'</div>'+
 						'<div class="summary-text">'+
 							'<p>Registered</p>'+
-							'<p class="number">' + data.length + '</p>'+
+							'<p class="number" id="totalRegistered">0</p>'+
 						'</div>'+
 						'<div class="summary-text">'+
 							'<p>Guest</p>'+
-							'<p class="number">0</p>'+
+							'<p class="number" id="totalGuest">0</p>'+
 						'</div>'+
 						'<div class="alpha">'+
 							'<ul>' +
@@ -130,7 +131,7 @@
 					'<table class="table table-striped table-responsive">'+
 					    '<thead>'+
 					    	'<tr>'+
-						    	'<th width="5%"><input type="checkbox" value="'+loop+'" id="selectRecord' + loop + '" onclick="checkboxToggle(this, \'customerSelect\')" /><label for="selectRecord' + loop + '"></label></th>'+
+						    	'<th width="5%"><input type="checkbox" name="customerSelect" id="selectRecord" value="0" onclick="checkboxToggle(this, \'customerSelect\')" /><label for="selectRecord"></label></th>'+
 						    	'<th>Name</th>'+
 						        '<th>E mail</th>'+
 						        '<th>Company</th>'+
@@ -138,20 +139,7 @@
 						        '<th>Location</th>'+
 					    	'</tr>'+
 					    '</thead>'+
-					    '<tbody>';
-					    	for(var loop =0; loop<data.length; loop++){
-					    		html = html +
-					    		'<tr>'+
-					    			'<td><input type="checkbox" name="customerSelect" value="'+data[loop].customerId+'" id="selectRecord' + loop + '"><label for="selectRecord' + loop + '"></label></td>'+
-					    			'<td class="syn-nowrap">'+ data[loop].name +'</td>'+
-					    			'<td>'+ data[loop].email +'</td>'+
-					    			'<td class="syn-nowrap">'+ data[loop].company +'</td>'+
-					    			'<td>'+ data[loop].phone +'</td>'+
-					    			'<td>'+ data[loop].address +'</td>'+
-					    		'</tr>';
-					    	}
-				html = html +
-					    '</tbody>'+
+					    '<tbody></tbody>'+
 					'</table>'+
 				'</div>';
 
@@ -189,11 +177,125 @@
 					'</div>'+
 				'</div>';
 
-				// html = html + '</div>';
 				$('main.parent-admin .main-content').append(html);
+
+				r_setCookie('adminPageFilter', '1');
+				r_setCookie('adminAlphaFilter', '');
+				var page = (r_getCookie('adminPageFilter') != "" ? r_getCookie('adminPageFilter'): "1");
+				var data = p_getData('operation', 'customer', page);
+					data = data.feedData;
+
+				dataGenerator(data);
+				
+				//filter
+				$('.alpha a').on("click", function(){
+					var page = (r_getCookie('adminPageFilter') != "" ? r_getCookie('adminPageFilter'): "1");
+					var data = p_getData('operation', 'customer', page, '(name LIKE "' + $(this).html() + '%")');
+					data = data.feedData;
+					dataGenerator(data);
+
+					r_setCookie('adminPageFilter', page);
+					r_setCookie('adminAlphaFilter', $(this).html());
+				});
+
+				$('button.search').on("click", function(){
+					var keyword = $("[placeholder='Search']").val();
+					var data = p_getData('operation', 'customer', '1', '(name LIKE "%' + keyword + '%")');
+					data = data.feedData;
+					dataGenerator(data);
+				});
+
+				//filter end
+
+				//paging
+				$('.pagging-text .pagging-right').on("click", function(){
+					var page = (r_getCookie('adminPageFilter') != "" ? r_getCookie('adminPageFilter'): "1");
+					page = parseInt(page) + 1;
+
+					var keyword = $("[placeholder='Search']").val();
+					var alpha = (r_getCookie('adminAlphaFilter') != "" ? '(name LIKE "' + r_getCookie('adminAlphaFilter') + '%") AND ': "");
+
+					var data = p_getData('operation', 'customer', page, alpha + '(name LIKE "%' + keyword + '%")');
+					data = data.feedData;
+
+					if(data.length > 0){ dataGenerator(data); } else { page = parseInt(page) - 1; }
+
+					r_setCookie('adminPageFilter', page);
+				});
+
+				$('.pagging-text .pagging-left').on("click", function(){
+					var page = (r_getCookie('adminPageFilter') != "" ? r_getCookie('adminPageFilter'): "1");
+					if(page > 1){
+						page = parseInt(page) - 1;
+
+						var keyword = $("[placeholder='Search']").val();
+						var data = p_getData('operation', 'customer', page, '(name LIKE "%' + keyword + '%")');
+						data = data.feedData;
+						dataGenerator(data);
+
+						r_setCookie('adminPageFilter', page);
+					}
+				});
+				//paging end
 			}
 			
-		
+			function dataGenerator(data){
+				var html = "";
+				var guestCounter = 0;
+				var registeredCounter = 0;
+				for(var loop =0; loop<data.length; loop++){
+		    		html = html +
+		    		'<tr>'+
+		    			'<td><input type="checkbox" name="customerSelect" value="'+data[loop].idData+'" id="selectRecord' + loop + '"><label for="selectRecord' + loop + '"></label></td>'+
+		    			'<td class="syn-nowrap">'+ data[loop].name +'</td>'+
+		    			'<td>'+ data[loop].email +'</td>'+
+		    			'<td class="syn-nowrap">'+ data[loop].company +'</td>'+
+		    			'<td>'+ data[loop].phone +'</td>'+
+		    			'<td>'+ data[loop].address +'</td>'+
+		    		'</tr>';
+		    		
+		    		if(data[loop].customerId == "" || data[loop].customerId == "NULL") guestCounter++;
+		    		else registeredCounter++;
+		    	}
+
+				$('main.parent-admin table tbody').html('').append(html);
+				$('main.parent-admin #totalRecord').html(data.length);
+				$('main.parent-admin #totalRegistered').html(registeredCounter);
+				$('main.parent-admin #totalGuest').html(guestCounter);
+
+				//activator
+				checkboxActivator();
+				operationActivator();
+			}
+
+			function operationActivator(){
+				$('#deleteButton').unbind().on("click", function(){ 
+					if(checkedArray.length > 0){
+						var confirmation = confirm("Are you sure you want to delete the selected data?");
+						if (confirmation == true) {
+							p_removeData('operation', 'customer', checkedArray);
+							
+							r_setCookie('adminPageFilter', '1');
+							r_setCookie('adminAlphaFilter', '');
+							var page = (r_getCookie('adminPageFilter') != "" ? r_getCookie('adminPageFilter'): "1");
+							var data = p_getData('operation', 'customer', page);
+								data = data.feedData;
+
+							dataGenerator(data);
+						}
+					}else{
+						alert("Please choose record first!");
+					}
+				});
+
+				$('#manageButton').unbind().on("click", function(){ 
+					if(checkedArray.length == 1 && checkedArray[0] != "0"){
+						window.location.href = base_url + "/admin/formCustomer.html?q=" + checkedArray[0];
+					}else{
+						alert("Please choose only one record!");
+					}
+				});
+			}
 		</script>
 	</body>
 </html>

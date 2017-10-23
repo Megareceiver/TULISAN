@@ -22,8 +22,8 @@
 				case "departmentOption" : $resultList = $this->fetchAllRecord('departments', array("name as caption", "idData as value"), $post['keyword'], "ORDER BY name ASC"); break;
 				case "departmentFetch" 	: $resultList = $this->fetchSingleRequest('departments', array("name", "idData"), $post['keyword']); break;
 
-				case "customer" 		: $resultList = $this->fetchAllRequest('customers', array("idData", "name", "company", "phone", "email", "CONCAT(address, '\n', city,  ,zipCode, '\n', country) as address", "COALESCE(userId,'guest')"), $post['keyword'], "ORDER BY name ASC", $post['page']); break;
-				case "customerFetch" 	: $resultList = $this->fetchSingleRequest('customers', array("idData", "name", "company", "phone", "email", "address", "city", "zipCode", "country"), $post['keyword']); break;
+				case "customer" 		: $resultList = $this->fetchAllRequest('customers', array("idData", "name", "company", "phone", "email", "CONCAT(address, '</br>', city, ' ', zipCode, '</br>', country) as address", "COALESCE(userId,'guest')"), $post['keyword'], "ORDER BY name ASC", $post['page']); break;
+				case "customerFetch" 	: $resultList = $this->fetchSingleRequest('customers c LEFT JOIN users u ON c.userId = u.idData', array("c.idData", "c.name", "c.company", "c.phone", "c.email", "c.address", "c.city", "c.zipCode", "c.country, u.picture"), $post['keyword']); break;
 
 				case "cms_blog" 		: $resultList = $this->fetchAllRequest('cms_blog', array("idData","title", "date", "subtitle", "SUBSTRING(description, 1, 300) as description", "photoBy"), $post['keyword'], "ORDER BY idData DESC", $post['page']); break;
 				case "cms_blogFetch" 	: $resultList = $this->fetchSingleRequest('cms_blog', array("idData","title", "date", "subtitle", "description", "photoBy", "pictures as `pictures[]`"), $post['keyword']); break;
@@ -58,15 +58,33 @@
 				case "product" 		: $resultList = $this->deleteById('products', $post['id']); break;
 				case "color" 		: $resultList = $this->deleteById('colors', $post['id']); break;
 				case "department" 	: $resultList = $this->deleteById('departments', $post['id']); break;
-				case "customer" 	: $resultList = $this->deleteById('customers', $post['id']); break;
+				case "customer" 	: 
+					if(isset($post['id'])){
+						$temp  = "";
+						foreach ($post['id'] as $value) {
+							if($temp  == "") $temp = $value;
+							else $temp = $temp.",".$value;
+						}
+
+						$resultList = $this->fetchAllRecord('customers', array("userId"), "idData IN (".$temp.")");
+						if($resultList['feedStatus'] == "success"){
+							$data = $resultList['feedData'];
+							foreach ($data as $value) {
+								$userResult = $this->deleteById('users', $value['userId']);
+								$resultList = $this->deleteById('customers', $post['id']);
+								$resultList['userFeed'] = $userResult;
+							}
+						} 
+					}
+				break;
 				case "vendor" 		: $resultList = $this->deleteById('vendors', $post['id']); break;
 				case "order" 		: $resultList = $this->deleteById('orders', $post['id']); break;
 				case "user" 		: $resultList = $this->deleteById('users', $post['id']); break;
-				case "cms_blog" 		: $resultList = $this->deleteById('cms_blog', $post['id']); break;
-				case "cms_chatter" 		: $resultList = $this->deleteById('cms_chatter', $post['id']); break;
-				case "cms_home" 		: $resultList = $this->deleteById('cms_home', $post['id']); break;
-				case "cms_story" 		: $resultList = $this->deleteById('cms_story', $post['id']); break;
-				case "cms_video" 		: $resultList = $this->deleteById('cms_video', $post['id']); break;
+				case "cms_blog" 	: $resultList = $this->deleteById('cms_blog', $post['id']); break;
+				case "cms_chatter" 	: $resultList = $this->deleteById('cms_chatter', $post['id']); break;
+				case "cms_home" 	: $resultList = $this->deleteById('cms_home', $post['id']); break;
+				case "cms_story" 	: $resultList = $this->deleteById('cms_story', $post['id']); break;
+				case "cms_video" 	: $resultList = $this->deleteById('cms_video', $post['id']); break;
 
 				default	   : $resultList = array( "feedStatus" => "failed", "feedType" => "danger", "feedMessage" => "Something went wrong, failed to collect data!", "feedData" => array()); break;
 			}
@@ -247,6 +265,59 @@
 					}
 				break;
 
+				case "customer"  : 
+					//create user first
+					$fields = array();
+					$values = array();
+					$userId = "";
+
+					if(isset($post['name'])) {
+						array_push($fields, "name");
+						array_push($values, $post['name']);
+					}
+
+					if(isset($post['email'])) {
+						array_push($fields, "username");
+						array_push($values, $post['email']);
+					}
+
+					if(isset($post['password']) && isset($post['retype_password']) && $post['password'] == $post['retype_password']) {
+						array_push($fields, "password");
+						array_push($values, md5($post['password']));
+					}
+
+					array_push($fields, "type");
+					array_push($values, "Customer");
+
+					$resultList = $this->insert('users', $fields, $values); 
+
+					if($resultList["feedStatus"] == "success") {
+
+						//create customer
+						$fields = array("name","address", "city", "country", "zipCode", "phone", "email", "company");
+						$values = array();
+						foreach ($fields as $key) {
+							$value = (isset($post[$key]) && $post[$key] != "") ? $post[$key] : "";
+							array_push($values, $value);
+						}
+
+						if(isset($resultList["feedId"])) {
+							$userId = $resultList["feedId"];
+							array_push($fields, "userId");
+							array_push($values, $userId);
+						}
+
+						$resultList = $this->insert('customers', $fields, $values); 
+
+						if($resultList["feedStatus"] == "success") {
+							if(isset($_FILES["picture"])){
+								$upload = $this->uploadSingleImage($_FILES["picture"], "users", "users", "picture", $userId);
+								array_push($resultList, array("feedUpload" => $upload['feedMessage']));
+							}
+						}
+					}
+				break;
+
 				default	   		: $resultList = array( "feedStatus" => "failed", "feedType" => "danger", "feedMessage" => "Something went wrong, failed to collect data!", "feedData" => array()); break;
 			}
 
@@ -422,6 +493,42 @@
 							$resultList["feedMultiUpload"] = $upload['feedMessage'];
 						}
 					
+					}
+
+				break;
+
+				case "customer"  : 
+
+					//update user first 
+					$fields = array("name");
+					$values = array();
+					foreach ($fields as $key) {
+						$value = (isset($post[$key]) && $post[$key] != "") ? $post[$key] : "";
+						$values[$key] = $key." = '".str_replace(',','',$value)."'";
+					}
+
+					if(isset($post['password']) && isset($post['retype_password']) && $post['password'] == $post['retype_password']) {
+						$values['password'] = "password = '".md5($post['password'])."'";
+					}
+
+					$resultList = $this->update('users', $values, $post['idData']); 
+
+					if($resultList["feedStatus"] == "success" && isset($post['idData']) && $post['idData']!="") {
+						if(isset($_FILES["picture"])){
+							$upload = $this->uploadSingleImage($_FILES["picture"], "users", "users", "picture", $post['idData']);
+							$resultList["feedMultiUpload"] = $upload['feedMessage'];
+						}
+						
+
+						//update customer
+						$fields = array("name","address", "city", "country", "zipCode", "phone", "company");
+						$values = array();
+						foreach ($fields as $key) {
+							$value = (isset($post[$key]) && $post[$key] != "") ? $post[$key] : "";
+							$values[$key] = $key." = '".str_replace(',','',$value)."'";
+						}
+
+						$resultList = $this->update('customers', $values, $post['idData']);
 					}
 
 				break;

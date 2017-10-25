@@ -110,7 +110,7 @@ function p_formHandler(formId, type, back){
 
 //Fall Back 
 function r_callBack(back){
-	// window.location.href = base_url + "/admin/" + back;
+	window.location.href = base_url + "/admin/" + back;
 }
 
 

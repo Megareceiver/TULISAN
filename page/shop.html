@@ -157,11 +157,14 @@
 				if(product.length > 0){
 					for(var loop = 0; loop < product.length; loop++)
 					{
+						temp = normalFormatChanger(product[loop].price);
+						// price = currencyFormatChanger(price);
+						price = currencyFormat(String(temp))
 						html = html +
 						'<div class="col-md-6 shop-thumb">'+
 							'<a href="shopDetail.html?q=' + product[loop].idData + '">' +
 								'<img class="big-image" src="../assets/products/'+product[loop].picture+'">'+
-								'<h4 class="center-div"><b class="fontserif">'+product[loop].name+' Rp.'+product[loop].price+'</b></h4>'+
+								'<h4 class="center-div"><b class="fontserif">'+product[loop].name+' Rp.'+price+'</b></h4>'+
 							'</a>' +
 						'</div>';
 					}

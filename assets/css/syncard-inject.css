@@ -9,7 +9,7 @@ html, body { overflow-x: hidden; }
 
 a { color: #333; }
 /*.container{max-width: 687px;}*/
-.syn-center { 
+.syn-center {
   text-align: center;
   padding: 0;
  }
@@ -17,9 +17,9 @@ a { color: #333; }
   display: inline-block;
   float: none;
  }
-   
-.syn-right{ 
-  text-align: right; 
+
+.syn-right{
+  text-align: right;
   padding-right: 38px;
 }
 
@@ -36,17 +36,17 @@ a { color: #333; }
 .btn-default:hover,
 .btn-default:active,
 .btn-default.active.focus,
-.btn-default.active:focus, 
-.btn-default.active:hover, 
-.btn-default:active.focus, 
-.btn-default:active:focus, 
-.btn-default:active:hover, 
-.open>.dropdown-toggle.btn-default.focus, 
-.open>.dropdown-toggle.btn-default:focus, 
+.btn-default.active:focus,
+.btn-default.active:hover,
+.btn-default:active.focus,
+.btn-default:active:focus,
+.btn-default:active:hover,
+.open>.dropdown-toggle.btn-default.focus,
+.open>.dropdown-toggle.btn-default:focus,
 .open>.dropdown-toggle.btn-default:hover{
   background-color: #333232;
   color: #FFF;
-  border-color:unset; 
+  border-color:unset;
 }
 
 .no-padding{
@@ -123,6 +123,8 @@ a { color: #333; }
 .content-story p{text-align: justify;}
 .title-story {text-align: center;}
 
+.hide-block { opacity: 0 }
+
 /*=============================================================================================*/
 /* */
 body { background-color: #CCC }
@@ -131,11 +133,11 @@ body .container:first-child {
   padding: 0;
 }
 
-.fixed-container { 
-  display: inline-block; 
-  width: 100%; 
-  max-width: 1100px; 
-  margin: auto;  
+.fixed-container {
+  display: inline-block;
+  width: 100%;
+  max-width: 1100px;
+  margin: auto;
 }
 
 .div-normalize { padding-left: 33px; padding-right: 33px; }
@@ -286,7 +288,7 @@ header.parent.fly {
 .navbar-brand>img { display: initial; }
 
 .navbar-collapse#syncard-nav { position: relative; }
-.navbar-shortcut { 
+.navbar-shortcut {
   display: inline-block;
   position: absolute;
   top: 15px;
@@ -344,8 +346,8 @@ main.parent .jumbo-tron { margin-top: -30px }
 }
 
 .tab-link ul { display: block; padding: 0 }
-.tab-link ul li { 
-  display: inline-block; 
+.tab-link ul li {
+  display: inline-block;
   padding: 10px;
   list-style: none;
 }
@@ -379,10 +381,10 @@ footer.parent .license {
 
 /*=============================================================================================*/
 /* TAB PAGE */
-.tab-header .tab-button { 
+.tab-header .tab-button {
   display: inline-block;
   padding: 5px 0;
-  color: #111; 
+  color: #111;
   border-bottom: 2px solid transparent
 }
 
@@ -391,15 +393,15 @@ footer.parent .license {
 .tab-header ul { padding: 0; }
 .tab-header ul li.bold { font-weight: bold; }
 .tab-header ul li.italic { font-style: italic; }
-.tab-header ul li { 
-  display: inline-block; 
+.tab-header ul li {
+  display: inline-block;
   margin-right: 10px;
-  list-style: none; 
+  list-style: none;
 }
 
 .tab-header.in-style .tab-button {
   padding: 5px 0;
-  color: #111; 
+  color: #111;
   border-bottom: none;
   border-top: 2px solid #111;
   display: block;
@@ -419,14 +421,14 @@ footer.parent .license {
 
 /*=============================================================================================*/
 /* MAP MARKER */
-.maps { 
+.maps {
   position: relative;
   margin-bottom: 35px;
   padding-bottom: 35px;
   border-bottom: 1px solid #111;
 }
 
-.maps img { 
+.maps img {
   width: 100%;
 }
 
@@ -1123,12 +1125,12 @@ footer.parent .license {
 
 .table-box ul { display: inline-block; width: 100%; padding: 0; border-bottom: 1px solid #CCC; }
 .table-box ul.clear { border-bottom: none; }
-.table-box ul li { 
+.table-box ul li {
   list-style: none;
   padding: 20px 10px;
 }
 
-.table-box.thin ul li { 
+.table-box.thin ul li {
   padding: 0 10px;
 }
 
@@ -1150,7 +1152,7 @@ footer.parent .license {
 .basic-table a { color: rgb(17, 85, 204) }
 .basic-table ul { display: inline-block; width: 100%; padding-left: 25px; padding-right: 25px;  }
 .basic-table ul:nth-child(odd) { background-color: #DDD; }
-.basic-table ul li { 
+.basic-table ul li {
   list-style: none;
   padding: 10px 5px;
   text-align: left;
@@ -1213,7 +1215,7 @@ img,
 /*page size*/
 @media (max-width: 767px) {
   /*=============================================================================================*/
-  /* HEADER */ 
+  /* HEADER */
   header.parent {
     position: fixed;
     left: 0;
@@ -1246,7 +1248,7 @@ img,
     width: 100%;
     margin: 15px 0
   }
-  
+
   /*=============================================================================================*/
   /* BREADCRUMB */
   .breadcrumb { margin-top: 60px; padding-left: 0 }
@@ -1336,7 +1338,7 @@ img,
 
 /* small */
 @media (min-width: 768px) and (max-width: 991px) {
-  
+
 }
 /* medium */
 @media (min-width: 992px) and (max-width: 1199px) {

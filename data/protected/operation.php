@@ -10,11 +10,11 @@
 		public function requestData($post, $target){
 			switch($target){
 				case "summary" 			: $resultList = $this->summary(); break;
-				
+
 				case "product" 			: $resultList = $this->fetchAllRequest('products', array("picture", "idData", "sku", "name", "description", "qty", "price"), $post['keyword'], "ORDER BY name ASC", $post['page']); break;
 				case "productFetch" 	: $resultList = $this->fetchSingleRequest('products', array("picture", "pattern as `pattern[]`", "idData", "sku", "name", "description", "qty", "price", "material", "dimension", "storyId", "colorId"), $post['keyword']); break;
 				case "productDetail" 	: $resultList = $this->fetchSingleRequest('products', array("picture", "pattern", "idData", "sku", "name", "description", "qty", "price", "material", "dimension", "storyId", "colorId"), $post['keyword']); break;
-				
+
 				case "color" 			: $resultList = $this->fetchAllRequest('colors', array("name", "idData"), $post['keyword'], "ORDER BY name ASC", $post['page']); break;
 				case "colorOption" 		: $resultList = $this->fetchAllRecord('colors', array("name as caption", "idData as value"), $post['keyword'], "ORDER BY name ASC"); break;
 				case "coloretail" 		: $resultList = $this->fetchSingleRequest('colors', array("name", "idData"), $post['keyword']); break;
@@ -29,32 +29,33 @@
 				case "cms_blog" 		: $resultList = $this->fetchAllRequest('cms_blog', array("idData","title", "date", "subtitle", "SUBSTRING(description, 1, 300) as description", "photoBy", "pictures"), $post['keyword'], "ORDER BY idData DESC", $post['page']); break;
 				case "cms_blogFetch" 	: $resultList = $this->fetchSingleRequest('cms_blog', array("idData","title", "date", "subtitle", "description", "photoBy", "pictures as `pictures[]`"), $post['keyword']); break;
 				case "cms_blogDetail" 	: $resultList = $this->fetchSingleRequest('cms_blog', array("idData","title", "date", "subtitle", "description", "photoBy", "pictures as pictures"), $post['keyword']); break;
-				
+
 				case "cms_chatter" 		: $resultList = $this->fetchAllRequest('cms_chatter', array("idData","title", "date", "description","picture", "createdBy as publishedBy", "createdDate as publishedTime"), $post['keyword'], "ORDER BY idData DESC", $post['page']); break;
 				case "cms_chatterFetch" : $resultList = $this->fetchSingleRequest('cms_chatter', array("idData","title", "date", "description","picture"), $post['keyword']); break;
-				
+
 				case "cms_home" 		: $resultList = $this->fetchAllRequest('cms_home', array("idData", "title", "description", "picture", "createdBy as publishedBy", "createdDate as publishedTime"), $post['keyword'], "ORDER BY idData ASC", $post['page']); break;
-				case "cms_homeFetch" 	: $resultList = $this->fetchSingleRequest('cms_home', array("idData", "title", "description", "picture"), $post['keyword']); break;
-				
+				case "cms_homeFetch": $resultList = $this->fetchSingleRequest('cms_home', array("idData", "title", "description", "picture"), $post['keyword']); break;
+				case "cms_?" 		: $resultList = $this->fetchAllRequest('cms_home', array("idData", "title", "description", "picture", "createdBy as publishedBy", "createdDate as publishedTime"), $post['keyword'], "ORDER BY idData ASC", $post['page']); break;
+
 				case "cms_story" 		: $resultList = $this->fetchAllRequest('cms_story', array("idData","title", "subtitle", "SUBSTRING(description, 1, 300) as description", "author", "picture"), $post['keyword'], "ORDER BY idData DESC", $post['page']); break;
 				case "cms_storyOption" 	: $resultList = $this->fetchAllRecord('cms_story', array("title as caption", "idData as value"), $post['keyword'], "ORDER BY title ASC"); break;
 				case "cms_storyFetch" 	: $resultList = $this->fetchSingleRequest('cms_story', array("idData", "title", "subtitle", "description", "author", "picture"), $post['keyword']); break;
-				
+
 				case "cms_video" 		: $resultList = $this->fetchAllRequest('cms_video', array("idData","title", "SUBSTRING(description, 1, 300) as description", "fileName", "fileSize", "createdBy as publishedBy", "createdDate as publishedTime"), $post['keyword'], "ORDER BY idData DESC", $post['page']); break;
 				case "cms_videoFetch" 	: $resultList = $this->fetchSingleRequest('cms_video', array("idData","title", "description", "fileName", "createdDate as publish"), $post['keyword']); break;
-				
+
 				case "user" 			: $resultList = $this->fetchAllRequest('users u LEFT JOIN departments d ON u.departmentId = d.idData', array("u.idData","u.name", "u.username", "u.type", "IFNULL(d.name,'') as department", "u.picture"), "u.idData <> '0'", "ORDER BY u.idData DESC", $post['page']); break;
 				case "userFetch" 		: $resultList = $this->fetchSingleRequest('users', array("idData","name", "username", "type", "departmentId", "picture"), $post['keyword']); break;
-				
+
 				case "vendor" 			: $resultList = $this->fetchAllRequest('vendors', array("idData", "name", "company", "phone", "email", "CONCAT(address, '</br>', city, ' ', zipCode, '</br>', country) as address"), $post['keyword'], "ORDER BY name ASC", $post['page']); break;
 				case "vendorFetch" 		: $resultList = $this->fetchSingleRequest('vendors', array("idData", "name", "company", "phone", "email", "address", "city", "zipCode", "country"), $post['keyword'], "ORDER BY name ASC"); break;
-				
+
 				default	   : $resultList = array( "feedStatus" => "failed", "feedType" => "danger", "feedMessage" => "Something went wrong, failed to collect data!", "feedData" => array()); break;
 			}
 
 			/* result fetch */
 			$json = $resultList;
-		
+
 	        return $json;
 		}
 
@@ -63,7 +64,7 @@
 				case "product" 		: $resultList = $this->deleteById('products', $post['id']); break;
 				case "color" 		: $resultList = $this->deleteById('colors', $post['id']); break;
 				case "department" 	: $resultList = $this->deleteById('departments', $post['id']); break;
-				case "customer" 	: 
+				case "customer" 	:
 					if(isset($post['id'])){
 						$temp  = "";
 						foreach ($post['id'] as $value) {
@@ -79,7 +80,7 @@
 								$resultList = $this->deleteById('customers', $post['id']);
 								$resultList['userFeed'] = $userResult;
 							}
-						} 
+						}
 					}
 				break;
 				case "vendor" 		: $resultList = $this->deleteById('vendors', $post['id']); break;
@@ -96,13 +97,13 @@
 
 			/* result fetch */
 			$json = $resultList;
-		
+
 	        return $json;
 		}
 
 		public function addData($post, $target){
 			switch($target){
-				case "product"  : 
+				case "product"  :
 					$fields = array("name", "sku", "description", "material", "dimension", "qty", "price", "storyId", "colorId");
 					$values = array();
 					foreach ($fields as $key) {
@@ -110,7 +111,7 @@
 						array_push($values, $value);
 					}
 
-					$resultList = $this->insert('products', $fields, $values); 
+					$resultList = $this->insert('products', $fields, $values);
 
 					if($resultList["feedStatus"] == "success") {
 						if(isset($_FILES["picture"])){
@@ -125,21 +126,21 @@
 					}
 				break;
 
-				case "color"  : 
+				case "color"  :
 					$fields = array("name");
 					$values = array($post["name"]);
 
-					$resultList = $this->insert('colors', $fields, $values); 
+					$resultList = $this->insert('colors', $fields, $values);
 				break;
 
-				case "department"  : 
+				case "department"  :
 					$fields = array("name");
 					$values = array($post["name"]);
 
-					$resultList = $this->insert('departments', $fields, $values); 
+					$resultList = $this->insert('departments', $fields, $values);
 				break;
 
-				case "cms_home"  : 
+				case "cms_home"  :
 					$fields = array("title", "description");
 					$values = array();
 					foreach ($fields as $key) {
@@ -147,7 +148,7 @@
 						array_push($values, $value);
 					}
 
-					$resultList = $this->insert('cms_home', $fields, $values); 
+					$resultList = $this->insert('cms_home', $fields, $values);
 
 					if($resultList["feedStatus"] == "success") {
 						if(isset($_FILES["picture"])){
@@ -157,7 +158,7 @@
 					}
 				break;
 
-				case "cms_story"  : 
+				case "cms_story"  :
 					$fields = array("title", "subtitle", "author");
 					$values = array();
 					foreach ($fields as $key) {
@@ -170,7 +171,7 @@
 						array_push($values, base64_encode($post['description']));
 					}
 
-					$resultList = $this->insert('cms_story', $fields, $values); 
+					$resultList = $this->insert('cms_story', $fields, $values);
 
 					if($resultList["feedStatus"] == "success") {
 						if(isset($_FILES["picture"])){
@@ -180,7 +181,7 @@
 					}
 				break;
 
-				case "cms_blog"  : 
+				case "cms_blog"  :
 					$fields = array("title", "date", "subtitle", "photoBy");
 					$values = array();
 					foreach ($fields as $key) {
@@ -193,7 +194,7 @@
 						array_push($values, base64_encode($post['description']));
 					}
 
-					$resultList = $this->insert('cms_blog', $fields, $values); 
+					$resultList = $this->insert('cms_blog', $fields, $values);
 
 					if($resultList["feedStatus"] == "success") {
 						if(isset($_FILES["pictures"])){
@@ -203,7 +204,7 @@
 					}
 				break;
 
-				case "cms_chatter"  : 
+				case "cms_chatter"  :
 					$fields = array("title", "date", "description");
 					$values = array();
 					foreach ($fields as $key) {
@@ -211,7 +212,7 @@
 						array_push($values, $value);
 					}
 
-					$resultList = $this->insert('cms_chatter', $fields, $values); 
+					$resultList = $this->insert('cms_chatter', $fields, $values);
 
 					if($resultList["feedStatus"] == "success") {
 						if(isset($_FILES["picture"])){
@@ -221,7 +222,7 @@
 					}
 				break;
 
-				case "cms_video"  : 
+				case "cms_video"  :
 					$fields = array("title");
 					$values = array();
 					foreach ($fields as $key) {
@@ -234,7 +235,7 @@
 						array_push($values, base64_encode($post['description']));
 					}
 
-					$resultList = $this->insert('cms_video', $fields, $values); 
+					$resultList = $this->insert('cms_video', $fields, $values);
 
 					if($resultList["feedStatus"] == "success") {
 						if(isset($_FILES["video"])){
@@ -244,7 +245,7 @@
 					}
 				break;
 
-				case "user"  : 
+				case "user"  :
 					$fields = array("name", "username", "departmentId");
 					$values = array();
 					foreach ($fields as $key) {
@@ -260,7 +261,7 @@
 					array_push($fields, "type");
 					array_push($values, "admin");
 
-					$resultList = $this->insert('users', $fields, $values); 
+					$resultList = $this->insert('users', $fields, $values);
 
 					if($resultList["feedStatus"] == "success") {
 						if(isset($_FILES["picture"])){
@@ -270,7 +271,7 @@
 					}
 				break;
 
-				case "customer"  : 
+				case "customer"  :
 					//create user first
 					$fields = array();
 					$values = array();
@@ -294,7 +295,7 @@
 					array_push($fields, "type");
 					array_push($values, "Customer");
 
-					$resultList = $this->insert('users', $fields, $values); 
+					$resultList = $this->insert('users', $fields, $values);
 
 					if($resultList["feedStatus"] == "success") {
 
@@ -312,7 +313,7 @@
 							array_push($values, $userId);
 						}
 
-						$resultList = $this->insert('customers', $fields, $values); 
+						$resultList = $this->insert('customers', $fields, $values);
 
 						if($resultList["feedStatus"] == "success") {
 							if(isset($_FILES["picture"])){
@@ -323,7 +324,7 @@
 					}
 				break;
 
-				case "vendor"  : 
+				case "vendor"  :
 					$fields = array("name", "company", "phone", "email", "address", "city", "zipCode", "country");
 					$values = array();
 					foreach ($fields as $key) {
@@ -331,7 +332,7 @@
 						array_push($values, $value);
 					}
 
-					$resultList = $this->insert('vendors', $fields, $values); 
+					$resultList = $this->insert('vendors', $fields, $values);
 				break;
 
 				default	   		: $resultList = array( "feedStatus" => "failed", "feedType" => "danger", "feedMessage" => "Something went wrong, failed to collect data!", "feedData" => array()); break;
@@ -339,13 +340,13 @@
 
 			/* result fetch */
 			$json = $resultList;
-		
+
 	        return $json;
 		}
 
 		public function updateData($post, $target){
 			switch($target){
-				case "product"  : 
+				case "product"  :
 					$fields = array("name", "sku", "description", "material", "dimension", "qty", "price", "storyId", "colorId");
 					$values = array();
 					foreach ($fields as $key) {
@@ -353,7 +354,7 @@
 						$values[$key] = $key." = '".str_replace(',','',$value)."'";
 					}
 
-					$resultList = $this->update('products', $values, $post['idData']); 
+					$resultList = $this->update('products', $values, $post['idData']);
 
 					if($resultList["feedStatus"] == "success" && isset($post['idData']) && $post['idData']!="") {
 						if(isset($_FILES["picture"])){
@@ -365,22 +366,22 @@
 							$upload = $this->uploadMultiImage($_FILES["pattern"], "patterns", "products", "pattern", $post['idData']);
 							$resultList["feedMultiUpload"] = $upload['feedMessage'];
 						}
-					
+
 					}
 
 				break;
 
-				case "color"  : 
+				case "color"  :
 					$values = array("name = '".$post["name"]."'");
-					$resultList = $this->update('colors', $values, $post['idData']); 
+					$resultList = $this->update('colors', $values, $post['idData']);
 				break;
 
-				case "department"  : 
+				case "department"  :
 					$values = array("name = '".$post["name"]."'");
-					$resultList = $this->update('departments', $values, $post['idData']); 
+					$resultList = $this->update('departments', $values, $post['idData']);
 				break;
 
-				case "cms_home"  : 
+				case "cms_home"  :
 					$fields = array("title", "description");
 					$values = array();
 					foreach ($fields as $key) {
@@ -388,7 +389,7 @@
 						$values[$key] = $key." = '".str_replace(',','',$value)."'";
 					}
 
-					$resultList = $this->update('cms_home', $values, $post['idData']); 
+					$resultList = $this->update('cms_home', $values, $post['idData']);
 
 					if($resultList["feedStatus"] == "success" && isset($post['idData']) && $post['idData']!="") {
 						if(isset($_FILES["picture"])){
@@ -399,7 +400,7 @@
 
 				break;
 
-				case "cms_story"  : 
+				case "cms_story"  :
 					$fields = array("title", "subtitle", "author");
 					$values = array();
 					foreach ($fields as $key) {
@@ -411,7 +412,7 @@
 						$values['description'] = "description = '".base64_encode($post['description'])."'";
 					}
 
-					$resultList = $this->update('cms_story', $values, $post['idData']); 
+					$resultList = $this->update('cms_story', $values, $post['idData']);
 
 					if($resultList["feedStatus"] == "success" && isset($post['idData']) && $post['idData']!="") {
 						if(isset($_FILES["picture"])){
@@ -422,7 +423,7 @@
 
 				break;
 
-				case "cms_blog"  : 
+				case "cms_blog"  :
 					$fields = array("title", "date", "subtitle", "photoBy");
 					$values = array();
 					foreach ($fields as $key) {
@@ -434,19 +435,19 @@
 						$values['description'] = "description = '".base64_encode($post['description'])."'";
 					}
 
-					$resultList = $this->update('cms_blog', $values, $post['idData']); 
+					$resultList = $this->update('cms_blog', $values, $post['idData']);
 
 					if($resultList["feedStatus"] == "success" && isset($post['idData']) && $post['idData']!="") {
 						if(isset($_FILES["pictures"])){
 							$upload = $this->uploadMultiImage($_FILES["pictures"], "blogs", "cms_blog", "pictures", $post['idData']);
 							$resultList["feedMultiUpload"] = $upload['feedMessage'];
 						}
-					
+
 					}
 
 				break;
 
-				case "cms_chatter"  : 
+				case "cms_chatter"  :
 					$fields = array("title", "date", "description");
 					$values = array();
 					foreach ($fields as $key) {
@@ -454,7 +455,7 @@
 						$values[$key] = $key." = '".str_replace(',','',$value)."'";
 					}
 
-					$resultList = $this->update('cms_chatter', $values, $post['idData']); 
+					$resultList = $this->update('cms_chatter', $values, $post['idData']);
 
 					if($resultList["feedStatus"] == "success" && isset($post['idData']) && $post['idData']!="") {
 						if(isset($_FILES["picture"])){
@@ -465,7 +466,7 @@
 
 				break;
 
-				case "cms_video"  : 
+				case "cms_video"  :
 					$fields = array("title");
 					$values = array();
 					foreach ($fields as $key) {
@@ -477,19 +478,19 @@
 						$values['description'] = "description = '".base64_encode($post['description'])."'";
 					}
 
-					$resultList = $this->update('cms_video', $values, $post['idData']); 
+					$resultList = $this->update('cms_video', $values, $post['idData']);
 
 					if($resultList["feedStatus"] == "success" && isset($post['idData']) && $post['idData']!="") {
 						if(isset($_FILES["video"])){
 							$upload = $this->uploadSingleVideo($_FILES["video"], "videos", "cms_video", "fileName", $post['idData']);
 							$resultList["feedMultiUpload"] = $upload['feedMessage'];
 						}
-					
+
 					}
 
 				break;
 
-				case "user"  : 
+				case "user"  :
 					$fields = array("name", "departmentId");
 					$values = array();
 					foreach ($fields as $key) {
@@ -501,21 +502,21 @@
 						$values['password'] = "password = '".md5($post['password'])."'";
 					}
 
-					$resultList = $this->update('users', $values, $post['idData']); 
+					$resultList = $this->update('users', $values, $post['idData']);
 
 					if($resultList["feedStatus"] == "success" && isset($post['idData']) && $post['idData']!="") {
 						if(isset($_FILES["picture"])){
 							$upload = $this->uploadSingleImage($_FILES["picture"], "users", "users", "picture", $post['idData']);
 							$resultList["feedMultiUpload"] = $upload['feedMessage'];
 						}
-					
+
 					}
 
 				break;
 
-				case "customer"  : 
+				case "customer"  :
 
-					//update user first 
+					//update user first
 					$fields = array("name");
 					$values = array();
 					foreach ($fields as $key) {
@@ -527,14 +528,14 @@
 						$values['password'] = "password = '".md5($post['password'])."'";
 					}
 
-					$resultList = $this->update('users', $values, $post['idData']); 
+					$resultList = $this->update('users', $values, $post['idData']);
 
 					if($resultList["feedStatus"] == "success" && isset($post['idData']) && $post['idData']!="") {
 						if(isset($_FILES["picture"])){
 							$upload = $this->uploadSingleImage($_FILES["picture"], "users", "users", "picture", $post['idData']);
 							$resultList["feedMultiUpload"] = $upload['feedMessage'];
 						}
-						
+
 
 						//update customer
 						$fields = array("name","address", "city", "country", "zipCode", "phone", "company");
@@ -549,7 +550,7 @@
 
 				break;
 
-				case "vendor"  : 
+				case "vendor"  :
 					$fields = array("name", "company", "phone", "email", "address", "city", "zipCode", "country");
 					$values = array();
 					foreach ($fields as $key) {
@@ -557,7 +558,7 @@
 						$values[$key] = $key." = '".str_replace(',','',$value)."'";
 					}
 
-					$resultList = $this->update('vendors', $values, $post['idData']); 
+					$resultList = $this->update('vendors', $values, $post['idData']);
 				break;
 
 				default	   		: $resultList = array( "feedStatus" => "failed", "feedType" => "danger", "feedMessage" => "Something went wrong, failed to collect data!", "feedData" => array()); break;
@@ -565,7 +566,7 @@
 
 			/* result fetch */
 			$json = $resultList;
-		
+
 	        return $json;
 		}
 
@@ -579,9 +580,9 @@
 
 			$temp		= "";
 
-			/* open connection */ 
+			/* open connection */
 			$gate = $this->db;
-			if($gate){		
+			if($gate){
 
 				if(is_array($fields)) {
 					foreach ($fields as $value) {
@@ -606,23 +607,23 @@
 
 
 				$sql = "SELECT ".$fields." FROM ".$table." ".$conditions." ".$orderBy." ";
-							
+
 				$result = $this->db->query($sql);
 				if($result){
 					$feedStatus	= "success";
 					$feedType   = "success";
 					$feedMessage= "The process has been successful";
 					$feedData = $result->fetchAll(PDO::FETCH_ASSOC);
-				}	
+				}
 
 				$feedType = $sql;
 			}
-			
+
 			$resultList = array( "feedStatus" => $feedStatus, "feedType" => $feedType, "feedMessage" => $feedMessage, "feedData" => $feedData);
-			
+
 			/* result fetch */
 			$json = $resultList;
-			
+
 			return $json;
 		}
 
@@ -636,9 +637,9 @@
 
 			$temp		= "";
 
-			/* open connection */ 
+			/* open connection */
 			$gate = $this->db;
-			if($gate){		
+			if($gate){
 
 				if(is_array($fields)) {
 					foreach ($fields as $value) {
@@ -668,23 +669,23 @@
 				$paging = "LIMIT ".$temp.",20";
 
 				$sql = "SELECT ".$fields." FROM ".$table." ".$conditions." ".$orderBy." ".$paging;
-							
+
 				$result = $this->db->query($sql);
 				if($result){
 					$feedStatus	= "success";
 					$feedType   = "success";
 					$feedMessage= "The process has been successful";
 					$feedData = $result->fetchAll(PDO::FETCH_ASSOC);
-				}	
+				}
 
 				$feedType = $sql;
 			}
-			
+
 			$resultList = array( "feedStatus" => $feedStatus, "feedType" => $feedType, "feedMessage" => $feedMessage, "feedData" => $feedData);
-			
+
 			/* result fetch */
 			$json = $resultList;
-			
+
 			return $json;
 		}
 
@@ -698,9 +699,9 @@
 
 			$temp		= "";
 
-			/* open connection */ 
+			/* open connection */
 			$gate = $this->db;
-			if($gate){		
+			if($gate){
 
 				if(is_array($fields)) {
 					foreach ($fields as $value) {
@@ -724,23 +725,23 @@
 				$conditions = ($conditions != "") ? "WHERE ".$conditions : "";
 
 				$sql = "SELECT ".$fields." FROM ".$table." ".$conditions;
-							
+
 				$result = $this->db->query($sql);
 				if($result){
 					$feedStatus	= "success";
 					$feedType   = "success";
 					$feedMessage= "The process has been successful";
 					$feedData = $result->fetch(PDO::FETCH_ASSOC);
-				}	
+				}
 
 					$feedType = $sql;
 			}
-			
+
 			$resultList = array( "feedStatus" => $feedStatus, "feedType" => $feedType, "feedMessage" => $feedMessage, "feedData" => $feedData);
-			
+
 			/* result fetch */
 			$json = $resultList;
-			
+
 			return $json;
 		}
 
@@ -754,11 +755,11 @@
 
 			$temp		= "";
 
-			/* open connection */ 
+			/* open connection */
 			$gate = $this->db;
-			if($gate){		
+			if($gate){
 
-				$sql = 
+				$sql =
 				" 	SELECT * FROM (
 						SELECT 'Orders' as `group`, COUNT(idData) as total FROM orders
 						UNION
@@ -771,21 +772,21 @@
 						SELECT 'Users' as `group`, COUNT(idData) as total FROM users
 					) AS table_generate
 				";
-							
+
 				$result = $this->db->query($sql);
 				if($result){
 					$feedStatus	= "success";
 					$feedType   = "success";
 					$feedMessage= "The process has been successful";
 					$feedData = $result->fetchAll(PDO::FETCH_ASSOC);
-				}	
+				}
 			}
-			
+
 			$resultList = array( "feedStatus" => $feedStatus, "feedType" => $feedType, "feedMessage" => $feedMessage, "feedData" => $feedData);
-			
+
 			/* result fetch */
 			$json = $resultList;
-			
+
 			return $json;
 		}
 
@@ -801,9 +802,9 @@
 
 			$temp		= "";
 
-			/* open connection */ 
+			/* open connection */
 			$gate = $this->db;
-			if($gate){		
+			if($gate){
 
 				if(is_array($conditions)) {
 					foreach ($conditions as $value) {
@@ -816,23 +817,23 @@
 				}
 
 				$sql = "DELETE FROM ".$table." WHERE idData IN (".$conditions.")";
-							
+
 				$result = $this->db->query($sql);
 				if($result){
 					$feedStatus	= "success";
 					$feedType   = "success";
 					$feedMessage= "The process has been successful";
 					$feedData   = $conditions;
-				}	
+				}
 
 				$feedType = $sql;
 			}
-			
+
 			$resultList = array( "feedStatus" => $feedStatus, "feedType" => $feedType, "feedMessage" => $feedMessage, "feedData" => $feedData);
-			
+
 			/* result fetch */
 			$json = $resultList;
-			
+
 			return $json;
 		}
 
@@ -849,9 +850,9 @@
 
 			$temp		= "";
 
-			/* open connection */ 
+			/* open connection */
 			$gate = $this->db;
-			if($gate){		
+			if($gate){
 
 				if(is_array($fields)) {
 					foreach ($fields as $item) {
@@ -874,25 +875,25 @@
 				}
 
 				$sql = "INSERT INTO ".$table."(".$fields.", createdBy, createdDate) VALUES (".$values.", 'SESSION_TEST',NOW())";
-							
+
 				$result = $this->db->query($sql);
 				if($result){
 					$feedStatus	= "success";
 					$feedType   = "success";
 					$feedMessage= "The process has been successful";
 					$feedId 	= $this->db->lastInsertId();
-				}	
+				}
 
 				$feedType = $sql;
 			}
-			
+
 			$resultList = array( "feedStatus" => $feedStatus, "feedType" => $feedType, "feedMessage" => $feedMessage, "feedData" => $feedData, "feedId" => $feedId);
-			
+
 			/* result fetch */
 			$json = $resultList;
-			
+
 			return $json;
-					
+
 		}
 
 		//UPDATE DATA
@@ -907,9 +908,9 @@
 
 			$temp		= "";
 
-			/* open connection */ 
+			/* open connection */
 			$gate = $this->db;
-			if($gate){		
+			if($gate){
 
 				if(is_array($values)) {
 					foreach ($values as $item) {
@@ -922,24 +923,24 @@
 				}
 
 				$sql = "UPDATE ".$table." SET ".$values.", changedBy = 'SESSION_TEST', changedDate = NOW() WHERE idData = '".$id."'";
-							
+
 				$result = $this->db->query($sql);
 				if($result){
 					$feedStatus	= "success";
 					$feedType   = "success";
 					$feedMessage= "The process has been successful";
-				}	
+				}
 
 				$feedType = $sql;
 			}
-			
+
 			$resultList = array( "feedStatus" => $feedStatus, "feedType" => $feedType, "feedMessage" => $feedMessage, "feedData" => $feedData);
-			
+
 			/* result fetch */
 			$json = $resultList;
-			
+
 			return $json;
-					
+
 		}
 
 		//UPLOAD IMAGE
@@ -954,9 +955,9 @@
 
 			$temp		= "";
 
-			/* open connection */ 
+			/* open connection */
 			$gate = $this->db;
-			if($gate){		
+			if($gate){
 
 				/*upload image*/
 				if(isset($image)){
@@ -973,29 +974,29 @@
 					$saveAs 		 = "../assets/".$dir."/".$newFileName;
 
 					if (in_array($fileExtension, $Validextensions)) {
-						if(move_uploaded_file($file_tmp, $saveAs)){ 
+						if(move_uploaded_file($file_tmp, $saveAs)){
 							$sql = "UPDATE ".$table." SET ".$field."='".$newFileName."' WHERE idData ='".$id."'";
-									
+
 							$result = $this->db->query($sql);
 							if($result){
 								$feedStatus	= "success";
 								$feedType   = "success".is_dir($saveAs);
 								$feedMessage= "The process has been successful";
 							}
-						}							
+						}
 					}
 				}
 				/*upload end*/
 
 			}
-			
+
 			$resultList = array( "feedStatus" => $feedStatus, "feedType" => $feedType, "feedMessage" => $feedMessage, "feedData" => $feedData);
-			
+
 			/* result fetch */
 			$json = $resultList;
-			
+
 			return $json;
-					
+
 		}
 
 		public function uploadMultiImage($image, $dir, $table, $field, $id){
@@ -1010,9 +1011,9 @@
 			$temp		= "";
 			$counter	= 0;
 
-			/* open connection */ 
+			/* open connection */
 			$gate = $this->db;
-			if($gate){		
+			if($gate){
 
 				/*upload image*/
 				if(isset($image)){
@@ -1031,7 +1032,7 @@
 						$saveAs 		 = "../assets/".$dir."/".$newFileName;
 
 						if (in_array($fileExtension, $Validextensions)) {
-							if(move_uploaded_file($file_tmp, $saveAs)){ 
+							if(move_uploaded_file($file_tmp, $saveAs)){
 								$temp = ($temp == "") ? $newFileName : $temp.",".$newFileName;
 							}
 
@@ -1044,8 +1045,8 @@
 									$feedStatus	= "success";
 									$feedType   = "success";
 									$feedMessage= "The process has been successful";
-								}						
-							}			
+								}
+							}
 						}
 
 					}
@@ -1054,14 +1055,14 @@
 				/*upload end*/
 
 			}
-			
+
 			$resultList = array( "feedStatus" => $feedStatus, "feedType" => $feedType, "feedMessage" => $feedMessage, "feedData" => $feedData);
-			
+
 			/* result fetch */
 			$json = $resultList;
-			
+
 			return $json;
-					
+
 		}
 
 		//IMAGE VIDEO
@@ -1076,9 +1077,9 @@
 
 			$temp		= "";
 
-			/* open connection */ 
+			/* open connection */
 			$gate = $this->db;
-			if($gate){		
+			if($gate){
 
 				/*upload image*/
 				if(isset($image)){
@@ -1095,31 +1096,31 @@
 					$saveAs 		 = "../assets/".$dir."/".$newFileName;
 
 					if (in_array($fileExtension, $Validextensions)) {
-						if(move_uploaded_file($file_tmp, $saveAs)){ 
+						if(move_uploaded_file($file_tmp, $saveAs)){
 							$sql = "UPDATE ".$table." SET ".$field."='".$newFileName."', fileSize='".$file_size."' WHERE idData ='".$id."'";
-									
+
 							$result = $this->db->query($sql);
 							if($result){
 								$feedStatus	= "success";
 								$feedType   = "success".is_dir($saveAs);
 								$feedMessage= "The process has been successful";
 							}
-						}							
+						}
 					}
 				}
 				/*upload end*/
 
 			}
-			
+
 			$resultList = array( "feedStatus" => $feedStatus, "feedType" => $feedType, "feedMessage" => $feedMessage, "feedData" => $feedData);
-			
+
 			/* result fetch */
 			$json = $resultList;
-			
+
 			return $json;
-					
+
 		}
-		
+
 	}
 
 ?>

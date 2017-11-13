@@ -8,7 +8,7 @@
 		<link rel="icon" type="image/x-icon" href="assets/PICS/TL_Favicon.png">
 		<!-- Site Properities -->
 		<title>Tulisan</title>
-	  
+
 		<link href="assets/css/bootstrap.min.css" rel="stylesheet">
 		<link href="assets/css/font-awesome.min.css" rel="stylesheet">
 		<link href="assets/css/syncard-inject.css" rel="stylesheet">
@@ -67,20 +67,20 @@
 					</div>
 				</div>
 				<div class="col-md-12 div-normalize">
-					<div id="articles-section">&nbsp;</div>	
-					<div class="clearfix"></div>			
-				</div>				
+					<div id="articles-section">&nbsp;</div>
+					<div class="clearfix"></div>
+				</div>
 			</main>
-					
+
 			<footer class="parent"></footer>
 		</div>
 		<!-- Script collection -->
 		<script type="text/javascript" src="assets/js/jquery-3.2.1.min.js"></script>
 		<script type="text/javascript" src="assets/js/jquery-ui-1.10.0.custom.min.js"></script>
-		<script type="text/javascript" src="assets/js/bootstrap.min.js"></script>	
+		<script type="text/javascript" src="assets/js/bootstrap.min.js"></script>
 		<script type="text/javascript" src="assets/js/imagesloaded.pkgd.min.js"></script>
-		<script type="text/javascript" src="assets/js/partial.js"></script>	
-		<script type="text/javascript" src="assets/js/public.js"></script>	
+		<script type="text/javascript" src="assets/js/partial.js"></script>
+		<script type="text/javascript" src="assets/js/public.js"></script>
 
 		<!-- page script -->
 		<script type="text/javascript">
@@ -96,6 +96,9 @@
 					{"description": "Netflix's 'Abstract: The Art of Design' Will Spotlight the World's Most Creative Minds", "comment_counter": "3", "picture": "LB_FW13_15.jpg"},
 				];
 
+				// var articles = p_getData('operation', 'cms_home');
+				// articles = articles.feedData;
+
 				var html = '<h4 class="sync-center">data not found</h4>';
 
 				if(articles != null && articles.length > 0){
@@ -106,11 +109,10 @@
 							'<div class="picture-box" style="background-image: url(assets/PICS/' + articles[loop].picture + ');"></div>' +
 							'<div class="article">' +
 								'<p>' + articles[loop].description + '</p>' +
-								'<p class="counter">' + articles[loop].comment_counter + ' comments</p>' +
 							'</div>' +
 						'</div>';
 
-						
+
 					}
 
 					html = html + '<div class="col-md-12 more"><a href="#">MORE</a></div>';
@@ -121,7 +123,7 @@
 
 				var home = "";
 				var homeData = p_getData('operation', 'cms_home');
-					homeData = homeData.feedData;
+				homeData = homeData.feedData;
 
 				for(var loop=0; loop<homeData.length; loop++){
 					home = home +
@@ -137,7 +139,7 @@
 			    $("#myCarousel .carousel-inner").html(home);
 				$(".jumbo-tron img").css({'height':($(window).innerHeight()-52), 'object-fit':'cover', 'width': '100%'});
 			}
-			
+
 		</script>
 	</body>
 </html>

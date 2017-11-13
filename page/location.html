@@ -8,11 +8,11 @@
 		<link rel="icon" type="image/x-icon" href="../assets/PICS/TL_Favicon.png">
 		<!-- Site Properities -->
 		<title>Tulisan</title>
-	  
+
 		<link href="../assets/css/bootstrap.min.css" rel="stylesheet">
 		<link href="../assets/css/font-awesome.min.css" rel="stylesheet">
 		<link href="../assets/css/syncard-inject.css" rel="stylesheet">
-		
+
 	</head>
 	<body>
 
@@ -20,7 +20,7 @@
 			<header class="parent"></header>
 
 			<main class="parent clear dark-flex"></main>
-	
+
 			<footer class="parent clear"></footer>
 		</div>
 
@@ -29,7 +29,7 @@
 		<script type="text/javascript" src="../assets/js/jquery-ui-1.10.0.custom.min.js"></script>
 		<script type="text/javascript" src="../assets/js/bootstrap.min.js"></script>
 		<script type="text/javascript" src="../assets/js/imagesloaded.pkgd.min.js"></script>
-		<script type="text/javascript" src="../assets/js/partial.js"></script>	
+		<script type="text/javascript" src="../assets/js/partial.js"></script>
 
 		<!-- page script -->
 		<script type="text/javascript">
@@ -39,9 +39,9 @@
 			function maps(){
 				var html = '';
 				var mapMarker = [
-					{'location': 'location 1', 'x': 200 , 'y' : 175, 'lat': '', 'long': '', 'place': ''},
-					{'location': 'location 2', 'x': 240 , 'y' : 225, 'lat': '', 'long': '', 'place': ''},
-					{'location': 'location 3', 'x': 170 , 'y' : 280, 'lat': '', 'long': '', 'place': ''},
+					// {'location': 'location 1', 'x': 200 , 'y' : 175, 'lat': '', 'long': '', 'place': ''},
+					// {'location': 'location 2', 'x': 240 , 'y' : 225, 'lat': '', 'long': '', 'place': ''},
+					// {'location': 'location 3', 'x': 170 , 'y' : 280, 'lat': '', 'long': '', 'place': ''},
 				];
 
 				var mapMarkerMin = [
@@ -121,12 +121,12 @@
 							'</div>';
 
 
-				html = html + 
+				html = html +
 						"</div><div class='clearfix'></div>";
 
 				$("main").html(html);
 
-				$(".go-maps").unbind().on("click", function(){ 
+				$(".go-maps").unbind().on("click", function(){
 					openMaps($(this).attr('m-place'), $(this).attr('m-lng'),$(this).attr('m-lat'));
 				});
 			}

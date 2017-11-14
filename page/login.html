@@ -21,17 +21,17 @@
 					<img class="small-image" src="../assets/PICS/tulisan.png" />
 				</div>
 				<div class="col-md-6 left">
-					<form>
+					<form id="syncrom" f-group="auth">
 						<p><b>Sign In</b></p>
 						<div class="form-group">
-						  <input type="text" class="form-control" placeholder="E mail">
+						  <input type="text" name="username" class="form-control" placeholder="E mail">
 						</div>
 						<div class="form-group">
-						  <input type="text" class="form-control" placeholder="Password">
+						  <input type="password" name="password" class="form-control" placeholder="Password">
 						</div>
 						<a href="#" class="text-warning">Forgot password?</a>
 						<div class="form-group syn-plus">
-						  <button id='signIn' type="button" class="btn form-control">Sign In</button>
+						  <button type="submit" class="btn form-control">Sign In</button>
 						</div>
 						<p class="hide-block" style="opacity:0"><b>Or sign in using Facebook</b></p>
 						<div class="form-group hide-block" style="opacity:0">
@@ -70,7 +70,11 @@
 
 		<!-- page script -->
 		<script type="text/javascript">
-			$('#signIn').on('click', function(){ console.log(base_url); window.location.href = base_url + "/admin/index.html"; });
+			// $('#signIn').on('click', function(){
+			// 	console.log(base_url); window.location.href = base_url + "/admin/index.html";
+			// });
+
+			p_formHandler('syncrom', 'login', 'login', 'yes');
 		</script>
 	</body>
 </html>

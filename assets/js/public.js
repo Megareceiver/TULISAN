@@ -44,7 +44,7 @@ function p_getData(group, target, page="1", keyword=""){
 		complete: function(xhr,status) {  },
 		error: function(xhr,status,error) { console.log(xhr); }
 	});
-	
+
 	return data;
 }
 
@@ -63,7 +63,7 @@ function p_removeData(group, target, id){
 		complete: function(xhr,status) {  },
 		error: function(xhr,status,error) { console.log(xhr); }
 	});
-	
+
 	return data;
 }
 
@@ -82,11 +82,11 @@ function p_changeData(group, target, pId, refferenceId, dataFetch){
 		complete: function(xhr,status) {  },
 		error: function(xhr,status,error) { console.log(xhr); }
 	});
-	
+
 	return data;
 }
 
-function p_formHandler(formId, type, back){
+function p_formHandler(formId, type, back, custom = "no"){
 	$("#" + formId).unbind().on('submit', function(e) {
 		e.preventDefault();
 		$.ajax({
@@ -99,20 +99,47 @@ function p_formHandler(formId, type, back){
 			success: function(result){
 				console.log(result);
 				if(result.feedStatus == "success"){
-					r_callBack(back);
+					if(back != "") r_callBack(back, custom, result.feedData);
 				}
 			},
 			complete: function(xhr,status) {  },
 			error: function(xhr,status,error) { console.log(xhr); }
 		});
-	});		
+	});
 }
 
-//Fall Back 
-function r_callBack(back){
-	window.location.href = base_url + "/admin/" + back;
+//Fall Back
+function r_callBack(back, custom, data){
+	if(custom == "no"){
+		window.location.href = base_url + "/admin/" + back;
+	}else{
+		switch (back) {
+			case "login":
+					p_login_set_cookie(data);
+
+					if(data.type=="admin"){
+						window.location.href = base_url + "/admin/";
+					}else{
+						window.location.href = base_url + "/page/shop.html";
+					}
+			break;
+			case "logout":
+				r_clearCookies();
+				window.location.href = base_url;
+			break;
+			default:
+
+		}
+	}
 }
 
+function p_login_set_cookie(data) {
+	r_setCookie('tulisan_user_name', data.name);
+	r_setCookie('tulisan_user_username', data.username);
+	r_setCookie('tulisan_user_type', data.type);
+	r_setCookie('tulisan_user_picture', data.picture);
+	r_setCookie('tulisan_user_departement', data.departement);
+}
 
 function r_setCookie(cname,cvalue,exdays="1") {
     var d = new Date();
@@ -138,7 +165,12 @@ function r_getCookie(cname) {
 
 function r_clearCookies(){
 	r_setCookie('adminPageFilter'				,'', 0.1);
-	r_setCookie('adminAlphaFilter'				,'', 0.1);
+	r_setCookie('adminAlphaFilter'			,'', 0.1);
+	r_setCookie('tulisan_user_name'			,'', 0.1);
+	r_setCookie('tulisan_user_username'	,'', 0.1);
+	r_setCookie('tulisan_user_type'			,'', 0.1);
+	r_setCookie('tulisan_user_picture'			,'', 0.1);
+	r_setCookie('tulisan_user_departement'	,'', 0.1);
 }
 
 function checkboxActivator(){
@@ -201,7 +233,7 @@ function imagePreviewActivator(target){
 }
 
 function imagePreview(elem, targetId) {
-	
+
 	if (elem.files && elem.files[0]) {
 		var reader = new FileReader();
 

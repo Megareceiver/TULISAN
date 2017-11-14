@@ -8,7 +8,7 @@
 		<link rel="icon" type="image/x-icon" href="../assets/PICS/TL_Favicon.png">
 		<!-- Site Properities -->
 		<title>Tulisan</title>
-	  
+
 		<link href="../assets/css/bootstrap.min.css" rel="stylesheet">
 		<link href="../assets/css/font-awesome.min.css" rel="stylesheet">
 		<link href="../assets/css/syncard-inject.css" rel="stylesheet">
@@ -20,6 +20,9 @@
 
 			<main class="parent clear">
 				<div class="col-md-8 col-md-offset-2 div-normalize">
+					<form id="syncrom" f-group="auth">
+						 <button type="submit" class="btn btn-danger pull-right">Logout</button>
+					</form>
 					<h1>Your Account</h1>
 				</div>
 				<div class="col-md-8 col-md-offset-2 div-normalize basic-table">
@@ -46,17 +49,18 @@
 				</div>
 				<div id="UnpaidOrders" class="col-md-8 col-md-offset-2 div-normalize basic-table">
 				</div>
-			</main>	
-	
+			</main>
+
 			<footer class="parent"></footer>
 		</div>
 
 		<!-- Script collection -->
 		<script type="text/javascript" src="../assets/js/jquery-3.2.1.min.js"></script>
 		<script type="text/javascript" src="../assets/js/jquery-ui-1.10.0.custom.min.js"></script>
-		<script type="text/javascript" src="../assets/js/bootstrap.min.js"></script>	
+		<script type="text/javascript" src="../assets/js/bootstrap.min.js"></script>
 		<script type="text/javascript" src="../assets/js/imagesloaded.pkgd.min.js"></script>
-		<script type="text/javascript" src="../assets/js/partial.js"></script>	
+		<script type="text/javascript" src="../assets/js/partial.js"></script>
+		<script type="text/javascript" src="../assets/js/public.js"></script>
 
 		<!-- page script -->
 		<script type="text/javascript">
@@ -99,6 +103,8 @@
 				}
 
 				$("main #UnpaidOrders").append(html);
+
+				p_formHandler('syncrom', 'logout', 'logout', 'yes');
 			}
 		</script>
 	</body>

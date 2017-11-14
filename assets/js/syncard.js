@@ -15,12 +15,14 @@ function headerAdmin(){
 			'</div>'+
 			'<div class="col-xs-7 col-md-9">'+
 				'<div class="header-title"><h2><span id="departmentName">Product</span> - Departement</h2></div>'+
-				'<div class="header-menu fontserif hidden-sm hidden-xs">' + 
-					'<ul>' + 
-						'<li><a href="../page/shop.html">View Store</a> &nbsp; &nbsp;|</li>' + 
+				'<div class="header-menu fontserif hidden-sm hidden-xs">' +
+					'<ul>' +
+						'<li><form id="syncrom" f-group="auth">' +
+							 '<button type="submit" class="btn">View Store</button>' +
+						'</form> &nbsp; &nbsp;|</li>' +
 						'<li><img src="../assets/PICS/pattern3.jpg"></li>' +
-						'<li>Khrisni Swandayani</li>' + 
-						'<li><a href="setting.html"><i class="fa fa-cog fa-o"></i></a></li>' + 
+						'<li>Khrisni Swandayani</li>' +
+						'<li><a href="setting.html"><i class="fa fa-cog fa-o"></i></a></li>' +
 					'</ul>'+
 				'</div>'+
 			'</div>'+
@@ -84,18 +86,18 @@ function pageAdmin(){
 	});
 
 	//breadcrum
-	var page = window.location.href; 
+	var page = window.location.href;
 		page = page.substring(page.lastIndexOf("/")+ 1);
 		page = (page.match(/[^.]+(\.[^?#]+)?/) || [])[0];
 
 	if(page != null && page.length > 0){
 		$(".list-nav li, .top-nav li").removeClass('active');
 		switch(page){
-			case "product.html": 
-			case "color.html": 
-			case "formColor.html": 
+			case "product.html":
+			case "color.html":
+			case "formColor.html":
 			case "formProduct.html": $(".product-route").addClass('active'); break;
-			case "customer.html": 
+			case "customer.html":
 			case "formCustomer.html": $(".customer-route").addClass('active'); break;
 			case "formDepartment.html":
 			case "departement.html": $(".departement-route").addClass('active'); break;
@@ -108,11 +110,11 @@ function pageAdmin(){
 			case "formVideo.html":
 			case "chatter.html":
 			case "formChatter.html": $(".cms-route").addClass('active'); break;
-			case "formBlog.html": 
+			case "formBlog.html":
 			case "blog.html": $(".blog-route").addClass('active'); break;
 			case "formUser.html":
 			case "setting.html": $(".setting-route").addClass('active'); break;
-			case "formVendor.html": 
+			case "formVendor.html":
 			case "vendor.html": $(".vendor-route").addClass('active'); break;
 			case "order.html": $(".order-route").addClass('active'); break;
 			default: $(".dashboard-route").addClass('active'); break;
@@ -134,9 +136,9 @@ function checkboxToggle(source, targetName) {
   }
 }
 
-//country list option 
+//country list option
 function countryListOption(){
-	var html = 
+	var html =
 	// '<option value="AF">Afghanistan</option>' +
 	// '<option value="AX">Åland Islands</option>' +
 	// '<option value="AL">Albania</option>' +

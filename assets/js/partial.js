@@ -1,5 +1,5 @@
 var base_url = window.location.origin + '/TULISAN';
-				
+
 header();
 footer();
 
@@ -22,9 +22,31 @@ $(function(){
 	});
 });
 
+function r_setCookie(cname,cvalue,exdays="1") {
+    var d = new Date();
+    d.setTime(d.getTime() + (exdays*24*60*60*1000));
+    var expires = "expires=" + d.toGMTString();
+    document.cookie = "TULISAN_" + cname + "=" + cvalue + ";" + expires + ";path=/";
+}
+
+function r_getCookie(cname) {
+    var name = "TULISAN_" + cname + "=";
+    var ca = document.cookie.split(';');
+    for(var i = 0; i < ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+        }
+    }
+    return "";
+}
+
 function header(){
 	var active_page = "home-route";
-	var html = 
+	var html =
 	'<!--div class="row"-->' +
 		'<nav class="navbar navbar-default plain">' +
 		    '<!-- Brand and toggle get grouped for better mobile display -->' +
@@ -46,9 +68,19 @@ function header(){
 					'<div class="link">' +
 						'<a href="' + base_url + '/page/location.html">FIND A STORE</a> |' +
 						'<a href="' + base_url + '/page/media.html">MEDIA</a> |' +
-						'<a href="' + base_url + '/page/cart.html"><span class="fa fa-shopping-cart"></span></a> |' +
-						// '<a href="' + base_url + '/page/profile.html"><span class="fa fa-user-circle-o"></span></a>' +
-						'<a href="' + base_url + '/page/login.html">LOGIN</a>' +
+						'<a href="' + base_url + '/page/cart.html"><span class="fa fa-shopping-cart"></span></a> |';
+
+						if(r_getCookie('tulisan_user_name') != ""){
+							var res = r_getCookie('tulisan_user_name');
+							if(res.length > 7){
+								res = res.substring(0, 5) + '...';
+							}
+
+							html = html + '<a href="' + base_url + '/page/profile.html">' + res + '</a>';
+						}else{
+							html = html + '<a href="' + base_url + '/page/login.html">LOGIN</a>';
+						}
+					html = html +
 					'</div>' +
 					'<div class="form">' +
 				    	'<form class="form-inline">' +
@@ -86,75 +118,75 @@ function header(){
 	//breadcrum
 	var breadcrumbHtml = "";
 	var breadcrumb = "";
-	var page = window.location.href; 
+	var page = window.location.href;
 		page = page.substring(page.lastIndexOf("/")+ 1);
 		page = (page.match(/[^.]+(\.[^?#]+)?/) || [])[0];
 
 	if(page != null && page.length > 0){
 		switch(page){
-			case "story.html": 		 	
-				breadcrumb = "<a href='" + base_url + "'>Home</a> / story"; 
-				active_page = "story-route"; 
+			case "story.html":
+				breadcrumb = "<a href='" + base_url + "'>Home</a> / story";
+				active_page = "story-route";
 			break;
-			case "storydetail.html": 	
+			case "storydetail.html":
 				breadcrumb = "<a href='" + base_url + "'>Home</a> / <a href='" + base_url + "/page/story.html'>story</a> / <span id='custom-bread-detail'>detail</span>";
-				active_page = "story-route"; 
+				active_page = "story-route";
 			break;
-			case "blog.html": 			
-				breadcrumb = "<a href='" + base_url + "'>Home</a> / blog";	
-				active_page = "blog-route"; 
+			case "blog.html":
+				breadcrumb = "<a href='" + base_url + "'>Home</a> / blog";
+				active_page = "blog-route";
 			break;
-			case "blogDetail.html":  	
+			case "blogDetail.html":
 				breadcrumb = "<a href='" + base_url + "'>Home</a> / <a href='" + base_url + "/page/blog.html'>blog</a> / <span id='custom-bread-detail'>detail</span>";
-				active_page = "blog-route"; 
+				active_page = "blog-route";
 			break;
-			case "chatter.html":  	 	
+			case "chatter.html":
 				breadcrumb = "<a href='" + base_url + "'>Home</a> / chatter";
-				active_page = "chatter-route"; 
+				active_page = "chatter-route";
 			break;
-			case "chatterDetail.html":  
+			case "chatterDetail.html":
 				breadcrumb = "<a href='" + base_url + "'>Home</a> / <a href='" + base_url + "/page/chatter.html'>chatter</a> / <span id='custom-bread-detail'>detail</span>";
-				active_page = "chatter-route"; 
+				active_page = "chatter-route";
 			break;
-			case "videos.html":  	 	
+			case "videos.html":
 				breadcrumb = "<a href='" + base_url + "'>Home</a> / videos";
-				active_page = "video-route"; 
+				active_page = "video-route";
 			break;
-			case "videoDetail.html":  	 	
+			case "videoDetail.html":
 				breadcrumb = "<a href='" + base_url + "'>Home</a> / <a href='" + base_url + "/page/videos.html'>videos</a> / <span id='custom-bread-detail'>detail</span>";
-				active_page = "video-route"; 
+				active_page = "video-route";
 			break;
-			case "media.html":  	 	
+			case "media.html":
 				breadcrumb = "<a href='" + base_url + "'>Home</a> / media";
-				active_page = "Media"; 
+				active_page = "Media";
 			break;
-			case "privacyPolicy.html":  	 	
+			case "privacyPolicy.html":
 				breadcrumb = "<a href='" + base_url + "'>Home</a> / privacy policy";
-				active_page = "Privacy Policy"; 
+				active_page = "Privacy Policy";
 			break;
-			case "about.html":  	 	
+			case "about.html":
 				breadcrumb = "<a href='" + base_url + "'>Home</a> / about";
-				active_page = "about-route"; 
+				active_page = "about-route";
 			break;
-			case "location.html":  	 	
+			case "location.html":
 				breadcrumb = "<a href='" + base_url + "'>Home</a> / Store locator";
-				active_page = "contact-route"; 
+				active_page = "contact-route";
 			break;
-			case "shop.html":  	 	
+			case "shop.html":
 				breadcrumb = "<a href='" + base_url + "'>Home</a> / Shop";
-				active_page = "shop-route"; 
+				active_page = "shop-route";
 			break;
-			case "shopDetail.html":  	 	
+			case "shopDetail.html":
 				breadcrumb = "<a href='" + base_url + "'>Home</a> / <a href='" + base_url + "/page/shop.html'>Shop</a> / <span id='custom-bread-detail'>detail</span>";
-				active_page = "shop-route"; 
+				active_page = "shop-route";
 			break;
-			case "chart.html":  	 	
+			case "chart.html":
 				breadcrumb = "<a href='" + base_url + "'>Home</a> / cart";
-				active_page = "shop-route"; 
+				active_page = "shop-route";
 			break;
-			case "checkout.html":  	 	
+			case "checkout.html":
 				breadcrumb = "<a href='" + base_url + "'>Home</a> / <a href='" + base_url + "/page/shop.html'>Shop</a> / <span id='custom-bread-detail'>checkout</span>";
-				active_page = "shop-route"; 
+				active_page = "shop-route";
 			break;
 		}
 
@@ -235,14 +267,14 @@ function footer(){
 			html = html + '</div>';
 		}
 
-		html = html + 
+		html = html +
 			'<div class="clearfix"></div>' +
 		'</div>';
 	}
 
 	/* socmed generator */
 	if(socmed != null && socmed.length > 0){
-		html = html + 
+		html = html +
 		'<div class="row socmed">' +
 			'<div class="col-md-6 socmed-box">' +
 				'<p>' +
@@ -257,13 +289,13 @@ function footer(){
 			html = html + '<a href="' + socmed[loop].link + '"><span class="fa fa-' + socmed[loop].icon + '"></span></a>';
 		}
 
-		html = html + 
+		html = html +
 			'</div>' +
 			'<div class="clearfix"></div>' +
 		'</div>';
 	}
 
-	html = html + 
+	html = html +
 			'<div class="license"><p>' + license + '</p></div>' +
 		'</div>' +
 		'<div class="clearfix"></div>' +
@@ -424,9 +456,9 @@ function currencyFormat(num, curr = 'Rp. ') {
     }, "");
 }
 
-//country list option 
+//country list option
 function countryListOption(){
-	var html = 
+	var html =
 	'<option value="AF">Afghanistan</option>' +
 	'<option value="AX">Åland Islands</option>' +
 	'<option value="AL">Albania</option>' +

@@ -127,6 +127,10 @@ function r_callBack(back, custom, data){
 				r_clearCookies();
 				window.location.href = base_url;
 			break;
+			case "view-store":
+				r_clearCookies();
+				window.location.href = base_url + "/page/shop.html";;
+			break;
 			default:
 
 		}

@@ -17,9 +17,7 @@ function headerAdmin(){
 				'<div class="header-title"><h2><span id="departmentName">Product</span> - Departement</h2></div>'+
 				'<div class="header-menu fontserif hidden-sm hidden-xs">' +
 					'<ul>' +
-						'<li><form id="syncrom" f-group="auth">' +
-							 '<button type="submit" class="btn">View Store</button>' +
-						'</form> &nbsp; &nbsp;|</li>' +
+						'<li><form id="syncrom" f-group="auth"><button type="submit" class="btn btn-link">View Store &nbsp; &nbsp;|</button></form></li>' +
 						'<li><img src="../assets/PICS/pattern3.jpg"></li>' +
 						'<li>Khrisni Swandayani</li>' +
 						'<li><a href="setting.html"><i class="fa fa-cog fa-o"></i></a></li>' +
@@ -30,6 +28,8 @@ function headerAdmin(){
 	'</div>';
 
 	$("header.parent-admin").html(html);
+
+	p_formHandler('syncrom', 'logout', 'view-store', 'yes');
 }
 
 function pageAdmin(){

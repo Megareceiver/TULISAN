@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<!-- Standard Meta -->
+		<meta charset="utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+		<link rel="icon" type="image/x-icon" href="../assets/PICS/TL_Favicon.png">
+		<!-- Site Properities -->
+		<title>Tulisan</title>
+	  
+		<link href="../assets/css/bootstrap.min.css" rel="stylesheet">
+		<link href="../assets/css/font-awesome.min.css" rel="stylesheet">
+		<link href="../assets/css/syncard-inject.css" rel="stylesheet">
+	</head>
+	<body>
+
+		<div class="container">
+			<header class="parent"></header>
+
+			<main class="parent clear yellow-flex"></main>
+	
+			<footer class="parent clear"></footer>
+		</div>
+
+		<!-- Script collection -->
+		<script type="text/javascript" src="../assets/js/jquery-3.2.1.min.js"></script>
+		<script type="text/javascript" src="../assets/js/jquery-ui-1.10.0.custom.min.js"></script>
+		<script type="text/javascript" src="../assets/js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="../assets/js/imagesloaded.pkgd.min.js"></script>	
+		<script type="text/javascript" src="../assets/js/partial.js"></script>
+		<script type="text/javascript" src="../assets/js/public.js"></script>	
+			
+
+		<!-- page script -->
+		<script type="text/javascript">
+			loadData();
+
+			function loadData(){
+				var html = '';
+
+				html = html +
+				'<form id="syncrom" f-group="operation" f-target="customer" enctype="multipart/form-data">'+
+					'<div class="input-frame col-md-6">'+
+						'<h3><b>Customer</b></h3>'+
+						'<div class="form-group">'+
+							'<label>Full Name</label>'+
+							'<input name="name" type="text" class="form-control" value="'+r_getCookie('tulisan_register_fullname')+'">'+
+							'<input name="idData" type="hidden">'+
+						'</div>'+
+						'<div class="form-group">'+
+							'<label>Address</label>'+
+							'<textarea name="address" class="form-control" id="editor"></textarea>'+
+						'</div>'+
+						'<div class="form-group">'+
+							'<div class="col-md-8 syn-clear">'+
+								'<label>City</label>'+
+								'<input name="city" type="text" class="form-control">'+
+							'</div>'+
+							'<div class="col-md-4 syn-clear">'+
+								'<label>Zip Code</label>'+
+								'<input name="zipCode" type="text" class="form-control">'+
+							'</div>'+
+							'<div class="clearfix"></div>'+
+						'</div>'+
+						'<div class="form-group">'+
+							'<label>Country</label>'+
+							'<select name="country" class="form-control">'+
+								countryListOption() +
+							'</select>'+
+						'</div>'+
+						'<div class="form-group">'+
+							'<label>Mobile Phone</label>'+
+							'<input name="phone" type="text" class="form-control">'+
+						'</div>'+
+						'<div class="form-group">'+
+							'<label>Company</label>'+
+							'<input name="company" type="text" class="form-control">'+
+						'</div>'+
+						'<div class="clearfix"></div>'+
+						'<div class="btn-group">'+
+							'<button class="btn btn-warning" type="submit">Create</button>'+
+							'<a href="login.html" class="btn btn-warning">Cancel</a>'+
+						'</div>'+
+					'</div>' +
+					'<div class="input-frame col-md-6">'+
+						'<div class="form-group">'+
+							'<label>Avatar</label>'+
+						'</div>'+
+						'<div class="form-group text-center">'+
+							'<img id="preview" name-tag="picture" class="medium-image" src="../assets/default/user.gif">'+
+						'</div>'+
+						'<div class="form-group">'+
+							'<input name="picture" preview-id="preview" accept="image/x-png,image/gif,image/jpeg" id="input-id" type="file" class="file form-control" data-preview-file-type="text">'+
+						'</div>' +
+						'<div class="form-group">'+
+							'<label>Email / Username</label>'+
+							'<input name="email" type="email" class="form-control" value="'+r_getCookie('tulisan_register_email')+'">'+
+						'</div>'+
+						'<div class="form-group">'+
+							'<label>Password</label>'+
+							'<input name="password" type="password" class="form-control">'+
+						'</div>'+
+						'<div class="form-group">'+
+							'<label>Retype Password</label>'+
+							'<input name="retype_password" type="password" class="form-control">'+
+						'</div>'+
+					'</div>' +
+				'</form>';
+
+				$('main.parent').append(html);
+				p_formHandler('syncrom', 'addData', 'customer.html');
+			}
+
+		</script>
+	</body>
+</html>

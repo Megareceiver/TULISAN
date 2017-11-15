@@ -109,7 +109,7 @@ function p_formHandler(formId, type, back, custom = "no"){
 }
 
 //Fall Back
-function r_callBack(back, custom, data){
+function r_callBack(back, custom, data=null){
 	if(custom == "no"){
 		window.location.href = base_url + "/admin/" + back;
 	}else{
@@ -129,7 +129,11 @@ function r_callBack(back, custom, data){
 			break;
 			case "view-store":
 				r_clearCookies();
-				window.location.href = base_url + "/page/shop.html";;
+				window.location.href = base_url + "/page/shop.html";
+			break;
+			case "signup":
+				p_signup_set_cookie(data);
+				window.location.href = base_url + "/page/register_completed.html";
 			break;
 			default:
 
@@ -143,6 +147,11 @@ function p_login_set_cookie(data) {
 	r_setCookie('tulisan_user_type', data.type);
 	r_setCookie('tulisan_user_picture', data.picture);
 	r_setCookie('tulisan_user_departement', data.departement);
+}
+
+function p_signup_set_cookie(data) {
+	r_setCookie('tulisan_register_fullname', data.fullname);
+	r_setCookie('tulisan_register_email', data.email);
 }
 
 function r_setCookie(cname,cvalue,exdays="1") {

@@ -32,6 +32,7 @@ a { color: #333; }
 .text-right { text-align: right !important; }
 .text-left {text-align: left !important; }
 .text-center {text-align: center !important; }
+.text-alert { color: red; }
 
 .btn-default:hover,
 .btn-default:active,
@@ -1161,6 +1162,10 @@ footer.parent .license {
 .basic-table ul.header {
   background-color: #605B5D;
   color: #FFF;
+}
+
+.no-margin-bottom{
+  margin-bottom: unset;
 }
 
 /*=============================================================================================*/

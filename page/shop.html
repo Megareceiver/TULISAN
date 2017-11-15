@@ -8,7 +8,7 @@
 		<link rel="icon" type="image/x-icon" href="../assets/PICS/TL_Favicon.png">
 		<!-- Site Properities -->
 		<title>Tulisan</title>
-	  
+
 		<link href="../assets/css/bootstrap.min.css" rel="stylesheet">
 		<link href="../assets/css/font-awesome.min.css" rel="stylesheet">
 		<link href="../assets/css/syncard-inject.css" rel="stylesheet">
@@ -19,17 +19,17 @@
 			<header class="parent"></header>
 
 			<main class="parent clear default-flex"></main>
-	
+
 			<footer class="parent clear"></footer>
 		</div>
 
 		<!-- Script collection -->
 		<script type="text/javascript" src="../assets/js/jquery-3.2.1.min.js"></script>
 		<script type="text/javascript" src="../assets/js/jquery-ui-1.10.0.custom.min.js"></script>
-		<script type="text/javascript" src="../assets/js/bootstrap.min.js"></script>	
+		<script type="text/javascript" src="../assets/js/bootstrap.min.js"></script>
 		<script type="text/javascript" src="../assets/js/imagesloaded.pkgd.min.js"></script>
-		<script type="text/javascript" src="../assets/js/partial.js"></script>	
-		<script type="text/javascript" src="../assets/js/public.js"></script>	
+		<script type="text/javascript" src="../assets/js/partial.js"></script>
+		<script type="text/javascript" src="../assets/js/public.js"></script>
 
 		<!-- page script -->
 		<script type="text/javascript">
@@ -108,10 +108,23 @@
 				};
 
 				paging = 0;
+				filter = [];
 
 				keyword = "";
-				if(getParam('story') != "" && getParam('story') != null){ keyword = "storyId =" + getParam('story'); }
-				if(getParam('color') != "" && getParam('color') != null){ keyword = "colorId =" + getParam('color'); }
+				if(getParam('story') != "" && getParam('story') != null){
+					keyword = "storyId =" + getParam('story');
+					data = p_getData('operation', 'cms_storyFetch', "1", " idData = '" + getParam('story') + "'");
+					filter = data.feedData;
+				}
+
+				if(getParam('color') != "" && getParam('color') != null){
+					keyword = "colorId =" + getParam('color');
+					data = p_getData('operation', 'color', "1", " idData = '" + getParam('color') + "'");
+					filter = data.feedData[0];
+				}
+
+				if(keyword != "") { keyword = keyword + " AND "; }
+				keyword = keyword + "qty > 0";
 
 				data = p_getData('operation', 'product', "1", keyword);
 				product = data.feedData;
@@ -121,39 +134,43 @@
 
 				data = p_getData('operation', 'cms_story');
 				story = data.feedData;
-				
+
 				html = '<div class="col-md-12">';
-				
+
 				html = html +
 				'<div class="shop row">'+
-					'<div class="col-md-4 left-menu">'+
-						'<h3 class="fontserif title">SHOP BY PRODUCT <span toggle-target="#productList" class="left-menu-toggle fa fa-chevron-down syn-fixed-right "></span></h3>' +
-						'<ul id="productList" style="display: none">';
+					'<div class="col-md-3 left-menu">'+
+						'<h5 class="fontserif title">SHOP BY PRODUCT <span toggle-target="#productList" class="left-menu-toggle fa fa-chevron-up syn-fixed-right "></span></h3>' +
+						'<ul id="productList" class="active">';
 
 				for(var loop = 0; loop < product.length; loop++){
-					html = html + '<li><a href="shopDetail.html?q=' + product[loop].idData + '">' + product[loop].name + '</a></li>';	
+					html = html + '<li><a href="shopDetail.html?q=' + product[loop].idData + '">' + product[loop].name + '</a></li>';
 				}
 
 				html = html + '</ul>';
-				html = html + 
-				'<h3 class="fontserif title">SHOP BY COLOR <span toggle-target="#colorList" class="left-menu-toggle fa fa-chevron-down syn-fixed-right "></span></h3>' +
+				html = html +
+				'<h5 class="fontserif title">SHOP BY COLOR <span toggle-target="#colorList" class="left-menu-toggle fa fa-chevron-down syn-fixed-right "></span></h3>' +
 				'<ul id="colorList" style="display: none">';
 
 				for(var loop = 0; loop < color.length; loop++){
-					html = html + '<li><a href="shop.html?color=' + color[loop].idData + '">' + color[loop].name + '</a></li>';	
+					html = html + '<li><a href="shop.html?color=' + color[loop].idData + '">' + color[loop].name + '</a></li>';
 				}
 
 				html = html + '</ul>';
-				html = html + 
-				'<h3 class="fontserif title">SHOP BY STORY <span toggle-target="#storyList" class="left-menu-toggle fa fa-chevron-up syn-fixed-right "></span></h3>' +
-				'<ul id="storyList" class="active">';
+				html = html +
+				'<h5 class="fontserif title">SHOP BY STORY <span toggle-target="#storyList" class="left-menu-toggle fa fa-chevron-down syn-fixed-right "></span></h3>' +
+				'<ul id="storyList" style="display: none">';
 				for(var loop = 0; loop < story.length; loop++){
-					html = html + '<li><a href="shop.html?story=' + story[loop].idData + '">' + story[loop].title + '</a></li>';	
+					html = html + '<li><a href="shop.html?story=' + story[loop].idData + '">' + story[loop].title + '</a></li>';
 				}
 
 				html = html + '</ul></div>';
 
-				html = html + '<div class="col-md-8 col-md-offset-4 product-list">';
+				html = html + '<div class="col-md-9 col-md-offset-3 product-list">';
+				if(filter.name != undefined) { html = html + '<h5><i>Color : </i>' + filter.name + '</h5><hr/>'; }
+				if(filter.title != undefined) { html = html + '<h5>' + filter.title + '</h5>'; }
+				if(filter.title != undefined) { html = html + '<h6>' + filter.subtitle + '</h6>'; }
+				if(filter.title != undefined) { html = html + '<p>' + Base64.decode(filter.description).substring(0, 500) + '... <a href="storydetail.html?q=' + filter.idData + '" class="btn-link">view story</a>' + '</p><hr/>'; }
 				if(product.length > 0){
 					for(var loop = 0; loop < product.length; loop++)
 					{
@@ -161,14 +178,17 @@
 						// price = currencyFormatChanger(price);
 						price = currencyFormat(String(temp))
 						html = html +
-						'<div class="col-md-6 shop-thumb">'+
+						'<div class="col-md-4">'+
 							'<a href="shopDetail.html?q=' + product[loop].idData + '">' +
 								'<img class="big-image" src="../assets/products/'+product[loop].picture+'">'+
-								'<h4 class="center-div"><b class="fontserif">'+product[loop].name+' Rp.'+price+'</b></h4>'+
+								'<hr/>' +
+								'<h5 class="center-div"><b class="fontserif">'+product[loop].name + " - " + price+'</b></h5>'+
+								'<h6 class="center-div">Remaining : '+product[loop].qty + '</h6>'+
+								'<hr/>' +
 							'</a>' +
 						'</div>';
 					}
-					
+
 					/*paging*/
 					for(var loop=pagingState; loop<=paging; loop++){
 						if((paging - pagingState) > 5){
@@ -188,7 +208,7 @@
 				}else{
 					html = html +
 						'<p>Sorry there is no product</p>';
-				}	
+				}
 
 				html = html +
 					'</div>'+

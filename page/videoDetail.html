@@ -8,7 +8,7 @@
 		<link rel="icon" type="image/x-icon" href="../assets/PICS/TL_Favicon.png">
 		<!-- Site Properities -->
 		<title>Tulisan</title>
-	  
+
 		<link href="../assets/css/bootstrap.min.css" rel="stylesheet">
 		<link href="../assets/css/font-awesome.min.css" rel="stylesheet">
 		<link href="../assets/css/syncard-inject.css" rel="stylesheet">
@@ -19,7 +19,7 @@
 			<header class="parent"></header>
 
 			<main class="parent clear yellow-flex"></main>
-	
+
 			<footer class="parent clear"></footer>
 		</div>
 
@@ -27,9 +27,9 @@
 		<script type="text/javascript" src="../assets/js/jquery-3.2.1.min.js"></script>
 		<script type="text/javascript" src="../assets/js/jquery-ui-1.10.0.custom.min.js"></script>
 		<script type="text/javascript" src="../assets/js/bootstrap.min.js"></script>
-		<script type="text/javascript" src="../assets/js/imagesloaded.pkgd.min.js"></script>	
-		<script type="text/javascript" src="../assets/js/partial.js"></script>	
-		<script type="text/javascript" src="../assets/js/public.js"></script>	
+		<script type="text/javascript" src="../assets/js/imagesloaded.pkgd.min.js"></script>
+		<script type="text/javascript" src="../assets/js/partial.js"></script>
+		<script type="text/javascript" src="../assets/js/public.js"></script>
 
 		<!-- page script -->
 		<script type="text/javascript">
@@ -38,20 +38,12 @@
 			function loadVideo(){
 				var html = '';
 
-				var data = 
-				{
-					video	: "testVids.mp4",
-					title	: "Finding Unconditional Love",
-					desc	: "The Sound of Dawn’, an art project by multi-dimensional artist Melissa Sunjaya, examines the concept of self-love. This sensual prose is about a spiritual awakening to discover bliss and happiness within ourselves. Only through a commitment of loving ourselves wholeheartedly, we can begin to love others unconditionally.</br>We recently sat down with designer Zhijun Wang to discuss his project that turns hyped sneakers into wearable face masks. The Beijing-based creative started his face mask project to comment on the pollution in his city, where citizens are battling extreme air pollution. Understandably, Wang’s mask projects have been met with mixed responses and have created quite a buzz on the internet. In our talk with Wang he notes that he only wishes to make interesting items that no one has made before and that he has no interest in selling his masks. Additionally, we gave a pair of our HYPEBEAST 20th anniversary New Balance 580 “Earth” sneakers to Wang to be made into one of his signature face masks.",
-					publish : "May 3, 2016"
-				};
-
 				if(getParam('q') != "" && getParam('q') != null){
-					data = p_getData('operation', 'cms_videoFetch', 'idData = "' + getParam('q') + "'");
+					data = p_getData('operation', 'cms_videoFetch', '1','idData = "' + getParam('q') + '"');
 					data = data.feedData;
 				}
 
-				html = 
+				html =
 				'<div class="row" >'+
 					'<div class="detail-video col-md-12">' +
 						'<div class="video-player" >'+
@@ -60,28 +52,19 @@
 							// 	'Your browser does not support the video tag.'+
 							// '</video>' +
 							'<iframe id="vid1" class="video-player" width="100%" height="600"'+
-								'src="https://www.youtube.com/embed/'+data.fileName+'#t=29">'+
+								'src="https://www.youtube.com/embed/'+data.fileName+'">'+
 							'</iframe>'+
 						'</div>' +
 						// '<div class="detail-video-cover"></div>' +
 					'</div>' +
 				'</div>';
 
-				html = html + 	
+				html = html +
 				'<div class="col-md-10 col-md-offset-1 content description-box">'+
 					'<h1 class="fontserif">'+data.title+'</h1>' +
 					'<p>Published on ' + timeSince(new Date(Date.parse(data.publish))) + '</p>' +
 					'<div class="detail-content">'+
 						'<p>'+Base64.decode(data.description)+'</p>'+
-					'</div>' +
-					'<div class="sosmedpage">' +
-						'<p> SHARE IT &nbsp;' +
-							'<a href="#"><span class="fa fa-3x fa-instagram"> </span></a>' +
-							'<a href="#"><span class="fa fa-3x fa-facebook-official"> </span></a>' +
-							'<a href="#"><span class="fa fa-3x fa-twitter"> </span></a>' +
-							'<a href="#"><span class="fa fa-3x fa-pinterest"> </span></a>' +
-							'<a href="#"><span class="fa fa-3x fa-youtube"> </span></a>' +
-						'</p>' +
 					'</div>' +
 				'</div>';
 
@@ -102,7 +85,7 @@
 				$('.video-player').click(function () {
 					$('.video-player #vid1').get(0).pause();
 					$(".detail-video-cover").fadeIn();
-				    
+
 				});
 			}
 		</script>

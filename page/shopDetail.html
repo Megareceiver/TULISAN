@@ -8,7 +8,7 @@
 		<link rel="icon" type="image/x-icon" href="../assets/PICS/TL_Favicon.png">
 		<!-- Site Properities -->
 		<title>Tulisan</title>
-	  
+
 		<link href="../assets/css/bootstrap.min.css" rel="stylesheet">
 		<link href="../assets/css/font-awesome.min.css" rel="stylesheet">
 		<link href="../assets/css/syncard-inject.css" rel="stylesheet">
@@ -19,58 +19,45 @@
 			<header class="parent"></header>
 
 			<main class="parent clear"></main>
-	
+
 			<footer class="parent"></footer>
 		</div>
 
 		<!-- Script collection -->
 		<script type="text/javascript" src="../assets/js/jquery-3.2.1.min.js"></script>
 		<script type="text/javascript" src="../assets/js/jquery-ui-1.10.0.custom.min.js"></script>
-		<script type="text/javascript" src="../assets/js/bootstrap.min.js"></script>	
+		<script type="text/javascript" src="../assets/js/bootstrap.min.js"></script>
 		<script type="text/javascript" src="../assets/js/imagesloaded.pkgd.min.js"></script>
-		<script type="text/javascript" src="../assets/js/partial.js"></script>	
-		<script type="text/javascript" src="../assets/js/public.js"></script>	
+		<script type="text/javascript" src="../assets/js/partial.js"></script>
+		<script type="text/javascript" src="../assets/js/public.js"></script>
 
 		<!-- page script -->
 		<script type="text/javascript">
 			loadShop();
 
 			function loadShop(){
-				var html = '';
-				var data = {	
-					"name"	 	 :  "Altier Box",
-					"product"	 :  "db_file_img_133_350x350.jpg",
-					"date"		 :  "25TH FEBRUARY 2014",
-					"price"	 	 :  "$77.00",
-					"description":  "Much like the Gallery Tote, the Atelier Box has a structure that lends to organization. This attaché is perfect for an afternoon stroll about town or to keep at home to tidy files and accessories. The Atelier features a short handle to clutch or sling over one elbow as a sophisticated shopper. An interior split stitched pocket helps secure smaller items like a cellphone or business cards.",
-					"color"	 	 :  "Blue Note is crisp and preppy. Featuring a solid indigo background, the leaves and blooms of the Marigold pattern take on the natural raffia color of the raw canvas.",
-					"material"	 :  "Water-resistant, non-toxic coated cotton canvas and coated polyester lining. Comes with dust bag.",
-					"dimension"	 :  "13 x 7.5 x 12 in",
-					"picture"	 :  ["LB_FW13_23.jpg","LB_FW13_15.jpg"],
-					"title"	 	 :  "LUCA",
-					"story"	 	 :  "Marigold is a derivation of the children’s book “Les Papillons de Victor” in which Melissa, the founder and creative director of Tulisan collaborated with a French writer, Virginie Kasse to do the illustrations for the book. Marigold, also known as Calendula, was chosen to symbolize sacred love and affection, a theme that largely shapes the storyline of “Les Papillons de Victor.” \r\n \r\n Handcrafted in small batches, Tulisan products are made using eco-friendly water based dyes while still maintaining rich, intense color. The Marigold collection is silk-screened onto pure, unbleached cotton canvas using a technique that can create slight variations from product to product, making every product a little different. The products are coated with a non-toxic water-resistant coating that is formaldehyde, phthalate and lead free. From start to finish, each Tulisan product is made with love in Indonesia.",
-					"pattern"	 :  ["pattern1.jpg","pattern2.jpg","pattern3.jpg","pattern4.jpg"]
-				};
+				var html 		= '';
+				var data 		= [];
+				var story 	= [];
+				var color 	= [];
+				var filter  = [];
 
-				var story = [];
-				var color = [];
-
-				data.description = data.description.replace(/(?:\r\n|\r|\n)/g, '<br />');
-				data.story = data.story.replace(/(?:\r\n|\r|\n)/g, '<br />');
+				// data.description = data.description.replace(/(?:\r\n|\r|\n)/g, '<br />');
+				// data.story = data.story.replace(/(?:\r\n|\r|\n)/g, '<br />');
 
 				if(getParam('q') != "" && getParam('q') != null){
-					data = p_getData('operation', 'productDetail', 'idData = "' + getParam('q') + "'");
+					data = p_getData('operation', 'productDetail', '1', 'idData = "' + getParam('q') + '"');
 					data = data.feedData;
 
-					story = p_getData('operation', 'cms_storyFetch', 'idData = "' + data.storyId + "'");
+					story = p_getData('operation', 'cms_storyFetch', '1', 'idData = "' + data.storyId + '"');
 					story = story.feedData;
 
-					color = p_getData('operation', 'colorFetch', 'idData = "' + data.colorId + "'");
+					color = p_getData('operation', 'colorFetch', '1', 'idData = "' + data.colorId + '"');
 					color = color.feedData;
 				}
-				
+
 				html = '<div class="col-md-10 col-md-offset-1 div-normalize">';
-				
+
 				html = html +
 				'<div class="col-md-6">'+
 					'<div class="col-md-10 col-md-offset-1"><img class="big-image" src="../assets/products/' + data.picture + '"/></div>'+
@@ -81,8 +68,6 @@
 				//color
 				var pattern = data.pattern;
 					pattern = pattern.split(',');
-					console.log('as');
-					console.log(pattern);
 				for(var loop=0; loop<pattern.length; loop++){
 					html = html + '<li style="background-image : url(\'../assets/patterns/' + pattern[loop] + '\')"></li>';
 				}
@@ -115,12 +100,12 @@
 				'<div class="col-md-10 col-md-offset-1 product-story center-div margin-top div-normalize">'+
 					'<h4>' + story.title + '</h4>' +
 					'<p class="margin-top">' + Base64.decode(story.description) + '</p>' +
-				'</div>';	
-							
-				html = html + 
+				'</div>';
+
+				html = html +
 						"</div><div class='clearfix'></div>";
 
-				html = html + 
+				html = html +
 				'<div class="row margin-top">' +
 					'<div class="col-md-12">' +
 						"<div class='blog-box'>"+
@@ -132,24 +117,11 @@
 
 				data.description = data.description.replace(/(?:\r\n|\r|\n)/g, '<br />');
 
-				html = html +  
+				html = html +
 							"</div>"+
 						"</div>" +
 					"</div>" +
 				"</div>";
-
-				html = html + 
-				'<div class="center-div">' +
-					'<div class="sosmedpage">' +
-						'<p> SHARE IT &nbsp;' +
-							'<a href="#"><span class="fa fa-3x fa-instagram"> </span></a>' +
-							'<a href="#"><span class="fa fa-3x fa-facebook-official"> </span></a>' +
-							'<a href="#"><span class="fa fa-3x fa-twitter"> </span></a>' +
-							'<a href="#"><span class="fa fa-3x fa-pinterest"> </span></a>' +
-							'<a href="#"><span class="fa fa-3x fa-youtube"> </span></a>' +
-						'</p>' +
-					'</div>' +
-				'</div>';
 
 				$("main").html(html);
 				$("#custom-bread-detail").html(toTitleCase(data.name));

@@ -467,7 +467,7 @@
 				break;
 
 				case "cms_video"  :
-					$fields = array("title");
+					$fields = array("title", "fileName");
 					$values = array();
 					foreach ($fields as $key) {
 						$value = (isset($post[$key]) && $post[$key] != "") ? $post[$key] : "";
@@ -480,13 +480,13 @@
 
 					$resultList = $this->update('cms_video', $values, $post['idData']);
 
-					if($resultList["feedStatus"] == "success" && isset($post['idData']) && $post['idData']!="") {
-						if(isset($_FILES["video"])){
-							$upload = $this->uploadSingleVideo($_FILES["video"], "videos", "cms_video", "fileName", $post['idData']);
-							$resultList["feedMultiUpload"] = $upload['feedMessage'];
-						}
-
-					}
+					// if($resultList["feedStatus"] == "success" && isset($post['idData']) && $post['idData']!="") {
+					// 	if(isset($_FILES["video"])){
+					// 		$upload = $this->uploadSingleVideo($_FILES["video"], "videos", "cms_video", "fileName", $post['idData']);
+					// 		$resultList["feedMultiUpload"] = $upload['feedMessage'];
+					// 	}
+          //
+					// }
 
 				break;
 

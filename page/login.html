@@ -49,7 +49,7 @@
 						  <input type="text" class="form-control" id="lastname" placeholder="Last Name">
 						</div>
 						<div class="form-group">
-						  <input type="text" class="form-control" id="email" placeholder="E mail">
+						  <input type="email" class="form-control" id="email" placeholder="E mail">
 						</div>
 						<p>Enter your name and email address and click Submit.
 							We will send you a confirmation email with your password.</p>
@@ -73,15 +73,19 @@
 		<script type="text/javascript">
 			$('#signup').on('click', function(){
 				if($('#firstname').val() == '' || $('#lastname').val() =='' || $('#email').val() == ''){
-					$('.alert-register').html('Please complete the input')
+					$('.alert-register').html('Please complete the input!');
 				}else{
-					var fullname = $('#firstname').val() + ' ' + $('#lastname').val();
-					var email = $('#email').val();
-					var data = {
-						'fullname' : fullname,
-						'email' : email
-					};
-					r_callBack('signup', 'yes', data);
+					if(validateEmail($('#email').val())){
+						var fullname = $('#firstname').val() + ' ' + $('#lastname').val();
+						var email = $('#email').val();
+						var data = {
+							'fullname' : fullname,
+							'email' : email
+						};
+						r_callBack('signup', 'yes', data);
+					}else{
+						$('.alert-register').html('Invalid email format!');
+					}
 				}
 			});
 

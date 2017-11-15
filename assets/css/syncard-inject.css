@@ -8,6 +8,8 @@ html, body { overflow-x: hidden; }
 }
 
 a { color: #333; }
+iframe { border: 1px solid #ddd; background-color: #000; }
+
 /*.container{max-width: 687px;}*/
 .syn-center {
   text-align: center;
@@ -877,7 +879,6 @@ footer.parent .license {
 }
 .left-menu .title {
   font-weight: bold;
-  font-size: 20px;
 }
 
 .left-menu ul {
@@ -937,14 +938,15 @@ footer.parent .license {
 .video-box .play-button {
   position: absolute;
   background:  url("../PICS/playbutton.png")no-repeat;
-  height: 60px;
-  width: 60px;
+  background-size: 60px;
+  background-position: center;
+  height: 100%;
+  width: 100%;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
   margin: auto;
-  background-size: cover;
 }
 
 .video-box .caption {

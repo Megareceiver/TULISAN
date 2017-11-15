@@ -39,6 +39,7 @@ function p_getData(group, target, page="1", keyword=""){
 		data: { page : page, keyword: keyword },
 		success: function(result){
 			console.log(result);
+			console.log(keyword);
 			data = result;
 		},
 		complete: function(xhr,status) {  },
@@ -201,6 +202,17 @@ function checkboxActivator(){
 
 /* form auto */
 /* =============================================================================================== */
+function validateEmail(value) {
+    var x = value;
+    var atpos = x.indexOf("@");
+    var dotpos = x.lastIndexOf(".");
+    if (atpos<1 || dotpos<atpos+2 || dotpos+2>=x.length) {
+        return false;
+    }
+
+		return true;
+}
+
 function isNumberKey(evt){
 	$('input.number').keyup(function(){$(this).val($(this).val().replace(/[^\d]/,''));});
     var charCode = (evt.which) ? evt.which : evt.keyCode

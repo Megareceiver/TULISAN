@@ -84,10 +84,13 @@
 					'<div class="row">' +
 						'<div class="col-md-12">' +
 							'<div class="video-box">' +
-								'<video id="vid-' + loop + '" class="video-player">'+
-								  	'<source src="'+ base_url +'/assets/videos/'+data[loop].fileName+'#t=29" type="video/mp4">'+
-									'Your browser does not support the video tag.'+
-								'</video>' +
+								// '<video id="vid-' + loop + '" class="video-player">'+
+								//   	'<source src="'+ base_url +'/assets/videos/'+data[loop].fileName+'#t=29" type="video/mp4">'+
+								// 	'Your browser does not support the video tag.'+
+								// '</video>' +
+								'<iframe id="vid-' + loop + '" class="video-player" width="100%" height="600"'+
+								'src="https://www.youtube.com/embed/'+ data[loop].fileName+'#t=29">'+
+								'</iframe>'+
 								'<div class="layer"></div>' +
 								'<div class="caption">' +
 									'<h1 class="fontserif">'+data[loop].title+'</h1>'+

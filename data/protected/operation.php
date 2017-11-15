@@ -223,7 +223,7 @@
 				break;
 
 				case "cms_video"  :
-					$fields = array("title");
+					$fields = array("title","video");
 					$values = array();
 					foreach ($fields as $key) {
 						$value = (isset($post[$key]) && $post[$key] != "") ? $post[$key] : "";
@@ -235,14 +235,15 @@
 						array_push($values, base64_encode($post['description']));
 					}
 
-					$resultList = $this->insert('cms_video', $fields, $values);
+					$resultList = $fields;
+					// $resultList = $this->insert('cms_video', $fields, $values);
 
-					if($resultList["feedStatus"] == "success") {
-						if(isset($_FILES["video"])){
-							$upload = $this->uploadSingleVideo($_FILES["video"], "videos", "cms_video", "fileName", $resultList['feedId']);
-							$resultList["feedMultiUpload"] = $upload['feedMessage'];
-						}
-					}
+					// if($resultList["feedStatus"] == "success") {
+					// 	// if(isset($_FILES["video"])){
+					// 	// 	$upload = $this->uploadSingleVideo($_FILES["video"], "videos", "cms_video", "fileName", $resultList['feedId']);
+					// 	// 	$resultList["feedMultiUpload"] = $upload['feedMessage'];
+					// 	// }
+					// }
 				break;
 
 				case "user"  :

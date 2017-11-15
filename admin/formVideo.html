@@ -40,7 +40,7 @@
 				var html = '';
 
 				html = html +
-				'<form id="syncrom" f-group="operation" f-target="cms_video" enctype="multipart/form-data" method="post">'+
+				'<form id="syncrom" f-group="operation" f-target="cms_video" enctype="multipart/form-data">'+
 					'<div class="input-frame col-md-6">'+
 						'<h3><b>Video</b></h3>'+
 						'<div class="form-group">'+
@@ -53,16 +53,13 @@
 							'<textarea name="description" class="form-control" rows="5" id="editor"></textarea>'+
 						'</div>'+
 						'<div class="form-group">'+
-							'<label>Video</label>'+
+							'<label>File</label>'+
 						'</div>'+
-						// '<div class="form-group">'+
-						// 	'<p><i name="fileName">&nbsp;</i></p>'+
-						// '</div>' +
-						// '<div class="form-group">'+
-						// 	'<input name="video" id="input-id" type="file" class="file form-control" data-preview-file-type="text">'+
-						// '</div>' +
 						'<div class="form-group">'+
-							'<input name="video" type="text" class="file form-control" >'+
+							'<p><i name="fileName">&nbsp;</i></p>'+
+						'</div>' +
+						'<div class="form-group">'+
+							'<input name="video" id="input-id" type="file" class="file form-control" data-preview-file-type="text">'+
 						'</div>' +
 						'<div class="clearfix"></div>'+
 						'<div class="btn-group">'+
@@ -76,9 +73,8 @@
 
 
 				/* data generator */
-				// if(getParam('q') != "" && getParam('q') != null) dataGenerator(getParam('q'));
-				// else {p_formHandler('syncrom', 'addData', 'videos.html', "no");
-				// }
+				if(getParam('q') != "" && getParam('q') != null) dataGenerator(getParam('q'));
+				else p_formHandler('syncrom', 'addData', 'videos.html');
 
 				// //textarea editor
 				new nicEditor({iconsPath : '../assets/PICS/nicEditorIcons.gif'}).panelInstance('editor');
@@ -86,12 +82,6 @@
 				$(".nicEdit-main").on("blur",function(){
 					$("[name='description']").val($(this).html());
 				});
-
-				$('[type="submit"]').on('click', function(){
-					p_formHandler('syncrom', 'addData', 'videos.html', "no");
-					console.log('sdaf');
-				});
-
 			}
 
 			function dataGenerator(idData){

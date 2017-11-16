@@ -1,7 +1,7 @@
 <?php
 	define('db_host', "localhost");
 	define('db_user', "root");
-	define('db_pass', "");
+	define('db_pass', "root");
 	define('db_name', "tulisan_db_new");
 
 	function openGate(){
@@ -15,6 +15,6 @@
 	}
 
 	function basePath(){
-		return $_SERVER['SERVER_NAME'].'/TULISAN/';
+		return $_SERVER['SERVER_NAME'].'';
 	}
 ?>

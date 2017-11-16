@@ -12,6 +12,11 @@ function headerAdmin(){
 		return false;
 	}
 
+	var departement = "";
+	if(r_getCookie('tulisan_user_departement') != ""){
+		departement = r_getCookie('tulisan_user_departement');
+	}
+
 	var html =
 	'<div class="content-frame">'+
 		'<div class="row">'+
@@ -19,11 +24,13 @@ function headerAdmin(){
 				'<div class="logo"><img class="big-image" src="../assets/PICS/tulisan.png" /></div>'+
 			'</div>'+
 			'<div class="col-xs-7 col-md-9">'+
-				'<div class="header-title"><h2><span id="departmentName">Product</span> - Departement</h2></div>'+
+				'<div class="header-title"><h2><span id="departmentName">' + departement + '</span> - Departement</h2></div>'+
 				'<div class="header-menu fontserif hidden-sm hidden-xs">' +
 					'<ul>' +
-						'<li><form id="syncrom_logout" f-group="auth"><button type="submit" class="btn btn-link">Logout &nbsp; &nbsp;|</button></form></li>' +
-						'<li><form id="syncrom_viewstore" f-group="auth"><button type="submit" class="btn btn-link">View Store &nbsp; &nbsp;|</button></form></li>';
+						'<li><form id="syncrom_logout" f-group="auth"><button type="submit" class="btn btn-custom">Logout</button></form></li>' +
+						'<li>|</li>' +
+						'<li><form id="syncrom_viewstore" f-group="auth"><button type="submit" class="btn btn-custom">View Store</button></form></li>' +
+						'<li>|</li>';
 						if(r_getCookie('tulisan_user_name') != ""){
 							var res = r_getCookie('tulisan_user_name');
 							var img = r_getCookie('tulisan_user_picture');
@@ -60,7 +67,9 @@ function pageAdmin(){
 						'<li class="customer-route"><a href="customer.html">CUSTOMERS</a></li>'+
 						'<li class="vendor-route"><a href="vendor.html">VENDORS</a></li>'+
 						'<li class="order-route"><a href="order.html">ORDERS</a></li>'+
-						'<li class="hidden-md hidden-lg"><a href="../page/shop.html">VIEW STORE</a></li>'+
+						'<li class="hidden-md hidden-lg"><hr style="border-color: #000;"/></li>' +
+						'<li class="hidden-md hidden-lg"><form id="syncrom_viewstore_min" f-group="auth"><button type="submit" class="btn btn-custom">VIEW STORE</button></form></li>' +
+						'<li class="hidden-md hidden-lg"><form id="syncrom_logout_min" f-group="auth"><button type="submit" class="btn btn-custom">LOGOUT</button></form></li>' +
 					'</ul>' +
 				'</div>'+
 			'</div>'+
@@ -70,10 +79,10 @@ function pageAdmin(){
 						'<li class="departement-route"><a href="departement.html">Departement</a></li>'+
 						'<li class="product-route"><a href="product.html">Item</a></li>'+
 						'<li class="customer-route"><a href="customer.html">Customer</a></li>'+
-						'<li><a href="#">Shipping Option</a></li>'+
-						'<li><a href="#">Payment Method</a></li>'+
-						'<li><a href="#">Discounts</a></li>'+
-						'<li><a href="#">Catalog Price Rule</a></li>'+
+						'<li><a href="#" style="color: #555">Shipping Option</a></li>'+
+						'<li><a href="#" style="color: #555">Payment Method</a></li>'+
+						'<li><a href="#" style="color: #555">Discounts</a></li>'+
+						'<li><a href="#" style="color: #555">Catalog Price Rule</a></li>'+
 					'</ul>' +
 				'</div>'+
 				'<div class="col-md-12 main-content syn-clear">'+
@@ -85,6 +94,9 @@ function pageAdmin(){
 	'</div>';
 
 	$("main.parent-admin").html(html);
+
+	p_formHandler('syncrom_viewstore_min', 'logout', 'view-store', 'yes');
+	p_formHandler('syncrom_logout_min', 'logout', 'logout', 'yes');
 
 	$(".left-nav-toggle").on('click', function(){
 		if($('.toggle-target').is(":hidden")){

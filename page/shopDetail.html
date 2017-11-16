@@ -73,11 +73,12 @@
 				}
 
 				html = html +
-									'</ul>'+
-								'</div>'+
-							'</div>';
+						'</ul>'+
+					'</div>'+
+				'</div>';
+
 				html = html +
-							'<div class="col-md-6">'+
+					'<div class="col-md-6">'+
 								'<div class="product-desc">'+
 									'<h1 class="fontserif"><b>' + data.name + '</b> <small> Rp. ' + data.price + '</small></h1>'+
 									'<p>' + data.description + '</p>'+
@@ -94,24 +95,33 @@
 										data.dimension +
 									'</p>'+
 								'</div>'+
-							'</div>'+
-							"</div><div class='clearfix'></div>";
+								'<hr/>' +
+								'<div class="input-group">' +
+							    '<span class="input-group-addon"><i class="glyphicon glyphicon-plus"></i></span>' +
+							    '<input type="text" class="form-control" placeholder="Email">' +
+									'<span class="input-group-addon"><i class="glyphicon glyphicon-minus"></i></span>' +
+							  '</div>' +
+								'<button type="button" class="btn btn-warning margin-top" item-id="' + data.idData + '">Add to cart</button>' +
+						'</div>'+
+				"</div><div class='clearfix'></div>";
 				html = html +
+				'<hr/>' +
 				'<div class="col-md-10 col-md-offset-1 product-story center-div margin-top div-normalize">'+
 					'<h4>' + story.title + '</h4>' +
 					'<p class="margin-top">' + Base64.decode(story.description) + '</p>' +
 				'</div>';
 
-				html = html +
-						"</div><div class='clearfix'></div>";
+				html = html + "</div><div class='clearfix'></div>";
 
 				html = html +
+				'<hr/>' +
 				'<div class="row margin-top">' +
 					'<div class="col-md-12">' +
 						"<div class='blog-box'>"+
 							"<div class='blog-pic'>";
 
 				// for(var loop=0; loop<story.length; loop++){
+
 					html = html +  "<img src='../assets/stories/" + story.picture + "' />";
 				// }
 
@@ -122,10 +132,25 @@
 						"</div>" +
 					"</div>" +
 				"</div>";
+				html = html + "</div><div class='clearfix'></div>";
 
 				$("main").html(html);
 				$("#custom-bread-detail").html(toTitleCase(data.name));
 
+			}
+
+			var count = 1;
+			var elem  = document.getElementById("count");
+			function plus(){
+					count++;
+					elem.value = count;
+			}
+
+			function minus(){
+				if (count > 1) {
+					count--;
+					elem.value = count;
+				}
 			}
 		</script>
 	</body>

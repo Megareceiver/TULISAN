@@ -17,7 +17,7 @@
 
 				case "color" 			: $resultList = $this->fetchAllRequest('colors', array("name", "idData"), $post['keyword'], "ORDER BY name ASC", $post['page']); break;
 				case "colorOption" 		: $resultList = $this->fetchAllRecord('colors', array("name as caption", "idData as value"), $post['keyword'], "ORDER BY name ASC"); break;
-				case "coloretail" 		: $resultList = $this->fetchSingleRequest('colors', array("name", "idData"), $post['keyword']); break;
+				case "colorFetch" 		: $resultList = $this->fetchSingleRequest('colors', array("name", "idData"), $post['keyword']); break;
 
 				case "department" 		: $resultList = $this->fetchAllRequest('departments', array("name", "idData"), $post['keyword'], "ORDER BY name ASC", $post['page']); break;
 				case "departmentOption" : $resultList = $this->fetchAllRecord('departments', array("name as caption", "idData as value"), $post['keyword'], "ORDER BY name ASC"); break;
@@ -40,6 +40,10 @@
 				case "cms_story" 		: $resultList = $this->fetchAllRequest('cms_story', array("idData","title", "subtitle", "SUBSTRING(description, 1, 300) as description", "author", "picture"), $post['keyword'], "ORDER BY idData DESC", $post['page']); break;
 				case "cms_storyOption" 	: $resultList = $this->fetchAllRecord('cms_story', array("title as caption", "idData as value"), $post['keyword'], "ORDER BY title ASC"); break;
 				case "cms_storyFetch" 	: $resultList = $this->fetchSingleRequest('cms_story', array("idData", "title", "subtitle", "description", "author", "picture"), $post['keyword']); break;
+
+				case "artWork" 					: $resultList = $this->fetchAllRequest('cms_story_artwork a JOIN cms_story s ON a.idStory = s.idData', array("a.name", "a.idData", "s.title"), $post['keyword'], "ORDER BY a.name ASC", $post['page']); break;
+				case "artWorkOption" 		: $resultList = $this->fetchAllRecord('cms_story_artwork', array("name as caption", "idData as value"), $post['keyword'], "ORDER BY name ASC"); break;
+				case "artWorkFetch" 		: $resultList = $this->fetchSingleRequest('cms_story_artwork', array("name", "idData", "idStory"), $post['keyword']); break;
 
 				case "cms_video" 		: $resultList = $this->fetchAllRequest('cms_video', array("idData","title", "SUBSTRING(description, 1, 300) as description", "fileName", "fileSize", "createdBy as publishedBy", "createdDate as publishedTime"), $post['keyword'], "ORDER BY idData DESC", $post['page']); break;
 				case "cms_videoFetch" 	: $resultList = $this->fetchSingleRequest('cms_video', array("idData","title", "description", "fileName", "createdDate as publish"), $post['keyword']); break;
@@ -90,6 +94,7 @@
 				case "cms_chatter" 	: $resultList = $this->deleteById('cms_chatter', $post['id']); break;
 				case "cms_home" 	: $resultList = $this->deleteById('cms_home', $post['id']); break;
 				case "cms_story" 	: $resultList = $this->deleteById('cms_story', $post['id']); break;
+				case "artWork" 		: $resultList = $this->deleteById('cms_story_artwork', $post['id']); break;
 				case "cms_video" 	: $resultList = $this->deleteById('cms_video', $post['id']); break;
 
 				default	   : $resultList = array( "feedStatus" => "failed", "feedType" => "danger", "feedMessage" => "Something went wrong, failed to collect data!", "feedData" => array()); break;
@@ -179,6 +184,17 @@
 							array_push($resultList, array("feedUpload" => $upload['feedMessage']));
 						}
 					}
+				break;
+
+				case "artWork"  :
+					$fields = array("name", "idStory");
+					$values = array();
+					foreach ($fields as $key) {
+						$value = (isset($post[$key]) && $post[$key] != "") ? $post[$key] : "";
+						array_push($values, $value);
+					}
+
+					$resultList = $this->insert('cms_story_artwork', $fields, $values);
 				break;
 
 				case "cms_blog"  :
@@ -421,6 +437,11 @@
 						}
 					}
 
+				break;
+
+				case "artWork"  :
+					$values = array("name = '".$post["name"]."'");
+					$resultList = $this->update('cms_story_artwork', $values, $post['idData']);
 				break;
 
 				case "cms_blog"  :

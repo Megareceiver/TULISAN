@@ -8,7 +8,7 @@
 		<link rel="icon" type="image/x-icon" href="../assets/PICS/TL_Favicon.png">
 		<!-- Site Properities -->
 		<title>Tulisan</title>
-	  
+
 		<link href="../assets/css/bootstrap.min.css" rel="stylesheet">
 		<link href="../assets/css/font-awesome.min.css" rel="stylesheet">
 		<link href="../assets/css/syncard-inject.css" rel="stylesheet">
@@ -19,16 +19,16 @@
 			<header class="parent-admin"></header>
 
 			<main class="parent-admin"></main>
-					
+
 			<footer class="parent-admin"></footer>
 		</div>
 
 		<!-- Script collection -->
 		<script type="text/javascript" src="../assets/js/jquery-3.2.1.min.js"></script>
 		<script type="text/javascript" src="../assets/js/jquery-ui-1.10.0.custom.min.js"></script>
-		<script type="text/javascript" src="../assets/js/bootstrap.min.js"></script>	
-		<script type="text/javascript" src="../assets/js/syncard.js"></script>	
-		<script type="text/javascript" src="../assets/js/public.js"></script>	
+		<script type="text/javascript" src="../assets/js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="../assets/js/syncard.js"></script>
+		<script type="text/javascript" src="../assets/js/public.js"></script>
 
 		<!-- page script -->
 		<script type="text/javascript">
@@ -103,7 +103,7 @@
 					'<table class="table table-striped table-responsive">'+
 					    '<thead>'+
 					    	'<tr>'+
-						    	'<th width="5%"><input type="checkbox" id="selectRecord" value="0" onclick="checkboxToggle(this, \'customerSelect\')" /><label for="selectRecord"></label></th>'+
+									'<th width="5%"><input type="checkbox" name="customerSelect" id="selectRecord" value="0" onclick="checkboxToggle(this, \'customerSelect\')" /><label for="selectRecord"></label></th>'+
 						    	'<th>Color</th>'+
 					    	'</tr>'+
 					    '</thead>'+
@@ -154,7 +154,7 @@
 					data = data.feedData;
 
 				dataGenerator(data);
-				
+
 				//filter
 				$('.alpha a').on("click", function(){
 					var page = (r_getCookie('adminPageFilter') != "" ? r_getCookie('adminPageFilter'): "1");
@@ -206,13 +206,13 @@
 				});
 				//paging end
 			}
-			
+
 			function dataGenerator(data){
 				var html = "";
 				for(var loop =0; loop<data.length; loop++){
 		    		html = html +
 		    		'<tr>'+
-		    			'<td><input type="checkbox" value="'+data[loop].idData+'" id="selectRecord' + loop + '"><label for="selectRecord' + loop + '"></label></td>'+
+							'<td width="5%"><input type="checkbox" name="customerSelect" value="'+data[loop].idData+'" id="selectRecord' + loop + '"><label for="selectRecord' + loop + '"></label></td>'+
 		    			'<td class="syn-nowrap">'+ data[loop].name +'</td>'+
 		    		'</tr>';
 		    	}
@@ -226,12 +226,12 @@
 			}
 
 			function operationActivator(){
-				$('#deleteButton').unbind().on("click", function(){ 
+				$('#deleteButton').unbind().on("click", function(){
 					if(checkedArray.length > 0){
 						var confirmation = confirm("Are you sure you want to delete the selected data?");
 						if (confirmation == true) {
 							p_removeData('operation', 'color', checkedArray);
-							
+
 							r_setCookie('adminPageFilter', '1');
 							r_setCookie('adminAlphaFilter', '');
 							var page = (r_getCookie('adminPageFilter') != "" ? r_getCookie('adminPageFilter'): "1");
@@ -245,7 +245,7 @@
 					}
 				});
 
-				$('#manageButton').unbind().on("click", function(){ 
+				$('#manageButton').unbind().on("click", function(){
 					if(checkedArray.length == 1 && checkedArray[0] != "0"){
 						window.location.href = base_url + "/admin/formColor.html?q=" + checkedArray[0];
 					}else{

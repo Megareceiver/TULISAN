@@ -31,6 +31,8 @@
 		<script type="text/javascript" src="../assets/js/partial.js"></script>
 		<script type="text/javascript" src="../assets/js/public.js"></script>
 
+		<script type="text/javascript" src="../assets/plugins/elevatezoom/jquery.elevatezoom.min.js"></script>
+
 		<!-- page script -->
 		<script type="text/javascript">
 			loadShop();
@@ -60,16 +62,28 @@
 
 				html = html +
 				'<div class="col-md-6">'+
-					'<div class="col-md-10 col-md-offset-1"><img class="big-image" src="../assets/products/' + data.picture + '"/></div>'+
+					'<div class="col-md-10 col-md-offset-1 margin-top">' +
+						'<img id="product_detail" class="big-images" src="../assets/products/small/' + data.picture + '" data-zoom-image="../assets/products/large/' + data.picture + '" />' +
+					'</div>'+
 					'<div class="clearfix"></div>' +
-					'<div class="color-choice">'+
-						'<ul>';
+					'<div class="color-choice margin-top">'+
+						'<ul id="detail_list">' +
+							'<li>' +
+								'<a href="#" data-image="../assets/products/small/' + data.picture + '"  data-zoom-image="../assets/products/large/' + data.picture + '">' +
+									'<img id="product_detail" class="big-images" src="../assets/products/small/' + data.picture + '" />' +
+							  '</a>' +
+							'</li>';
 
-				//color
+				//detail picture
 				var pattern = data.pattern;
-					pattern = pattern.split(',');
+				pattern = pattern.split(',');
 				for(var loop=0; loop<pattern.length; loop++){
-					html = html + '<li style="background-image : url(\'../assets/patterns/' + pattern[loop] + '\')"></li>';
+					html = html +
+					'<li>' +
+						'<a href="#" data-image="../assets/patterns/' + pattern[loop] + '" data-zoom-image="../assets/patterns/' + pattern[loop] + '">' +
+					    '<img id="product_detail" src="../assets/patterns/' + pattern[loop] + '" />' +
+					  '</a>' +
+					'</li>';
 				}
 
 				html = html +
@@ -81,12 +95,21 @@
 					'<div class="col-md-6">'+
 								'<div class="product-desc">'+
 									'<h1 class="fontserif"><b>' + data.name + '</b> <small> Rp. ' + data.price + '</small></h1>'+
+									'<hr/>' +
 									'<p>' + data.description + '</p>'+
-									'<p>'+
-										'COLOR<br>'+
-										color.name +
-									'</p>'+
-									'<p>'+
+									'<div class="row margin-top">'+
+										'<div class="col-xs-6">'+
+											'<p>PATTERN</p>'+
+											'<select class="form-control">' +
+											'</select>' +
+										'</div>' +
+										'<div class="col-xs-6">'+
+											'<p>COLOR</p>'+
+											'<select class="form-control">' +
+											'</select>' +
+										'</div>' +
+									'</div>' +
+									'<p class="margin-top">'+
 										'MATERIAL<br>'+
 										data.material +
 									'</p>'+
@@ -96,19 +119,28 @@
 									'</p>'+
 								'</div>'+
 								'<hr/>' +
-								'<div class="input-group">' +
-							    '<span class="input-group-addon"><i class="glyphicon glyphicon-plus"></i></span>' +
-							    '<input type="text" class="form-control" placeholder="Email">' +
-									'<span class="input-group-addon"><i class="glyphicon glyphicon-minus"></i></span>' +
+								'<div class="row">' +
+									'<div class="col-xs-6">' +
+										'<p>SIZE</p>' +
+								    '<select class="form-control">' +
+								    '</select>' +
+										'<p class="margin-top">Remaining : ' + data.qty + '</p>' +
+										'<div class="input-group">' +
+									    '<span class="input-group-addon" onclick="minus()"><i class="glyphicon glyphicon-minus"></i></span>' +
+									    '<input type="text" class="form-control text-center" id="count" value="1">' +
+											'<span class="input-group-addon" onclick="plus()"><i class="glyphicon glyphicon-plus"></i></span>' +
+									  '</div>' +
+								  '</div>' +
 							  '</div>' +
-								'<button type="button" class="btn btn-warning margin-top" item-id="' + data.idData + '">Add to cart</button>' +
+								'<div class="clearfix"></div>' +
+								'<button type="button" class="btn btn-warning margin-top form-control" item-id="' + data.idData + '">Add to cart</button>' +
 						'</div>'+
 				"</div><div class='clearfix'></div>";
 				html = html +
 				'<hr/>' +
 				'<div class="col-md-10 col-md-offset-1 product-story center-div margin-top div-normalize">'+
 					'<h4>' + story.title + '</h4>' +
-					'<p class="margin-top">' + Base64.decode(story.description) + '</p>' +
+					'<p class="margin-top">' + story.subtitle + '</p>' +
 				'</div>';
 
 				html = html + "</div><div class='clearfix'></div>";
@@ -132,11 +164,20 @@
 						"</div>" +
 					"</div>" +
 				"</div>";
+
+				html = html +
+				'<hr/>' +
+				'<div class="col-md-4 col-md-offset-4">' +
+					'<p class="text-center">Are you interested ?</p>' +
+					'<button type="button" class="btn btn-warning margin-top form-control" item-id="' + data.idData + '">Add to cart</button>' +
+				'</div>';
+
 				html = html + "</div><div class='clearfix'></div>";
 
 				$("main").html(html);
 				$("#custom-bread-detail").html(toTitleCase(data.name));
 
+				zoomActivator();
 			}
 
 			var count = 1;
@@ -151,6 +192,27 @@
 					count--;
 					elem.value = count;
 				}
+			}
+
+			function zoomActivator(){
+				$('#product_detail').elevateZoom({
+			    zoomType: "inner",
+					// zoomType				: "lens",
+				  // lensShape : "round",
+				  // lensSize    : 200,
+					cursor: "crosshair",
+					zoomWindowFadeIn: 100,
+					zoomWindowFadeOut: 150,
+					gallery:'detail_list',
+					galleryActiveClass: 'active',
+					imageCrossfade: true,
+			   });
+
+			 $("#product_detail").bind("click", function(e) {
+				  var ez =   $('#product_detail').data('elevateZoom');
+					$.fancybox(ez.getGalleryList());
+				  return false;
+				});
 			}
 		</script>
 	</body>

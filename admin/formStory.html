@@ -8,7 +8,7 @@
 		<link rel="icon" type="image/x-icon" href="../assets/PICS/TL_Favicon.png">
 		<!-- Site Properities -->
 		<title>Tulisan</title>
-	  
+
 		<link href="../assets/css/bootstrap.min.css" rel="stylesheet">
 		<link href="../assets/css/font-awesome.min.css" rel="stylesheet">
 		<link href="../assets/css/syncard-inject.css" rel="stylesheet">
@@ -19,17 +19,17 @@
 			<header class="parent-admin"></header>
 
 			<main class="parent-admin"></main>
-					
+
 			<footer class="parent-admin"></footer>
 		</div>
 
 		<!-- Script collection -->
 		<script type="text/javascript" src="../assets/js/jquery-3.2.1.min.js"></script>
 		<script type="text/javascript" src="../assets/js/jquery-ui-1.10.0.custom.min.js"></script>
-		<script type="text/javascript" src="../assets/js/bootstrap.min.js"></script>	
-		<script type="text/javascript" src="../assets/js/syncard.js"></script>	
-		<script type="text/javascript" src="../assets/js/public.js"></script>	
-		<script type="text/javascript" src="../assets/js/nicEdit.js"></script>	
+		<script type="text/javascript" src="../assets/js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="../assets/js/syncard.js"></script>
+		<script type="text/javascript" src="../assets/js/public.js"></script>
+		<script type="text/javascript" src="../assets/js/nicEdit.js"></script>
 
 		<!-- page script -->
 		<script type="text/javascript">
@@ -63,7 +63,7 @@
 						'<div class="clearfix"></div>'+
 						'<div class="btn-group">'+
 							'<button class="btn btn-warning" type="submit">Create</button>'+
-							'<button class="btn btn-warning" type="button">Cancel</button>'+
+							'<a href="story.html" class="btn btn-warning" type="reset">Cancel</a>'+
 						'</div>'+
 					'</div>' +
 					'<div class="input-frame col-md-6">'+
@@ -89,7 +89,7 @@
 				imagePreviewActivator('[name="picture"]');
 
 				// //textarea editor
-				new nicEditor({iconsPath : '../assets/PICS/nicEditorIcons.gif'}).panelInstance('editor');
+				new nicEditor({iconsPath : '../assets/PICS/nicEditorIcons.gif', maxHeight : 200}).panelInstance('editor');
 
 				$(".nicEdit-main").on("blur",function(){
 					$("[name='description']").val($(this).html());
@@ -103,7 +103,7 @@
 				for (var key in xData) {
 					if(key != "description"){
 						if($("[name='" + key + "']").attr('type') != "file") $("[name=" + key + "]").val(xData[key]);
-						else{ 
+						else{
 							if(xData[key]!="") $("[name-tag=" + key + "]").attr('src', '../assets/stories/' + xData[key]);
 							else $("[name-tag='" + key + "']").attr('src', '../assets/default/story.gif');
 						}

@@ -24,7 +24,7 @@ function headerAdmin(){
 				'<div class="logo"><img class="big-image" src="../assets/PICS/tulisan.png" /></div>'+
 			'</div>'+
 			'<div class="col-xs-7 col-md-9">'+
-				'<div class="header-title"><h2><span id="departmentName">' + departement + '</span> - Departement</h2></div>'+
+				'<div class="header-title"><h2><span id="departmentName">' + departement + '</span> - Department</h2></div>'+
 				'<div class="header-menu fontserif hidden-sm hidden-xs">' +
 					'<ul>' +
 						'<li><form id="syncrom_logout" f-group="auth"><button type="submit" class="btn btn-custom">Logout</button></form></li>' +
@@ -76,7 +76,7 @@ function pageAdmin(){
 			'<div class="col-md-9 col-md-offset-3 syn-clear">'+
 				'<div class="col-md-12 top-nav">'+
 					'<ul>' +
-						'<li class="departement-route"><a href="departement.html">Departement</a></li>'+
+						'<li class="departement-route"><a href="department.html">Departement</a></li>'+
 						'<li class="product-route"><a href="product.html">Item</a></li>'+
 						'<li class="customer-route"><a href="customer.html">Customer</a></li>'+
 						'<li><a href="#" style="color: #555">Shipping Option</a></li>'+
@@ -124,12 +124,14 @@ function pageAdmin(){
 			case "customer.html":
 			case "formCustomer.html": $(".customer-route").addClass('active'); break;
 			case "formDepartment.html":
-			case "departement.html": $(".departement-route").addClass('active'); break;
+			case "department.html": $(".departement-route").addClass('active'); break;
 			case "cms.html":
 			case "home.html":
 			case "formHome.html":
 			case "story.html":
 			case "formStory.html":
+			case "artWork.html":
+			case "formArtWork.html":
 			case "videos.html":
 			case "formVideo.html":
 			case "chatter.html":

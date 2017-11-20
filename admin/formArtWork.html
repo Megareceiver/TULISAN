@@ -39,31 +39,41 @@
 				var html = '';
 
 				html = html +
-				'<form id="syncrom" f-group="operation" f-target="department">'+
+				'<form id="syncrom" f-group="operation" f-target="artWork">'+
 					'<div class="input-frame col-md-6">'+
-						'<h3><b>Department</b></h3>'+
+						'<h3><b>Art Work</b></h3>'+
 						'<div class="form-group">'+
-							'<label>Department Name</label>'+
+							'<label>Art Work Name</label>'+
 							'<input name="name" type="text" class="form-control">'+
 							'<input name="idData" type="hidden">'+
+						'</div>'+
+						'<div class="form-group">'+
+							'<label>Story</label>'+
+							'<select name="idStory" class="form-control">' +
+					    	'<option value="NULL">Choose color</option>' +
+					    '</select>' +
 						'</div>'+
 						'<div class="clearfix"></div>'+
 						'<div class="btn-group">'+
 							'<button class="btn btn-warning" type="submit">Create</button>'+
-							'<a href="department.html" class="btn btn-warning" type="reset">Cancel</a>'+
+							'<a href="artWork.html" class="btn btn-warning" type="reset">Cancel</a>'+
 						'</div>'+
 					'</div>' +
 				'</form>';
 
 				$('main.parent-admin .main-content').append(html);
 
+				//option list
+				var oData = p_getData('operation', 'cms_storyOption');
+				$("[name=idStory]").append(dataToOptionHtml(oData.feedData));
+
 				/* data generator */
 				if(getParam('q') != "" && getParam('q') != null) dataGenerator(getParam('q'));
-				else p_formHandler('syncrom', 'addData', 'department.html');
+				else p_formHandler('syncrom', 'addData', 'artWork.html');
 			}
 
 			function dataGenerator(idData){
-				var xData = p_getData('operation', 'departmentFetch', '', "idData=" + idData);
+				var xData = p_getData('operation', 'artWorkFetch', '', "idData=" + idData);
 					xData = xData.feedData;
 
 				for (var key in xData) {
@@ -71,18 +81,20 @@
 					else{
 						var temp = xData[key].split(","); console.log(temp);
 						if(Array.isArray(temp) == false){
-							if(xData[key]!="") $("[name-tag=" + key + "]").attr('src', '../assets/department/' + xData[key]);
-							else $("[name-tag='" + key + "']").attr('src', '../assets/default/department.gif');
+							if(xData[key]!="") $("[name-tag=" + key + "]").attr('src', '../assets/artWorks/' + xData[key]);
+							else $("[name-tag='" + key + "']").attr('src', '../assets/default/artWorks.gif');
 						}else{
 							for(var loop=0; loop<temp.length; loop++){
-								if(xData[key]!="") $("[name-tag='" + key + loop +"']").attr('src', '../assets/department/' + temp[loop]);
-								else $("[name-tag='" + key + loop +"']").attr('src', '../assets/default/department.gif');
+								if(xData[key]!="") $("[name-tag='" + key + loop +"']").attr('src', '../assets/artWorks/' + temp[loop]);
+								else $("[name-tag='" + key + loop +"']").attr('src', '../assets/default/artWorks.gif');
 							}
 						}
 					}
 				}
 
-				p_formHandler('syncrom', 'updateData', 'department.html');
+				p_formHandler('syncrom', 'updateData', 'artWork.html');
+
+				$('[name=idStory]').attr('disabled', 'disabled');
 			}
 		</script>
 	</body>

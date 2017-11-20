@@ -8,7 +8,7 @@
 		<link rel="icon" type="image/x-icon" href="../assets/PICS/TL_Favicon.png">
 		<!-- Site Properities -->
 		<title>Tulisan</title>
-	  
+
 		<link href="../assets/css/bootstrap.min.css" rel="stylesheet">
 		<link href="../assets/css/font-awesome.min.css" rel="stylesheet">
 		<link href="../assets/css/syncard-inject.css" rel="stylesheet">
@@ -19,16 +19,16 @@
 			<header class="parent-admin"></header>
 
 			<main class="parent-admin"></main>
-					
+
 			<footer class="parent-admin"></footer>
 		</div>
 
 		<!-- Script collection -->
 		<script type="text/javascript" src="../assets/js/jquery-3.2.1.min.js"></script>
 		<script type="text/javascript" src="../assets/js/jquery-ui-1.10.0.custom.min.js"></script>
-		<script type="text/javascript" src="../assets/js/bootstrap.min.js"></script>	
-		<script type="text/javascript" src="../assets/js/syncard.js"></script>	
-		<script type="text/javascript" src="../assets/js/public.js"></script>	
+		<script type="text/javascript" src="../assets/js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="../assets/js/syncard.js"></script>
+		<script type="text/javascript" src="../assets/js/public.js"></script>
 
 		<!-- page script -->
 		<script type="text/javascript">
@@ -50,7 +50,7 @@
 						'<div class="clearfix"></div>'+
 						'<div class="btn-group">'+
 							'<button class="btn btn-warning" type="submit">Create</button>'+
-							'<button class="btn btn-warning" type="button">Cancel</button>'+
+							'<a href="color.html" class="btn btn-warning" type="reset">Cancel</a>'+
 						'</div>'+
 					'</div>' +
 				'</form>';
@@ -68,7 +68,7 @@
 
 				for (var key in xData) {
 					if($("[name='" + key + "']").attr('type') != "file") $("[name=" + key + "]").val(xData[key]);
-					else{ 
+					else{
 						var temp = xData[key].split(","); console.log(temp);
 						if(Array.isArray(temp) == false){
 							if(xData[key]!="") $("[name-tag=" + key + "]").attr('src', '../assets/colors/' + xData[key]);

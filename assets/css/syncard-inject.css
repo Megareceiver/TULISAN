@@ -1229,7 +1229,7 @@ img,
     top: 0;
     display: inline-block;
     width: 100%;
-    z-index: 2;
+    z-index: 9;
   }
 
   header.parent .row .navbar.navbar-default { padding: 0 15px; }

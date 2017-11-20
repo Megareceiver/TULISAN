@@ -27,8 +27,8 @@
 		<script type="text/javascript" src="../assets/js/jquery-3.2.1.min.js"></script>
 		<script type="text/javascript" src="../assets/js/jquery-ui-1.10.0.custom.min.js"></script>
 		<script type="text/javascript" src="../assets/js/bootstrap.min.js"></script>
-		<script type="text/javascript" src="../assets/js/public.js"></script>
 		<script type="text/javascript" src="../assets/js/syncard.js"></script>
+		<script type="text/javascript" src="../assets/js/public.js"></script>
 
 		<!-- page script -->
 		<script type="text/javascript">
@@ -43,29 +43,26 @@
 					'<div class="operation-group">'+
 						'<form class="form-inline">' +
 							'<div class="input-group operation-button">' +
-								'<a href="formStory.html"><i class="fa fa-plus-circle text-warning">&nbsp;</i> Add Story</a>'+
+								'<a href="formDepartment.html"><i class="fa fa-plus-circle text-warning">&nbsp;</i> Add Department</a>'+
 							'</div>' +
 							'<div class="input-group operation-button">' +
-								'<a href="#" id="deleteButton"><i class="fa fa-minus-circle text-warning">&nbsp;</i> Delete Story</a>'+
+								'<a href="#" id="deleteButton"><i class="fa fa-minus-circle text-warning">&nbsp;</i> Delete Department</a>'+
 							'</div>' +
 							'<div class="input-group operation-button">' +
-								'<a href="#" id="manageButton"><i class="fa fa-bars text-warning">&nbsp;</i> Manage Story</a>'+
+								'<a href="#" id="manageButton"><i class="fa fa-bars text-warning">&nbsp;</i> Manage Department</a>'+
 							'</div>' +
-							'<div class="input-group operation-button">' +
-								'<a href="#" id="manageArtwork"><i class="fa fa-paint-brush text-warning">&nbsp;</i> Manage Art Work</a>'+
-							'</div>' +
-			        '<div class="input-group pull-right">' +
-			        		'<input type="text" class="form-control" placeholder="Search">' +
-				        	'<span class="input-group-btn">' +
-				        		'<button type="button" class="search btn btn-default">SEARCH</button>' +
-				        	'</span>' +
-			        '</div>' +
-			   		'</form>' +
-			   		'<div class="clearfix"></div>' +
+				        	'<div class="input-group pull-right">' +
+				        		'<input type="text" class="form-control" placeholder="Search">' +
+					        	'<span class="input-group-btn">' +
+					        		'<button type="button" class="search btn btn-default">SEARCH</button>' +
+					        	'</span>' +
+				        	'</div>' +
+				   		'</form>' +
+				   		'<div class="clearfix"></div>' +
 					'</div>' +
 					'<div class="summary-group">'+
 						'<div class="summary-text">'+
-							'<p>Total number of stories</p>'+
+							'<p>Total number of Departments</p>'+
 							'<p class="number" id="totalRecord">0</p>'+
 						'</div>'+
 						'<div class="alpha">'+
@@ -106,11 +103,8 @@
 					'<table class="table table-striped table-responsive">'+
 					    '<thead>'+
 					    	'<tr>'+
-						    	'<th width="5%"><input type="checkbox" value="0" id="selectRecord" onclick="checkboxToggle(this, \'customerSelect\')" /><label for="selectRecord"></label></th>'+
-						        '<th>Title</th>'+
-						        '<th width="25%">Subtitle</th>'+
-						        '<th width="30%">Description</th>'+
-						        '<th>Author</th>'+
+									'<th width="5%"><input type="checkbox" name="customerSelect" id="selectRecord" value="0" onclick="checkboxToggle(this, \'customerSelect\')" /><label for="selectRecord"></label></th>'+
+						    	'<th>department</th>'+
 					    	'</tr>'+
 					    '</thead>'+
 					    '<tbody></tbody>'+
@@ -156,7 +150,7 @@
 				r_setCookie('adminPageFilter', '1');
 				r_setCookie('adminAlphaFilter', '');
 				var page = (r_getCookie('adminPageFilter') != "" ? r_getCookie('adminPageFilter'): "1");
-				var data = p_getData('operation', 'cms_story', page);
+				var data = p_getData('operation', 'department', page);
 					data = data.feedData;
 
 				dataGenerator(data);
@@ -164,7 +158,7 @@
 				//filter
 				$('.alpha a').on("click", function(){
 					var page = (r_getCookie('adminPageFilter') != "" ? r_getCookie('adminPageFilter'): "1");
-					var data = p_getData('operation', 'cms_story', page, '(title LIKE "' + $(this).html() + '%")');
+					var data = p_getData('operation', 'department', page, '(name LIKE "' + $(this).html() + '%")');
 					data = data.feedData;
 					dataGenerator(data);
 
@@ -174,7 +168,7 @@
 
 				$('button.search').on("click", function(){
 					var keyword = $("[placeholder='Search']").val();
-					var data = p_getData('operation', 'cms_story', '1', '(title LIKE "%' + keyword + '%")');
+					var data = p_getData('operation', 'department', '1', '(name LIKE "%' + keyword + '%")');
 					data = data.feedData;
 					dataGenerator(data);
 				});
@@ -187,9 +181,9 @@
 					page = parseInt(page) + 1;
 
 					var keyword = $("[placeholder='Search']").val();
-					var alpha = (r_getCookie('adminAlphaFilter') != "" ? '(title LIKE "' + r_getCookie('adminAlphaFilter') + '%") AND ': "");
+					var alpha = (r_getCookie('adminAlphaFilter') != "" ? '(name LIKE "' + r_getCookie('adminAlphaFilter') + '%") AND ': "");
 
-					var data = p_getData('operation', 'cms_story', page, alpha + '(title LIKE "%' + keyword + '%")');
+					var data = p_getData('operation', 'department', page, alpha + '(name LIKE "%' + keyword + '%")');
 					data = data.feedData;
 
 					if(data.length > 0){ dataGenerator(data); } else { page = parseInt(page) - 1; }
@@ -203,7 +197,7 @@
 						page = parseInt(page) - 1;
 
 						var keyword = $("[placeholder='Search']").val();
-						var data = p_getData('operation', 'cms_story', page, '(title LIKE "%' + keyword + '%")');
+						var data = p_getData('operation', 'department', page, '(name LIKE "%' + keyword + '%")');
 						data = data.feedData;
 						dataGenerator(data);
 
@@ -215,16 +209,11 @@
 
 			function dataGenerator(data){
 				var html = "";
-
 				for(var loop =0; loop<data.length; loop++){
-					var desc = (Base64.decode(data[loop].description)).substring(0, 300) + '...';
 		    		html = html +
 		    		'<tr>'+
-		    			'<td><input type="checkbox" name="customerSelect" value="'+data[loop].idData+'" id="selectRecord' + loop + '"><label for="selectRecord' + loop + '"></label></td>'+
-		    			'<td>'+ data[loop].title +'</td>'+
-		    			'<td>'+ data[loop].subtitle +'</td>'+
-		    			'<td>'+ desc +'</td>'+
-		    			'<td class="syn-nowrap">'+ data[loop].author +'</td>'+
+							'<td width="5%"><input type="checkbox" name="customerSelect" value="'+data[loop].idData+'" id="selectRecord' + loop + '"><label for="selectRecord' + loop + '"></label></td>'+
+		    			'<td class="syn-nowrap">'+ data[loop].name +'</td>'+
 		    		'</tr>';
 		    	}
 
@@ -241,12 +230,12 @@
 					if(checkedArray.length > 0){
 						var confirmation = confirm("Are you sure you want to delete the selected data?");
 						if (confirmation == true) {
-							p_removeData('operation', 'cms_story', checkedArray);
+							p_removeData('operation', 'department', checkedArray);
 
 							r_setCookie('adminPageFilter', '1');
 							r_setCookie('adminAlphaFilter', '');
 							var page = (r_getCookie('adminPageFilter') != "" ? r_getCookie('adminPageFilter'): "1");
-							var data = p_getData('operation', 'cms_story', page);
+							var data = p_getData('operation', 'department', page);
 								data = data.feedData;
 
 							dataGenerator(data);
@@ -258,18 +247,10 @@
 
 				$('#manageButton').unbind().on("click", function(){
 					if(checkedArray.length == 1 && checkedArray[0] != "0"){
-						window.location.href = base_url + "/admin/formStory.html?q=" + checkedArray[0];
+						window.location.href = base_url + "/admin/formDepartment.html?q=" + checkedArray[0];
 					}else{
 						alert("Please choose only one record!");
 					}
-				});
-
-				$('#manageArtwork').unbind().on("click", function(){
-					// if(checkedArray.length == 1 && checkedArray[0] != "0"){
-						window.location.href = base_url + "/admin/artWork.html?q=";
-					// }else{
-					// 	alert("Please choose only one record!");
-					// }
 				});
 			}
 		</script>

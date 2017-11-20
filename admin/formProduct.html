@@ -8,7 +8,7 @@
 		<link rel="icon" type="image/x-icon" href="../assets/PICS/TL_Favicon.png">
 		<!-- Site Properities -->
 		<title>Tulisan</title>
-	  
+
 		<link href="../assets/css/bootstrap.min.css" rel="stylesheet">
 		<link href="../assets/css/font-awesome.min.css" rel="stylesheet">
 		<link href="../assets/css/syncard-inject.css" rel="stylesheet">
@@ -19,16 +19,16 @@
 			<header class="parent-admin"></header>
 
 			<main class="parent-admin"></main>
-					
+
 			<footer class="parent-admin"></footer>
 		</div>
 
 		<!-- Script collection -->
 		<script type="text/javascript" src="../assets/js/jquery-3.2.1.min.js"></script>
 		<script type="text/javascript" src="../assets/js/jquery-ui-1.10.0.custom.min.js"></script>
-		<script type="text/javascript" src="../assets/js/bootstrap.min.js"></script>	
-		<script type="text/javascript" src="../assets/js/syncard.js"></script>	
-		<script type="text/javascript" src="../assets/js/public.js"></script>	
+		<script type="text/javascript" src="../assets/js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="../assets/js/syncard.js"></script>
+		<script type="text/javascript" src="../assets/js/public.js"></script>
 
 		<!-- page script -->
 		<script type="text/javascript">
@@ -53,79 +53,146 @@
 					'</div><div class="clearfix"></div>'+
 					'<div class="form-group">'+
 						'<label>Description</label>'+
-						'<textarea name="description" class="form-control" rows=5></textarea>'+
+						'<textarea name="description" class="form-control" rows="6"></textarea>'+
 					'</div>'+
+					'<div class="clearfix"></div>' +
+				'</div>';
+
+				html = html +
+				'<div class="input-frame col-md-6">'+
 					'<div class="form-group">'+
 						'<label>Material</label>'+
-						'<textarea name="material" class="form-control" rows=3></textarea>'+
+						'<textarea name="material" class="form-control" rows="4"></textarea>'+
 					'</div>'+
 					'<div class="form-group">'+
 						'<label>Dimension</label>'+
 						'<input name="dimension" type="text" class="form-control">'+
 					'</div>'+
 					'<div class="form-group">'+
-						'<label>Quantity</label>'+
-						'<input name="qty" type="text" class="form-control">'+
-					'</div>'+
-					'<div class="form-group">'+
 						'<label>Price</label>'+
 						'<input name="price" type="text" class="form-control">'+
 					'</div>'+
-					'<div class="form-group">' +
-					    '<label>Story</label>' +
-					    '<select name="storyId" class="form-control">' +
-					    	'<option value="NULL">Choose story</option>' +
-					    '</select>' +
-				    '</div>'+
-				    '<div class="form-group">' +
-					    '<label>Color group</label>' +
-					    '<select name="colorId" class="form-control">' +
-					    	'<option value="NULL">Choose color</option>' +
-					    '</select>' +
-				    '</div>'+
-					'<div class="clearfix"></div>';
-						
-					html = html +
-					'<div class="clearfix"></div>'+
-					'<div class="btn-group">'+
-						'<button class="btn btn-warning" type="sumbit">Create</button>'+
-						'<a href="product.html" class="btn btn-warning" type="reset">Cancel</a>'+
-					'</div>'+
-				'</div>'+
+				'</div>';
+
+				html = html +
+				'<div class="clearfix"></div>' +
+				'<hr/>' +
 				'<div class="input-frame col-md-6">'+
+					'<div class="form-group">' +
+						'<label>Story</label>' +
+						'<select name="storyId" class="form-control">' +
+							'<option value="NULL">Choose story</option>' +
+						'</select>' +
+					'</div>'+
+				'</div>';
+
+			html = html +
+			'<div class="clearfix"></div>' +
+			'<hr/>' +
+			'<div class="input-frame col-md-3">'+
 					'<div class="form-group">'+
-						'<label>Product Image</label>'+
+						'<label>Front angle</label>'+
 					'</div>'+
 					'<div class="form-group text-center">'+
-						'<img id="preview" name-tag="picture" class="medium-image" src="../assets/default/product.gif">'+
+						'<img id="preview" name-tag="picture" class="big-image" src="../assets/default/product.gif">'+
 					'</div>'+
 					'<div class="form-group">'+
 						'<input name="picture" preview-id="preview" accept="image/x-png,image/gif,image/jpeg" id="input-id" type="file" class="file form-control" data-preview-file-type="text">'+
 					'</div>' +
-					'<hr/>' +
+			 '</div>' +
+			 '<div class="input-frame col-md-3">'+
+ 					'<div class="form-group">'+
+ 						'<label>Back angle</label>'+
+ 					'</div>'+
+ 					'<div class="form-group text-center">'+
+ 						'<img id="preview" name-tag="picture" class="big-image" src="../assets/default/product.gif">'+
+ 					'</div>'+
+ 					'<div class="form-group">'+
+ 						'<input name="picture" preview-id="preview" accept="image/x-png,image/gif,image/jpeg" id="input-id" type="file" class="file form-control" data-preview-file-type="text">'+
+ 					'</div>' +
+ 			 '</div>' +
+			 '<div class="input-frame col-md-3">'+
+ 					'<div class="form-group">'+
+ 						'<label>Top angle</label>'+
+ 					'</div>'+
+ 					'<div class="form-group text-center">'+
+ 						'<img id="preview" name-tag="picture" class="big-image" src="../assets/default/product.gif">'+
+ 					'</div>'+
+ 					'<div class="form-group">'+
+ 						'<input name="picture" preview-id="preview" accept="image/x-png,image/gif,image/jpeg" id="input-id" type="file" class="file form-control" data-preview-file-type="text">'+
+ 					'</div>' +
+ 			 '</div>' +
+			 '<div class="input-frame col-md-3">'+
+ 					'<div class="form-group">'+
+ 						'<label>Bottom angle</label>'+
+ 					'</div>'+
+ 					'<div class="form-group text-center">'+
+ 						'<img id="preview" name-tag="picture" class="big-image" src="../assets/default/product.gif">'+
+ 					'</div>'+
+ 					'<div class="form-group">'+
+ 						'<input name="picture" preview-id="preview" accept="image/x-png,image/gif,image/jpeg" id="input-id" type="file" class="file form-control" data-preview-file-type="text">'+
+ 					'</div>' +
+ 			 '</div>' +
+			 '<div class="input-frame col-md-3">'+
+ 					'<div class="form-group">'+
+ 						'<label>Left angle</label>'+
+ 					'</div>'+
+ 					'<div class="form-group text-center">'+
+ 						'<img id="preview" name-tag="picture" class="big-image" src="../assets/default/product.gif">'+
+ 					'</div>'+
+ 					'<div class="form-group">'+
+ 						'<input name="picture" preview-id="preview" accept="image/x-png,image/gif,image/jpeg" id="input-id" type="file" class="file form-control" data-preview-file-type="text">'+
+ 					'</div>' +
+ 			 '</div>' +
+			 '<div class="input-frame col-md-3">'+
+ 					'<div class="form-group">'+
+ 						'<label>Right angle</label>'+
+ 					'</div>'+
+ 					'<div class="form-group text-center">'+
+ 						'<img id="preview" name-tag="picture" class="big-image" src="../assets/default/product.gif">'+
+ 					'</div>'+
+ 					'<div class="form-group">'+
+ 						'<input name="picture" preview-id="preview" accept="image/x-png,image/gif,image/jpeg" id="input-id" type="file" class="file form-control" data-preview-file-type="text">'+
+ 					'</div>' +
+ 			 '</div>';
 
-					'<div class="color-choice border">'+
-						'<ul>';
+			 html = html +
+			 '<div class="clearfix"></div>'+
+			 '<hr/>' +
+			 '<div class="input-frame col-md-3">'+
+ 					'<div class="form-group">'+
+ 						'<label>Look book</label>'+
+ 					'</div>'+
+ 					'<div class="form-group text-center">'+
+ 						'<img id="preview" name-tag="picture" class="big-image" src="../assets/default/lookBook.gif">'+
+ 					'</div>'+
+ 					'<div class="form-group">'+
+ 						'<input name="picture" preview-id="preview" accept="image/x-png,image/gif,image/jpeg" id="input-id" type="file" class="file form-control" data-preview-file-type="text">'+
+ 					'</div>' +
+ 			 '</div>' +
+			 '<div class="input-frame col-md-3">'+
+					 '<div class="form-group">'+
+						 '<label>&nbsp;</label>'+
+					 '</div>'+
+					 '<div class="form-group text-center">'+
+						 '<img id="preview" name-tag="picture" class="big-image" src="../assets/default/lookBook.gif">'+
+					 '</div>'+
+					 '<div class="form-group">'+
+						 '<input name="picture" preview-id="preview" accept="image/x-png,image/gif,image/jpeg" id="input-id" type="file" class="file form-control" data-preview-file-type="text">'+
+					 '</div>' +
+				'</div>';
 
-					//color
-					for(var loop=0; loop<6; loop++){
-						html = html + '<li><img id="preview' + loop + '" name-tag="pattern[]' + loop + '" class="big-image" src="../assets/default/pattern.gif"/></li>';
-					}
-
-					html = html +
-						'</ul>'+
-					'</div>';
-
-					for(var loop=0; loop<6; loop++){
-						html = html +
-						'<div class="form-group">'+
-							'<label>Pattern #' + (loop + 1) + '</label>'+
-							'<input name="pattern[]" preview-id="preview' + loop + '" id="input-id' + loop + '" accept="image/x-png,image/gif,image/jpeg" type="file" class="file form-control" data-preview-file-type="text">'+
-						'</div>';
-					}
-
-				html = html + '</div>';
-				html = html + '</form>';
+				html = html +
+						'<div class="clearfix"></div>'+
+						'<hr/>' +
+						'<div class="input-frame col-md-6">'+
+							'<div class="btn-group">'+
+								'<button class="btn btn-warning" type="sumbit">Create</button>'+
+								'<a href="product.html" class="btn btn-warning" type="reset">Cancel</a>'+
+							'</div>'+
+						'</div>'+
+					'</div>'+
+				'</form>';
 
 				$('main.parent-admin .main-content').append(html);
 
@@ -136,21 +203,18 @@
 				var oData = p_getData('operation', 'cms_storyOption');
 				$("[name=storyId]").append(dataToOptionHtml(oData.feedData));
 
-				oData = p_getData('operation', 'colorOption');
-				$("[name=colorId]").append(dataToOptionHtml(oData.feedData));
-
 				/* data generator */
 				if(getParam('q') != "" && getParam('q') != null) dataGenerator(getParam('q'));
 				else p_formHandler('syncrom', 'addData', 'product.html');
 			}
-			
+
 			function dataGenerator(idData){
 				var xData = p_getData('operation', 'productFetch', '', "idData=" + idData);
 					xData = xData.feedData;
 
 				for (var key in xData) {
 					if($("[name='" + key + "']").attr('type') != "file") $("[name=" + key + "]").val(xData[key]);
-					else{ 
+					else{
 						var temp = xData[key].split(",");
 						if(key == "picture"){
 							if(xData[key]!="") $("[name-tag=" + key + "]").attr('src', '../assets/products/' + xData[key]);

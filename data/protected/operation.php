@@ -11,7 +11,7 @@
 			switch($target){
 				case "summary" 			: $resultList = $this->summary(); break;
 
-				case "product" 			: $resultList = $this->fetchAllRequest('products', array("picture", "idData", "sku", "name", "description", "qty", "price"), $post['keyword'], "ORDER BY name ASC", $post['page']); break;
+				case "product" 			: $resultList = $this->fetchAllRequest('products', array("frontPicture", "idData", "sku", "name", "description", "price"), $post['keyword'], "ORDER BY name ASC", $post['page']); break;
 				case "productFetch" 	: $resultList = $this->fetchSingleRequest('products', array("picture", "pattern as `pattern[]`", "idData", "sku", "name", "description", "qty", "price", "material", "dimension", "storyId", "colorId"), $post['keyword']); break;
 				case "productDetail" 	: $resultList = $this->fetchSingleRequest('products', array("picture", "pattern", "idData", "sku", "name", "description", "qty", "price", "material", "dimension", "storyId", "colorId"), $post['keyword']); break;
 

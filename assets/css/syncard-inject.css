@@ -36,6 +36,8 @@ iframe { border: 1px solid #ddd; background-color: #000; }
 .text-center {text-align: center !important; }
 .text-alert { color: red; }
 
+.border-all { border: 1px solid #CCC; }
+
 .btn-default:hover,
 .btn-default:active,
 .btn-default.active.focus,

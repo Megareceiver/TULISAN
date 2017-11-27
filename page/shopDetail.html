@@ -62,31 +62,42 @@
 
 				html = html +
 				'<div class="col-md-6">'+
-					'<div class="col-md-10 col-md-offset-1 margin-top">' +
-						'<img id="product_detail" class="big-images" src="../assets/products/small/' + data.picture + '" data-zoom-image="../assets/products/large/' + data.picture + '" />' +
+					'<div class="col-md-12 margin-top">' +
+						'<img id="product_detail" src="../assets/products/small/' + data.frontPicture + '" data-zoom-image="../assets/products/large/' + data.frontPicture + '" />' +
 					'</div>'+
 					'<div class="clearfix"></div>' +
 					'<div class="color-choice margin-top">'+
 						'<ul id="detail_list">' +
 							'<li>' +
-								'<a href="#" data-image="../assets/products/small/' + data.picture + '"  data-zoom-image="../assets/products/large/' + data.picture + '">' +
-									'<img id="product_detail" class="big-images" src="../assets/products/small/' + data.picture + '" />' +
+								'<a href="#" data-image="../assets/products/small/' + data.frontPicture + '" data-zoom-image="../assets/products/large/' + data.frontPicture + '">' +
+									'<img id="product_detail" class="big-image" src="../assets/products/small/' + data.frontPicture + '" />' +
+								'</a>' +
+							'</li>' +
+							'<li>' +
+								'<a href="#" data-image="../assets/products/small/' + data.rightPicture + '" data-zoom-image="../assets/products/large/' + data.rightPicture + '">' +
+							    '<img id="product_detail" class="big-image" src="../assets/products/small/' + data.rightPicture + '" />' +
 							  '</a>' +
-							'</li>';
-
-				//detail picture
-				var pattern = data.pattern;
-				pattern = pattern.split(',');
-				for(var loop=0; loop<pattern.length; loop++){
-					html = html +
-					'<li>' +
-						'<a href="#" data-image="../assets/patterns/' + pattern[loop] + '" data-zoom-image="../assets/patterns/' + pattern[loop] + '">' +
-					    '<img id="product_detail" src="../assets/patterns/' + pattern[loop] + '" />' +
-					  '</a>' +
-					'</li>';
-				}
-
-				html = html +
+							'</li>' +
+							'<li>' +
+								'<a href="#" data-image="../assets/products/small/' + data.bottomPicture + '" data-zoom-image="../assets/products/large/' + data.bottomPicture + '">' +
+							    '<img id="product_detail" class="big-image" src="../assets/products/small/' + data.bottomPicture + '" />' +
+							  '</a>' +
+							'</li>' +
+							'<li>' +
+								'<a href="#" data-image="../assets/products/small/' + data.leftPicture + '" data-zoom-image="../assets/products/large/' + data.leftPicture + '">' +
+							    '<img id="product_detail" class="big-image" src="../assets/products/small/' + data.leftPicture + '" />' +
+							  '</a>' +
+							'</li>' +
+							'<li>' +
+								'<a href="#" data-image="../assets/products/small/' + data.topPicture + '" data-zoom-image="../assets/products/large/' + data.topPicture + '">' +
+							    '<img id="product_detail" class="big-image" src="../assets/products/small/' + data.topPicture + '" />' +
+							  '</a>' +
+							'</li>' +
+							'<li>' +
+								'<a href="#" data-image="../assets/products/small/' + data.backPicture + '" data-zoom-image="../assets/products/large/' + data.topPicture + '">' +
+							    '<img id="product_detail" class="big-image" src="../assets/products/small/' + data.backPicture + '" />' +
+							  '</a>' +
+							'</li>' +
 						'</ul>'+
 					'</div>'+
 				'</div>';
@@ -124,7 +135,7 @@
 										'<p>SIZE</p>' +
 								    '<select class="form-control">' +
 								    '</select>' +
-										'<p class="margin-top">Remaining : ' + data.qty + '</p>' +
+										'<p class="margin-top">Remaining : 0</p>' +
 										'<div class="input-group">' +
 									    '<span class="input-group-addon" onclick="minus()"><i class="glyphicon glyphicon-minus"></i></span>' +
 									    '<input type="text" class="form-control text-center" id="count" value="1">' +
@@ -150,16 +161,11 @@
 				'<div class="row margin-top">' +
 					'<div class="col-md-12">' +
 						"<div class='blog-box'>"+
-							"<div class='blog-pic'>";
-
-				// for(var loop=0; loop<story.length; loop++){
-
-					html = html +  "<img src='../assets/stories/" + story.picture + "' />";
-				// }
-
-				data.description = data.description.replace(/(?:\r\n|\r|\n)/g, '<br />');
-
-				html = html +
+							"<div class='blog-pic'>" +
+								"<img src='../assets/products/large/" + data.lookBook1 + "' />" +
+							"</div>"+
+							"<div class='blog-pic'>" +
+								"<img src='../assets/products/large/" + data.lookBook2 + "' />" +
 							"</div>"+
 						"</div>" +
 					"</div>" +

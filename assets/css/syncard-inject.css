@@ -10,6 +10,13 @@ html, body { overflow-x: hidden; }
 a { color: #333; }
 iframe { border: 1px solid #ddd; background-color: #000; }
 
+/*hack*/
+.zoomWrapper img {
+    left: 0;
+    right: 0;
+    margin: auto;
+}
+
 /*.container{max-width: 687px;}*/
 .syn-center {
   text-align: center;

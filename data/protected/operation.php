@@ -10,12 +10,12 @@
 		public function requestData($post, $target){
 			switch($target){
 				case "summary" 			: $resultList = $this->summary(); break;
+// SELECT DISTINCT p.frontPicture,p.idData,p.sku,p.name,p.description,p.price FROM products p JOIN products_variant v ON p.idData = v.productId WHERE v.qty > 0 ORDER BY name ASC
+				case "product" 			: $resultList = $this->fetchAllRequest('products p JOIN products_variant v ON p.idData = v.productId', array("DISTINCT p.frontPicture", "p.idData", "p.sku", "p.name", "p.description", "p.price"), $post['keyword'], "ORDER BY p.name ASC", $post['page']); break;
+				case "productFetch" 	: $resultList = $this->fetchSingleRequest('products', array("frontPicture", "idData", "sku", "name", "description", "price", "material", "dimension", "storyId"), $post['keyword']); break;
+				case "productDetail" 	: $resultList = $this->fetchSingleRequest('products', array("frontPicture", "backPicture", "topPicture", "rightPicture", "bottomPicture", "leftPicture", "lookBook1", "lookBook2", "idData", "sku", "name", "description", "price", "material", "dimension", "storyId"), $post['keyword']); break;
 
-				case "product" 			: $resultList = $this->fetchAllRequest('products', array("frontPicture", "idData", "sku", "name", "description", "price"), $post['keyword'], "ORDER BY name ASC", $post['page']); break;
-				case "productFetch" 	: $resultList = $this->fetchSingleRequest('products', array("picture", "pattern as `pattern[]`", "idData", "sku", "name", "description", "qty", "price", "material", "dimension", "storyId", "colorId"), $post['keyword']); break;
-				case "productDetail" 	: $resultList = $this->fetchSingleRequest('products', array("picture", "pattern", "idData", "sku", "name", "description", "qty", "price", "material", "dimension", "storyId", "colorId"), $post['keyword']); break;
-
-				case "color" 			: $resultList = $this->fetchAllRequest('colors', array("name", "idData"), $post['keyword'], "ORDER BY name ASC", $post['page']); break;
+				case "color" 					: $resultList = $this->fetchAllRequest('colors', array("name", "idData"), $post['keyword'], "ORDER BY name ASC", $post['page']); break;
 				case "colorOption" 		: $resultList = $this->fetchAllRecord('colors', array("name as caption", "idData as value"), $post['keyword'], "ORDER BY name ASC"); break;
 				case "colorFetch" 		: $resultList = $this->fetchSingleRequest('colors', array("name", "idData"), $post['keyword']); break;
 
@@ -109,7 +109,7 @@
 		public function addData($post, $target){
 			switch($target){
 				case "product"  :
-					$fields = array("name", "sku", "description", "material", "dimension", "qty", "price", "storyId", "colorId");
+					$fields = array("name", "sku", "description", "material", "dimension", "price", "storyId");
 					$values = array();
 					foreach ($fields as $key) {
 						$value = (isset($post[$key]) && $post[$key] != "") ? $post[$key] : "";
@@ -119,14 +119,44 @@
 					$resultList = $this->insert('products', $fields, $values);
 
 					if($resultList["feedStatus"] == "success") {
-						if(isset($_FILES["picture"])){
-							$upload = $this->uploadSingleImage($_FILES["picture"], "products", "products", "picture", $resultList["feedId"]);
+						if(isset($_FILES["frontPicture"])){
+							$upload = $this->uploadZoomImage($_FILES["frontPicture"], "products", "products", "frontPicture", $resultList["feedId"], '1');
 							array_push($resultList, array("feedUpload" => $upload['feedMessage']));
 						}
 
-						if(isset($_FILES["pattern"])){
-							$upload = $this->uploadMultiImage($_FILES["pattern"], "patterns", "products", "pattern", $resultList['feedId']);
-							$resultList["feedMultiUpload"] = $upload['feedMessage'];
+						if(isset($_FILES["backPicture"])){
+							$upload = $this->uploadZoomImage($_FILES["backPicture"], "products", "products", "backPicture", $resultList["feedId"], '2');
+							array_push($resultList, array("feedUpload" => $upload['feedMessage']));
+						}
+
+						if(isset($_FILES["topPicture"])){
+							$upload = $this->uploadZoomImage($_FILES["topPicture"], "products", "products", "topPicture", $resultList["feedId"], '3');
+							array_push($resultList, array("feedUpload" => $upload['feedMessage']));
+						}
+
+						if(isset($_FILES["rightPicture"])){
+							$upload = $this->uploadZoomImage($_FILES["rightPicture"], "products", "products", "rightPicture", $resultList["feedId"], '4');
+							array_push($resultList, array("feedUpload" => $upload['feedMessage']));
+						}
+
+						if(isset($_FILES["bottomPicture"])){
+							$upload = $this->uploadZoomImage($_FILES["bottomPicture"], "products", "products", "bottomPicture", $resultList["feedId"], '5');
+							array_push($resultList, array("feedUpload" => $upload['feedMessage']));
+						}
+
+						if(isset($_FILES["leftPicture"])){
+							$upload = $this->uploadZoomImage($_FILES["leftPicture"], "products", "products", "leftPicture", $resultList["feedId"], '6');
+							array_push($resultList, array("feedUpload" => $upload['feedMessage']));
+						}
+
+						if(isset($_FILES["lookBook1"])){
+							$upload = $this->uploadZoomImage($_FILES["lookBook1"], "products", "products", "lookBook1", $resultList["feedId"], '7');
+							array_push($resultList, array("feedUpload" => $upload['feedMessage']));
+						}
+
+						if(isset($_FILES["lookBook2"])){
+							$upload = $this->uploadZoomImage($_FILES["lookBook2"], "products", "products", "lookBook2", $resultList["feedId"], '8');
+							array_push($resultList, array("feedUpload" => $upload['feedMessage']));
 						}
 					}
 				break;
@@ -895,7 +925,7 @@
 					$temp   = "";
 				}
 
-				$sql = "INSERT INTO ".$table."(".$fields.", createdBy, createdDate) VALUES (".$values.", 'SESSION_TEST',NOW())";
+				$sql = "INSERT INTO ".$table."(".$fields.", createdBy, createdDate) VALUES (".$values.", '".$_SESSION['tulisan_user_username']."',NOW())";
 
 				$result = $this->db->query($sql);
 				if($result){
@@ -943,7 +973,7 @@
 					$temp   = "";
 				}
 
-				$sql = "UPDATE ".$table." SET ".$values.", changedBy = 'SESSION_TEST', changedDate = NOW() WHERE idData = '".$id."'";
+				$sql = "UPDATE ".$table." SET ".$values.", changedBy = '".$_SESSION['tulisan_user_username']."', changedDate = NOW() WHERE idData = '".$id."'";
 
 				$result = $this->db->query($sql);
 				if($result){
@@ -991,7 +1021,7 @@
 					$Validextensions = array("jpeg", "JPEG", "jpg", "JPG", "png", "PNG", "gif", "GIF");
 					$temporary 		 = explode(".", $file_name);
 					$fileExtension   = end($temporary);
-					$newFileName 	 = $dir."_".$id.".".$fileExtension;
+					$newFileName 	 = $dir."_".$id."_".date("Ymdhisa").".".$fileExtension;
 					$saveAs 		 = "../assets/".$dir."/".$newFileName;
 
 					if (in_array($fileExtension, $Validextensions)) {
@@ -1084,6 +1114,111 @@
 
 			return $json;
 
+		}
+
+		public function uploadZoomImage($image, $dir, $table, $field, $id, $que){
+			error_reporting(E_ALL);
+			/* initial condition */
+			$resultList = array();
+			$feedStatus	= "failed";
+			$feedType   = "danger";
+			$feedMessage= "Something went wrong, failed to upload data!";
+			$feedData	= array();
+
+			$temp		= "";
+
+			/* open connection */
+			$gate = $this->db;
+			if($gate){
+
+				/*upload image*/
+				if(isset($image)){
+
+					$file_name = $image['name'];
+				    $file_size = $image['size'];
+				    $file_tmp  = $image['tmp_name'];
+				    $file_type = $image['type'];
+
+					$Validextensions = array("jpeg", "JPEG", "jpg", "JPG", "png", "PNG", "gif", "GIF");
+					$temporary 		 = explode(".", $file_name);
+					$fileExtension   = end($temporary);
+					$newFileName 	 	 = $dir."_".$id."_".$que.date("Ymdhisa").".".$fileExtension;
+					$saveAs 		 		 = "../assets/".$dir."/large/".$newFileName;
+
+					if (in_array($fileExtension, $Validextensions)) {
+						if(move_uploaded_file($file_tmp, $saveAs)){
+
+							$this->imageThumb($saveAs, "../assets/products/small/".$newFileName, 340);
+							$sql = "UPDATE ".$table." SET ".$field."='".$newFileName."' WHERE idData ='".$id."'";
+
+							$result = $this->db->query($sql);
+							if($result){
+								$feedStatus	= "success";
+								$feedType   = "success";
+								$feedMessage= "The process has been successful";
+							}
+						}
+					}
+				}
+				/*upload end*/
+
+			}
+
+			$resultList = array( "feedStatus" => $feedStatus, "feedType" => $feedType, "feedMessage" => $feedMessage, "feedData" => $feedData);
+
+			/* result fetch */
+			$json = $resultList;
+
+			return $json;
+
+		}
+
+		public function imageThumb($src,$dest,$desired_width = false, $desired_height = false)
+		{
+		    /*If no dimenstion for thumbnail given, return false */
+		    // if (!$desired_height&&!$desired_width) return false;
+		    $fparts = pathinfo($src);
+
+		    $ext = strtolower($fparts['extension']);
+		    /* if its not an image return false */
+		    if (!in_array($ext,array('gif','jpg','png','jpeg'))) return false;
+
+		    /* read the source image */
+		    if ($ext == 'gif')
+		        $resource = imagecreatefromgif($src);
+		    else if ($ext == 'png')
+		        $resource = imagecreatefrompng($src);
+		    else if ($ext == 'jpg' || $ext == 'jpeg')
+		        $resource = imagecreatefromjpeg($src);
+
+		    $width  = imagesx($resource);
+		    $height = imagesy($resource);
+		    /* find the "desired height" or "desired width" of this thumbnail, relative to each other, if one of them is not given  */
+		    if(!$desired_height) $desired_height = floor($height*($desired_width/$width));
+		    if(!$desired_width)  $desired_width  = floor($width*($desired_height/$height));
+
+		    /* create a new, "virtual" image */
+		    $virtual_image = imagecreatetruecolor($desired_width,$desired_height);
+
+		    /* copy source image at a resized size */
+		    imagecopyresized($virtual_image,$resource,0,0,0,0,$desired_width,$desired_height,$width,$height);
+
+		    /* create the physical thumbnail image to its destination */
+		    /* Use correct function based on the desired image type from $dest thumbnail source */
+		    $fparts = pathinfo($dest);
+		    $ext = strtolower($fparts['extension']);
+		    /* if dest is not an image type, default to jpg */
+		    if (!in_array($ext,array('gif','jpg','png','jpeg'))) $ext = 'jpg';
+		    $dest = $fparts['dirname'].'/'.$fparts['filename'].'.'.$ext;
+
+		    if ($ext == 'gif')
+		        imagegif($virtual_image,$dest);
+		    else if ($ext == 'png')
+		        imagepng($virtual_image,$dest,1);
+		    else if ($ext == 'jpg' || $ext == 'jpeg')
+		        imagejpeg($virtual_image,$dest,100);
+
+		    return true;
 		}
 
 		//IMAGE VIDEO

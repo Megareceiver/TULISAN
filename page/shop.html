@@ -180,10 +180,11 @@
 						html = html +
 						'<div class="col-md-4">'+
 							'<a href="shopDetail.html?q=' + product[loop].idData + '">' +
-								'<img class="big-image" src="../assets/products/'+product[loop].picture+'">'+
+								'<img class="big-image" src="../assets/products/large/'+product[loop].frontPicture+'">'+
 								'<hr/>' +
-								'<h5 class="center-div"><b class="fontserif">'+product[loop].name + " - " + price+'</b></h5>'+
-								'<h6 class="center-div">Remaining : '+product[loop].qty + '</h6>'+
+								'<h5 class="center-div"><b class="fontserif">' + product[loop].name +' variants</b></h5>'+
+								'<h4 class="center-div">'+ price + '</h4>'+
+								'<button type="button" class="btn btn-warning form-control">Buy</button>' +
 								'<hr/>' +
 							'</a>' +
 						'</div>';

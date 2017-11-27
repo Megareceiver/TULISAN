@@ -88,7 +88,6 @@ function p_changeData(group, target, pId, refferenceId, dataFetch){
 }
 
 function p_formHandler(formId, type, back, custom = "no"){
-	console.log(formId+','+type+','+back+','+custom);
 	$("#" + formId).unbind().on('submit', function(e) {
 		e.preventDefault();
 		$.ajax({

@@ -37,35 +37,36 @@
 			});
 			function loadData(){
 				var html = '';
+				/* get ID */
+				var id = "";
+				if(getParam('q') != "" && getParam('q') != null) id = '?s=' + getParam('q');
 
 				html = html +
-				'<div class="header-option">' +
-					'<div class="operation-group">'+
-						'<form class="form-inline">' +
-							'<div class="input-group operation-button">' +
-								'<a href="formColor.html"><i class="fa fa-plus-circle text-warning">&nbsp;</i> Add Color</a>'+
-							'</div>' +
-							'<div class="input-group operation-button">' +
-								'<a href="#" id="deleteButton"><i class="fa fa-minus-circle text-warning">&nbsp;</i> Delete Color</a>'+
-							'</div>' +
-							'<div class="input-group operation-button">' +
-								'<a href="#" id="manageButton"><i class="fa fa-bars text-warning">&nbsp;</i> Manage Color</a>'+
-							'</div>' +
-							'<div class="input-group operation-button">' +
-								'<a href="product.html"><i class="fa fa-arrow-left text-warning">&nbsp;</i> Back to Products</a>'+
-							'</div>' +
-		        	'<div class="input-group pull-right">' +
-		        		'<input type="text" class="form-control" placeholder="Search">' +
-			        	'<span class="input-group-btn">' +
-			        		'<button type="button" class="search btn btn-default">SEARCH</button>' +
-			        	'</span>' +
-		        	'</div>' +
-		   		'</form>' +
-		   		'<div class="clearfix"></div>' +
-					'</div>' +
+				'<div class="operation-group">'+
+					'<form class="form-inline">' +
+						'<div class="input-group">' +
+							'<a href="formProductVariant.html' + id + '"><i class="fa fa-plus-circle text-warning">&nbsp;</i> Add Variant</a>'+
+						'</div>' +
+						'<div class="input-group">' +
+							'<a href="#" id="deleteButton"><i class="fa fa-minus-circle text-warning">&nbsp;</i> Delete Variant</a>'+
+						'</div>' +
+						'<div class="input-group operation-button">' +
+							'<a href="#" id="manageButton"><i class="fa fa-bars text-warning">&nbsp;</i> Manage Variant</a>'+
+						'</div>' +
+	        	'<div class="input-group pull-right">' +
+	        		'<input type="text" class="form-control" placeholder="Search">' +
+		        	'<span class="input-group-btn">' +
+		        		'<button type="button" class="search btn btn-default">SEARCH</button>' +
+		        	'</span>' +
+	        	'</div>' +
+	   			'</form>' +
+	        '<div class="clearfix"></div>' +
+				'</div>';
+
+				html = html +
 					'<div class="summary-group">'+
 						'<div class="summary-text">'+
-							'<p>Total number of Colors</p>'+
+							'<p>Total number of Variants</p>'+
 							'<p class="number" id="totalRecord">0</p>'+
 						'</div>'+
 						'<div class="alpha">'+
@@ -98,22 +99,14 @@
 							'</ul>'+
 						'</div>'+
 					'</div>'+
-					'<p class="pagging-text"><a href="#" class="pagging-left">< Previous page</a> | <a href="#" class="pagging-right">Next page ></a></p>' +
-				'</div>';
-
+					'<p class="pagging-text"><a href="#" class="pagging-left">< Previous page</a> | <a href="#" class="pagging-right">Next page ></a></p>' ;
 				html = html +
 				'<div class="table-frame">'+
-					'<table class="table table-striped table-responsive">'+
-					    '<thead>'+
-					    	'<tr>'+
-									'<th width="5%"><input type="checkbox" name="customerSelect" id="selectRecord" value="0" onclick="checkboxToggle(this, \'customerSelect\')" /><label for="selectRecord"></label></th>'+
-						    	'<th>Color</th>'+
-					    	'</tr>'+
-					    '</thead>'+
-					    '<tbody></tbody>'+
-					'</table>'+
-				'</div>';
+					'<div class="data-list">';
 
+				html = html +
+					'</div>'+
+				'</div>';
 				html = html +
 				'<p class="pagging-text"><a href="#" class="pagging-left">< Previous page</a> | <a href="#" class="pagging-right">Next page ></a></p>'+
 				'<div class="ext-group">'+
@@ -153,7 +146,7 @@
 				r_setCookie('adminPageFilter', '1');
 				r_setCookie('adminAlphaFilter', '');
 				var page = (r_getCookie('adminPageFilter') != "" ? r_getCookie('adminPageFilter'): "1");
-				var data = p_getData('operation', 'color', page);
+				var data = p_getData('operation', 'product', page);
 					data = data.feedData;
 
 				dataGenerator(data);
@@ -161,7 +154,7 @@
 				//filter
 				$('.alpha a').on("click", function(){
 					var page = (r_getCookie('adminPageFilter') != "" ? r_getCookie('adminPageFilter'): "1");
-					var data = p_getData('operation', 'color', page, '(name LIKE "' + $(this).html() + '%")');
+					var data = p_getData('operation', 'product', page, '(name LIKE "' + $(this).html() + '%")');
 					data = data.feedData;
 					dataGenerator(data);
 
@@ -171,7 +164,7 @@
 
 				$('button.search').on("click", function(){
 					var keyword = $("[placeholder='Search']").val();
-					var data = p_getData('operation', 'color', '1', '(name LIKE "%' + keyword + '%")');
+					var data = p_getData('operation', 'product', '1', '(name LIKE "%' + keyword + '%" OR sku LIKE "%' + keyword + '%")');
 					data = data.feedData;
 					dataGenerator(data);
 				});
@@ -186,7 +179,7 @@
 					var keyword = $("[placeholder='Search']").val();
 					var alpha = (r_getCookie('adminAlphaFilter') != "" ? '(name LIKE "' + r_getCookie('adminAlphaFilter') + '%") AND ': "");
 
-					var data = p_getData('operation', 'color', page, alpha + '(name LIKE "%' + keyword + '%")');
+					var data = p_getData('operation', 'product', page, alpha + '(name LIKE "%' + keyword + '%" OR sku LIKE "%' + keyword + '%")');
 					data = data.feedData;
 
 					if(data.length > 0){ dataGenerator(data); } else { page = parseInt(page) - 1; }
@@ -200,7 +193,7 @@
 						page = parseInt(page) - 1;
 
 						var keyword = $("[placeholder='Search']").val();
-						var data = p_getData('operation', 'color', page, '(name LIKE "%' + keyword + '%")');
+						var data = p_getData('operation', 'product', page, '(name LIKE "%' + keyword + '%" OR sku LIKE "%' + keyword + '%")');
 						data = data.feedData;
 						dataGenerator(data);
 
@@ -213,14 +206,26 @@
 			function dataGenerator(data){
 				var html = "";
 				for(var loop =0; loop<data.length; loop++){
+
+					data[loop].frontPicture = (data[loop].frontPicture != "") ? "../assets/products/large/" + data[loop].frontPicture : "";
+					data[loop].price  = (data[loop].price != "") ? normalFormatChanger(data[loop].price) : "0";
+
 		    		html = html +
-		    		'<tr>'+
-							'<td width="5%"><input type="checkbox" name="customerSelect" value="'+data[loop].idData+'" id="selectRecord' + loop + '"><label for="selectRecord' + loop + '"></label></td>'+
-		    			'<td class="syn-nowrap">'+ data[loop].name +'</td>'+
-		    		'</tr>';
+		    		'<div class="col-md-3 border-all">'+
+							'<br/>' +
+		    			'<input type="checkbox" name="customerSelect" value="'+data[loop].idData+'" id="selectRecord' + loop + '"><label for="selectRecord' + loop + '"></label>'+
+		    			'<img class="big-image" src="'+ data[loop].frontPicture +'">'+
+							'<hr/>' +
+		    			'<p class="text-center">'+ data[loop].sku +'</p>'+
+		    			'<p class="text-center">'+ data[loop].name +'</p>'+
+		    			// '<p class="text-center">'+ data[loop].qty +'</p>'+
+		    			// '<p class="text-center">'+ currencyFormat(String(data[loop].price)) +'</p>'+
+		    		'</div>';
 		    	}
 
-				$('main.parent-admin table tbody').html('').append(html);
+				html = html + '<div class="clearfix"></div>';
+
+				$('main.parent-admin .data-list').html('').append(html);
 				$('main.parent-admin #totalRecord').html(data.length);
 
 				//activator
@@ -233,12 +238,12 @@
 					if(checkedArray.length > 0){
 						var confirmation = confirm("Are you sure you want to delete the selected data?");
 						if (confirmation == true) {
-							p_removeData('operation', 'color', checkedArray);
+							p_removeData('operation', 'product', checkedArray);
 
 							r_setCookie('adminPageFilter', '1');
 							r_setCookie('adminAlphaFilter', '');
 							var page = (r_getCookie('adminPageFilter') != "" ? r_getCookie('adminPageFilter'): "1");
-							var data = p_getData('operation', 'color', page);
+							var data = p_getData('operation', 'product', page);
 								data = data.feedData;
 
 							dataGenerator(data);
@@ -250,11 +255,12 @@
 
 				$('#manageButton').unbind().on("click", function(){
 					if(checkedArray.length == 1 && checkedArray[0] != "0"){
-						window.location.href = base_url + "/admin/formColor.html?q=" + checkedArray[0];
+						window.location.href = base_url + "/admin/formProductVariant.html?q=" + checkedArray[0] + "&s=" + getParam('q');
 					}else{
 						alert("Please choose only one record!");
 					}
 				});
+
 			}
 		</script>
 	</body>

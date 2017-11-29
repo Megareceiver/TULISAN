@@ -8,7 +8,7 @@
 		<link rel="icon" type="image/x-icon" href="../assets/PICS/TL_Favicon.png">
 		<!-- Site Properities -->
 		<title>Tulisan</title>
-	  
+
 		<link href="../assets/css/bootstrap.min.css" rel="stylesheet">
 		<link href="../assets/css/font-awesome.min.css" rel="stylesheet">
 		<link href="../assets/css/syncard-inject.css" rel="stylesheet">
@@ -36,17 +36,18 @@
 						</ul>
 					</div>
 				</div>
-			</main>	
-	
+			</main>
+
 			<footer class="parent"></footer>
 		</div>
 
 		<!-- Script collection -->
 		<script type="text/javascript" src="../assets/js/jquery-3.2.1.min.js"></script>
 		<script type="text/javascript" src="../assets/js/jquery-ui-1.10.0.custom.min.js"></script>
-		<script type="text/javascript" src="../assets/js/bootstrap.min.js"></script>	
+		<script type="text/javascript" src="../assets/js/bootstrap.min.js"></script>
 		<script type="text/javascript" src="../assets/js/imagesloaded.pkgd.min.js"></script>
-		<script type="text/javascript" src="../assets/js/partial.js"></script>	
+		<script type="text/javascript" src="../assets/js/public.js"></script>
+		<script type="text/javascript" src="../assets/js/partial.js"></script>
 
 		<!-- page script -->
 		<script type="text/javascript">
@@ -61,23 +62,35 @@
 					{ 'productId': 'LDA02012', 'productName': 'Daisy Loops', 'productPicture': 'db_file_img_740_350x350.jpg', 'price': '20000', 'quantity': '1' },
 				];
 
+				var arr = [];
+				if(r_getCookie('TULISAN_USER_CART_STATUS') == 'active'){
+					arr = r_getCookie('TULISAN_USER_CART_ARRAY');
+					arr = JSON.parse(arr);
+					dumb_arr = (arraySplit(arr)).sort();
+					variantId = dumb_arr.join();
+					data = p_getData('operation', 'productCart', '1', 'v.idData IN (' + variantId + ') AND v.qty > 0');
+					data = data.feedData;
+				}
+
 				var total = 0;
 
 				html = html + '<div class="table-box">';
+
+
 				for(var loop=0; loop<data.length; loop++){
-					html = html + 
-					'<ul class="cart-cell" id="' + data[loop].productId + '">' +
-						'<li class="col-md-2"><img class="big-image" src="../assets/PICS/' + data[loop].productPicture + '"/></li>' +
-						'<li class="col-md-5">' + 
-							'<h4>' + data[loop].productName + '</h4>' + 
-							'<button type="button" class="btn btn-danger" delete-list="' + data[loop].productId + '">Delete</button>' +
+					html = html +
+					'<ul class="cart-cell" id="' + data[loop].idData + '">' +
+						'<li class="col-md-2"><img class="big-image" src="../assets/products/large/' + data[loop].frontPicture + '"/></li>' +
+						'<li class="col-md-5">' +
+							'<h4>' + data[loop].name + '</h4>' +
+							'<button type="button" class="btn btn-danger" delete-list="' + data[loop].idData + '">Delete</button>' +
 						'</li>' +
 						'<li class="col-md-3">' + currencyFormat(data[loop].price) + '</li>' +
-						'<li class="col-md-2 col-sm-4 col-xs-4"><input type="number" class="form-control price" d-price="' + data[loop].price + '" value="' + data[loop].quantity + '" /></li>' +
+						'<li class="col-md-2 col-sm-4 col-xs-4"><input type="number" class="form-control price" d-price="' + data[loop].price + '" value="' + arr[loop].qty + '" /></li>' +
 					'</ul>';
 					html = html + '<div class="clearfix"></div>';
 
-					total = total + parseInt(data[loop].price);
+					total = total + (parseInt(arr[loop].qty) * parseInt(data[loop].price));
 				}
 
 				html = html + '</div>';
@@ -136,6 +149,14 @@
 					$("#totalTemp").val(tempRest);
 					temp = tempRest;
 				}, 500);
+			}
+
+			function arraySplit(definition) {
+			  // return Object.values(definition).map(function(e.variantId) {
+			  //   return e;
+			  // });
+
+				return definition.map(function(o) { return o.variantId; })
 			}
 		</script>
 	</body>

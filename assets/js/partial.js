@@ -202,6 +202,9 @@ function header(){
 	$("header.parent").after(breadcrumbHtml);
 	$("header.parent .main-menu a").removeClass('active');
 	$("header.parent .main-menu a#" + active_page).addClass('active');
+	$("#cart_icon").removeClass('active');
+
+	if(r_getCookie("TULISAN_USER_CART_STATUS") == "active") $("#cart_icon").addClass('active');
 }
 
 function footer(){

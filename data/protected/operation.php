@@ -26,6 +26,9 @@
 																"substring_index(group_concat(v.artworkId SEPARATOR ','), ',', 1) as artworkId",
 																"p.sku", "p.name", "p.description", "p.price", "p.material", "p.dimension", "p.lookBook1", "p.lookBook2", "s.title", "s.subtitle"), $post['keyword']); break;
 
+				case "productCart" 	: $resultList = $this->fetchAllRequest('products p JOIN products_variant v ON p.idData = v.productId',array("DISTINCT v.idData", "v.qty", "v.frontPicture","p.name", "p.price"), $post['keyword'], "ORDER BY v.idData", $post['page']); break;
+
+
 				case "productVariant" 				: $resultList = $this->fetchAllRequest('products p JOIN products_variant v ON p.idData = v.productId LEFT JOIN cms_story_artwork a ON v.artworkId = a.idData LEFT JOIN colors c ON v.colorId = c.idData', array("v.idData", "p.name", "v.qty", "v.size", "v.frontPicture", "a.name as artwork", "c.name as color"), $post['keyword'], "ORDER BY v.artWorkId ASC", $post['page']); break;
 				case "productVariantFetch" 		: $resultList = $this->fetchSingleRequest('products_variant', array("frontPicture", "backPicture", "topPicture", "rightPicture", "bottomPicture", "leftPicture", "idData", "qty", "size", "colorId", "artworkId"), $post['keyword']); break;
 				case "productArtworkOption" 	: $resultList = $this->fetchAllRecord('products_variant v JOIN cms_story_artwork a ON v.artworkId = a.idData', array("DISTINCT a.name as caption", "a.idData as value"), $post['keyword'], "ORDER BY v.idData ASC"); break;

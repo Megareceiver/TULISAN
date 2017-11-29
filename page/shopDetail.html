@@ -109,7 +109,7 @@
 									'<p class="margin-top">Remaining : <span id="qty">0</span></p>' +
 									'<div class="input-group">' +
 								    '<span class="input-group-addon" onclick="minus()"><i class="glyphicon glyphicon-minus"></i></span>' +
-								    '<input type="text" class="form-control text-center" id="count" value="1">' +
+								    '<input type="text" name="qty" class="form-control text-center" id="count" value="1">' +
 										'<span class="input-group-addon" onclick="plus()"><i class="glyphicon glyphicon-plus"></i></span>' +
 								  '</div>' +
 							  '</div>' +
@@ -296,6 +296,49 @@
 				count = 1;
 				max_count = parseInt(data.qty);
 				zoomActivator();
+			}
+
+			function add_to_cart(){
+
+				var arr = [];
+				var dum = [];
+				var variantId = $('#ItemForm [name=variantId]').val();
+				var qty = parseInt($('#ItemForm [name=qty]').val());
+
+				//call
+				if(r_getCookie('TULISAN_USER_CART_STATUS') == ''){
+					r_setCookie('TULISAN_USER_CART_STATUS', 'active');
+					arr = [{ variantId : variantId, qty : qty }];
+					arr = JSON.stringify(arr);
+				}else{
+					arr = r_getCookie('TULISAN_USER_CART_ARRAY');
+					arr = JSON.parse(arr);
+
+					index = arr.map(function(o) { return o.variantId; }).indexOf(variantId);
+					if(index < 0){
+						arr.push({ variantId : variantId, qty : qty });
+					}else{
+						qty_dumb = parseInt(arr[index].qty);
+						qty = qty + qty_dumb;
+
+						arr[index].qty = qty;
+					}
+
+					arr = JSON.stringify(arr);
+				}
+				// var
+
+				// //set cart to r_getCookie
+				// var arr = ['foo', 'bar', 'baz'];
+				// var json_str = JSON.stringify(arr);
+        //
+        //
+
+				r_setCookie('TULISAN_USER_CART_ARRAY', arr);
+
+				console.log(r_getCookie('TULISAN_USER_CART_ARRAY'));
+				// $("#cart_icon").removeClass('active').addClass('active');
+				// window.location.href = base_url + "/page/cart.html";
 			}
 		</script>
 	</body>

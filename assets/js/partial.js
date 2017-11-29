@@ -68,7 +68,7 @@ function header(){
 					'<div class="link">' +
 						'<a href="' + base_url + '/page/location.html">FIND A STORE</a> |' +
 						'<a href="' + base_url + '/page/media.html">MEDIA</a> |' +
-						'<a href="' + base_url + '/page/cart.html"><span class="fa fa-shopping-cart"></span></a> |';
+						'<a href="' + base_url + '/page/cart.html" id="cart_icon"><span class="fa fa-shopping-cart"></span></a> |';
 
 						if(r_getCookie('tulisan_user_name') != ""){
 							var res = r_getCookie('tulisan_user_name');

@@ -50,112 +50,77 @@
 
 				if(getParam('q') != "" && getParam('q') != null){
 					productId = getParam('q');
-					data = p_getData('operation', 'productDetail', '1', 'idData = "' + productId + '"');
+					data = p_getData('operation', 'productDetail', '1', 'p.idData = "' + productId + '"');
 					data = data.feedData;
 				}else{
 					window.location.href = base_url + "/page/shop.html";
 				}
 
 				html = '<div class="col-md-10 col-md-offset-1 div-normalize">';
+				html = html + '<div class="col-md-6" id="productViewer"></div>';
+
+				temp = normalFormatChanger(data.price);
+				price = currencyFormat(String(temp));
 
 				html = html +
 				'<div class="col-md-6">'+
-					'<div class="col-md-12 margin-top">' +
-						'<img id="product_detail" src="../assets/products/small/' + data.frontPicture + '" data-zoom-image="../assets/products/large/' + data.frontPicture + '" />' +
-					'</div>'+
-					'<div class="clearfix"></div>' +
-					'<div class="color-choice margin-top">'+
-						'<ul id="detail_list">' +
-							'<li>' +
-								'<a href="#" data-image="../assets/products/small/' + data.frontPicture + '" data-zoom-image="../assets/products/large/' + data.frontPicture + '">' +
-									'<img id="product_detail" class="big-image" src="../assets/products/small/' + data.frontPicture + '" />' +
-								'</a>' +
-							'</li>' +
-							'<li>' +
-								'<a href="#" data-image="../assets/products/small/' + data.rightPicture + '" data-zoom-image="../assets/products/large/' + data.rightPicture + '">' +
-							    '<img id="product_detail" class="big-image" src="../assets/products/small/' + data.rightPicture + '" />' +
-							  '</a>' +
-							'</li>' +
-							'<li>' +
-								'<a href="#" data-image="../assets/products/small/' + data.bottomPicture + '" data-zoom-image="../assets/products/large/' + data.bottomPicture + '">' +
-							    '<img id="product_detail" class="big-image" src="../assets/products/small/' + data.bottomPicture + '" />' +
-							  '</a>' +
-							'</li>' +
-							'<li>' +
-								'<a href="#" data-image="../assets/products/small/' + data.leftPicture + '" data-zoom-image="../assets/products/large/' + data.leftPicture + '">' +
-							    '<img id="product_detail" class="big-image" src="../assets/products/small/' + data.leftPicture + '" />' +
-							  '</a>' +
-							'</li>' +
-							'<li>' +
-								'<a href="#" data-image="../assets/products/small/' + data.topPicture + '" data-zoom-image="../assets/products/large/' + data.topPicture + '">' +
-							    '<img id="product_detail" class="big-image" src="../assets/products/small/' + data.topPicture + '" />' +
-							  '</a>' +
-							'</li>' +
-							'<li>' +
-								'<a href="#" data-image="../assets/products/small/' + data.backPicture + '" data-zoom-image="../assets/products/large/' + data.topPicture + '">' +
-							    '<img id="product_detail" class="big-image" src="../assets/products/small/' + data.backPicture + '" />' +
-							  '</a>' +
-							'</li>' +
-						'</ul>'+
-					'</div>'+
-				'</div>';
-
-				html = html +
-					'<div class="col-md-6">'+
-								'<div class="product-desc">'+
-									'<h1 class="fontserif"><b>' + data.name + '</b> <small> Rp. ' + data.price + '</small></h1>'+
-									'<hr/>' +
-									'<p>' + data.description + '</p>'+
-									'<div class="row margin-top">'+
-										'<div class="col-xs-6">'+
-											'<p>PATTERN</p>'+
-											'<div class="select-box">' +
-												'<select name="artworkId" class="form-control">' +
-												'</select>' +
-											'</div>' +
-										'</div>' +
-										'<div class="col-xs-6">'+
-											'<p>COLOR</p>'+
-											'<div class="select-box">' +
-												'<select name="colorId" class="form-control">' +
-												'</select>' +
-											'</div>' +
+						'<form>' +
+							'<input type="hidden" name="variantId" value="" />' +
+							'<div class="product-desc">'+
+								'<h1 class="fontserif"><b>' + data.name + '</b> <small>' + price + '</small></h1>'+
+								'<hr/>' +
+								'<p>' + data.description + '</p>'+
+								'<div class="row margin-top">'+
+									'<div class="col-xs-6">'+
+										'<p>PATTERN</p>'+
+										'<div class="select-box">' +
+											'<select name="artworkId" class="form-control">' +
+											'</select>' +
 										'</div>' +
 									'</div>' +
-									'<p class="margin-top">'+
-										'MATERIAL<br>'+
-										data.material +
-									'</p>'+
-									'<p>'+
-										'DIMENSION<br>'+
-										data.dimension +
-									'</p>'+
-								'</div>'+
-								'<hr/>' +
-								'<div class="row">' +
-									'<div class="col-xs-6">' +
-										'<p>SIZE</p>' +
+									'<div class="col-xs-6">'+
+										'<p>COLOR</p>'+
 										'<div class="select-box">' +
-									    '<select name="size" class="form-control">' +
-									    '</select>' +
+											'<select name="colorId" class="form-control">' +
+											'</select>' +
 										'</div>' +
-										'<p class="margin-top">Remaining : 0</p>' +
-										'<div class="input-group">' +
-									    '<span class="input-group-addon" onclick="minus()"><i class="glyphicon glyphicon-minus"></i></span>' +
-									    '<input type="text" class="form-control text-center" id="count" value="1">' +
-											'<span class="input-group-addon" onclick="plus()"><i class="glyphicon glyphicon-plus"></i></span>' +
-									  '</div>' +
+									'</div>' +
+								'</div>' +
+								'<p class="margin-top">'+
+									'MATERIAL<br>'+
+									data.material +
+								'</p>'+
+								'<p>'+
+									'DIMENSION<br>'+
+									data.dimension +
+								'</p>'+
+							'</div>'+
+							'<hr/>' +
+							'<div class="row">' +
+								'<div class="col-xs-6">' +
+									'<p>SIZE</p>' +
+									'<div class="select-box">' +
+								    '<select name="size" class="form-control">' +
+								    '</select>' +
+									'</div>' +
+									'<p class="margin-top">Remaining : 0</p>' +
+									'<div class="input-group">' +
+								    '<span class="input-group-addon" onclick="minus()"><i class="glyphicon glyphicon-minus"></i></span>' +
+								    '<input type="text" class="form-control text-center" id="count" value="1">' +
+										'<span class="input-group-addon" onclick="plus()"><i class="glyphicon glyphicon-plus"></i></span>' +
 								  '</div>' +
 							  '</div>' +
-								'<div class="clearfix"></div>' +
-								'<button type="button" class="btn btn-warning margin-top form-control" item-id="' + data.idData + '">Add to cart</button>' +
+						  '</div>' +
+							'<div class="clearfix"></div>' +
+							'<button type="button" class="btn btn-warning margin-top form-control" item-id="' + data.idData + '">Add to cart</button>' +
 						'</div>'+
+					'</form>' +
 				"</div><div class='clearfix'></div>";
 				html = html +
 				'<hr/>' +
 				'<div class="col-md-10 col-md-offset-1 product-story center-div margin-top div-normalize">'+
-					'<h4>' + story.title + '</h4>' +
-					'<p class="margin-top">' + story.subtitle + '</p>' +
+					'<h4>' + data.title + '</h4>' +
+					'<p class="margin-top">' + data.subtitle + '</p>' +
 				'</div>';
 
 				html = html + "</div><div class='clearfix'></div>";
@@ -183,18 +148,31 @@
 				html = html + "</div><div class='clearfix'></div>";
 
 				$("main").html(html);
+				product_htmlGenerate(data);
 				$("#custom-bread-detail").html(toTitleCase(data.name));
 
 				var oData = p_getData('operation', 'productArtworkOption', '', "v.productId='" + productId + "'");
 				$("[name=artworkId]").append(dataToOptionHtml(oData.feedData));
 
-				oData = p_getData('operation', 'productColorOption', '', "v.productId='" + productId + "'");
+				oData = p_getData('operation', 'productColorOption', '', "v.productId='" + productId + "' AND v.artworkId = '" + data.artworkId + "'");
 				$("[name=colorId]").append(dataToOptionHtml(oData.feedData));
 
-				oData = p_getData('operation', 'productSizeOption', '', "v.productId='" + productId + "'");
+				oData = p_getData('operation', 'productSizeOption', '', "v.productId='" + productId + "' AND v.artworkId = '" + data.artworkId + "'");
 				$("[name=size]").append(dataToOptionHtml(oData.feedData));
 
 				zoomActivator();
+
+				$('[name=artworkId]').on("change", function(){
+					custom_artwork($(this).val());
+				});
+
+				$('[name=colorId]').on("change", function(){
+					custom_color($(this).val());
+				});
+
+				$('[name=size]').on("change", function(){
+					custom_size($(this).val());
+				});
 			}
 
 			var count = 1;
@@ -230,6 +208,93 @@
 					$.fancybox(ez.getGalleryList());
 				  return false;
 				});
+			}
+
+			function custom_artwork(artworkId){
+				$("[name=colorId], [name=size]").html("");
+
+				var productId = getParam('q');
+				var oData = p_getData('operation', 'productColorOption', '', "v.productId='" + productId + "' AND v.artworkId = '" + artworkId + "'");
+				$("[name=colorId]").append(dataToOptionHtml(oData.feedData));
+
+				var colorId = $('[name=colorId]').val();
+
+				oData = p_getData('operation', 'productSizeOption', '', "v.productId='" + productId + "' AND v.artworkId = '" + artworkId + "' AND v.colorId = '" + colorId + "'");
+				$("[name=size]").append(dataToOptionHtml(oData.feedData));
+
+				data = p_getData('operation', 'productDetail', '1', 'p.idData = "' + productId + '" AND v.artWorkId ="' + artworkId + '" AND v.colorId = "' + colorId + '"');
+				data = data.feedData;
+				product_htmlGenerate(data);
+			}
+
+			function custom_color(colorId){
+				$("[name=size]").html("");
+
+				var productId = getParam('q');
+				var artworkId = $('[name=artworkId]').val();
+
+				oData = p_getData('operation', 'productSizeOption', '', "v.productId='" + productId + "' AND v.artworkId = '" + artworkId + "' AND v.colorId = '" + colorId + "'");
+				$("[name=size]").append(dataToOptionHtml(oData.feedData));
+
+				data = p_getData('operation', 'productDetail', '1', 'p.idData = "' + productId + '" AND v.artWorkId ="' + artworkId + '" AND v.colorId = "' + colorId + '"');
+				data = data.feedData;
+				product_htmlGenerate(data);
+			}
+
+			function custom_size(size){
+				var productId = getParam('q');
+				var artworkId = $('[name=artworkId]').val();
+				var colorId = $('[name=colorId]').val();
+
+				data = p_getData('operation', 'productDetail', '1', 'p.idData = "' + productId + '" AND v.artWorkId ="' + artworkId + '" AND v.colorId = "' + colorId + '" AND v.size = "' + size + '"');
+				data = data.feedData;
+				product_htmlGenerate(data);
+			}
+
+			function product_htmlGenerate(data){
+				html =
+				'<div class="col-md-12 margin-top">' +
+					'<img id="product_detail" src="../assets/products/small/' + data.frontPicture + '" data-zoom-image="../assets/products/large/' + data.frontPicture + '" />' +
+				'</div>'+
+				'<div class="clearfix"></div>' +
+				'<div class="color-choice margin-top">'+
+					'<ul id="detail_list">' +
+						'<li>' +
+							'<a href="#" data-image="../assets/products/small/' + data.frontPicture + '" data-zoom-image="../assets/products/large/' + data.frontPicture + '">' +
+								'<img id="product_detail" class="big-image" src="../assets/products/small/' + data.frontPicture + '" />' +
+							'</a>' +
+						'</li>' +
+						'<li>' +
+							'<a href="#" data-image="../assets/products/small/' + data.backPicture + '" data-zoom-image="../assets/products/large/' + data.topPicture + '">' +
+								'<img id="product_detail" class="big-image" src="../assets/products/small/' + data.backPicture + '" />' +
+							'</a>' +
+						'</li>' +
+						'<li>' +
+							'<a href="#" data-image="../assets/products/small/' + data.topPicture + '" data-zoom-image="../assets/products/large/' + data.topPicture + '">' +
+								'<img id="product_detail" class="big-image" src="../assets/products/small/' + data.topPicture + '" />' +
+							'</a>' +
+						'</li>' +
+						'<li>' +
+							'<a href="#" data-image="../assets/products/small/' + data.bottomPicture + '" data-zoom-image="../assets/products/large/' + data.bottomPicture + '">' +
+						    '<img id="product_detail" class="big-image" src="../assets/products/small/' + data.bottomPicture + '" />' +
+						  '</a>' +
+						'</li>' +
+						'<li>' +
+							'<a href="#" data-image="../assets/products/small/' + data.leftPicture + '" data-zoom-image="../assets/products/large/' + data.leftPicture + '">' +
+						    '<img id="product_detail" class="big-image" src="../assets/products/small/' + data.leftPicture + '" />' +
+						  '</a>' +
+						'</li>' +
+						'<li>' +
+							'<a href="#" data-image="../assets/products/small/' + data.rightPicture + '" data-zoom-image="../assets/products/large/' + data.rightPicture + '">' +
+						    '<img id="product_detail" class="big-image" src="../assets/products/small/' + data.rightPicture + '" />' +
+						  '</a>' +
+						'</li>' +
+					'</ul>'+
+				'</div>';
+
+				$("#productViewer").html(html);
+				$("[name=variantId]").val(data.idData);
+				zoomActivator();
 			}
 		</script>
 	</body>

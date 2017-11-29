@@ -175,8 +175,7 @@
 					for(var loop = 0; loop < product.length; loop++)
 					{
 						temp = normalFormatChanger(product[loop].price);
-						// price = currencyFormatChanger(price);
-						price = currencyFormat(String(temp))
+						price = currencyFormat(String(temp));
 						html = html +
 						'<div class="col-md-4">'+
 							'<a href="shopDetail.html?q=' + product[loop].idData + '">' +

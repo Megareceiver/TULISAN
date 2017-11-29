@@ -10,10 +10,17 @@
 		public function requestData($post, $target){
 			switch($target){
 				case "summary" 			: $resultList = $this->summary(); break;
-// SELECT DISTINCT p.frontPicture,p.idData,p.sku,p.name,p.description,p.price FROM products p JOIN products_variant v ON p.idData = v.productId WHERE v.qty > 0 ORDER BY name ASC
-				case "product" 			: $resultList = $this->fetchAllRequest('products p JOIN products_variant v ON p.idData = v.productId', array("DISTINCT p.frontPicture", "p.idData", "p.sku", "p.name", "p.description", "p.price"), $post['keyword'], "ORDER BY p.name ASC", $post['page']); break;
-				case "productFetch" 	: $resultList = $this->fetchSingleRequest('products', array("frontPicture", "idData", "sku", "name", "description", "price", "material", "dimension", "storyId"), $post['keyword']); break;
-				case "productDetail" 	: $resultList = $this->fetchSingleRequest('products', array("frontPicture", "backPicture", "topPicture", "rightPicture", "bottomPicture", "leftPicture", "lookBook1", "lookBook2", "idData", "sku", "name", "description", "price", "material", "dimension", "storyId"), $post['keyword']); break;
+
+				case "product" 				: $resultList = $this->fetchAllRequest('products p JOIN products_variant v ON p.idData = v.productId', array("DISTINCT p.idData", "(SELECT x.frontPicture FROM products_variant x WHERE x.productId = p.idData ORDER BY x.idData ASC LIMIT 1) as frontPicture", "p.sku", "p.name", "p.description", "p.price"), $post['keyword'], "ORDER BY p.name ASC", $post['page']); break;
+				case "productFetch" 	: $resultList = $this->fetchSingleRequest('products', array("idData", "sku", "name", "description", "price", "material", "dimension", "storyId", "lookBook1", "lookBook2"), $post['keyword']); break;
+				case "productDetail" 	: $resultList = $this->fetchSingleRequest('products', array("lookBook1", "lookBook2", "idData", "sku", "name", "description", "price", "material", "dimension", "storyId"), $post['keyword']); break;
+
+				case "productVariant" 				: $resultList = $this->fetchAllRequest('products p JOIN products_variant v ON p.idData = v.productId LEFT JOIN cms_story_artwork a ON v.artworkId = a.idData LEFT JOIN colors c ON v.colorId = c.idData', array("v.idData", "p.name", "v.qty", "v.size", "v.frontPicture", "a.name as artwork", "c.name as color"), $post['keyword'], "ORDER BY v.idData ASC", $post['page']); break;
+				case "productVariantFetch" 		: $resultList = $this->fetchSingleRequest('products_variant', array("frontPicture", "backPicture", "topPicture", "rightPicture", "bottomPicture", "leftPicture", "idData", "qty", "size", "colorId", "artworkId"), $post['keyword']); break;
+				case "productArtworkOption" 	: $resultList = $this->fetchAllRecord('products_variant v JOIN cms_story_artwork a ON v.artworkId = a.idData', array("DISTINCT a.name as caption", "a.idData as value"), $post['keyword'], "ORDER BY v.idData ASC"); break;
+				case "productColorOption" 	: $resultList = $this->fetchAllRecord('products_variant v JOIN colors a ON v.colorId = a.idData', array("DISTINCT a.name as caption", "a.idData as value"), $post['keyword'], "ORDER BY v.idData ASC"); break;
+				case "productSizeOption" 		: $resultList = $this->fetchAllRecord('products_variant v', array("DISTINCT v.size as caption", "v.size as value"), $post['keyword'], "ORDER BY v.idData ASC"); break;
+				// case "productVariantDetail" 	: $resultList = $this->fetchSingleRequest('products', array("frontPicture", "backPicture", "topPicture", "rightPicture", "bottomPicture", "leftPicture", "lookBook1", "lookBook2", "idData", "sku", "name", "description", "price", "material", "dimension", "storyId"), $post['keyword']); break;
 
 				case "color" 					: $resultList = $this->fetchAllRequest('colors', array("name", "idData"), $post['keyword'], "ORDER BY name ASC", $post['page']); break;
 				case "colorOption" 		: $resultList = $this->fetchAllRecord('colors', array("name as caption", "idData as value"), $post['keyword'], "ORDER BY name ASC"); break;
@@ -65,10 +72,11 @@
 
 		public function removeData($post, $target){
 			switch($target){
-				case "product" 		: $resultList = $this->deleteById('products', $post['id']); break;
-				case "color" 		: $resultList = $this->deleteById('colors', $post['id']); break;
-				case "department" 	: $resultList = $this->deleteById('departments', $post['id']); break;
-				case "customer" 	:
+				case "product" 						: $resultList = $this->deleteById('products', $post['id']); break;
+				case "productVariant" 		: $resultList = $this->deleteById('products_variant', $post['id']); break;
+				case "color" 							: $resultList = $this->deleteById('colors', $post['id']); break;
+				case "department" 				: $resultList = $this->deleteById('departments', $post['id']); break;
+				case "customer" 					:
 					if(isset($post['id'])){
 						$temp  = "";
 						foreach ($post['id'] as $value) {
@@ -119,35 +127,6 @@
 					$resultList = $this->insert('products', $fields, $values);
 
 					if($resultList["feedStatus"] == "success") {
-						if(isset($_FILES["frontPicture"])){
-							$upload = $this->uploadZoomImage($_FILES["frontPicture"], "products", "products", "frontPicture", $resultList["feedId"], '1');
-							array_push($resultList, array("feedUpload" => $upload['feedMessage']));
-						}
-
-						if(isset($_FILES["backPicture"])){
-							$upload = $this->uploadZoomImage($_FILES["backPicture"], "products", "products", "backPicture", $resultList["feedId"], '2');
-							array_push($resultList, array("feedUpload" => $upload['feedMessage']));
-						}
-
-						if(isset($_FILES["topPicture"])){
-							$upload = $this->uploadZoomImage($_FILES["topPicture"], "products", "products", "topPicture", $resultList["feedId"], '3');
-							array_push($resultList, array("feedUpload" => $upload['feedMessage']));
-						}
-
-						if(isset($_FILES["rightPicture"])){
-							$upload = $this->uploadZoomImage($_FILES["rightPicture"], "products", "products", "rightPicture", $resultList["feedId"], '4');
-							array_push($resultList, array("feedUpload" => $upload['feedMessage']));
-						}
-
-						if(isset($_FILES["bottomPicture"])){
-							$upload = $this->uploadZoomImage($_FILES["bottomPicture"], "products", "products", "bottomPicture", $resultList["feedId"], '5');
-							array_push($resultList, array("feedUpload" => $upload['feedMessage']));
-						}
-
-						if(isset($_FILES["leftPicture"])){
-							$upload = $this->uploadZoomImage($_FILES["leftPicture"], "products", "products", "leftPicture", $resultList["feedId"], '6');
-							array_push($resultList, array("feedUpload" => $upload['feedMessage']));
-						}
 
 						if(isset($_FILES["lookBook1"])){
 							$upload = $this->uploadZoomImage($_FILES["lookBook1"], "products", "products", "lookBook1", $resultList["feedId"], '7');
@@ -156,6 +135,49 @@
 
 						if(isset($_FILES["lookBook2"])){
 							$upload = $this->uploadZoomImage($_FILES["lookBook2"], "products", "products", "lookBook2", $resultList["feedId"], '8');
+							array_push($resultList, array("feedUpload" => $upload['feedMessage']));
+						}
+					}
+				break;
+
+				case "productVariant"  :
+					$fields = array("qty", "size", "artworkId", "colorId", "productId");
+					$values = array();
+					foreach ($fields as $key) {
+						$value = (isset($post[$key]) && $post[$key] != "") ? $post[$key] : "";
+						array_push($values, $value);
+					}
+
+					$resultList = $this->insert('products_variant', $fields, $values);
+
+					if($resultList["feedStatus"] == "success") {
+						if(isset($_FILES["frontPicture"])){
+							$upload = $this->uploadZoomImage($_FILES["frontPicture"], "products", "products_variant", "frontPicture", $resultList["feedId"], '1');
+							array_push($resultList, array("feedUpload" => $upload['feedMessage']));
+						}
+
+						if(isset($_FILES["backPicture"])){
+							$upload = $this->uploadZoomImage($_FILES["backPicture"], "products", "products_variant", "backPicture", $resultList["feedId"], '2');
+							array_push($resultList, array("feedUpload" => $upload['feedMessage']));
+						}
+
+						if(isset($_FILES["topPicture"])){
+							$upload = $this->uploadZoomImage($_FILES["topPicture"], "products", "products_variant", "topPicture", $resultList["feedId"], '3');
+							array_push($resultList, array("feedUpload" => $upload['feedMessage']));
+						}
+
+						if(isset($_FILES["rightPicture"])){
+							$upload = $this->uploadZoomImage($_FILES["rightPicture"], "products", "products_variant", "rightPicture", $resultList["feedId"], '4');
+							array_push($resultList, array("feedUpload" => $upload['feedMessage']));
+						}
+
+						if(isset($_FILES["bottomPicture"])){
+							$upload = $this->uploadZoomImage($_FILES["bottomPicture"], "products", "products_variant", "bottomPicture", $resultList["feedId"], '5');
+							array_push($resultList, array("feedUpload" => $upload['feedMessage']));
+						}
+
+						if(isset($_FILES["leftPicture"])){
+							$upload = $this->uploadZoomImage($_FILES["leftPicture"], "products", "products_variant", "leftPicture", $resultList["feedId"], '6');
 							array_push($resultList, array("feedUpload" => $upload['feedMessage']));
 						}
 					}
@@ -393,7 +415,7 @@
 		public function updateData($post, $target){
 			switch($target){
 				case "product"  :
-					$fields = array("name", "sku", "description", "material", "dimension", "qty", "price", "storyId", "colorId");
+					$fields = array("name", "sku", "description", "material", "dimension", "price", "storyId");
 					$values = array();
 					foreach ($fields as $key) {
 						$value = (isset($post[$key]) && $post[$key] != "") ? $post[$key] : "";
@@ -403,16 +425,59 @@
 					$resultList = $this->update('products', $values, $post['idData']);
 
 					if($resultList["feedStatus"] == "success" && isset($post['idData']) && $post['idData']!="") {
-						if(isset($_FILES["picture"])){
-							$upload = $this->uploadSingleImage($_FILES["picture"], "products", "products", "picture", $post['idData']);
-							$resultList["feedUpload"] = $upload['feedMessage'];
+						if(isset($_FILES["lookBook1"])){
+							$upload = $this->uploadSingleImage($_FILES["lookBook1"], "products", "products", "lookBook1", $post['idData'], '1');
+							array_push($resultList, array("feedUpload" => $upload['feedMessage']));
 						}
 
-						if(isset($_FILES["pattern"])){
-							$upload = $this->uploadMultiImage($_FILES["pattern"], "patterns", "products", "pattern", $post['idData']);
-							$resultList["feedMultiUpload"] = $upload['feedMessage'];
+						if(isset($_FILES["lookBook2"])){
+							$upload = $this->uploadSingleImage($_FILES["lookBook2"], "products", "products", "lookBook2", $post['idData'], '2');
+							array_push($resultList, array("feedUpload" => $upload['feedMessage']));
+						}
+					}
+
+				break;
+
+				case "productVariant"  :
+					$fields = array("qty", "size", "artworkId", "colorId");
+					$values = array();
+					foreach ($fields as $key) {
+						$value = (isset($post[$key]) && $post[$key] != "") ? $post[$key] : "";
+						$values[$key] = $key." = '".str_replace(',','',$value)."'";
+					}
+
+					$resultList = $this->update('products_variant', $values, $post['idData']);
+
+					if($resultList["feedStatus"] == "success" && isset($post['idData']) && $post['idData']!="") {
+						if(isset($_FILES["frontPicture"])){
+							$upload = $this->uploadZoomImage($_FILES["frontPicture"], "products", "products_variant", "frontPicture", $post["idData"], '1');
+							array_push($resultList, array("feedUpload" => $upload['feedMessage']));
 						}
 
+						if(isset($_FILES["backPicture"])){
+							$upload = $this->uploadZoomImage($_FILES["backPicture"], "products", "products_variant", "backPicture", $post["idData"], '2');
+							array_push($resultList, array("feedUpload" => $upload['feedMessage']));
+						}
+
+						if(isset($_FILES["topPicture"])){
+							$upload = $this->uploadZoomImage($_FILES["topPicture"], "products", "products_variant", "topPicture", $post["idData"], '3');
+							array_push($resultList, array("feedUpload" => $upload['feedMessage']));
+						}
+
+						if(isset($_FILES["rightPicture"])){
+							$upload = $this->uploadZoomImage($_FILES["rightPicture"], "products", "products_variant", "rightPicture", $post["idData"], '4');
+							array_push($resultList, array("feedUpload" => $upload['feedMessage']));
+						}
+
+						if(isset($_FILES["bottomPicture"])){
+							$upload = $this->uploadZoomImage($_FILES["bottomPicture"], "products", "products_variant", "bottomPicture", $post["idData"], '5');
+							array_push($resultList, array("feedUpload" => $upload['feedMessage']));
+						}
+
+						if(isset($_FILES["leftPicture"])){
+							$upload = $this->uploadZoomImage($_FILES["leftPicture"], "products", "products_variant", "leftPicture", $post["idData"], '6');
+							array_push($resultList, array("feedUpload" => $upload['feedMessage']));
+						}
 					}
 
 				break;
@@ -995,7 +1060,7 @@
 		}
 
 		//UPLOAD IMAGE
-		public function uploadSingleImage($image, $dir, $table, $field, $id){
+		public function uploadSingleImage($image, $dir, $table, $field, $id, $que = ""){
 			error_reporting(E_ALL);
 			/* initial condition */
 			$resultList = array();
@@ -1021,7 +1086,7 @@
 					$Validextensions = array("jpeg", "JPEG", "jpg", "JPG", "png", "PNG", "gif", "GIF");
 					$temporary 		 = explode(".", $file_name);
 					$fileExtension   = end($temporary);
-					$newFileName 	 = $dir."_".$id."_".date("Ymdhisa").".".$fileExtension;
+					$newFileName 	 = $dir."_".$id."_".$que.date("Ymdhisa").".".$fileExtension;
 					$saveAs 		 = "../assets/".$dir."/".$newFileName;
 
 					if (in_array($fileExtension, $Validextensions)) {
@@ -1142,7 +1207,7 @@
 					$Validextensions = array("jpeg", "JPEG", "jpg", "JPG", "png", "PNG", "gif", "GIF");
 					$temporary 		 = explode(".", $file_name);
 					$fileExtension   = end($temporary);
-					$newFileName 	 	 = $dir."_".$id."_".$que.date("Ymdhisa").".".$fileExtension;
+					$newFileName 	 	 = $dir."_".$id."_".$que.".".$fileExtension;
 					$saveAs 		 		 = "../assets/".$dir."/large/".$newFileName;
 
 					if (in_array($fileExtension, $Validextensions)) {

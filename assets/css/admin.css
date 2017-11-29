@@ -71,7 +71,6 @@ header.parent-admin a { color: #777; }
 
 header.parent-admin .logo {
   padding: 10px 30px 20px 20px;
-  border-right: 1px solid #AAA;
 }
 
 header.parent-admin .header-menu {
@@ -98,6 +97,8 @@ header.parent-admin .header-menu ul li img {
   border-radius: 50%;
 }
 
+header.parent-admin .di-left { padding: 0 20px; border-left: 1px solid #AAA; }
+
 /*=============================================================================================*/
 /*main*/
 
@@ -120,11 +121,7 @@ main.parent-admin .left-nav {
 
 main.parent-admin .left-nav .list-nav {
   display: block;
-  /*height: 93%;*/
-  /*background-color: #EEE;*/
   padding: 40px;
-  /*box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.2);*/
-  border-right: 1px dashed #CCC;
 }
 
 main.parent-admin .left-nav .list-nav a { color: #777; }
@@ -150,6 +147,7 @@ main.parent-admin .top-nav ul li.active,
 main.parent-admin .top-nav ul li:hover { background-color: #E68924; }
 
 main.parent-admin .top-nav a { color: #FFF; }
+main.parent-admin .di-left { padding: 0 20px; border-left: 1px dashed #CCC; }
 
 /*main-footer*/
 .main-footer {

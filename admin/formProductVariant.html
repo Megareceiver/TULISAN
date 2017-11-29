@@ -38,26 +38,29 @@
 			function loadData(){
 				/* get ID */
 				var id = "";
-				if(getParam('s') != "" && getParam('s') != null) id = '?q=' + getParam('s');
+				var link = "";
+				if(getParam('s') != "" && getParam('s') != null) id = getParam('s');
+				if(getParam('s') != "" && getParam('s') != null) link = '?q=' + getParam('s');
 
 				var html = '';
 
 				html = html +
-				'<form id="syncrom" f-group="operation" f-target="product" enctype="multipart/form-data">'+
+				'<form id="syncrom" f-group="operation" f-target="productVariant" enctype="multipart/form-data">'+
 				'<div class="input-frame col-md-6">'+
 					'<h3><b>Variant Product</b></h3>'+
 					'<div class="form-group">' +
 						'<label>Quantity</label>'+
 						'<input name="qty" type="text" class="form-control">'+
 						'<input name="idData" type="hidden">'+
+						'<input name="productId" type="hidden" value="' + id + '">'+
 					'</div>'+
 					'<div class="form-group select-box">' +
 						'<label>Size</label>' +
-						'<select name="artworkId" class="form-control">' +
+						'<select name="size" class="form-control">' +
 							'<option value="NULL">Choose Size</option>' +
-							'<option value="small">Small</option>' +
-							'<option value="medium">Medium</option>' +
-							'<option value="large">Large</option>' +
+							'<option value="Small">Small</option>' +
+							'<option value="Medium">Medium</option>' +
+							'<option value="Large">Large</option>' +
 						'</select>' +
 					'</div>'+
 				'</div>'+
@@ -66,13 +69,13 @@
 					'<div class="form-group select-box">' +
 						'<label>Artwork</label>' +
 						'<select name="artworkId" class="form-control">' +
-							'<option value="NULL">Choose Artwork</option>' +
+							'<option value="">Choose Artwork</option>' +
 						'</select>' +
 					'</div>'+
 					'<div class="form-group select-box">' +
 						'<label>Color</label>' +
 						'<select name="colorId" class="form-control">' +
-							'<option value="NULL">Choose Color</option>' +
+							'<option value="">Choose Color</option>' +
 						'</select>' +
 					'</div>'+
 				'</div>';
@@ -154,7 +157,7 @@
 						'<div class="input-frame col-md-6">'+
 							'<div class="btn-group">'+
 								'<button class="btn btn-warning" type="sumbit">Create</button>'+
-								'<a href="productsVariant.html' + id + '" class="btn btn-warning" type="reset">Cancel</a>'+
+								'<a href="productsVariant.html' + link + '" class="btn btn-warning" type="reset">Cancel</a>'+
 							'</div>'+
 						'</div>'+
 					'</div>'+
@@ -166,36 +169,32 @@
 				currencyFormatActivator('[name="price"]');
 				imagePreviewActivator('[preview-id]');
 
-				var oData = p_getData('operation', 'cms_storyOption');
-				$("[name=storyId]").append(dataToOptionHtml(oData.feedData));
+				var oData = p_getData('operation', 'colorOption');
+				$("[name=colorId]").append(dataToOptionHtml(oData.feedData));
+
+				var oData = p_getData('operation', 'artWorkOption');
+				$("[name=artworkId]").append(dataToOptionHtml(oData.feedData));
 
 				/* data generator */
 				if(getParam('q') != "" && getParam('q') != null) dataGenerator(getParam('q'));
-				else p_formHandler('syncrom', 'addData', 'product.html');
+				else p_formHandler('syncrom', 'addData', 'ProductsVariant.html' + link);
 			}
 
 			function dataGenerator(idData){
-				var xData = p_getData('operation', 'productFetch', '', "idData=" + idData);
+				var xData = p_getData('operation', 'productVariantFetch', '', "idData=" + idData);
 					xData = xData.feedData;
 
 				for (var key in xData) {
 					if($("[name='" + key + "']").attr('type') != "file") $("[name=" + key + "]").val(xData[key]);
 					else{
-						var temp = xData[key].split(",");
-						if(key == "picture"){
-							if(xData[key]!="") $("[name-tag=" + key + "]").attr('src', '../assets/products/' + xData[key]);
-							else $("[name-tag='" + key + "']").attr('src', '../assets/default/product.gif');
-						}else{
-							for(var loop=0; loop<temp.length; loop++){
-								if(xData[key]!="") $("[name-tag='" + key + loop +"']").attr('src', '../assets/patterns/' + temp[loop]);
-								else $("[name-tag='" + key + loop +"']").attr('src', '../assets/default/pattern.gif');
-							}
-						}
+						if(xData[key]!="") $("[name-tag=" + key + "]").attr('src', '../assets/products/large/' + xData[key]);
+						else $("[name-tag='" + key + "']").attr('src', '../assets/default/product.gif');
 					}
 				}
 
-				currencyFormatChanger('[name="price"]');
-				p_formHandler('syncrom', 'updateData', '');
+				var link = "";
+				if(getParam('s') != "" && getParam('s') != null) link = '?q=' + getParam('s');
+				p_formHandler('syncrom', 'updateData', 'ProductsVariant.html' + link);
 			}
 		</script>
 	</body>

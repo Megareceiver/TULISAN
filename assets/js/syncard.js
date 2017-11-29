@@ -19,30 +19,29 @@ function headerAdmin(){
 
 	var html =
 	'<div class="content-frame">'+
-		'<div class="row">'+
-			'<div class="col-xs-5 col-md-3">'+
-				'<div class="logo"><img class="big-image" src="../assets/PICS/tulisan.png" /></div>'+
+		'<div class="col-xs-5 col-md-3">'+
+			'<div class="logo"><img class="big-image" src="../assets/PICS/tulisan.png" /></div>'+
+		'</div>'+
+		'<div class="col-xs-7 col-md-9 di-left">'+
+			'<div class="header-title"><h2><span id="departmentName">' + departement + '</span> - Department</h2></div>'+
+			'<div class="header-menu fontserif hidden-sm hidden-xs">' +
+				'<ul>' +
+					'<li><form id="syncrom_logout" f-group="auth"><button type="submit" class="btn btn-custom">Logout</button></form></li>' +
+					'<li>|</li>' +
+					'<li><form id="syncrom_viewstore" f-group="auth"><button type="submit" class="btn btn-custom">View Store</button></form></li>' +
+					'<li>|</li>';
+					if(r_getCookie('tulisan_user_name') != ""){
+						var res = r_getCookie('tulisan_user_name');
+						var img = r_getCookie('tulisan_user_picture');
+						html = html + '<li><img src="../assets/' + ((img) ? 'users/' + img : 'PICS/pattern3.jpg') + '"></li>';
+						html = html + '<li>' + res + '</li>';
+					}
+					html = html +
+					'<li><a href="setting.html"><i class="fa fa-cog fa-o"></i></a></li>' +
+				'</ul>'+
 			'</div>'+
-			'<div class="col-xs-7 col-md-9">'+
-				'<div class="header-title"><h2><span id="departmentName">' + departement + '</span> - Department</h2></div>'+
-				'<div class="header-menu fontserif hidden-sm hidden-xs">' +
-					'<ul>' +
-						'<li><form id="syncrom_logout" f-group="auth"><button type="submit" class="btn btn-custom">Logout</button></form></li>' +
-						'<li>|</li>' +
-						'<li><form id="syncrom_viewstore" f-group="auth"><button type="submit" class="btn btn-custom">View Store</button></form></li>' +
-						'<li>|</li>';
-						if(r_getCookie('tulisan_user_name') != ""){
-							var res = r_getCookie('tulisan_user_name');
-							var img = r_getCookie('tulisan_user_picture');
-							html = html + '<li><img src="../assets/' + ((img) ? 'users/' + img : 'PICS/pattern3.jpg') + '"></li>';
-							html = html + '<li>' + res + '</li>';
-						}
-						html = html +
-						'<li><a href="setting.html"><i class="fa fa-cog fa-o"></i></a></li>' +
-					'</ul>'+
-				'</div>'+
-			'</div>'+
-		'</div><div class="clearfix"></div>' +
+		'</div>'+
+		'<div class="clearfix"></div>' +
 	'</div>';
 
 	$("header.parent-admin").html(html);
@@ -73,7 +72,7 @@ function pageAdmin(){
 					'</ul>' +
 				'</div>'+
 			'</div>'+
-			'<div class="col-md-9 col-md-offset-3 syn-clear">'+
+			'<div class="col-md-9 col-md-offset-3 syn-clear di-left">'+
 				'<div class="col-md-12 top-nav">'+
 					'<ul>' +
 						'<li class="departement-route"><a href="department.html">Departement</a></li>'+

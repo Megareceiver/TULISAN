@@ -78,84 +78,13 @@
 				'<div class="clearfix"></div>' +
 				'<hr/>' +
 				'<div class="input-frame col-md-6">'+
-					'<div class="form-group">' +
+					'<div class="form-group select-box">' +
 						'<label>Story</label>' +
 						'<select name="storyId" class="form-control">' +
 							'<option value="NULL">Choose story</option>' +
 						'</select>' +
 					'</div>'+
 				'</div>';
-
-			html = html +
-			'<div class="clearfix"></div>' +
-			'<hr/>' +
-			'<div class="input-frame col-md-3 col-sm-6">'+
-					'<div class="form-group">'+
-						'<label>Front angle</label>'+
-					'</div>'+
-					'<div class="form-group text-center">'+
-						'<img id="frontPicture" name-tag="frontPicture" class="big-image" src="../assets/default/product.gif">'+
-					'</div>'+
-					'<div class="form-group">'+
-						'<input name="frontPicture" preview-id="frontPicture" accept="image/x-png,image/gif,image/jpeg" type="file" class="file form-control" data-preview-file-type="text">'+
-					'</div>' +
-			 '</div>' +
-			 '<div class="input-frame col-md-3 col-sm-6">'+
- 					'<div class="form-group">'+
- 						'<label>Back angle</label>'+
- 					'</div>'+
- 					'<div class="form-group text-center">'+
- 						'<img id="backPicture" name-tag="backPicture" class="big-image" src="../assets/default/product.gif">'+
- 					'</div>'+
- 					'<div class="form-group">'+
- 						'<input name="backPicture" preview-id="backPicture" accept="image/x-png,image/gif,image/jpeg" type="file" class="file form-control" data-preview-file-type="text">'+
- 					'</div>' +
- 			 '</div>' +
-			 '<div class="input-frame col-md-3 col-sm-6">'+
- 					'<div class="form-group">'+
- 						'<label>Top angle</label>'+
- 					'</div>'+
- 					'<div class="form-group text-center">'+
- 						'<img id="topPicture" name-tag="topPicture" class="big-image" src="../assets/default/product.gif">'+
- 					'</div>'+
- 					'<div class="form-group">'+
- 						'<input name="topPicture" preview-id="topPicture" accept="image/x-png,image/gif,image/jpeg" type="file" class="file form-control" data-preview-file-type="text">'+
- 					'</div>' +
- 			 '</div>' +
-			 '<div class="input-frame col-md-3 col-sm-6">'+
- 					'<div class="form-group">'+
- 						'<label>Bottom angle</label>'+
- 					'</div>'+
- 					'<div class="form-group text-center">'+
- 						'<img id="bottomPicture" name-tag="bottomPicture" class="big-image" src="../assets/default/product.gif">'+
- 					'</div>'+
- 					'<div class="form-group">'+
- 						'<input name="bottomPicture" preview-id="bottomPicture" accept="image/x-png,image/gif,image/jpeg" type="file" class="file form-control" data-preview-file-type="text">'+
- 					'</div>' +
- 			 '</div>' +
-			 '<div class="clearfix"></div>' +
-			 '<div class="input-frame col-md-3 col-sm-6">'+
- 					'<div class="form-group">'+
- 						'<label>Left angle</label>'+
- 					'</div>'+
- 					'<div class="form-group text-center">'+
- 						'<img id="leftPicture" name-tag="leftPicture" class="big-image" src="../assets/default/product.gif">'+
- 					'</div>'+
- 					'<div class="form-group">'+
- 						'<input name="leftPicture" preview-id="leftPicture" accept="image/x-png,image/gif,image/jpeg" type="file" class="file form-control" data-preview-file-type="text">'+
- 					'</div>' +
- 			 '</div>' +
-			 '<div class="input-frame col-md-3 col-sm-6">'+
- 					'<div class="form-group">'+
- 						'<label>Right angle</label>'+
- 					'</div>'+
- 					'<div class="form-group text-center">'+
- 						'<img id="rightPicture" name-tag="rightPicture" class="big-image" src="../assets/default/product.gif">'+
- 					'</div>'+
- 					'<div class="form-group">'+
- 						'<input name="rightPicture" preview-id="rightPicture" accept="image/x-png,image/gif,image/jpeg" type="file" class="file form-control" data-preview-file-type="text">'+
- 					'</div>' +
- 			 '</div>';
 
 			 html = html +
 			 '<div class="clearfix"></div>'+
@@ -216,21 +145,13 @@
 				for (var key in xData) {
 					if($("[name='" + key + "']").attr('type') != "file") $("[name=" + key + "]").val(xData[key]);
 					else{
-						var temp = xData[key].split(",");
-						if(key == "picture"){
-							if(xData[key]!="") $("[name-tag=" + key + "]").attr('src', '../assets/products/' + xData[key]);
-							else $("[name-tag='" + key + "']").attr('src', '../assets/default/product.gif');
-						}else{
-							for(var loop=0; loop<temp.length; loop++){
-								if(xData[key]!="") $("[name-tag='" + key + loop +"']").attr('src', '../assets/patterns/' + temp[loop]);
-								else $("[name-tag='" + key + loop +"']").attr('src', '../assets/default/pattern.gif');
-							}
-						}
+						if(xData[key]!="") $("[name-tag=" + key + "]").attr('src', '../assets/products/' + xData[key]);
+						else $("[name-tag='" + key + "']").attr('src', '../assets/default/lookBook.gif');
 					}
 				}
 
 				currencyFormatChanger('[name="price"]');
-				p_formHandler('syncrom', 'updateData', '');
+				p_formHandler('syncrom', 'updateData', 'product.html');
 			}
 		</script>
 	</body>

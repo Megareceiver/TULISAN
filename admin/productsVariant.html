@@ -39,13 +39,19 @@
 				var html = '';
 				/* get ID */
 				var id = "";
-				if(getParam('q') != "" && getParam('q') != null) id = '?s=' + getParam('q');
+				var link = "";
+				if(getParam('q') != "" && getParam('q') != null) {
+					id 	 = getParam('q');
+					link = '?s=' + getParam('q');
+				}else{
+					window.location.href = base_url + "/admin/product.html";
+				}
 
 				html = html +
 				'<div class="operation-group">'+
 					'<form class="form-inline">' +
 						'<div class="input-group">' +
-							'<a href="formProductVariant.html' + id + '"><i class="fa fa-plus-circle text-warning">&nbsp;</i> Add Variant</a>'+
+							'<a href="formProductVariant.html' + link + '"><i class="fa fa-plus-circle text-warning">&nbsp;</i> Add Variant</a>'+
 						'</div>' +
 						'<div class="input-group">' +
 							'<a href="#" id="deleteButton"><i class="fa fa-minus-circle text-warning">&nbsp;</i> Delete Variant</a>'+
@@ -66,7 +72,7 @@
 				html = html +
 					'<div class="summary-group">'+
 						'<div class="summary-text">'+
-							'<p>Total number of Variants</p>'+
+							'<p>Total number of <b id="productGroups"></b> Variants</p>'+
 							'<p class="number" id="totalRecord">0</p>'+
 						'</div>'+
 						'<div class="alpha">'+
@@ -146,15 +152,15 @@
 				r_setCookie('adminPageFilter', '1');
 				r_setCookie('adminAlphaFilter', '');
 				var page = (r_getCookie('adminPageFilter') != "" ? r_getCookie('adminPageFilter'): "1");
-				var data = p_getData('operation', 'product', page);
-					data = data.feedData;
+				var data = p_getData('operation', 'productVariant', page, 'productId = "' + id + '"');
+				data = data.feedData;
 
 				dataGenerator(data);
 
 				//filter
 				$('.alpha a').on("click", function(){
 					var page = (r_getCookie('adminPageFilter') != "" ? r_getCookie('adminPageFilter'): "1");
-					var data = p_getData('operation', 'product', page, '(name LIKE "' + $(this).html() + '%")');
+					var data = p_getData('operation', 'productVariant', page, '(a.name LIKE "' + $(this).html() + '%")');
 					data = data.feedData;
 					dataGenerator(data);
 
@@ -164,7 +170,7 @@
 
 				$('button.search').on("click", function(){
 					var keyword = $("[placeholder='Search']").val();
-					var data = p_getData('operation', 'product', '1', '(name LIKE "%' + keyword + '%" OR sku LIKE "%' + keyword + '%")');
+					var data = p_getData('operation', 'productVariant', '1', '(a.name LIKE "%' + keyword + '%")');
 					data = data.feedData;
 					dataGenerator(data);
 				});
@@ -193,7 +199,7 @@
 						page = parseInt(page) - 1;
 
 						var keyword = $("[placeholder='Search']").val();
-						var data = p_getData('operation', 'product', page, '(name LIKE "%' + keyword + '%" OR sku LIKE "%' + keyword + '%")');
+						var data = p_getData('operation', 'productVariant', page, '(name LIKE "%' + keyword + '%" OR sku LIKE "%' + keyword + '%")');
 						data = data.feedData;
 						dataGenerator(data);
 
@@ -207,26 +213,28 @@
 				var html = "";
 				for(var loop =0; loop<data.length; loop++){
 
-					data[loop].frontPicture = (data[loop].frontPicture != "") ? "../assets/products/large/" + data[loop].frontPicture : "";
-					data[loop].price  = (data[loop].price != "") ? normalFormatChanger(data[loop].price) : "0";
+					data[loop].frontPicture = (data[loop].frontPicture != "") ? "../assets/products/large/" + data[loop].frontPicture : "../assets/default/no.gif";
 
-		    		html = html +
-		    		'<div class="col-md-3 border-all">'+
-							'<br/>' +
-		    			'<input type="checkbox" name="customerSelect" value="'+data[loop].idData+'" id="selectRecord' + loop + '"><label for="selectRecord' + loop + '"></label>'+
-		    			'<img class="big-image" src="'+ data[loop].frontPicture +'">'+
-							'<hr/>' +
-		    			'<p class="text-center">'+ data[loop].sku +'</p>'+
-		    			'<p class="text-center">'+ data[loop].name +'</p>'+
-		    			// '<p class="text-center">'+ data[loop].qty +'</p>'+
-		    			// '<p class="text-center">'+ currencyFormat(String(data[loop].price)) +'</p>'+
-		    		'</div>';
-		    	}
+	    		html = html +
+	    		'<div class="col-md-3 border-all ' + ((parseInt(data[loop].qty) <= 0) ? 'danger' : '') + '">'+
+						'<br/>' +
+	    			'<input type="checkbox" name="customerSelect" value="'+data[loop].idData+'" id="selectRecord' + loop + '"><label for="selectRecord' + loop + '"></label>'+
+	    			'<img class="big-image" src="'+ data[loop].frontPicture +'">'+
+						'<hr/>' +
+	    			'<p class="text-center">'+ ((data[loop].artwork!=null) ? data[loop].artwork : '<b>- NO ARTWORK -</b>') +'</p>'+
+	    			'<p class="text-center">'+ ((data[loop].color!=null) ? data[loop].color : '<b>- NO COLOR -</b>') +'</p>'+
+	    			'<p class="text-center">Remaining : '+ data[loop].qty +'</p>'+
+	    			// '<p class="text-center">'+ currencyFormat(String(data[loop].price)) +'</p>'+
+	    		'</div>';
+	    	}
 
 				html = html + '<div class="clearfix"></div>';
 
 				$('main.parent-admin .data-list').html('').append(html);
 				$('main.parent-admin #totalRecord').html(data.length);
+
+				//
+				$('#productGroups').html(data[0].name);
 
 				//activator
 				checkboxActivator();
@@ -238,12 +246,12 @@
 					if(checkedArray.length > 0){
 						var confirmation = confirm("Are you sure you want to delete the selected data?");
 						if (confirmation == true) {
-							p_removeData('operation', 'product', checkedArray);
+							p_removeData('operation', 'productVariant', checkedArray);
 
 							r_setCookie('adminPageFilter', '1');
 							r_setCookie('adminAlphaFilter', '');
 							var page = (r_getCookie('adminPageFilter') != "" ? r_getCookie('adminPageFilter'): "1");
-							var data = p_getData('operation', 'product', page);
+							var data = p_getData('operation', 'productVariant', page);
 								data = data.feedData;
 
 							dataGenerator(data);

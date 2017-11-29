@@ -44,6 +44,7 @@ iframe { border: 1px solid #ddd; background-color: #000; }
 .text-alert { color: red; }
 
 .border-all { border: 1px solid #CCC; }
+.border-all.danger { border: 2px dashed RED; }
 
 .btn-default:hover,
 .btn-default:active,
@@ -119,6 +120,35 @@ iframe { border: 1px solid #ddd; background-color: #000; }
   background-size: contain;
 }
 
+.select-box { position: relative; }
+.select-box select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+.select-box select {
+    font-family: inherit;
+    border-radius: unset;
+    background-color: transparent;
+    width: 100%;
+    font-size: 12px;
+    color: #000;
+}
+
+.select-box:after {
+    position: absolute;
+    bottom: 13px;
+    right: 10px;
+    width: 0;
+    height: 0;
+    padding: 0;
+    content: '';
+    border-left: 0.4em solid transparent;
+    border-right: 0.4em solid transparent;
+    border-top: 0.4em solid #000;
+    pointer-events: none;
+}
 
 .text-default-color{
   color: #605B5D;
@@ -835,6 +865,11 @@ footer.parent .license {
 
 .blog-container:last-child { border: none; margin-bottom: 0; }
 
+.blog-box {
+  border-top: 1px solid #CCC;
+  border-bottom: 1px solid #CCC;
+}
+
 .blog-box,
 .blog-box .blog-pic {
   display: inline-block;
@@ -859,10 +894,6 @@ footer.parent .license {
 
 .blog-box .blog-title p {
   font-weight: 500;
-}
-
-.blog-box .blog-pic {
-  margin-bottom: 40px;
 }
 
 .blog-box .blog-description {

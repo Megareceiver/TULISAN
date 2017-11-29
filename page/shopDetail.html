@@ -46,16 +46,14 @@
 
 				// data.description = data.description.replace(/(?:\r\n|\r|\n)/g, '<br />');
 				// data.story = data.story.replace(/(?:\r\n|\r|\n)/g, '<br />');
+				var productId = "";
 
 				if(getParam('q') != "" && getParam('q') != null){
-					data = p_getData('operation', 'productDetail', '1', 'idData = "' + getParam('q') + '"');
+					productId = getParam('q');
+					data = p_getData('operation', 'productDetail', '1', 'idData = "' + productId + '"');
 					data = data.feedData;
-
-					story = p_getData('operation', 'cms_storyFetch', '1', 'idData = "' + data.storyId + '"');
-					story = story.feedData;
-
-					color = p_getData('operation', 'colorFetch', '1', 'idData = "' + data.colorId + '"');
-					color = color.feedData;
+				}else{
+					window.location.href = base_url + "/page/shop.html";
 				}
 
 				html = '<div class="col-md-10 col-md-offset-1 div-normalize">';
@@ -111,13 +109,17 @@
 									'<div class="row margin-top">'+
 										'<div class="col-xs-6">'+
 											'<p>PATTERN</p>'+
-											'<select class="form-control">' +
-											'</select>' +
+											'<div class="select-box">' +
+												'<select name="artworkId" class="form-control">' +
+												'</select>' +
+											'</div>' +
 										'</div>' +
 										'<div class="col-xs-6">'+
 											'<p>COLOR</p>'+
-											'<select class="form-control">' +
-											'</select>' +
+											'<div class="select-box">' +
+												'<select name="colorId" class="form-control">' +
+												'</select>' +
+											'</div>' +
 										'</div>' +
 									'</div>' +
 									'<p class="margin-top">'+
@@ -133,8 +135,10 @@
 								'<div class="row">' +
 									'<div class="col-xs-6">' +
 										'<p>SIZE</p>' +
-								    '<select class="form-control">' +
-								    '</select>' +
+										'<div class="select-box">' +
+									    '<select name="size" class="form-control">' +
+									    '</select>' +
+										'</div>' +
 										'<p class="margin-top">Remaining : 0</p>' +
 										'<div class="input-group">' +
 									    '<span class="input-group-addon" onclick="minus()"><i class="glyphicon glyphicon-minus"></i></span>' +
@@ -157,23 +161,21 @@
 				html = html + "</div><div class='clearfix'></div>";
 
 				html = html +
-				'<hr/>' +
 				'<div class="row margin-top">' +
 					'<div class="col-md-12">' +
 						"<div class='blog-box'>"+
 							"<div class='blog-pic'>" +
-								"<img src='../assets/products/large/" + data.lookBook1 + "' />" +
+								"<img src='../assets/products/" + data.lookBook1 + "' />" +
 							"</div>"+
 							"<div class='blog-pic'>" +
-								"<img src='../assets/products/large/" + data.lookBook2 + "' />" +
+								"<img src='../assets/products/" + data.lookBook2 + "' />" +
 							"</div>"+
 						"</div>" +
 					"</div>" +
 				"</div>";
 
 				html = html +
-				'<hr/>' +
-				'<div class="col-md-4 col-md-offset-4">' +
+				'<div class="col-md-4 col-md-offset-4 margin-top">' +
 					'<p class="text-center">Are you interested ?</p>' +
 					'<button type="button" class="btn btn-warning margin-top form-control" item-id="' + data.idData + '">Add to cart</button>' +
 				'</div>';
@@ -182,6 +184,15 @@
 
 				$("main").html(html);
 				$("#custom-bread-detail").html(toTitleCase(data.name));
+
+				var oData = p_getData('operation', 'productArtworkOption', '', "v.productId='" + productId + "'");
+				$("[name=artworkId]").append(dataToOptionHtml(oData.feedData));
+
+				oData = p_getData('operation', 'productColorOption', '', "v.productId='" + productId + "'");
+				$("[name=colorId]").append(dataToOptionHtml(oData.feedData));
+
+				oData = p_getData('operation', 'productSizeOption', '', "v.productId='" + productId + "'");
+				$("[name=size]").append(dataToOptionHtml(oData.feedData));
 
 				zoomActivator();
 			}

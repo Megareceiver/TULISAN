@@ -16,7 +16,7 @@
 				// case "productDetail" 	: $resultList = $this->fetchSingleRequest('products', array("lookBook1", "lookBook2", "idData", "sku", "name", "description", "price", "material", "dimension", "storyId"), $post['keyword']); break;
 				case "productDetail" 	: $resultList = $this->fetchSingleRequest(
 																'products p JOIN products_variant v ON p.idData = v.productId JOIN cms_story s ON p.storyId = s.idData',
-																array("DISTINCT v.idData",
+																array("DISTINCT v.idData", "v.qty",
 																"substring_index(group_concat(v.frontPicture SEPARATOR ','), ',', 1) as frontPicture",
 																"substring_index(group_concat(v.backPicture SEPARATOR ','), ',', 1) as backPicture",
 																"substring_index(group_concat(v.topPicture SEPARATOR ','), ',', 1) as topPicture",

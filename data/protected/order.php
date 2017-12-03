@@ -11,7 +11,7 @@
 		public function requestData($post, $target){
 			switch($target){
 				case "orders" 			: $resultList = $this->fetchAllRequest('orders', array("idData", "name", "status", "total", "createdDate"), $post['keyword'], "ORDER BY status DESC, idData ASC, name ASC", $post['page']); break;
-				case "orderItems" 		: 
+				case "orderItems" 		:
 				case "itemsCart" 		: $resultList = $this->fetchAllRecord('orders_item i JOIN products_variant v ON i.variantId = v.idData JOIN products p ON v.productId = p.idData',array("p.name", "p.sku", "i.price", "i.qty"), $post['keyword'], "ORDER BY i.idData"); break;
 				case "orderInfo" 		: $resultList = $this->fetchSingleRequest('orders o JOIN countries c ON o.country = c.country_code',array("o.name", "o.address", "o.city", "o.zipCode", "c.country_name as country", "o.phone", "o.email", "o.paymentMethod"), $post['keyword']); break;
 				case "recentOrders" : $resultList = $this->fetchAllRecord('orders o',array("o.idData as number", 'DATE_FORMAT(o.createdDate, "%M, %d %Y") as date', "status"), "o.createdBy = '".$_SESSION['tulisan_user_username']."' AND o.status <> 'Waiting for payment'", "ORDER BY o.idData"); break;
@@ -149,7 +149,7 @@
 					$temp   = "";
 				}
 
-				$conditions = ($conditions != "") ? "WHERE ".$conditions : "";
+				$conditions = ($conditions != "") ? "WHERE ".str_replace('\\', '', $conditions) : "";
 
 
 				$sql = "SELECT ".$fields." FROM ".$table." ".$conditions." ".$orderBy." ";
@@ -206,7 +206,7 @@
 					$temp   = "";
 				}
 
-				$conditions = ($conditions != "") ? "WHERE ".$conditions : "";
+				$conditions = ($conditions != "") ? "WHERE ".str_replace('\\', '', $conditions) : "";
 
 
 				$temp = intval($paging);
@@ -268,7 +268,7 @@
 					$temp   = "";
 				}
 
-				$conditions = ($conditions != "") ? "WHERE ".$conditions : "";
+				$conditions = ($conditions != "") ? "WHERE ".str_replace('\\', '', $conditions) : "";
 
 				$sql = "SELECT ".$fields." FROM ".$table." ".$conditions;
 

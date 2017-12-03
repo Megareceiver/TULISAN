@@ -8,7 +8,7 @@
 		<link rel="icon" type="image/x-icon" href="../assets/PICS/TL_Favicon.png">
 		<!-- Site Properities -->
 		<title>Tulisan</title>
-	  
+
 		<link href="../assets/css/bootstrap.min.css" rel="stylesheet">
 		<link href="../assets/css/font-awesome.min.css" rel="stylesheet">
 		<link href="../assets/css/syncard-inject.css" rel="stylesheet">
@@ -19,7 +19,7 @@
 			<header class="parent"></header>
 
 			<main class="parent clear yellow-flex"></main>
-	
+
 			<footer class="parent clear"></footer>
 		</div>
 
@@ -27,10 +27,10 @@
 		<script type="text/javascript" src="../assets/js/jquery-3.2.1.min.js"></script>
 		<script type="text/javascript" src="../assets/js/jquery-ui-1.10.0.custom.min.js"></script>
 		<script type="text/javascript" src="../assets/js/bootstrap.min.js"></script>
-		<script type="text/javascript" src="../assets/js/imagesloaded.pkgd.min.js"></script>	
+		<script type="text/javascript" src="../assets/js/imagesloaded.pkgd.min.js"></script>
 		<script type="text/javascript" src="../assets/js/partial.js"></script>
-		<script type="text/javascript" src="../assets/js/public.js"></script>	
-			
+		<script type="text/javascript" src="../assets/js/public.js"></script>
+
 
 		<!-- page script -->
 		<script type="text/javascript">
@@ -45,7 +45,7 @@
 						'<h3><b>Customer</b></h3>'+
 						'<div class="form-group">'+
 							'<label>Full Name</label>'+
-							'<input name="name" type="text" class="form-control" value="'+r_getCookie('tulisan_register_fullname')+'">'+
+							'<input name="name" type="text" class="form-control" value="'+r_getCookie('register_fullname')+'">'+
 							'<input name="idData" type="hidden">'+
 						'</div>'+
 						'<div class="form-group">'+
@@ -63,11 +63,9 @@
 							'</div>'+
 							'<div class="clearfix"></div>'+
 						'</div>'+
-						'<div class="form-group">'+
+						'<div class="form-group select-box">'+
 							'<label>Country</label>'+
-							'<select name="country" class="form-control">'+
-								countryListOption() +
-							'</select>'+
+							'<select name="country" class="form-control" id="countries"></select>'+
 						'</div>'+
 						'<div class="form-group">'+
 							'<label>Mobile Phone</label>'+
@@ -95,7 +93,7 @@
 						'</div>' +
 						'<div class="form-group">'+
 							'<label>Email / Username</label>'+
-							'<input name="email" type="email" class="form-control" value="'+r_getCookie('tulisan_register_email')+'">'+
+							'<input name="email" type="email" class="form-control" value="'+r_getCookie('register_email')+'">'+
 						'</div>'+
 						'<div class="form-group">'+
 							'<label>Password</label>'+
@@ -110,6 +108,10 @@
 
 				$('main.parent').append(html);
 				p_formHandler('syncrom', 'addData', 'customer.html');
+
+				var countries = p_getData('operation', 'countryOption');
+						countries = countries.feedData;
+				$("#countries").html(listOption(countries));
 			}
 
 		</script>

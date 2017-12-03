@@ -7,14 +7,14 @@ $(function(){
 });
 
 function headerAdmin(){
-	if(r_getCookie('tulisan_user_name') == ""){
+	if(r_getCookie('user_name') == ""){
 		window.location.href = base_url + "/page/login.html";
 		return false;
 	}
 
 	var departement = "";
-	if(r_getCookie('tulisan_user_departement') != ""){
-		departement = r_getCookie('tulisan_user_departement');
+	if(r_getCookie('user_departement') != ""){
+		departement = r_getCookie('user_departement');
 	}
 
 	var html =
@@ -30,9 +30,9 @@ function headerAdmin(){
 					'<li>|</li>' +
 					'<li><form id="syncrom_viewstore" f-group="auth"><button type="submit" class="btn btn-custom">View Store</button></form></li>' +
 					'<li>|</li>';
-					if(r_getCookie('tulisan_user_name') != ""){
-						var res = r_getCookie('tulisan_user_name');
-						var img = r_getCookie('tulisan_user_picture');
+					if(r_getCookie('user_name') != ""){
+						var res = r_getCookie('user_name');
+						var img = r_getCookie('user_picture');
 						html = html + '<li><img src="../assets/' + ((img) ? 'users/' + img : 'PICS/pattern3.jpg') + '"></li>';
 						html = html + '<li>' + res + '</li>';
 					}
@@ -65,7 +65,7 @@ function pageAdmin(){
 						'<li class="blog-route"><a href="blog.html">USERS BLOG</a></li>'+
 						'<li class="customer-route"><a href="customer.html">CUSTOMERS</a></li>'+
 						'<li class="vendor-route"><a href="vendor.html">VENDORS</a></li>'+
-						'<li class="order-route"><a href="order.html">ORDERS</a></li>'+
+						'<li class="order-route"><a href="orders.html">ORDERS</a></li>'+
 						'<li class="hidden-md hidden-lg"><hr style="border-color: #000;"/></li>' +
 						'<li class="hidden-md hidden-lg"><form id="syncrom_viewstore_min" f-group="auth"><button type="submit" class="btn btn-custom">VIEW STORE</button></form></li>' +
 						'<li class="hidden-md hidden-lg"><form id="syncrom_logout_min" f-group="auth"><button type="submit" class="btn btn-custom">LOGOUT</button></form></li>' +
@@ -141,7 +141,8 @@ function pageAdmin(){
 			case "setting.html": $(".setting-route").addClass('active'); break;
 			case "formVendor.html":
 			case "vendor.html": $(".vendor-route").addClass('active'); break;
-			case "order.html": $(".order-route").addClass('active'); break;
+			case "orderItems.html":
+			case "orders.html": $(".order-route").addClass('active'); break;
 			default: $(".dashboard-route").addClass('active'); break;
 		}
 	}

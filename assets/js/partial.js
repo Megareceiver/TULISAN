@@ -70,8 +70,8 @@ function header(){
 						'<a href="' + base_url + '/page/media.html">MEDIA</a> |' +
 						'<a href="' + base_url + '/page/cart.html" id="cart_icon"><span class="fa fa-shopping-cart"></span></a> |';
 
-						if(r_getCookie('tulisan_user_name') != ""){
-							var res = r_getCookie('tulisan_user_name');
+						if(r_getCookie('user_name') != ""){
+							var res = r_getCookie('user_name');
 							if(res.length > 7){
 								res = res.substring(0, 5) + '...';
 							}

@@ -20,22 +20,20 @@
 
 			<main class="parent clear">
 				<div class="col-md-8 col-md-offset-2 div-normalize">
-					<form id="syncrom" f-group="auth">
-						 <button type="submit" class="btn btn-danger pull-right">Logout</button>
-					</form>
-					<h1>Your Account</h1>
+					<h1>Your Account <form id="syncrom" f-group="auth" class="pull-right"><button type="submit" class="btn btn-danger">Logout</button></form></h1>
 				</div>
 				<div class="col-md-8 col-md-offset-2 div-normalize basic-table">
 					<h3 class="header">Account settings</h3>
-					<h4><b>Jen's personal information</b></h4>
+					<h4><b><span id="pro_name">Jen's</span> personal information</b></h4>
 					<h5>Your Information <small><a href="#">Edit</a></small></h5>
-					<h5>Your email jen1810@yahoo.com Edit Saved addresses: 6 <small><a href="#">View</a></small></h5>
-					<h5>Email preferences <small><a href="#">Update</a></small></h5>
+					<h5>Your email : <span id="pro_email">jen1810@yahoo.com</span> <small><a href="#">Edit</a></small></h5>
+					<!-- <h5>Saved addresses: 6 <small><a href="#">View</a></small></h5> -->
+					<!-- <h5>Email preferences <small><a href="#">Update</a></small></h5> -->
 				</div>
-				<div class="col-md-8 col-md-offset-2 div-normalize basic-table">
+				<!-- <div class="col-md-8 col-md-offset-2 div-normalize basic-table">
 					<h4><b>Jen's payment information</b></h4>
 					<h5>Checkout settings: On Edit Credit cards saved: 3 <small><a href="#">Edit</a></small></h5>
-				</div>
+				</div> -->
 				<div class="col-md-8 col-md-offset-2 div-normalize clear">
 					<h3 class="header-custom">Recent orders</h3>
 				</div>
@@ -70,39 +68,41 @@
 
 			function loadData(){
 				var html = '';
-				var data = {
-					"recentOrders": [
-						{ "date": "August 1, 2014", "number": "#11234", "status": "Shipped", "link": "no", "linkTarget": "" },
-						{ "date": "August 1, 2014", "number": "#11234", "status": "Shipped", "link": "no", "linkTarget": "" },
-					],
-					"UnpaidOrders": [
-						{ "date": "August 1, 2014", "number": "#11234", "status": "Confirm", "link": "yes", "linkTarget": "#" },
-						{ "date": "August 1, 2014", "number": "#11234", "status": "Confirm", "link": "yes", "linkTarget": "#" },
-					]
-				};
+				var recentOrders = [];
+				var UnpaidOrders = [];
 
-				for(var loop=0; loop<data.recentOrders.length; loop++){
+				recentOrders = p_getData('order', 'recentOrders');
+				recentOrders = recentOrders.feedData;
+				unpaidOrders = p_getData('order', 'unpaidOrders');
+				unpaidOrders = unpaidOrders.feedData;
+
+				for(var loop=0; loop<recentOrders.length; loop++){
 					html = html +
 					'<ul>' +
-						'<li class="col-md-4">' + data.recentOrders[loop].date + '</li>' +
-						'<li class="col-md-4 col-sm-6 col-xs-6">Order ' + data.recentOrders[loop].number + '</li>' +
-						'<li class="col-md-4 col-sm-6 col-xs-6">' + data.recentOrders[loop].status + '</li>' +
+						'<li class="col-md-4">' + recentOrders[loop].date + '</li>' +
+						'<li class="col-md-4 col-sm-6 col-xs-6">Order #' + recentOrders[loop].number + '</li>' +
+						'<li class="col-md-4 col-sm-6 col-xs-6">' + recentOrders[loop].status + '</li>' +
 					'</ul>';
 				}
 
 				$("main #recentOrders").append(html);
 				html = "";
 
-				for(var loop=0; loop<data.UnpaidOrders.length; loop++){
+				console.log()
+				for(var loop=0; loop<unpaidOrders.length; loop++){
 					html = html +
 					'<ul>' +
-						'<li class="col-md-4">' + data.UnpaidOrders[loop].date + '</li>' +
-						'<li class="col-md-4 col-sm-6 col-xs-6">Order ' + data.UnpaidOrders[loop].number + '</li>' +
-						'<li class="col-md-4 col-sm-6 col-xs-6"><a href="#">' + data.UnpaidOrders[loop].status + '</a></li>' +
+						'<li class="col-md-4">' + unpaidOrders[loop].date + '</li>' +
+						'<li class="col-md-4 col-sm-6 col-xs-6">Order ' + unpaidOrders[loop].number + '</li>' +
+						'<li class="col-md-4 col-sm-6 col-xs-6"><a href="checkout.html?oid=' + unpaidOrders[loop].number + '">' + unpaidOrders[loop].status + '</a></li>' +
 					'</ul>';
 				}
 
 				$("main #UnpaidOrders").append(html);
+
+				//==================================================================
+				$("#pro_name").html(r_getCookie('user_name') + '\'s');
+				$("#pro_email").html(r_getCookie('user_email'));
 
 				p_formHandler('syncrom', 'logout', 'logout', 'yes');
 			}

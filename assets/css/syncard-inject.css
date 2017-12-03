@@ -134,7 +134,7 @@ iframe { border: 1px solid #ddd; background-color: #000; }
 .select-box select {
     font-family: inherit;
     border-radius: unset;
-    background-color: transparent;
+    background-color: #FFF;
     width: 100%;
     font-size: 12px;
     color: #000;

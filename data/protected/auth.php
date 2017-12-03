@@ -2,7 +2,8 @@
 
 	Class auth {
 		public function __construct(){
-			if (session_status() == PHP_SESSION_NONE) {session_start();} // session start
+			// if (session_status() == PHP_SESSION_NONE) {session_start();} // session start
+			if (session_id() == '') { session_start(); }
 			require_once('protected/config.php');
 			$this->db = openGate();
 		}
@@ -23,7 +24,7 @@
 			$gate = $this->db;
 			if($gate){
 
-				$sql = "SELECT u.username, u.name, u.type, d.name as departement, u.picture FROM users u LEFT JOIN departments d ON u.departmentId = d.idData WHERE u.username = '".$username."' AND u.password = md5('".$password."')";
+				$sql = "SELECT u.username, u.name, u.type, d.name as departement, u.picture, c.address, c.city, c.country, c.zipCode, c.phone, c.email FROM users u LEFT JOIN customers c ON u.idData = c.userId LEFT JOIN departments d ON u.departmentId = d.idData WHERE u.username = '".$username."' AND u.password = md5('".$password."')";
 
 				$result = $this->db->query($sql);
 				if($result){
@@ -39,6 +40,13 @@
 						$_SESSION['tulisan_user_type'] 				= $feedData['type'];
 						$_SESSION['tulisan_user_picture'] 		= $feedData['picture'];
 						$_SESSION['tulisan_user_departement'] = $feedData['departement'];
+
+						$_SESSION['tulisan_user_address'] = $feedData['address'];
+						$_SESSION['tulisan_user_city'] 		= $feedData['city'];
+						$_SESSION['tulisan_user_country'] = $feedData['country'];
+						$_SESSION['tulisan_user_zipCode'] = $feedData['zipCode'];
+						$_SESSION['tulisan_user_phone'] 	= $feedData['phone'];
+						$_SESSION['tulisan_user_email']		= $feedData['email'];
 					}
 				}
 			}

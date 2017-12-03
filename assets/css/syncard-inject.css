@@ -17,6 +17,10 @@ iframe { border: 1px solid #ddd; background-color: #000; }
     margin: auto;
 }
 
+.uppercase {
+    text-transform: uppercase;
+}
+
 /*.container{max-width: 687px;}*/
 .syn-center {
   text-align: center;
@@ -310,6 +314,7 @@ header.parent.fly {
   border-color: #FFF;
   padding: 0;
   margin-bottom: 0;
+  padding-top: 40px;
 }
 
 .navbar-default .navbar-toggle {
@@ -866,8 +871,8 @@ footer.parent .license {
 .blog-container:last-child { border: none; margin-bottom: 0; }
 
 .blog-box {
-  border-top: 1px solid #CCC;
-  border-bottom: 1px solid #CCC;
+  /*border-top: 1px solid #CCC;
+  border-bottom: 1px solid #CCC;*/
 }
 
 .blog-box,
@@ -885,6 +890,7 @@ footer.parent .license {
 
 .blog-box .blog-pic img {
   width: 100%;
+  margin-bottom: 20px;
 }
 
 .blog-box .blog-title,
@@ -1258,11 +1264,10 @@ img,
     right: -2px;
     width: 10px;
     height: 10px;
-    background-color: #B71C1C;
+    background-color: #E65100;
     text-align: center;
     font-size: 8px;
     z-index: 2;
-    border: 1px solid #E65100;
     -webkit-border-radius: 50%;
     -moz-border-radius: 50%;
     border-radius: 50%;
@@ -1361,6 +1366,7 @@ img,
   /*=============================================================================================*/
   /* NAVBAR */
   .navbar-default .navbar-brand { text-align: left; }
+  .navbar-default.plain { padding-top: 0; }
   .navbar-shortcut { top: 10px; font-size: 16px; }
   .navbar-shortcut .form-control,
   .navbar-shortcut .btn {

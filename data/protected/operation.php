@@ -2,7 +2,8 @@
 
 	Class operation {
 		public function __construct(){
-			if (session_status() == PHP_SESSION_NONE) {session_start();} // session start
+			// if (session_status() == PHP_SESSION_NONE) {session_start();} // session start
+			if (session_id() == '') { session_start(); }
 			require_once('protected/config.php');
 			$this->db = openGate();
 		}
@@ -26,7 +27,7 @@
 																"substring_index(group_concat(v.artworkId SEPARATOR ','), ',', 1) as artworkId",
 																"p.sku", "p.name", "p.description", "p.price", "p.material", "p.dimension", "p.lookBook1", "p.lookBook2", "s.title", "s.subtitle"), $post['keyword']); break;
 
-				case "productCart" 	: $resultList = $this->fetchAllRequest('products p JOIN products_variant v ON p.idData = v.productId',array("DISTINCT v.idData", "v.qty", "v.frontPicture","p.name", "p.price"), $post['keyword'], "ORDER BY v.idData", $post['page']); break;
+				case "productCart" 	: $resultList = $this->fetchAllRequest('products p JOIN products_variant v ON p.idData = v.productId',array("DISTINCT v.idData", "v.qty", "v.frontPicture","p.name", "p.price", "p.sku"), $post['keyword'], "ORDER BY v.idData", $post['page']); break;
 
 
 				case "productVariant" 				: $resultList = $this->fetchAllRequest('products p JOIN products_variant v ON p.idData = v.productId LEFT JOIN cms_story_artwork a ON v.artworkId = a.idData LEFT JOIN colors c ON v.colorId = c.idData', array("v.idData", "p.name", "v.qty", "v.size", "v.frontPicture", "a.name as artwork", "c.name as color"), $post['keyword'], "ORDER BY v.artWorkId ASC", $post['page']); break;
@@ -35,6 +36,8 @@
 				case "productColorOption" 	: $resultList = $this->fetchAllRecord('products_variant v JOIN colors a ON v.colorId = a.idData', array("DISTINCT a.name as caption", "a.idData as value"), $post['keyword'], "ORDER BY v.idData ASC"); break;
 				case "productSizeOption" 		: $resultList = $this->fetchAllRecord('products_variant v', array("DISTINCT v.size as caption", "v.size as value"), $post['keyword'], "ORDER BY v.idData ASC"); break;
 				// case "productVariantDetail" 	: $resultList = $this->fetchSingleRequest('products', array("frontPicture", "backPicture", "topPicture", "rightPicture", "bottomPicture", "leftPicture", "lookBook1", "lookBook2", "idData", "sku", "name", "description", "price", "material", "dimension", "storyId"), $post['keyword']); break;
+
+				case "countryOption" 	: $resultList = $this->fetchAllRecord('countries', array("DISTINCT country_name as caption", "country_code as value"), $post['keyword'], "ORDER BY country_name ASC"); break;
 
 				case "color" 					: $resultList = $this->fetchAllRequest('colors', array("name", "idData"), $post['keyword'], "ORDER BY name ASC", $post['page']); break;
 				case "colorOption" 		: $resultList = $this->fetchAllRecord('colors', array("name as caption", "idData as value"), $post['keyword'], "ORDER BY name ASC"); break;

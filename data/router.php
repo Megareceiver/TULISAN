@@ -9,6 +9,7 @@
 		switch($_GET['group']){
 			case "auth"				: require_once('protected/auth.php'); $route = new auth(); break;
 			case "operation"	: require_once('protected/operation.php'); $route = new operation(); break;
+			case "order"			: require_once('protected/order.php'); $route = new order(); break;
 			default  					: $error = 1; break;
 		}
 

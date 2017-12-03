@@ -143,16 +143,22 @@ function r_callBack(back, custom, data=null){
 }
 
 function p_login_set_cookie(data) {
-	r_setCookie('tulisan_user_name', data.name);
-	r_setCookie('tulisan_user_username', data.username);
-	r_setCookie('tulisan_user_type', data.type);
-	r_setCookie('tulisan_user_picture', data.picture);
-	r_setCookie('tulisan_user_departement', data.departement);
+	r_setCookie('user_name', data.name);
+	r_setCookie('user_username', data.username);
+	r_setCookie('user_type', data.type);
+	r_setCookie('user_picture', data.picture);
+	r_setCookie('user_departement', data.departement);
+	r_setCookie('user_address', data.address);
+	r_setCookie('user_city', data.city);
+	r_setCookie('user_country', data.country);
+	r_setCookie('user_zipCode', data.zipCode);
+	r_setCookie('user_phone', data.phone);
+	r_setCookie('user_email', data.email);
 }
 
 function p_signup_set_cookie(data) {
-	r_setCookie('tulisan_register_fullname', data.fullname);
-	r_setCookie('tulisan_register_email', data.email);
+	r_setCookie('register_fullname', data.fullname);
+	r_setCookie('register_email', data.email);
 }
 
 function r_setCookie(cname,cvalue,exdays="1") {
@@ -178,13 +184,19 @@ function r_getCookie(cname) {
 }
 
 function r_clearCookies(){
-	r_setCookie('adminPageFilter'				,'', 0.1);
-	r_setCookie('adminAlphaFilter'			,'', 0.1);
-	r_setCookie('tulisan_user_name'			,'', 0.1);
-	r_setCookie('tulisan_user_username'	,'', 0.1);
-	r_setCookie('tulisan_user_type'			,'', 0.1);
-	r_setCookie('tulisan_user_picture'			,'', 0.1);
-	r_setCookie('tulisan_user_departement'	,'', 0.1);
+	r_setCookie('adminPageFilter',	'', 0.1);
+	r_setCookie('adminAlphaFilter',	'', 0.1);
+	r_setCookie('user_name',				'', 0.1);
+	r_setCookie('user_username',		'', 0.1);
+	r_setCookie('user_type',				'', 0.1);
+	r_setCookie('user_picture',			'', 0.1);
+	r_setCookie('user_departement',	'', 0.1);
+	r_setCookie('user_address', 		'', 0.1);
+	r_setCookie('user_city', 				'', 0.1);
+	r_setCookie('user_country', 		'', 0.1);
+	r_setCookie('user_zipCode', 		'', 0.1);
+	r_setCookie('user_phone', 			'', 0.1);
+	r_setCookie('user_email', 			'', 0.1);
 }
 
 function checkboxActivator(){

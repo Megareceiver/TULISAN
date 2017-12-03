@@ -57,10 +57,7 @@
 
 			function loadData(){
 				var html = '';
-				var data = [
-					{ 'productId': 'LDA02014', 'productName': 'Beach Bag', 'productPicture': 'db_file_img_539_350x350.jpg', 'price': '86000', 'quantity': '1' },
-					{ 'productId': 'LDA02012', 'productName': 'Daisy Loops', 'productPicture': 'db_file_img_740_350x350.jpg', 'price': '20000', 'quantity': '1' },
-				];
+				var data = [];
 
 				var arr = [];
 				if(r_getCookie('TULISAN_USER_CART_STATUS') == 'active'){
@@ -86,7 +83,7 @@
 							'<button type="button" class="btn btn-danger" delete-list="' + data[loop].idData + '">Delete</button>' +
 						'</li>' +
 						'<li class="col-md-3">' + currencyFormat(data[loop].price) + '</li>' +
-						'<li class="col-md-2 col-sm-4 col-xs-4"><input type="number" class="form-control price" d-price="' + data[loop].price + '" value="' + arr[loop].qty + '" /></li>' +
+						'<li class="col-md-2 col-sm-4 col-xs-4"><input type="number" class="form-control price" min="1" max="' + data[loop].qty + '" d-price="' + data[loop].price + '" variantId="' + data[loop].idData + '" value="' + arr[loop].qty + '" /></li>' +
 					'</ul>';
 					html = html + '<div class="clearfix"></div>';
 
@@ -114,6 +111,7 @@
 
 				$('.price').on('change', function(){
 					priceSummary();
+					add_to_cart($(this).attr('variantId'), $(this).val());
 				});
 
 				$('.price').on('blur', function(){
@@ -124,7 +122,7 @@
 				/* delete function*/
 				$('[delete-list]').on('click', function(){
 					target = $(this).attr('delete-list');
-					$("#" + target).remove();
+					deleteItem(target);
 					priceSummary();
 					itemCounter = itemCounter -1;
 					itemsTotal = '(' + itemCounter + ((itemCounter > 1) ? " items" : ' item' ) + ')';
@@ -152,11 +150,54 @@
 			}
 
 			function arraySplit(definition) {
-			  // return Object.values(definition).map(function(e.variantId) {
-			  //   return e;
-			  // });
-
 				return definition.map(function(o) { return o.variantId; })
+			}
+
+			function deleteItem(variantId){
+				var arr = [];
+				if(r_getCookie('TULISAN_USER_CART_STATUS') != ''){
+					arr = r_getCookie('TULISAN_USER_CART_ARRAY');
+					arr = JSON.parse(arr);
+
+					index = arr.map(function(o) { return o.variantId; }).indexOf(variantId);
+					if(index != -1){
+						arr.splice(index, 1);
+
+						if(arr.length == 0) {
+							r_setCookie('TULISAN_USER_CART_STATUS', '');
+							$("#cart_icon").removeClass('active');
+						}
+						arr = JSON.stringify(arr);
+						r_setCookie('TULISAN_USER_CART_ARRAY', arr);
+						$("#" + variantId + ".cart-cell").remove();
+					}
+				}
+			}
+
+			function add_to_cart(variantId, qty){
+
+				var arr = [];
+				var dum = [];
+				var qty = parseInt(qty);
+
+				//call
+				if(r_getCookie('TULISAN_USER_CART_STATUS') != ''){
+					arr = r_getCookie('TULISAN_USER_CART_ARRAY');
+					arr = JSON.parse(arr);
+
+					index = arr.map(function(o) { return o.variantId; }).indexOf(variantId);
+					if(index != -1){
+						// qty_dumb = parseInt(arr[index].qty);
+						// qty = 1 + qty_dumb;
+
+						arr[index].qty = qty;
+					}
+
+					arr = JSON.stringify(arr);
+				}
+
+				r_setCookie('TULISAN_USER_CART_ARRAY', arr);
+				console.log(arr);
 			}
 		</script>
 	</body>

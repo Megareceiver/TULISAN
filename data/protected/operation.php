@@ -735,7 +735,7 @@
 					$temp   = "";
 				}
 
-				$conditions = ($conditions != "") ? "WHERE ".$conditions : "";
+				$conditions = ($conditions != "") ? "WHERE ".str_replace('\\', '', $conditions) : "";
 
 
 				$sql = "SELECT ".$fields." FROM ".$table." ".$conditions." ".$orderBy." ";
@@ -792,7 +792,7 @@
 					$temp   = "";
 				}
 
-				$conditions = ($conditions != "") ? "WHERE ".$conditions : "";
+				$conditions = ($conditions != "") ? "WHERE ".str_replace('\\', '', $conditions) : "";
 
 
 				$temp = intval($paging);
@@ -854,7 +854,7 @@
 					$temp   = "";
 				}
 
-				$conditions = ($conditions != "") ? "WHERE ".$conditions : "";
+				$conditions = ($conditions != "") ? "WHERE ".str_replace('\\', '', $conditions) : "";
 
 				$sql = "SELECT ".$fields." FROM ".$table." ".$conditions;
 

@@ -460,7 +460,7 @@ function currencyFormat(num, curr = 'Rp. ') {
 }
 
 //country list option
-function listOption(data){ console.log(data);
+function listOption(data){
 	var html  = "";
 	var state = "";
 	for(var loop=0; loop<data.length; loop++){

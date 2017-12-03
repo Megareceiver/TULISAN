@@ -24,7 +24,7 @@
 			$gate = $this->db;
 			if($gate){
 
-				$sql = "SELECT u.username, u.name, u.type, d.name as departement, u.picture, c.address, c.city, c.country, c.zipCode, c.phone, c.email FROM users u LEFT JOIN customers c ON u.idData = c.userId LEFT JOIN departments d ON u.departmentId = d.idData WHERE u.username = '".$username."' AND u.password = md5('".$password."')";
+				$sql = "SELECT c.idData, u.username, u.name, u.type, d.name as departement, u.picture, c.address, c.city, c.country as country_code, y.country_name as country, c.zipCode, c.phone, c.email FROM users u LEFT JOIN customers c ON u.idData = c.userId LEFT JOIN departments d ON u.departmentId = d.idData LEFT JOIN countries y ON c.country = y.country_code WHERE u.username = '".$username."' AND u.password = md5('".$password."')";
 
 				$result = $this->db->query($sql);
 				if($result){
@@ -35,18 +35,20 @@
 						$feedType   = "success";
 						$feedMessage= "The process has been successful";
 
+						$_SESSION['tulisan_customer_id'] 			= $feedData['idData'];
 						$_SESSION['tulisan_user_name'] 				= $feedData['name'];
 						$_SESSION['tulisan_user_username'] 		= $feedData['username'];
 						$_SESSION['tulisan_user_type'] 				= $feedData['type'];
 						$_SESSION['tulisan_user_picture'] 		= $feedData['picture'];
 						$_SESSION['tulisan_user_departement'] = $feedData['departement'];
 
-						$_SESSION['tulisan_user_address'] = $feedData['address'];
-						$_SESSION['tulisan_user_city'] 		= $feedData['city'];
-						$_SESSION['tulisan_user_country'] = $feedData['country'];
-						$_SESSION['tulisan_user_zipCode'] = $feedData['zipCode'];
-						$_SESSION['tulisan_user_phone'] 	= $feedData['phone'];
-						$_SESSION['tulisan_user_email']		= $feedData['email'];
+						$_SESSION['tulisan_user_address'] 		 = $feedData['address'];
+						$_SESSION['tulisan_user_city'] 				 = $feedData['city'];
+						$_SESSION['tulisan_user_country'] 		 = $feedData['country'];
+						$_SESSION['tulisan_user_country_code'] = $feedData['country_code'];
+						$_SESSION['tulisan_user_zipCode'] 		 = $feedData['zipCode'];
+						$_SESSION['tulisan_user_phone'] 			 = $feedData['phone'];
+						$_SESSION['tulisan_user_email']				 = $feedData['email'];
 					}
 				}
 			}

@@ -36,6 +36,16 @@
 						</ul>
 					</div>
 				</div>
+				<div id="go-shop" class="col-md-8 col-md-offset-2 div-normalize" style="display:none">
+					<div class="table-box">
+						<ul class="cart-cell clear">
+							<li class="col-md-7 hidden-sm hidden-xs"></li>
+							<li class="col-md-5">
+								<a href="shop.html" class="btn btn-warning form-control">Shopping now</a>
+							</li>
+						</ul>
+					</div>
+				</div>
 			</main>
 
 			<footer class="parent"></footer>
@@ -92,7 +102,11 @@
 
 				html = html + '</div>';
 
-				if(data.length == 0) html = "<div class='col-md-12 text-danger'>No items added yet</div>" + html;
+				if(data.length == 0) {
+					html = "<div class='col-md-12 text-danger'>No items added yet</div>" + html;
+					$("#cart-summary").hide();
+					$("#go-shop").show();
+				}
 
 				$("main #cart-list").append(html);
 
@@ -133,6 +147,7 @@
 
 				/*checkout redirect*/
 				$("#checkOut").on("click", function(){
+					r_setCookie('checkOutTab', 'shippingTab');
 					window.location.replace(base_url + "/page/checkout.html");
 				});
 			}
@@ -197,7 +212,6 @@
 				}
 
 				r_setCookie('TULISAN_USER_CART_ARRAY', arr);
-				console.log(arr);
 			}
 		</script>
 	</body>

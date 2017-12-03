@@ -141,13 +141,14 @@
 							<div class='blog-box text-left norm'>
 								<h1 class='fontserif'><b>Thank you for your order!</b></h1>
 								<div class='blog-description'>
-									<h5 class="text-warning"><b>Your Order ID is <span id="orderNumber">#2350</span></b></h5>
+									<h5 class="text-warning"><b>Your Order ID is <span id="orderNumber">#</span></b></h5>
 									<h5><i>Please put this Order ID in the message reference when making your transfer.</i></h5>
 									<div class="col-md-6 syn-clear">
 										<h3>SHIPPING ADDRESS</h3>
 										<h5 class="syn-plus"><b class="sessionName" >&nbsp;</b></h5>
 										<h5><i class="sessionAddress">&nbsp;</i></h4>
 										<h5><i class="sessionCity">&nbsp;</i></h5>
+										<h5><i class="sessionCountry">&nbsp;</i></h5>
 										<h5><i class="sessionPhone">&nbsp;</i></h5>
 									</div>
 									<div class="col-md-6 syn-clear">
@@ -155,6 +156,7 @@
 										<h5 class="syn-plus"><b class="sessionName" >&nbsp;</b></h5>
 										<h5><i class="sessionAddress">&nbsp;</i></h4>
 										<h5><i class="sessionCity">&nbsp;</i></h5>
+										<h5><i class="sessionCountry">&nbsp;</i></h5>
 										<h5><i class="sessionPhone">&nbsp;</i></h5>
 									</div>
 								</div>
@@ -187,7 +189,7 @@
 										<hr/>
 										<h5><i>After making your transfer, click this button to confirm.</i></h5>
 									</div>
-									<button type="button" class="btn btn-warning syn-plus" id="confirmButton">Confirm Payment</button>
+									<a href="#" class="btn btn-warning syn-plus" id="confirmButton">Confirm Payment</a>
 								</div>
 							</div>
 						</div>
@@ -228,39 +230,45 @@
 						"tulisan_customerCity" 		: r_getCookie('user_city'),
 						"tulisan_customerZipCode" : r_getCookie('user_zipCode'),
 						"tulisan_customerPhone" 	: r_getCookie('user_phone'),
+						"tulisan_customerCountry" : r_getCookie('user_country'),
 					};
-				}else if (r_getCookie('user_name_alternative') != "" && r_getCookie('user_name_alternative') != null && r_getCookie('user_name_alternative') != undefined) {
+				} else if (r_getCookie('user_name_alternative') != "" && r_getCookie('user_name_alternative') != null && r_getCookie('user_name_alternative') != undefined) {
 					data = {
 						"tulisan_customerName" 		: r_getCookie('user_name_alternative') ,
 						"tulisan_customerAddress" : r_getCookie('user_address_alternative'),
 						"tulisan_customerCity" 		: r_getCookie('user_city_alternative'),
 						"tulisan_customerZipCode" : r_getCookie('user_zipCode_alternative'),
 						"tulisan_customerPhone" 	: r_getCookie('user_phone_alternative'),
+						"tulisan_customerCountry" : r_getCookie('user_country_alternative'),
 					};
 				}
 
-				if(data != null){
+				if(data != null && data.tulisan_customerName != "" && data.tulisan_customerName != null && data.tulisan_customerName != undefined){
 					data.tulisan_customerAddress = data.tulisan_customerAddress.replace(/(?:\r\n|\r|\n)/g, '<br />');
 					$(".sessionName").html(data.tulisan_customerName);
 					$(".sessionAddress").html(data.tulisan_customerAddress);
 					$(".sessionCity").html(data.tulisan_customerCity + " " + data.tulisan_customerZipCode);
+					$(".sessionCountry").html(data.tulisan_customerCountry);
 					$(".sessionPhone").html("phone: " + data.tulisan_customerPhone);
 
 					$("#recentShipping").show();
 				}
-
 
 				var countries = p_getData('operation', 'countryOption');
 						countries = countries.feedData;
 				$("#country").html(listOption(countries));
 				$("#alternativeShipping").unbind().on("click", function(){ keepAlternative(); });
 
-				$("[t-target]").on("click", function(){
-					if($(this).attr('t-target')){
-						keepTabPosition($(this).attr('t-target'));
-						tabWizardChange($(this));
-					}
-				});
+				if(r_getCookie('checkOutTab') == "placeTab") {
+					$("[t-target]").unbind();
+				}else {
+					$("[t-target]").on("click", function(){
+						if($(this).attr('t-target')){
+							keepTabPosition($(this).attr('t-target'));
+							tabWizardChange($(this));
+						}
+					});
+				}
 
 				$("[name=bank]").on("click", function(){
 					if($(this).val() == '1'){
@@ -271,25 +279,57 @@
 				});
 
 				//===========================================================================================
-				var items = [
-					{ 'productId': 'LDA02014', 'productName': 'Beach Bag', 'price': '86000', 'quantity': '1' },
-					{ 'productId': 'LDA02012', 'productName': 'Daisy Loops','price': '20000', 'quantity': '1' },
-				];
+				var items = [];
+				var arr 	= [];
+				var oid 	= "";
+				if(getParam('oid') != undefined && getParam('oid') != ""){
+					oid = getParam('oid');
+					//get shipping info
+					var dumb = [];
+					dumb = p_getData('order', 'orderInfo', '1', 'o.idData = "' + oid + '"');
+					dumb = dumb.feedData;
 
-				var arr = [];
-				if(r_getCookie('TULISAN_USER_CART_STATUS') == 'active'){
-					arr = r_getCookie('TULISAN_USER_CART_ARRAY');
-					arr = JSON.parse(arr);
-					dumb_arr = (arraySplit(arr)).sort();
-					variantId = dumb_arr.join();
-					items = p_getData('operation', 'productCart', '1', 'v.idData IN (' + variantId + ') AND v.qty > 0');
+					$(".sessionName").html(dumb.name);
+					$(".sessionAddress").html(dumb.address);
+					$(".sessionCity").html(dumb.city + " " + dumb.zipCode);
+					$(".sessionCountry").html(dumb.country);
+					$(".sessionPhone").html("phone: " + dumb.phone);
+
+					if(dumb.paymentMethod == "DOKU WALLET"){
+							$("#transferInfo").attr("style", "display:none");
+							$("#confirmButton").html("DOKU Payment");
+							$("#confirmButton").attr("href", "#");
+					}else{
+						$("#transferInfo").attr("style", "display:block");
+						$("#confirmButton").html("Confirm Payment");
+						$("#confirmButton").attr("href", "confirm.html");
+					}
+
+					//get item list
+					$('#orderNumber').html("#" + oid);
+					items = p_getData('order', 'itemsCart', '1', 'i.orderId = "' + oid + '"');
 					items = items.feedData;
+				}else{
+					if(r_getCookie('TULISAN_USER_CART_STATUS') == 'active'){
+						arr = r_getCookie('TULISAN_USER_CART_ARRAY');
+						arr = JSON.parse(arr);
+						dumb_arr = (arraySplit(arr)).sort();
+						variantId = dumb_arr.join();
+						items = p_getData('operation', 'productCart', '1', 'v.idData IN (' + variantId + ')');
+						items = items.feedData;
+					}
 				}
 
 				var grandTotal = 0;
-
+				var qty = 0;
 				for(var loop=0; loop<items.length; loop++){
-					total = parseInt(items[loop].price) * parseInt(arr[loop].qty);
+					if(oid == ""){
+						qty = arr[loop].qty;
+					}else{
+						qty = items[loop].qty;
+					}
+
+					total = parseInt(items[loop].price) * parseInt(qty);
 					grandTotal = grandTotal + total;
 
 					html = html +
@@ -297,7 +337,7 @@
 						'<li class="col-xs-3">' + items[loop].name + '</li>' +
 						'<li class="col-xs-3">' + items[loop].sku + '</li>' +
 						'<li class="col-xs-2 text-right">' + currencyFormat(items[loop].price) + '</li>' +
-						'<li class="col-xs-2 text-center">' + arr[loop].qty + '</li>' +
+						'<li class="col-xs-2 text-center">' + qty + '</li>' +
 						'<li class="col-xs-2 text-right">' + currencyFormat(String(total)) + '</li>' +
 					'</ul>';
 				}
@@ -321,22 +361,26 @@
 				var address  = $('#alternativeShippingForm #address').val();
 				var city 		 = $('#alternativeShippingForm #city').val();
 				var zipCode  = $('#alternativeShippingForm #zipCode').val();
-				var country  = $('#alternativeShippingForm #country').val();
+				var country_code  = $('#alternativeShippingForm #country').val();
 				var phone 	 = $('#alternativeShippingForm #mobilePhone').val();
 				var email 	 = $('#alternativeShippingForm #email').val();
 
+				var country  = $('#alternativeShippingForm #country option:selected').text();
+
 				if(fullName != "" && address != "" && city != "" && zipCode != "" && country != "" && phone != "" && email != ""){
-					r_setCookie('user_name_alternative', fullName);
+					r_setCookie('user_name_alternative', 		fullName);
 					r_setCookie('user_address_alternative', address);
 					r_setCookie('user_city_alternative', 		city);
 					r_setCookie('user_country_alternative', country);
 					r_setCookie('user_zipCode_alternative', zipCode);
 					r_setCookie('user_phone_alternative', 	phone);
 					r_setCookie('user_email_alternative', 	email);
+					r_setCookie('user_country_code_alternative', 	country_code);
 
 					$(".sessionName").html(fullName);
 					$(".sessionAddress").html(address);
 					$(".sessionCity").html(city + " " + zipCode);
+					$(".sessionCountry").html(country);
 					$(".sessionPhone").html("phone: " + phone);
 
 					keepTabPosition("#2");
@@ -347,18 +391,21 @@
 			}
 
 			function placeOrder(){
-				if($("#paymentForm #paymentMethod").val() == "DOKU WALLET"){
-						$("#transferInfo").attr("style", "display:none");
-						$("#confirmButton").html("DOKU Payment");
-				}else{
-					$("#transferInfo").attr("style", "display:block");
-					$("#confirmButton").html("Confirm Payment");
+
+				if(sendOrder()){
+					if($("#paymentForm #paymentMethod").val() == "DOKU WALLET"){
+							$("#transferInfo").attr("style", "display:none");
+							$("#confirmButton").html("DOKU Payment");
+							$("#confirmButton").attr("href", "#");
+					}else{
+						$("#transferInfo").attr("style", "display:block");
+						$("#confirmButton").html("Confirm Payment");
+						$("#confirmButton").attr("href", "confirm.html");
+					}
+
+					keepTabPosition("#3");
+					tabWizardChange($("#placeTab"));
 				}
-
-				keepTabPosition("#3");
-				tabWizardChange($("#placeTab"));
-
-				// r_setCookie('TULISAN_USER_CART_ARRAY', '');
 			}
 
 			function sendOrder(){
@@ -369,19 +416,21 @@
 
 				 //check login
 				 if (r_getCookie('user_name_alternative') != "" && r_getCookie('user_name_alternative') != null && r_getCookie('user_name_alternative') != undefined) {
-					cookieData['name'] 		= r_getCookie('user_name_alternative') ,
-					cookieData['address'] = r_getCookie('user_address_alternative'),
-					cookieData['city'] 		= r_getCookie('user_city_alternative'),
-					cookieData['zipCode'] = r_getCookie('user_zipCode_alternative'),
-					cookieData['phone'] 	= r_getCookie('user_phone_alternative'),
-					cookieData['email'] 	= r_getCookie('user_email_alternative'),
+					cookieData['name'] 		= r_getCookie('user_name_alternative') ;
+					cookieData['address'] = r_getCookie('user_address_alternative');
+					cookieData['city'] 		= r_getCookie('user_city_alternative');
+					cookieData['zipCode'] = r_getCookie('user_zipCode_alternative');
+					cookieData['country'] = r_getCookie('user_country_code_alternative');
+					cookieData['phone'] 	= r_getCookie('user_phone_alternative');
+					cookieData['email'] 	= r_getCookie('user_email_alternative');
  				}else if(r_getCookie('user_username') != "" && r_getCookie('user_username') != null && r_getCookie('user_username') != undefined){
-					cookieData['name'] 		= r_getCookie('user_name') ,
-					cookieData['address'] = r_getCookie('user_address'),
-					cookieData['city'] 		= r_getCookie('user_city'),
-					cookieData['zipCode'] = r_getCookie('user_zipCode'),
-					cookieData['phone'] 	= r_getCookie('user_phone'),
-					cookieData['email'] 	= r_getCookie('user_email'),
+					cookieData['name'] 		= r_getCookie('user_name');
+					cookieData['address'] = r_getCookie('user_address');
+					cookieData['city'] 		= r_getCookie('user_city');
+					cookieData['zipCode'] = r_getCookie('user_zipCode');
+					cookieData['country'] = r_getCookie('user_country_code');
+					cookieData['phone'] 	= r_getCookie('user_phone');
+					cookieData['email'] 	= r_getCookie('user_email');
  				}
 
 				cookieData['items'] = r_getCookie('TULISAN_USER_CART_ARRAY');
@@ -392,7 +441,7 @@
 				localData['bank']					 = "";
 
 				if(localData['paymentMethod'] == "BANK TRANSFER"){
-					localData['bank']	= ($("#paymentMethod").val() == '0') ? "MANDIRI" : $("#otherBank").val();
+					localData['bank']	= ($("[name=bank]").val() == '0') ? "MANDIRI" : $("#otherBank").val();
 				}
 
 				param = {
@@ -400,6 +449,7 @@
 					"address" 			: cookieData['address'],
 					"city" 					: cookieData['city'],
 					"zipCode" 			: cookieData['zipCode'],
+					"country" 			: cookieData['country'],
 					"phone" 				: cookieData['phone'],
 					"email" 				: cookieData['email'],
 					"total"					: localData['total'],
@@ -409,14 +459,35 @@
 				};
 
 				$.ajax({
-					url: base_url + "/data/router.php?session=addData&group=order",
+					url: base_url + "/data/router.php?session=addData&group=order&target=order",
 					type: 'post',
 					dataType: 'json',
 					async: false,
 					data: param,
 					success: function(result){
 						console.log(result);
-						res = true;
+
+						if(result.feedStatus == "success") {
+							res = true;
+							$("[t-target]").unbind();
+							$("#cart_icon").removeClass('active');
+							r_setCookie('TULISAN_USER_CART_STATUS', '');
+							r_setCookie('TULISAN_USER_CART_ARRAY', '');
+
+							if(r_getCookie('user_username') == "" || r_getCookie('user_username') == null || r_getCookie('user_username') == undefined){
+								r_setCookie('user_name_alternative', 		'', 0.1);
+								r_setCookie('user_address_alternative', '', 0.1);
+								r_setCookie('user_city_alternative', 		'', 0.1);
+								r_setCookie('user_country_alternative', '', 0.1);
+								r_setCookie('user_zipCode_alternative', '', 0.1);
+								r_setCookie('user_phone_alternative', 	'', 0.1);
+								r_setCookie('user_email_alternative', 	'', 0.1);
+								r_setCookie('user_country_name_alternative', 	'', 0.1);
+							}
+
+							$("#orderNumber").html("#" + result.feedId);
+							window.history.pushState("", "Tulisan", "checkout.html?oid=" + result.feedId);
+						}
 					},
 					complete: function(xhr,status) {  },
 					error: function(xhr,status,error) { console.log(xhr); }

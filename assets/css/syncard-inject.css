@@ -338,7 +338,7 @@ header.parent.fly {
 .navbar-shortcut {
   display: inline-block;
   position: absolute;
-  top: 15px;
+  top: -20px;
   right: 25px;
   text-align: right;
   z-index: 2;

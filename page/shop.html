@@ -149,8 +149,8 @@
 
 				html = html + '</ul>';
 				html = html +
-				'<h5 class="fontserif title">SHOP BY COLOR <span toggle-target="#colorList" class="left-menu-toggle fa fa-chevron-down syn-fixed-right "></span></h3>' +
-				'<ul id="colorList" style="display: none">';
+				'<h5 class="fontserif title">SHOP BY COLOR <span toggle-target="#colorList" class="left-menu-toggle fa fa-chevron-up syn-fixed-right "></span></h3>' +
+				'<ul id="colorList" class="active">';
 
 				for(var loop = 0; loop < color.length; loop++){
 					html = html + '<li><a href="shop.html?color=' + color[loop].idData + '">' + color[loop].name + '</a></li>';
@@ -158,8 +158,10 @@
 
 				html = html + '</ul>';
 				html = html +
-				'<h5 class="fontserif title">SHOP BY STORY <span toggle-target="#storyList" class="left-menu-toggle fa fa-chevron-down syn-fixed-right "></span></h3>' +
-				'<ul id="storyList" style="display: none">';
+				'<h5 class="fontserif title">SHOP BY STORY <span toggle-target="#storyList" class="left-menu-toggle fa fa-chevron-up syn-fixed-right "></span></h3>' +
+				'<ul id="storyList" class="active">';
+				// '<ul id="storyList" style="display: none">'; if wanna initial hide
+
 				for(var loop = 0; loop < story.length; loop++){
 					html = html + '<li><a href="shop.html?story=' + story[loop].idData + '">' + story[loop].title + '</a></li>';
 				}

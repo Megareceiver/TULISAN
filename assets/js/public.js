@@ -151,6 +151,7 @@ function p_login_set_cookie(data) {
 	r_setCookie('user_address', data.address);
 	r_setCookie('user_city', data.city);
 	r_setCookie('user_country', data.country);
+	r_setCookie('user_country_code', data.country_code);
 	r_setCookie('user_zipCode', data.zipCode);
 	r_setCookie('user_phone', data.phone);
 	r_setCookie('user_email', data.email);

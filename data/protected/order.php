@@ -10,23 +10,8 @@
 
 		public function requestData($post, $target){
 			switch($target){
-				case "summary" 				: $resultList = $this->summary(); break;
-
-				case "product" 				: $resultList = $this->fetchAllRequest('products p JOIN products_variant v ON p.idData = v.productId', array("DISTINCT p.idData", "(SELECT x.frontPicture FROM products_variant x WHERE x.productId = p.idData ORDER BY x.idData ASC LIMIT 1) as frontPicture", "p.sku", "p.name", "p.description", "p.price"), $post['keyword'], "ORDER BY p.name ASC", $post['page']); break;
-				case "productFetch" 	: $resultList = $this->fetchSingleRequest('products', array("idData", "sku", "name", "description", "price", "material", "dimension", "storyId", "lookBook1", "lookBook2"), $post['keyword']); break;
-				case "productDetail" 	: $resultList = $this->fetchSingleRequest(
-																'products p JOIN products_variant v ON p.idData = v.productId JOIN cms_story s ON p.storyId = s.idData',
-																array("DISTINCT v.idData", "v.qty",
-																"substring_index(group_concat(v.frontPicture SEPARATOR ','), ',', 1) as frontPicture",
-																"substring_index(group_concat(v.backPicture SEPARATOR ','), ',', 1) as backPicture",
-																"substring_index(group_concat(v.topPicture SEPARATOR ','), ',', 1) as topPicture",
-																"substring_index(group_concat(v.rightPicture SEPARATOR ','), ',', 1) as rightPicture",
-																"substring_index(group_concat(v.leftPicture SEPARATOR ','), ',', 1) as leftPicture",
-																"substring_index(group_concat(v.bottomPicture SEPARATOR ','), ',', 1) as bottomPicture",
-																"substring_index(group_concat(v.artworkId SEPARATOR ','), ',', 1) as artworkId",
-																"p.sku", "p.name", "p.description", "p.price", "p.material", "p.dimension", "p.lookBook1", "p.lookBook2", "s.title", "s.subtitle"), $post['keyword']); break;
-
-				case "productCart" 	: $resultList = $this->fetchAllRequest('products p JOIN products_variant v ON p.idData = v.productId',array("DISTINCT v.idData", "v.qty", "v.frontPicture","p.name", "p.price", "p.sku"), $post['keyword'], "ORDER BY v.idData", $post['page']); break;
+				case "itemsCart" 		: $resultList = $this->fetchAllRecord('orders_item i JOIN products_variant v ON i.variantId = v.idData JOIN products p ON v.productId = p.idData',array("p.name", "p.sku", "i.price", "i.qty"), $post['keyword'], "ORDER BY i.idData"); break;
+				case "orderInfo" 		: $resultList = $this->fetchSingleRequest('orders o JOIN countries c ON o.country = c.country_code',array("o.name", "o.address", "o.city", "o.zipCode", "c.country_name as country", "o.phone", "o.email", "o.paymentMethod"), $post['keyword']); break;
 
 				default	   					: $resultList = array( "feedStatus" => "failed", "feedType" => "danger", "feedMessage" => "Something went wrong, failed to collect data!", "feedData" => array()); break;
 			}
@@ -52,26 +37,33 @@
 
 		public function addData($post, $target){
 			switch($target){
-				case "product"  :
-					$fields = array("name", "sku", "description", "material", "dimension", "price", "storyId");
+				case "order"  :
+					$fields = array("name", "address", "city", "zipCode", "country", "phone", "email", "total", "paymentMethod", "bank");
 					$values = array();
 					foreach ($fields as $key) {
 						$value = (isset($post[$key]) && $post[$key] != "") ? $post[$key] : "";
 						array_push($values, $value);
 					}
 
-					$resultList = $this->insert('products', $fields, $values);
+					array_push($fields, "customerId");
+					array_push($values, ((isset($_SESSION['tulisan_customer_id']) ? $_SESSION['tulisan_customer_id'] : '0')));
+
+					array_push($fields, "status");
+					array_push($values, "Waiting for payment");
+
+					$resultList = $this->insert('orders', $fields, $values);
 
 					if($resultList["feedStatus"] == "success") {
+						$resultList['resultItem'] = array();
 
-						if(isset($_FILES["lookBook1"])){
-							$upload = $this->uploadZoomImage($_FILES["lookBook1"], "products", "products", "lookBook1", $resultList["feedId"], '7');
-							array_push($resultList, array("feedUpload" => $upload['feedMessage']));
-						}
+						$fields = array("orderId", "variantId", "price", "qty");
+						$endLoop = count($post['items']);
+						for($loop=0;$loop<$endLoop;$loop++){
+							$item 			= $post['items'][$loop];
+							$values 		= '"'.$resultList["feedId"].'", "'.$item["variantId"].'",(SELECT price FROM products p JOIN products_variant v ON p.idData = v.productId WHERE v.idData = "'.$item['variantId'].'"), "'.$item['qty'].'"';
+							$resultItem = $this->insert('orders_item', $fields, $values);
 
-						if(isset($_FILES["lookBook2"])){
-							$upload = $this->uploadZoomImage($_FILES["lookBook2"], "products", "products", "lookBook2", $resultList["feedId"], '8');
-							array_push($resultList, array("feedUpload" => $upload['feedMessage']));
+							array_push($resultList['resultItem'], $resultItem);
 						}
 					}
 				break;
@@ -377,7 +369,8 @@
 					$temp   = "";
 				}
 
-				$sql = "INSERT INTO ".$table."(".$fields.", createdBy, createdDate) VALUES (".$values.", '".$_SESSION['tulisan_user_username']."',NOW())";
+				$user = (isset($_SESSION['tulisan_user_username']) ? $_SESSION['tulisan_user_username'] : 'guest');
+				$sql = "INSERT INTO ".$table."(".$fields.", createdBy, createdDate) VALUES (".$values.", '".$user."',NOW())";
 
 				$result = $this->db->query($sql);
 				if($result){

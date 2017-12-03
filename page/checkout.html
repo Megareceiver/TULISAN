@@ -288,6 +288,11 @@
 					var dumb = [];
 					dumb = p_getData('order', 'orderInfo', '1', 'o.idData = "' + oid + '"');
 					dumb = dumb.feedData;
+					
+					if(dumb == undefined || dumb.length == 0 || dumb == false){
+						window.location.href = "shop.html";
+						return false;
+					}
 
 					$(".sessionName").html(dumb.name);
 					$(".sessionAddress").html(dumb.address);

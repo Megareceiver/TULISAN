@@ -139,15 +139,16 @@
 				    '</div>';
 			    }
 
-			    $("#myCarousel .carousel-inner").html(home);
+			  $("#myCarousel .carousel-inner").html(home);
 				$(".jumbo-tron img").css({'height':'600px', 'object-fit':'cover', 'width': '100%'});
 			}
 
 			function showMore(){
-				html = "<hr/>";
+				var html = "<hr/>";
 				html = html + '<div class="col-md-12"><h4 class="margin-top">Older post</h4></div>';
 				html = html + '<div class="clearfix"></div>';
 				html = html + '<div class="clearfix margin-top"></div>';
+
 				for(var loop=0; loop<articlesRest.length; loop++){
 					if(articlesRest[loop].link != ""){ html = html + '<a href="' + articlesRest[loop].link + '">'; }
 					html = html +
@@ -158,9 +159,9 @@
 						'</div>' +
 					'</div>';
 					if(articlesRest[loop].link != ""){ html = html + '</a>'; }
-					$("#articles-section").append(html);
-					$("#moreButton").remove();
 				}
+				$("#articles-section").append(html);
+				$("#moreButton").remove();
 			}
 		</script>
 	</body>

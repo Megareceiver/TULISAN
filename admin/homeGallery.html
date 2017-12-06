@@ -42,16 +42,16 @@
 					'<div class="operation-group">'+
 						'<form class="form-inline">' +
 							'<div class="input-group operation-button">' +
-								'<a href="formHome.html"><i class="fa fa-plus-circle text-warning">&nbsp;</i> Add Home Picture</a>'+
+								'<a href="formHomeGallery.html"><i class="fa fa-plus-circle text-warning">&nbsp;</i> Add Home link</a>'+
 							'</div>' +
 							'<div class="input-group operation-button">' +
-								'<a href="#" id="deleteButton"><i class="fa fa-minus-circle text-warning">&nbsp;</i> Delete Home Picture</a>'+
+								'<a href="#" id="deleteButton"><i class="fa fa-minus-circle text-warning">&nbsp;</i> Delete Home link</a>'+
 							'</div>' +
 							'<div class="input-group operation-button">' +
-								'<a href="#" id="manageButton"><i class="fa fa-bars text-warning">&nbsp;</i> Manage Home Picture</a>'+
+								'<a href="#" id="manageButton"><i class="fa fa-bars text-warning">&nbsp;</i> Manage Home link</a>'+
 							'</div>' +
 							'<div class="input-group operation-button">' +
-								'<a href="homeGallery.html"><i class="fa fa-picture-o text-warning">&nbsp;</i> Home Gallery</a>'+
+								'<a href="home.html"><i class="fa fa-arrow-left text-warning">&nbsp;</i> Back to CMS Home</a>'+
 							'</div>' +
 		        	'<div class="input-group pull-right">' +
 		        		'<input type="text" class="form-control" placeholder="Search">' +
@@ -64,7 +64,7 @@
 					'</div>' +
 					'<div class="summary-group">'+
 						'<div class="summary-text">'+
-							'<p>Total number of Pictures</p>'+
+							'<p>Total number of Link</p>'+
 							'<p class="number" id="totalRecord">0</p>'+
 						'</div>'+
 						'<div class="alpha">'+
@@ -105,12 +105,10 @@
 					'<table class="table table-striped table-responsive">'+
 					    '<thead>'+
 					    	'<tr>'+
-						    	'<th width="5%"><input type="checkbox" value="1" id="selectRecord" onclick="checkboxToggle(this, \'customerSelect\')" /><label for="selectRecord"></label></th>'+
+						    		'<th width="5%"><input type="checkbox" value="1" id="selectRecord" onclick="checkboxToggle(this, \'customerSelect\')" /><label for="selectRecord"></label></th>'+
 						        '<th width="10%" class="text-center"><span class="fa fa-picture-o"></span></th>'+
-						        '<th>Title</th>'+
-						        '<th width="30%">Description</th>'+
-						        '<th>By</th>'+
-						        '<th>Time</th>'+
+						        '<th width="40%">Description</th>'+
+						        '<th>Link</th>'+
 					    	'</tr>'+
 					    '</thead>'+
 					    '<tbody></tbody>'+
@@ -156,7 +154,7 @@
 				r_setCookie('adminPageFilter', '1');
 				r_setCookie('adminAlphaFilter', '');
 				var page = (r_getCookie('adminPageFilter') != "" ? r_getCookie('adminPageFilter'): "1");
-				var data = p_getData('operation', 'cms_home', page);
+				var data = p_getData('operation', 'cms_home_gallery', page);
 					data = data.feedData;
 
 				dataGenerator(data);
@@ -164,7 +162,7 @@
 				//filter
 				$('.alpha a').on("click", function(){
 					var page = (r_getCookie('adminPageFilter') != "" ? r_getCookie('adminPageFilter'): "1");
-					var data = p_getData('operation', 'cms_home', page, '(title LIKE "' + $(this).html() + '%")');
+					var data = p_getData('operation', 'cms_home_gallery', page, '(description LIKE "' + $(this).html() + '%")');
 					data = data.feedData;
 					dataGenerator(data);
 
@@ -174,7 +172,7 @@
 
 				$('button.search').on("click", function(){
 					var keyword = $("[placeholder='Search']").val();
-					var data = p_getData('operation', 'cms_home', '1', '(title LIKE "%' + keyword + '%")');
+					var data = p_getData('operation', 'cms_home_gallery', '1', '(description LIKE "%' + keyword + '%")');
 					data = data.feedData;
 					dataGenerator(data);
 				});
@@ -189,7 +187,7 @@
 					var keyword = $("[placeholder='Search']").val();
 					var alpha = (r_getCookie('adminAlphaFilter') != "" ? '(title LIKE "' + r_getCookie('adminAlphaFilter') + '%") AND ': "");
 
-					var data = p_getData('operation', 'cms_home', page, alpha + '(title LIKE "%' + keyword + '%")');
+					var data = p_getData('operation', 'cms_home_gallery', page, alpha + '(description LIKE "%' + keyword + '%")');
 					data = data.feedData;
 
 					if(data.length > 0){ dataGenerator(data); } else { page = parseInt(page) - 1; }
@@ -203,7 +201,7 @@
 						page = parseInt(page) - 1;
 
 						var keyword = $("[placeholder='Search']").val();
-						var data = p_getData('operation', 'cms_home', page, '(title LIKE "%' + keyword + '%")');
+						var data = p_getData('operation', 'cms_home_gallery', page, '(description LIKE "%' + keyword + '%")');
 						data = data.feedData;
 						dataGenerator(data);
 
@@ -219,11 +217,9 @@
 		    		html = html +
 		    		'<tr>'+
 		    			'<td><input type="checkbox" name="customerSelect" value="'+data[loop].idData+'" id="selectRecord' + loop + '"><label for="selectRecord' + loop + '"></label></td>'+
-		    			'<td><img class="big-image" src="../assets/home/'+ data[loop].picture +'"></td>'+
-		    			'<td>'+ data[loop].title +'</td>'+
-		    			'<td>'+ data[loop].description +'</td>'+
-		    			'<td class="syn-nowrap">'+ data[loop].publishedBy +'</td>'+
-		    			'<td>'+ timeSince(new Date(Date.parse(data[loop].publishedTime))) +'</td>'+
+		    			'<td><img class="big-image" src="../assets/homeGallery/'+ data[loop].thumbnail +'"></td>'+
+							'<td>'+ data[loop].description +'</td>'+
+		    			'<td>'+ data[loop].link +'</td>'+
 		    		'</tr>';
 		    	}
 
@@ -240,12 +236,12 @@
 					if(checkedArray.length > 0){
 						var confirmation = confirm("Are you sure you want to delete the selected data?");
 						if (confirmation == true) {
-							p_removeData('operation', 'cms_home', checkedArray);
+							p_removeData('operation', 'cms_home_gallery', checkedArray);
 
 							r_setCookie('adminPageFilter', '1');
 							r_setCookie('adminAlphaFilter', '');
 							var page = (r_getCookie('adminPageFilter') != "" ? r_getCookie('adminPageFilter'): "1");
-							var data = p_getData('operation', 'cms_home', page);
+							var data = p_getData('operation', 'cms_home_gallery', page);
 								data = data.feedData;
 
 							dataGenerator(data);
@@ -257,7 +253,7 @@
 
 				$('#manageButton').unbind().on("click", function(){
 					if(checkedArray.length == 1 && checkedArray[0] != "0"){
-						window.location.href = base_url + "/admin/formHome.html?q=" + checkedArray[0];
+						window.location.href = base_url + "/admin/formHomeGallery.html?q=" + checkedArray[0];
 					}else{
 						alert("Please choose only one record!");
 					}

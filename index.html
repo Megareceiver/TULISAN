@@ -84,17 +84,16 @@
 
 		<!-- page script -->
 		<script type="text/javascript">
+			var articlesRest = [];
 			// $(function(){
 				articles();
 			// });
 
 			function articles(){
-				var articles = [
-					{"description": "Netflix's 'Abstract: The Art of Design' Will Spotlight the World's Most Creative Minds", "comment_counter": "3", "picture": "Illus.jpg"},
-					{"description": "Netflix's 'Abstract: The Art of Design' Will Spotlight the World's Most Creative Minds", "comment_counter": "3", "picture": "73263451_9067.jpg"},
-					{"description": "Netflix's 'Abstract: The Art of Design' Will Spotlight the World's Most Creative Minds", "comment_counter": "3", "picture": "f2d2ce4e_d50e.jpg"},
-					{"description": "Netflix's 'Abstract: The Art of Design' Will Spotlight the World's Most Creative Minds", "comment_counter": "3", "picture": "LB_FW13_15.jpg"},
-				];
+				var articles = [];
+
+				articles = p_getData('operation', 'cms_home_gallery');
+				articles = articles.feedData;
 
 				// var articles = p_getData('operation', 'cms_home');
 				// articles = articles.feedData;
@@ -104,18 +103,22 @@
 				if(articles != null && articles.length > 0){
 					html = "";
 					for(var loop=0; loop<articles.length; loop++){
+						if(articles[loop].link != ""){ html = html + '<a href="' + articles[loop].link + '">'; }
 						html = html +
 						'<div class="col-md-3 article-box">' +
-							'<div class="picture-box" style="background-image: url(assets/PICS/' + articles[loop].picture + ');"></div>' +
+							'<div class="picture-box" style="background-image: url(assets/homeGallery/' + articles[loop].thumbnail + ');"></div>' +
 							'<div class="article">' +
 								'<p>' + articles[loop].description + '</p>' +
 							'</div>' +
 						'</div>';
-
-
+						if(articles[loop].link != ""){ html = html + '</a>'; }
+						if(loop == 3) break;
 					}
 
-					html = html + '<div class="col-md-12 more"><a href="#">MORE</a></div>';
+					if(articles.length > 4) {
+						html = html + '<div class="col-md-12 more" id="moreButton"><button type="button" class="btn btn-link" onclick="showMore()">MORE</button></div>';
+						articlesRest = articles.slice(4, articles.length);
+					}
 					html = html + '<div class="clearfix"></div>';
 				}
 
@@ -137,9 +140,28 @@
 			    }
 
 			    $("#myCarousel .carousel-inner").html(home);
-				$(".jumbo-tron img").css({'height':($(window).innerHeight()-52), 'object-fit':'cover', 'width': '100%'});
+				$(".jumbo-tron img").css({'height':'600px', 'object-fit':'cover', 'width': '100%'});
 			}
 
+			function showMore(){
+				html = "<hr/>";
+				html = html + '<div class="col-md-12"><h4 class="margin-top">Older post</h4></div>';
+				html = html + '<div class="clearfix"></div>';
+				html = html + '<div class="clearfix margin-top"></div>';
+				for(var loop=0; loop<articlesRest.length; loop++){
+					if(articlesRest[loop].link != ""){ html = html + '<a href="' + articlesRest[loop].link + '">'; }
+					html = html +
+					'<div class="col-md-3 article-box">' +
+						'<div class="picture-box" style="background-image: url(assets/homeGallery/' + articlesRest[loop].thumbnail + ');"></div>' +
+						'<div class="article">' +
+							'<p>' + articlesRest[loop].description + '</p>' +
+						'</div>' +
+					'</div>';
+					if(articlesRest[loop].link != ""){ html = html + '</a>'; }
+					$("#articles-section").append(html);
+					$("#moreButton").remove();
+				}
+			}
 		</script>
 	</body>
 </html>

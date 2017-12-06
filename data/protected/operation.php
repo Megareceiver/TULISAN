@@ -58,7 +58,9 @@
 
 				case "cms_home" 		: $resultList = $this->fetchAllRequest('cms_home', array("idData", "title", "description", "picture", "createdBy as publishedBy", "createdDate as publishedTime"), $post['keyword'], "ORDER BY idData ASC", $post['page']); break;
 				case "cms_homeFetch": $resultList = $this->fetchSingleRequest('cms_home', array("idData", "title", "description", "picture"), $post['keyword']); break;
-				case "cms_?" 		: $resultList = $this->fetchAllRequest('cms_home', array("idData", "title", "description", "picture", "createdBy as publishedBy", "createdDate as publishedTime"), $post['keyword'], "ORDER BY idData ASC", $post['page']); break;
+
+				case "cms_home_gallery" 		: $resultList = $this->fetchAllRequest('cms_home_gallery', array("idData", "description", "thumbnail","link"), $post['keyword'], "ORDER BY idData DESC", $post['page']); break;
+				case "cms_home_galleryFetch": $resultList = $this->fetchSingleRequest('cms_home_gallery', array("idData", "description", "thumbnail as picture", "link"), $post['keyword']); break;
 
 				case "cms_story" 		: $resultList = $this->fetchAllRequest('cms_story', array("idData","title", "subtitle", "SUBSTRING(description, 1, 300) as description", "author", "picture"), $post['keyword'], "ORDER BY idData DESC", $post['page']); break;
 				case "cms_storyOption" 	: $resultList = $this->fetchAllRecord('cms_story', array("title as caption", "idData as value"), $post['keyword'], "ORDER BY title ASC"); break;
@@ -117,6 +119,7 @@
 				case "cms_blog" 	: $resultList = $this->deleteById('cms_blog', $post['id']); break;
 				case "cms_chatter" 	: $resultList = $this->deleteById('cms_chatter', $post['id']); break;
 				case "cms_home" 	: $resultList = $this->deleteById('cms_home', $post['id']); break;
+				case "cms_home_gallery" 	: $resultList = $this->deleteById('cms_home_gallery', $post['id']); break;
 				case "cms_story" 	: $resultList = $this->deleteById('cms_story', $post['id']); break;
 				case "artWork" 		: $resultList = $this->deleteById('cms_story_artwork', $post['id']); break;
 				case "cms_video" 	: $resultList = $this->deleteById('cms_video', $post['id']); break;
@@ -226,6 +229,24 @@
 					if($resultList["feedStatus"] == "success") {
 						if(isset($_FILES["picture"])){
 							$upload = $this->uploadSingleImage($_FILES["picture"], "home", "cms_home", "picture", $resultList["feedId"]);
+							array_push($resultList, array("feedUpload" => $upload['feedMessage']));
+						}
+					}
+				break;
+
+				case "cms_home_gallery"  :
+					$fields = array("description", "link");
+					$values = array();
+					foreach ($fields as $key) {
+						$value = (isset($post[$key]) && $post[$key] != "") ? str_replace("'", "\'", $post[$key]) : "";
+						array_push($values,$value);
+					}
+
+					$resultList = $this->insert('cms_home_gallery', $fields, $values);
+
+					if($resultList["feedStatus"] == "success") {
+						if(isset($_FILES["picture"])){
+							$upload = $this->uploadSingleImage($_FILES["picture"], "homeGallery", "cms_home_gallery", "thumbnail", $resultList["feedId"]);
 							array_push($resultList, array("feedUpload" => $upload['feedMessage']));
 						}
 					}
@@ -521,6 +542,25 @@
 					if($resultList["feedStatus"] == "success" && isset($post['idData']) && $post['idData']!="") {
 						if(isset($_FILES["picture"])){
 							$upload = $this->uploadSingleImage($_FILES["picture"], "home", "cms_home", "picture", $post['idData']);
+							$resultList["feedUpload"] = $upload['feedMessage'];
+						}
+					}
+
+				break;
+
+				case "cms_home_gallery"  :
+					$fields = array("description", "link");
+					$values = array();
+					foreach ($fields as $key) {
+						$value = (isset($post[$key]) && $post[$key] != "") ? str_replace("'", "\'", $post[$key]) : "";
+						$values[$key] = $key." = '".str_replace(',','',$value)."'";
+					}
+
+					$resultList = $this->update('cms_home_gallery', $values, $post['idData']);
+
+					if($resultList["feedStatus"] == "success" && isset($post['idData']) && $post['idData']!="") {
+						if(isset($_FILES["picture"])){
+							$upload = $this->uploadSingleImage($_FILES["picture"], "homeGallery", "cms_home_gallery", "thumbnail", $post['idData']);
 							$resultList["feedUpload"] = $upload['feedMessage'];
 						}
 					}

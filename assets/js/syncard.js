@@ -127,6 +127,8 @@ function pageAdmin(){
 			case "cms.html":
 			case "home.html":
 			case "formHome.html":
+			case "homeGallery.html":
+			case "formHomeGallery.html":
 			case "story.html":
 			case "formStory.html":
 			case "artWork.html":

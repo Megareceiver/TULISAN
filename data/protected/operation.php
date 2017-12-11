@@ -12,8 +12,8 @@
 			switch($target){
 				case "summary" 			: $resultList = $this->summary(); break;
 
-				case "product" 				: $resultList = $this->fetchAllRequest('products p JOIN products_variant v ON p.idData = v.productId', array("DISTINCT p.idData", "(SELECT x.frontPicture FROM products_variant x WHERE x.productId = p.idData ORDER BY x.idData ASC LIMIT 1) as frontPicture", "p.sku", "p.name", "p.description", "p.price"), $post['keyword'], "ORDER BY p.name ASC", $post['page']); break;
-				case "productFetch" 	: $resultList = $this->fetchSingleRequest('products', array("idData", "sku", "name", "description", "price", "material", "dimension", "storyId", "lookBook1", "lookBook2"), $post['keyword']); break;
+				case "product" 				: $resultList = $this->fetchAllRequest('products p JOIN products_variant v ON p.idData = v.productId', array("DISTINCT p.idData", "(SELECT x.frontPicture FROM products_variant x WHERE x.productId = p.idData ORDER BY x.idData ASC LIMIT 1) as frontPicture", "(SELECT x.price FROM products_variant x WHERE x.productId = p.idData ORDER BY x.idData ASC LIMIT 1) as price", "p.sku", "p.name", "p.description"), $post['keyword'], "ORDER BY p.name ASC", $post['page']); break;
+				case "productFetch" 	: $resultList = $this->fetchSingleRequest('products', array("idData", "sku", "name", "description", "material", "dimension", "storyId", "lookBook1", "lookBook2"), $post['keyword']); break;
 				// case "productDetail" 	: $resultList = $this->fetchSingleRequest('products', array("lookBook1", "lookBook2", "idData", "sku", "name", "description", "price", "material", "dimension", "storyId"), $post['keyword']); break;
 				case "productDetail" 	: $resultList = $this->fetchSingleRequest(
 																'products p JOIN products_variant v ON p.idData = v.productId JOIN cms_story s ON p.storyId = s.idData',
@@ -25,12 +25,13 @@
 																"substring_index(group_concat(v.leftPicture SEPARATOR ','), ',', 1) as leftPicture",
 																"substring_index(group_concat(v.bottomPicture SEPARATOR ','), ',', 1) as bottomPicture",
 																"substring_index(group_concat(v.artworkId SEPARATOR ','), ',', 1) as artworkId",
-																"p.sku", "p.name", "p.description", "p.price", "p.material", "p.dimension", "p.lookBook1", "p.lookBook2", "s.title", "s.subtitle"), $post['keyword']); break;
+																"substring_index(group_concat(v.price SEPARATOR ','), ',', 1) as price",
+																"p.sku", "p.name", "p.description", "p.material", "p.dimension", "p.lookBook1", "p.lookBook2", "s.title", "s.subtitle"), $post['keyword']); break;
 
-				case "productCart" 	: $resultList = $this->fetchAllRequest('products p JOIN products_variant v ON p.idData = v.productId',array("DISTINCT v.idData", "v.qty", "v.frontPicture","p.name", "p.price", "p.sku"), $post['keyword'], "ORDER BY v.idData", $post['page']); break;
+				case "productCart" 	: $resultList = $this->fetchAllRequest('products p JOIN products_variant v ON p.idData = v.productId',array("DISTINCT v.idData", "v.qty", "v.frontPicture","p.name", "v.price", "p.sku"), $post['keyword'], "ORDER BY v.idData", $post['page']); break;
 
-				case "productVariant" 				: $resultList = $this->fetchAllRequest('products p JOIN products_variant v ON p.idData = v.productId LEFT JOIN cms_story_artwork a ON v.artworkId = a.idData LEFT JOIN colors c ON v.colorId = c.idData', array("v.idData", "p.name", "v.qty", "v.size", "v.frontPicture", "a.name as artwork", "c.name as color"), $post['keyword'], "ORDER BY v.artWorkId ASC", $post['page']); break;
-				case "productVariantFetch" 		: $resultList = $this->fetchSingleRequest('products_variant', array("frontPicture", "backPicture", "topPicture", "rightPicture", "bottomPicture", "leftPicture", "idData", "qty", "size", "colorId", "artworkId"), $post['keyword']); break;
+				case "productVariant" 				: $resultList = $this->fetchAllRequest('products p JOIN products_variant v ON p.idData = v.productId LEFT JOIN cms_story_artwork a ON v.artworkId = a.idData LEFT JOIN colors c ON v.colorId = c.idData', array("v.idData", "p.name", "v.qty", "v.size", "v.frontPicture", "a.name as artwork", "c.name as color", "price"), $post['keyword'], "ORDER BY v.artWorkId ASC", $post['page']); break;
+				case "productVariantFetch" 		: $resultList = $this->fetchSingleRequest('products_variant', array("frontPicture", "backPicture", "topPicture", "rightPicture", "bottomPicture", "leftPicture", "idData", "qty", "size", "colorId", "artworkId", "price"), $post['keyword']); break;
 				case "productArtworkOption" 	: $resultList = $this->fetchAllRecord('products_variant v JOIN cms_story_artwork a ON v.artworkId = a.idData', array("DISTINCT a.name as caption", "a.idData as value"), $post['keyword'], "ORDER BY v.idData ASC"); break;
 				case "productColorOption" 	: $resultList = $this->fetchAllRecord('products_variant v JOIN colors a ON v.colorId = a.idData', array("DISTINCT a.name as caption", "a.idData as value"), $post['keyword'], "ORDER BY v.idData ASC"); break;
 				case "productSizeOption" 		: $resultList = $this->fetchAllRecord('products_variant v', array("DISTINCT v.size as caption", "v.size as value"), $post['keyword'], "ORDER BY v.idData ASC"); break;
@@ -136,7 +137,7 @@
 		public function addData($post, $target){
 			switch($target){
 				case "product"  :
-					$fields = array("name", "sku", "description", "material", "dimension", "price", "storyId");
+					$fields = array("name", "sku", "description", "material", "dimension", "storyId");
 					$values = array();
 					foreach ($fields as $key) {
 						$value = (isset($post[$key]) && $post[$key] != "") ? $post[$key] : "";
@@ -160,7 +161,7 @@
 				break;
 
 				case "productVariant"  :
-					$fields = array("qty", "size", "artworkId", "colorId", "productId");
+					$fields = array("qty", "size", "artworkId", "colorId", "productId", "price");
 					$values = array();
 					foreach ($fields as $key) {
 						$value = (isset($post[$key]) && $post[$key] != "") ? $post[$key] : "";
@@ -452,7 +453,7 @@
 		public function updateData($post, $target){
 			switch($target){
 				case "product"  :
-					$fields = array("name", "sku", "description", "material", "dimension", "price", "storyId");
+					$fields = array("name", "sku", "description", "material", "dimension", "storyId");
 					$values = array();
 					foreach ($fields as $key) {
 						$value = (isset($post[$key]) && $post[$key] != "") ? $post[$key] : "";
@@ -476,7 +477,7 @@
 				break;
 
 				case "productVariant"  :
-					$fields = array("qty", "size", "artworkId", "colorId");
+					$fields = array("qty", "size", "artworkId", "colorId", "price");
 					$values = array();
 					foreach ($fields as $key) {
 						$value = (isset($post[$key]) && $post[$key] != "") ? $post[$key] : "";

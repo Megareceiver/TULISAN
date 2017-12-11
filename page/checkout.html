@@ -284,11 +284,12 @@
 				var oid 	= "";
 				if(getParam('oid') != undefined && getParam('oid') != ""){
 					oid = getParam('oid');
+
 					//get shipping info
 					var dumb = [];
 					dumb = p_getData('order', 'orderInfo', '1', 'o.idData = "' + oid + '"');
 					dumb = dumb.feedData;
-					
+
 					if(dumb == undefined || dumb.length == 0 || dumb == false){
 						window.location.href = "shop.html";
 						return false;
@@ -307,7 +308,7 @@
 					}else{
 						$("#transferInfo").attr("style", "display:block");
 						$("#confirmButton").html("Confirm Payment");
-						$("#confirmButton").attr("href", "confirm.html");
+						$("#confirmButton").attr("href", "paymentConfirm.html?oid=" + oid);
 					}
 
 					//get item list
@@ -403,9 +404,10 @@
 							$("#confirmButton").html("DOKU Payment");
 							$("#confirmButton").attr("href", "#");
 					}else{
+						var oid = getParam('oid');
 						$("#transferInfo").attr("style", "display:block");
 						$("#confirmButton").html("Confirm Payment");
-						$("#confirmButton").attr("href", "confirm.html");
+						$("#confirmButton").attr("href", "paymentConfirm.html?oid=" + oid);
 					}
 
 					keepTabPosition("#3");

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<!-- Standard Meta -->
+		<meta charset="utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+		<link rel="icon" type="image/x-icon" href="../assets/PICS/TL_Favicon.png">
+		<!-- Site Properities -->
+		<title>Tulisan</title>
+
+		<link href="../assets/css/bootstrap.min.css" rel="stylesheet">
+		<link href="../assets/css/font-awesome.min.css" rel="stylesheet">
+		<link href="../assets/css/syncard-inject.css" rel="stylesheet">
+	</head>
+	<body>
+
+		<div class="container">
+			<header class="parent"></header>
+
+			<main class="parent clear">
+				<div class="col-md-8 col-md-offset-2 div-normalize">
+					<h1>Contact Us</h1>
+					<form id="syncrom" f-group="support" f-target="feedback">
+						<div class="row">
+							<div class="input-frame col-md-8">
+								<div class="form-group">
+									<label>Full Name</label>
+									<input name="name" type="text" class="form-control">
+								</div>
+								<div class="form-group">
+									<label>Email</label>
+									<input name="email" type="text" class="form-control">
+								</div>
+								<div class="form-group">
+									<label>Category</label>
+									<input name="category" type="text" class="form-control">
+								</div>
+								<div class="form-group select-box">
+									<label>Subject</label>
+									<select name="subject" class="form-control">
+										<option value="Product Support">Product Support</option>
+										<option value="Customer Inquiry">Customer Inquiry</option>
+										<option value="Reseller Inquiry">Reseller Inquiry</option>
+										<option value="Press Inquiry">Press Inquiry</option>
+									</select>
+								</div>
+								<div class="form-group">
+									<label>Message</label>
+									<textarea name="message" class="form-control" rows="10"></textarea>
+								</div>
+								<div class="clearfix"></div>
+								<div class="btn-group">
+									<button class="btn btn-warning" type="submit">Send</button>
+								</div>
+							</div>
+						</div>
+					</form>
+				</div>
+				<div class="clearfix"></div>
+				<div class="col-md-8 col-md-offset-2 div-normalize">
+					<hr/>
+					<p>Prefer to talk ?</p>
+					<h1 class="margin-top">Creative Headquarters</h1>
+					<h5>PT Tulisan Susunan Tinta</h5>
+					<h5>Darmawangsa Square, The City Walk</h5>
+					<h5>Ground Floor, Unit 24</h5>
+					<h5>Jakarta 12160, Indonesia</h5>
+					<h5>info@tulisan.com</h5>
+					<h5>+62 21 7278 0235</h5>
+				</div>
+			</main>
+
+			<footer class="parent"></footer>
+		</div>
+
+		<!-- Script collection -->
+		<script type="text/javascript" src="../assets/js/jquery-3.2.1.min.js"></script>
+		<script type="text/javascript" src="../assets/js/jquery-ui-1.10.0.custom.min.js"></script>
+		<script type="text/javascript" src="../assets/js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="../assets/js/imagesloaded.pkgd.min.js"></script>
+		<script type="text/javascript" src="../assets/js/public.js"></script>
+		<script type="text/javascript" src="../assets/js/partial.js"></script>
+
+		<!-- page script -->
+		<script type="text/javascript">
+			loadData();
+
+			function loadData(){
+				p_formHandler('syncrom', 'addData', 'feedback', 'yes');
+			}
+		</script>
+	</body>
+</html>

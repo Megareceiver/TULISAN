@@ -83,7 +83,7 @@ function header(){
 					html = html +
 					'</div>' +
 					'<div class="form">' +
-				    	'<form class="form-inline">' +
+				    	'<form class="form-inline" id="searchForm">' +
 				        	'<div class="input-group">' +
 				        		'<input type="text" class="form-control" placeholder="Search">' +
 					        	'<span class="input-group-btn">' +
@@ -107,7 +107,7 @@ function header(){
 					        '<li><a id="video-route" href="' + base_url + '/page/videos.html"><span>VIDEOS</span></a></li>' +
 					        '<li><a id="chatter-route" href="' + base_url + '/page/chatter.html"><span>CHATTER</span></a></li>' +
 					        '<li><a id="about-route" href="' + base_url + '/page/about.html"><span>ABOUT</span></a></li>' +
-					        '<li><a id="contact-route" href="' + base_url + '/page/location.html"><span>CONTACT</span></a></li>' +
+					        '<li><a id="contact-route" href="' + base_url + '/page/contact.html"><span>CONTACT</span></a></li>' +
 					    '</ul>' +
 					'</div>' +
 				'</div>' +
@@ -172,6 +172,10 @@ function header(){
 				breadcrumb = "<a href='" + base_url + "'>Home</a> / Store locator";
 				active_page = "contact-route";
 			break;
+			case "contact.html":
+				breadcrumb = "<a href='" + base_url + "'>Home</a> / Contact us";
+				active_page = "contact-route";
+			break;
 			case "shop.html":
 				breadcrumb = "<a href='" + base_url + "'>Home</a> / Shop";
 				active_page = "shop-route";
@@ -205,6 +209,12 @@ function header(){
 	$("#cart_icon").removeClass('active');
 
 	if(r_getCookie("TULISAN_USER_CART_STATUS") == "active") $("#cart_icon").addClass('active');
+
+	//search activator
+	$('#searchForm').unbind().on('submit', function(e) {
+		e.preventDefault();
+		window.location.href = base_url + "/page/shop.html?keyword=" + $('#searchForm input').val();
+	});
 }
 
 function footer(){
@@ -222,7 +232,7 @@ function footer(){
 		]},
 		{ "head": "SUPPORT", "head_link": "#", "body": [
 			{ "caption": "Product Care", "link": "#", "custom": "care" },
-			{ "caption": "Contact Us", 	 "link": base_url + "/page/location.html" },
+			{ "caption": "Contact Us", 	 "link": base_url + "/page/contact.html" },
 			{ "caption": "Login"	, 	 "link": "#" },
 		]},
 		{ "head": "SHOP", "head_link": "#", "body": [

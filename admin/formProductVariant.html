@@ -78,6 +78,13 @@
 							'<option value="">Choose Color</option>' +
 						'</select>' +
 					'</div>'+
+				'</div>' +
+				'<div class="clearfix"></div>' +
+				'<div class="input-frame col-md-6">'+
+					'<div class="form-group">'+
+						'<label>Price</label>'+
+						'<input name="price" type="text" class="form-control">'+
+					'</div>'+
 				'</div>';
 
 			html = html +
@@ -197,6 +204,7 @@
 
 				var link = "";
 				if(getParam('s') != "" && getParam('s') != null) link = '?q=' + getParam('s');
+				currencyFormatChanger('[name="price"]');
 				p_formHandler('syncrom', 'updateData', 'ProductsVariant.html' + link);
 			}
 		</script>

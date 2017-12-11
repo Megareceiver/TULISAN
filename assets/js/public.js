@@ -136,8 +136,11 @@ function r_callBack(back, custom, data=null){
 				p_signup_set_cookie(data);
 				window.location.href = base_url + "/page/register_completed.html";
 			break;
+			case "feedback":
+				window.location.href = base_url + "/page/contact.html";
+			break;
 			default:
-
+			break;
 		}
 	}
 }

@@ -111,6 +111,7 @@
 				filter = [];
 
 				keyword = "";
+				keywordSearch = "";
 				if(getParam('story') != "" && getParam('story') != null){
 					keyword = "storyId =" + getParam('story');
 					data = p_getData('operation', 'cms_storyFetch', "1", " idData = '" + getParam('story') + "'");
@@ -121,6 +122,11 @@
 					keyword = "colorId =" + getParam('color');
 					data = p_getData('operation', 'color', "1", " idData = '" + getParam('color') + "'");
 					filter = data.feedData[0];
+				}
+
+				if(getParam('keyword') != "" && getParam('keyword') != null){
+					keyword = "(name LIKE '%" + getParam('keyword') + "%' OR sku LIKE '%" + getParam('keyword') + "%')";
+					keywordSearch = getParam('keyword');
 				}
 
 				if(keyword != "") { keyword = keyword + " AND "; }
@@ -169,10 +175,12 @@
 				html = html + '</ul></div>';
 
 				html = html + '<div class="col-md-9 col-md-offset-3 product-list">';
+				if(keywordSearch != "") { html = html + '<h5><i>Search : </i>' + keywordSearch + '</h5><hr/>'; }
 				if(filter.name != undefined) { html = html + '<h5><i>Color : </i>' + filter.name + '</h5><hr/>'; }
 				if(filter.title != undefined) { html = html + '<h5>' + filter.title + '</h5>'; }
 				if(filter.title != undefined) { html = html + '<h6>' + filter.subtitle + '</h6>'; }
 				if(filter.title != undefined) { html = html + '<p>' + Base64.decode(filter.description).substring(0, 500) + '... <a href="storydetail.html?q=' + filter.idData + '" class="btn-link">view story</a>' + '</p><hr/>'; }
+
 				if(product.length > 0){
 					for(var loop = 0; loop < product.length; loop++)
 					{

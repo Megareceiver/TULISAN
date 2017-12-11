@@ -70,7 +70,7 @@
 						'<form id="ItemForm">' +
 							'<input type="hidden" name="variantId" value="" />' +
 							'<div class="product-desc">'+
-								'<h1 class="fontserif"><b>' + data.name + '</b> <small>' + price + '</small></h1>'+
+								'<h1 class="fontserif"><b>' + data.name + '</b> <small id="productPrice">' + price + '</small></h1>'+
 								'<hr/>' +
 								'<p>' + data.description + '</p>'+
 								'<div class="row margin-top">'+
@@ -291,6 +291,7 @@
 
 				$("#productViewer").html(html);
 				$("[name=variantId]").val(data.idData);
+				$("#productPrice").html(currencyFormat(String(data.price)));
 				$("#qty").html(data.qty);
 				$("#count").val(1);
 				count = 1;

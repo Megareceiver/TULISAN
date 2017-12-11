@@ -8,7 +8,7 @@
 		<link rel="icon" type="image/x-icon" href="../assets/PICS/TL_Favicon.png">
 		<!-- Site Properities -->
 		<title>Tulisan</title>
-	  
+
 		<link href="../assets/css/bootstrap.min.css" rel="stylesheet">
 		<link href="../assets/css/font-awesome.min.css" rel="stylesheet">
 		<link href="../assets/css/syncard-inject.css" rel="stylesheet">
@@ -19,16 +19,16 @@
 			<header class="parent-admin"></header>
 
 			<main class="parent-admin"></main>
-					
+
 			<footer class="parent-admin"></footer>
 		</div>
 
 		<!-- Script collection -->
 		<script type="text/javascript" src="../assets/js/jquery-3.2.1.min.js"></script>
 		<script type="text/javascript" src="../assets/js/jquery-ui-1.10.0.custom.min.js"></script>
-		<script type="text/javascript" src="../assets/js/bootstrap.min.js"></script>	
-		<script type="text/javascript" src="../assets/js/public.js"></script>	
-		<script type="text/javascript" src="../assets/js/syncard.js"></script>	
+		<script type="text/javascript" src="../assets/js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="../assets/js/public.js"></script>
+		<script type="text/javascript" src="../assets/js/syncard.js"></script>
 
 		<!-- page script -->
 		<script type="text/javascript">
@@ -37,7 +37,7 @@
 			});
 			function loadData(){
 				var html = '';
-				
+
 				html = html +
 				'<div class="header-option">' +
 					'<div class="operation-group">'+
@@ -108,8 +108,7 @@
 						        '<th>Title</th>'+
 						        '<th>Description</th>'+
 						        '<th>Date</th>'+
-						        '<th>By</th>'+
-						        '<th>Time</th>'+
+						        '<th>Type</th>'+
 					    	'</tr>'+
 					    '</thead>'+
 					    '<tbody></tbody>'+
@@ -159,7 +158,7 @@
 					data = data.feedData;
 
 				dataGenerator(data);
-				
+
 				//filter
 				$('.alpha a').on("click", function(){
 					var page = (r_getCookie('adminPageFilter') != "" ? r_getCookie('adminPageFilter'): "1");
@@ -211,7 +210,7 @@
 				});
 				//paging end
 			}
-			
+
 			function dataGenerator(data){
 				var html = "";
 				for(var loop =0; loop<data.length; loop++){
@@ -222,8 +221,8 @@
 		    			'<td>'+ data[loop].title +'</td>'+
 		    			'<td>'+ data[loop].description +'</td>'+
 		    			'<td class="syn-nowrap">'+ data[loop].date +'</td>'+
-		    			'<td class="syn-nowrap">'+ data[loop].publishedBy +'</td>'+
-		    			'<td>'+ timeSince(new Date(Date.parse(data[loop].publishedTime))) +'</td>'+
+		    			'<td class="syn-nowrap">'+ data[loop].type +'</td>'+
+		    			// '<td>'+ timeSince(new Date(Date.parse(data[loop].publishedTime))) +'</td>'+
 		    		'</tr>';
 		    	}
 
@@ -236,12 +235,12 @@
 			}
 
 			function operationActivator(){
-				$('#deleteButton').unbind().on("click", function(){ 
+				$('#deleteButton').unbind().on("click", function(){
 					if(checkedArray.length > 0){
 						var confirmation = confirm("Are you sure you want to delete the selected data?");
 						if (confirmation == true) {
 							p_removeData('operation', 'cms_chatter', checkedArray);
-							
+
 							r_setCookie('adminPageFilter', '1');
 							r_setCookie('adminAlphaFilter', '');
 							var page = (r_getCookie('adminPageFilter') != "" ? r_getCookie('adminPageFilter'): "1");
@@ -255,7 +254,7 @@
 					}
 				});
 
-				$('#manageButton').unbind().on("click", function(){ 
+				$('#manageButton').unbind().on("click", function(){
 					if(checkedArray.length == 1 && checkedArray[0] != "0"){
 						window.location.href = base_url + "/admin/formChatter.html?q=" + checkedArray[0];
 					}else{
